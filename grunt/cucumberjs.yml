@@ -1,0 +1,4 @@
+src: test/acceptance/features/
+options:
+    steps: test/acceptance/features/step_definitions/
+    format: pretty

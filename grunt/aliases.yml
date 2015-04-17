@@ -1,0 +1,11 @@
+lint:
+  - jscs
+  - jslint
+
+test: cucumberjs
+
+verify:
+  - lint
+  - test
+
+default: verify

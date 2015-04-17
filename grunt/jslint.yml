@@ -1,0 +1,15 @@
+app:
+  src: index.js
+  directives:
+    node: true
+    unparam: true
+  options:
+    errorsOnly: true
+
+test:
+  src: test/**/*.js
+  directives:
+    node: true
+    regexp: true
+  options:
+    errorsOnly: true
