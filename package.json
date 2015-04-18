@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "main": "index.js",
   "scripts": {
-    "test": "grunt"
+    "test": "grunt",
+    "start": "node index.js"
   },
   "author": "Matt Travi",
   "license": "MIT",

@@ -14,4 +14,14 @@ server.route({
     }
 });
 
+if (!module.parent) {
+    server.start(function (err) {
+        if (err) {
+            return console.error(err);
+        }
+
+        server.log('Server started', server.info.uri);
+    });
+}
+
 module.exports = server;
