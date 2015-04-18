@@ -8,6 +8,6 @@ dependencies:
     - npm install -g cucumber
 
 test:
-  override:
+  post:
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
     - cucumber.js --format=json test/acceptance/features/ > $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
