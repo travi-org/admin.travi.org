@@ -1,8 +1,4 @@
 machine:
   node:
     version:
-      - 0.11.14
-      - 0.10.34
-      - 0.12.0
-      - iojs-v1.2.0
-      - iojs-v1.3.0
+      0.12.0
