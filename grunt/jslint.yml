@@ -13,5 +13,12 @@ test:
     node: true
     regexp: true
     nomen: true
+    predef:
+      - suite
+      - setup
+      - teardown
+      - test
+      - assert
+      - sinon
   options:
     errorsOnly: true

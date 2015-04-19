@@ -1,0 +1,5 @@
+options:
+    reporters: spec
+    ui: tdd
+all:
+  - test/unit/**/*.spec.js

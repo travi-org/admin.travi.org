@@ -9,13 +9,18 @@
   "author": "Matt Travi",
   "license": "MIT",
   "devDependencies": {
+    "formatio": "^1.1.2",
     "grunt": "^0.4.5",
     "grunt-cucumber": "^0.3.0",
     "grunt-jscs": "^1.6.0",
     "grunt-jslint": "^1.1.14",
+    "grunt-mocha-cov": "^0.4.0",
     "load-grunt-config": "^0.17.0",
     "nock": "^1.6.0",
     "referee": "^1.1.1",
+    "referee-sinon": "^1.0.2",
+    "setup-referee-sinon": "^0.2.0",
+    "sinon": "^1.14.1",
     "time-grunt": "^1.1.1"
   },
   "dependencies": {
