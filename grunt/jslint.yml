@@ -3,6 +3,7 @@ app:
   directives:
     node: true
     unparam: true
+    nomen: true
   options:
     errorsOnly: true
 
@@ -11,5 +12,6 @@ test:
   directives:
     node: true
     regexp: true
+    nomen: true
   options:
     errorsOnly: true

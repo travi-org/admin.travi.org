@@ -14,10 +14,13 @@
     "grunt-jscs": "^1.6.0",
     "grunt-jslint": "^1.1.14",
     "load-grunt-config": "^0.17.0",
+    "nock": "^1.6.0",
     "referee": "^1.1.1",
     "time-grunt": "^1.1.1"
   },
   "dependencies": {
-    "hapi": "^8.4.0"
+    "hapi": "^8.4.0",
+    "traverson": "^2.0.0",
+    "traverson-hal": "^2.0.0"
   }
 }
