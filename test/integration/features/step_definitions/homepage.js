@@ -1,6 +1,7 @@
 var server = require(process.cwd() + '/index.js'),
     assert = require('referee').assert,
-    nock = require('nock');
+    nock = require('nock'),
+    any = require('../../../helpers/any');
 
 module.exports = function () {
     'use strict';
@@ -10,11 +11,11 @@ module.exports = function () {
 
     function buildLinksFrom(availableResourceTypes) {
         var links = {
-            'self': 'some url'
+            'self': any.url()
         };
 
         availableResourceTypes.forEach(function (type) {
-            links[type] = 'some url';
+            links[type] = any.url();
         });
         return links;
     }
@@ -31,7 +32,7 @@ module.exports = function () {
     });
 
     this.Given(/^user has api privileges$/, function (callback) {
-        availableResourceTypes = ['foo', 'bar'];
+        availableResourceTypes = [any.string(), any.string()];
 
         callback();
     });

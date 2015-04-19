@@ -1,7 +1,8 @@
 'use strict';
 
 var homepage = require('../../lib/homepageController.js'),
-    traviApiResources = require('../../lib/traviApiResources.js');
+    traviApiResources = require('../../lib/traviApiResources.js'),
+    any = require('../helpers/any');
 
 require('setup-referee-sinon/globals');
 
@@ -29,9 +30,9 @@ suite('homepage controller', function () {
     });
 
     test('that link rels are listed when links are present', function () {
-        var linkName = 'foo',
-            links = { 'self': {'href': 'http://api.travi.org/'}};
-        links[linkName] = {'href': 'http://api.travi.org/bar'};
+        var linkName = any.string(),
+            links = { 'self': {'href': any.url()}};
+        links[linkName] = {'href': any.url()};
         traviApiResources.getLinksFor.withArgs('catalog').yields(null, links);
 
         homepage.resourceTypes(null, reply);
