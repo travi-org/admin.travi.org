@@ -10,4 +10,4 @@ dependencies:
 test:
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
-    - cucumber.js --format=json test/acceptance/features/ > $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
+    - cucumber.js --format=json test/integration/features/ > $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
