@@ -1,4 +1,4 @@
-src: test/acceptance/features/
+src: test/integration/features/
 options:
-    steps: test/acceptance/features/step_definitions/
+    steps: test/integration/features/step_definitions/
     format: pretty
