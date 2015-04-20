@@ -1,37 +1,16 @@
 'use strict';
 
 var hapi = require('hapi'),
-    traverson = require('traverson'),
-    JsonHalAdapter = require('traverson-hal'),
+    homeController = require('./lib/homepageController'),
 
     server = new hapi.Server();
 
-traverson.registerMediaType(JsonHalAdapter.mediaType, JsonHalAdapter);
-
 server.connection({port: 3333});
-
-function removeSelfLinkFrom(resourceTypes) {
-    var selfIndex = resourceTypes.indexOf('self');
-
-    if (selfIndex > -1) {
-        resourceTypes.splice(selfIndex, 1);
-    }
-}
 
 server.route({
     method: 'GET',
     path: '/',
-    handler: function (request, reply) {
-        traverson.from('http://api.travi.org/')
-            .jsonHal()
-            .get(function (error, response) {
-                var resourceTypes = Object.keys(JSON.parse(response.body)._links);
-
-                removeSelfLinkFrom(resourceTypes);
-
-                reply(resourceTypes);
-            });
-    }
+    handler: homeController.resourceTypes
 });
 
 server.route({
