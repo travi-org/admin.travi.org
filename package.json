@@ -6,6 +6,16 @@
     "test": "grunt",
     "start": "node index.js"
   },
+  "config": {
+    "blanket": {
+      "pattern": "//\/[\\w-]+\\.js$/",
+      "data-cover-never": [
+        "node_modules",
+        "public",
+        "test"
+      ]
+    }
+  },
   "author": "Matt Travi",
   "license": "MIT",
   "devDependencies": {

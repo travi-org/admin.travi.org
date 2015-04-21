@@ -1,6 +1,12 @@
 options:
+  ui: tdd
+  files: test/unit/**/*.spec.js
+
+unit:
+  options:
     reporters: spec
-    ui: tdd
+
+coverage:
+  options:
     coveralls: true
-all:
-  - test/unit/**/*.spec.js
+

@@ -3,7 +3,7 @@ lint:
   - jslint
 
 test:
-  - mochacov
+  - mochacov:unit
   - cucumberjs
 
 verify:
