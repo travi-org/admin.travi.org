@@ -1,7 +1,7 @@
 {
   "name": "travi.org-admin",
-  "version": "0.1.0",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "grunt",
     "start": "node index.js"
