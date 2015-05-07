@@ -15,6 +15,10 @@ suite('travi-api resource interactions', function () {
         });
     });
 
+    teardown(function () {
+        traverson.from.restore();
+    });
+
     test('that links are requested from the api catalog', function () {
         var callback = sinon.spy(),
             links = {

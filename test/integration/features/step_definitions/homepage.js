@@ -40,9 +40,11 @@ module.exports = function () {
     this.When(/^the homepage is loaded$/, function (callback) {
         nock('http://api.travi.org')
             .get('/')
-            .reply(200, {
-                _links: buildLinksFrom(availableResourceTypes)
-            });
+            .reply(
+                200,
+                { _links: buildLinksFrom(availableResourceTypes)},
+                { 'Content-Type': 'application/hal+json'}
+            );
 
         server.inject({
             method: 'GET',
