@@ -5,6 +5,8 @@ options:
 unit:
   options:
     reporters: spec
+    compilers:
+      - jsx:jsx-require-extension
 
 coverage:
   options:

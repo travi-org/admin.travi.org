@@ -7,10 +7,12 @@ var React = require('react'),
 
 suite('layout view', function () {
     test('that the layout markup is correct', function () {
-        var shallowRenderer = ReactTestUtils.createRenderer();
-        var element = React.createElement(Layout);
+        var shallowRenderer = ReactTestUtils.createRenderer(),
+            element = React.createElement(Layout),
+            rendered;
+
         shallowRenderer.render(element);
-        var rendered = shallowRenderer.getRenderOutput();
+        rendered = shallowRenderer.getRenderOutput();
 
         assert.equals(rendered.type, 'html');
     });
