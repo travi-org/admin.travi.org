@@ -1,12 +1,12 @@
 options:
   ui: tdd
   files: test/unit/**/*Test.js
+  compilers:
+    - jsx:jsx-require-extension
 
 unit:
   options:
     reporters: spec
-    compilers:
-      - jsx:jsx-require-extension
 
 coverage:
   options:
