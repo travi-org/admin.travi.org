@@ -1,6 +1,6 @@
 options:
   ui: tdd
-  files: test/unit/**/*.spec.js
+  files: test/unit/**/*Test.js
 
 unit:
   options:
