@@ -1,4 +1,4 @@
-var server = require(process.cwd() + '/index.js'),
+var homepageController = require('../../../../lib/homepageController'),
     assert = require('referee').assert,
     nock = require('nock'),
     any = require('../../../helpers/any');
@@ -6,7 +6,7 @@ var server = require(process.cwd() + '/index.js'),
 module.exports = function () {
     'use strict';
 
-    var serverResponse,
+    var model,
         availableResourceTypes;
 
     function buildLinksFrom(availableResourceTypes) {
@@ -46,25 +46,20 @@ module.exports = function () {
                 { 'Content-Type': 'application/hal+json'}
             );
 
-        server.inject({
-            method: 'GET',
-            url: '/'
-        }, function (response) {
-            serverResponse = response;
+        homepageController.resourceTypes(function (err, types) {
+            model = types;
             callback();
         });
     });
 
     this.Then(/^no resources are listed$/, function (callback) {
-        assert.equals(serverResponse.statusCode, 200);
-        assert.equals(serverResponse.payload, '[]');
+        assert.equals(model, []);
 
         callback();
     });
 
     this.Then(/^top level resources are listed$/, function (callback) {
-        assert.equals(serverResponse.statusCode, 200);
-        assert.equals(serverResponse.payload, JSON.stringify(availableResourceTypes));
+        assert.equals(model, availableResourceTypes);
 
         callback();
     });

@@ -12,6 +12,7 @@ test:
   directives:
     node: true
     regexp: true
+    unparam: true
     nomen: true
     predef:
       - suite
