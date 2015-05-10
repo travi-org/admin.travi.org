@@ -7,12 +7,12 @@ var homepage = require('../../lib/homepageController.js'),
 require('setup-referee-sinon/globals');
 
 suite('homepage controller', function () {
-    var reply;
+    var callback;
 
     setup(function () {
         sinon.stub(traviApiResources, 'getLinksFor');
 
-        reply = sinon.spy();
+        callback = sinon.spy();
     });
 
     teardown(function () {
@@ -24,9 +24,9 @@ suite('homepage controller', function () {
             'self': {'href': 'http://api.travi.org/'}
         });
 
-        homepage.resourceTypes(null, reply);
+        homepage.resourceTypes(callback);
 
-        assert.calledWith(reply, []);
+        assert.calledWith(callback, null, []);
     });
 
     test('that link rels are listed when links are present', function () {
@@ -35,8 +35,8 @@ suite('homepage controller', function () {
         links[linkName] = {'href': any.url()};
         traviApiResources.getLinksFor.withArgs('catalog').yields(null, links);
 
-        homepage.resourceTypes(null, reply);
+        homepage.resourceTypes(callback);
 
-        assert.calledWith(reply, [linkName]);
+        assert.calledWith(callback, null, [linkName]);
     });
 });

@@ -7,10 +7,22 @@ var hapi = require('hapi'),
 
 server.connection({port: 3333});
 
+server.views({
+    engines: {
+        jsx: require('hapi-react-views')
+    },
+    relativeTo: __dirname,
+    path: 'views'
+});
+
 server.route({
     method: 'GET',
     path: '/',
-    handler: homeController.resourceTypes
+    handler: function (request, reply) {
+        homeController.resourceTypes(function (err, types) {
+            reply.view('index', types);
+        });
+    }
 });
 
 server.route({

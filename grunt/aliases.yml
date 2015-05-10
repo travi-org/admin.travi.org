@@ -4,9 +4,13 @@ lint:
   - jscs
   - jslint
 
+unit: mochacov:unit
+
+integration: cucumberjs
+
 test:
-  - mochacov:unit
-  - cucumberjs
+  - unit
+  - integration
 
 verify:
   - lint
