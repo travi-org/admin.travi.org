@@ -16,5 +16,7 @@ an acceptable way to piece together `hapi` and `react` to support the following:
 * Progressive Enhancement
 * Cut the Mustard
 * Isomorphic Views
+* Performance
 * Thin HATEOAS/Hal client
 * OAuth client
+* OpenID
