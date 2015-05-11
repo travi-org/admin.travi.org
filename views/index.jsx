@@ -4,7 +4,15 @@ var Component = React.createClass({
     render: function () {
 
         return (
-            <html> </html>
+            <html>
+                <body>
+                    <ul>
+                    {this.props.types.map(function (type) {
+                        return <li>{type}</li>
+                    })}
+                    </ul>
+                </body>
+            </html>
         );
     }
 });

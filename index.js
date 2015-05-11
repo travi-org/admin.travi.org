@@ -20,7 +20,9 @@ server.route({
     path: '/',
     handler: function (request, reply) {
         homeController.resourceTypes(function (err, types) {
-            reply.view('index', types);
+            reply.view('index', {
+                types: types
+            });
         });
     }
 });
