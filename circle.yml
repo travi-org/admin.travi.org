@@ -11,3 +11,9 @@ test:
     - grunt mochacov:coverage
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
     - cucumber.js --format=json test/integration/features/ > $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
+
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: infinite-lowlands-5332
