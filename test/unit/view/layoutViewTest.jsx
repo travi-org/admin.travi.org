@@ -4,7 +4,8 @@ var React = require('react'),
     ReactTestUtils = require('react/lib/ReactTestUtils'),
     assert = require('chai').assert,
 
-    Layout = require('../../../views/index.jsx');
+    Layout = require('../../../lib/views/index.jsx'),
+    PrimaryNav = require('../../../lib/views/theme/primaryNav.jsx');
 
 suite('layout view', function () {
     test('that the layout markup is correct', function () {
@@ -21,11 +22,7 @@ suite('layout view', function () {
 
         assert.equal('html', rendered.type);
         assert.deepEqual(<body>
-            <ul>
-                {types.map(function (type) {
-                    return <li>{type}</li>
-                })}
-            </ul>
+            <PrimaryNav types={types} />
         </body>, rendered.props.children);
     });
 });
