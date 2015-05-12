@@ -7,7 +7,7 @@ options:
 travi:
   files:
     - expand: true
-      cwd: resources
+      cwd: resources/scss
       src: '**/*.scss'
-      dest: resources/css
+      dest: resources/css/
       ext: .css

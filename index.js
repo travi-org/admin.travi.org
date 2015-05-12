@@ -17,6 +17,16 @@ server.views({
 
 server.route({
     method: 'GET',
+    path: '/resources/{param*}',
+    handler: {
+        directory: {
+            path: 'resources'
+        }
+    }
+});
+
+server.route({
+    method: 'GET',
     path: '/',
     handler: function (request, reply) {
         homeController.resourceTypes(function (err, types) {

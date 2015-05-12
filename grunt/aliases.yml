@@ -1,4 +1,6 @@
-build: sass
+build:
+  - clean
+  - sass
 
 lint:
   - jscs
