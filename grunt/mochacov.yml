@@ -3,6 +3,8 @@ options:
   files: test/unit/**/*Test.js*
   compilers:
     - jsx:jsx-require-extension
+  require:
+    - test/unit/view/jsDomSetup.js
 
 unit:
   options:
