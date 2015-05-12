@@ -5,14 +5,14 @@ var hapi = require('hapi'),
 
     server = new hapi.Server();
 
-server.connection({port: 3333});
+server.connection({port: process.env.PORT || 3333});
 
 server.views({
     engines: {
         jsx: require('hapi-react-views')
     },
     relativeTo: __dirname,
-    path: 'views'
+    path: 'lib/views'
 });
 
 server.route({
