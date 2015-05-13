@@ -18,4 +18,6 @@ verify:
   - lint
   - test
 
+heroku:production: build
+
 default: verify
