@@ -1,0 +1,5 @@
+prod:
+  options:
+    copy: false
+    bowerOptions:
+      production: true
