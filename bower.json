@@ -14,6 +14,10 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap-sass-official": "~3.3.4"
+    "bootstrap-sass-official": "~3.3.4",
+    "travi.org-theme": "*"
+  },
+  "resolutions": {
+    "jquery": "1.11.x"
   }
 }

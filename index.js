@@ -27,6 +27,16 @@ server.route({
 
 server.route({
     method: 'GET',
+    path: '/favicon.ico',
+    handler: {
+        file: {
+            path: 'bower_components/travi.org-theme/img/favicon.ico'
+        }
+    }
+});
+
+server.route({
+    method: 'GET',
     path: '/',
     handler: function (request, reply) {
         homeController.resourceTypes(function (err, types) {
