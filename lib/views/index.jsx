@@ -8,6 +8,7 @@ var Component = React.createClass({
         return (
             <html>
                 <head>
+                    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Permanent+Marker:regular" />
                     <Styles />
                 </head>
                 <body>
