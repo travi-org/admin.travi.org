@@ -24,6 +24,7 @@ suite('layout view', function () {
         assert.equal('html', rendered.type);
         assert.deepEqual([
             <head>
+                <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Permanent+Marker:regular" />
                 <Styles />
             </head>,
             <body>
