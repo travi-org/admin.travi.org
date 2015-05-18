@@ -1,7 +1,7 @@
 dist:
   src:
     - index.js
-    - js/**/*.js
+    - lib/**/*.js
   options:
     config: true
 

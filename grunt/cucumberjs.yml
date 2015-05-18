@@ -1,4 +1,13 @@
-src: test/integration/features/
-options:
-    steps: test/integration/features/step_definitions/
-    format: pretty
+integration:
+    src: test/integration/features/
+    options:
+        steps: test/integration/features/step_definitions/
+        format: pretty
+        tags: ~@wip
+
+wip:
+    src: test/integration/features/
+    options:
+        steps: test/integration/features/step_definitions/
+        format: pretty
+        tags: "@wip"

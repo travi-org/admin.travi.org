@@ -9,7 +9,7 @@ lint:
 
 unit: mochacov:unit
 
-integration: cucumberjs
+integration: cucumberjs:integration
 
 test:
   - unit

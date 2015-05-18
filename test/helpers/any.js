@@ -41,7 +41,20 @@ function url() {
     return protocol() + host() + '/' + string();
 }
 
+function listOf(constructor) {
+    var list = [],
+        listSize = int(),
+        i;
+
+    for (i = 0; i < listSize; i += 1) {
+        list.push(constructor());
+    }
+
+    return list;
+}
+
 module.exports = {
     string: string,
-    url: url
+    url: url,
+    listOf: listOf
 };
