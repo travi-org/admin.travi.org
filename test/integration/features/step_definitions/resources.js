@@ -10,32 +10,59 @@ module.exports = function () {
     var returnedResources,
         resources = [{}, {}];
 
-    function buildLinksIncluding(resourceType) {
+    function buildHalLink(href) {
+        return { href: href};
+    }
+
+    function buildLinksIncluding(resourceType, resourceLink) {
         var links = {
-            'self': any.url()
+            'self': buildHalLink(any.url())
         };
 
-        links[resourceType] = any.url();
+        links[resourceType] = buildHalLink(resourceLink);
 
         return links;
     }
 
-    this.Given(/^list of "([^"]*)" resources exists in the api$/, function (resourceType, callback) {
-        nock('http://api.travi.org')
+    function setupExpectedApiResponsesFor(resourceType) {
+        var host = 'http://api.travi.org',
+            requestPath = '/' + resourceType + any.string(),
+            resourceLink = host + requestPath,
+            headers = {'Content-Type': 'application/hal+json'},
+            document = {};
+        document[resourceType] = resources;
+
+        nock(host)
             .get('/')
             .reply(
                 200,
-                { _links: buildLinksIncluding(resourceType) },
-                { 'Content-Type': 'application/hal+json' }
+                {_links: buildLinksIncluding(resourceType, resourceLink)},
+                headers
             );
 
-        nock('http://api.travi.org')
-            .get('/' + resourceType)
+        nock(host)
+            .get(requestPath)
             .reply(
                 200,
-                { items: resources },
-                { 'Content-Type': 'application/hal+json' }
+                document,
+                headers
             );
+    }
+
+    this.Before(function (callback) {
+        nock.disableNetConnect();
+
+        callback();
+    });
+
+    this.After(function (callback) {
+        nock.enableNetConnect();
+
+        callback();
+    });
+
+    this.Given(/^list of "([^"]*)" resources exists in the api$/, function (resourceType, callback) {
+        setupExpectedApiResponsesFor(resourceType);
 
         callback();
     });

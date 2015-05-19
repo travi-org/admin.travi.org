@@ -2,6 +2,7 @@
 
 var hapi = require('hapi'),
     homeController = require('./lib/homepageController'),
+    resourcesControlller = require('./lib/resourcesController'),
 
     server = new hapi.Server();
 
@@ -49,9 +50,13 @@ server.route({
 
 server.route({
     method: 'GET',
-    path: '/hello',
+    path: '/{resourceType}',
     handler: function (request, reply) {
-        reply({message: 'Hello World'});
+        resourcesControlller.getListOf(request.params.resourceType, function (err, resources) {
+            reply.view('resourceList', {
+                resources: resources
+            });
+        });
     }
 });
 

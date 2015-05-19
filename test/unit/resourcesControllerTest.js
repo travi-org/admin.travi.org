@@ -3,15 +3,11 @@
 var resourcesController = require('../../lib/resourcesController'),
     traviApiResources = require('../../lib/traviApiResources.js'),
 
-    any = require('../helpers/any');
+    any = require('../helpers/any-for-admin');
 
 require('setup-referee-sinon/globals');
 
 suite('resources controller', function () {
-    any.resource = function () {
-        return {};
-    };
-
     setup(function () {
         sinon.stub(traviApiResources, 'getListOf');
     });

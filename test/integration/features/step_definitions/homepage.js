@@ -20,8 +20,13 @@ module.exports = function () {
         return links;
     }
 
-    this.After(function (callback) {
+    this.Before(function (callback) {
         availableResourceTypes = [];
+
+        callback();
+    });
+
+    this.After(function (callback) {
         nock.cleanAll();
 
         callback();
@@ -32,7 +37,7 @@ module.exports = function () {
     });
 
     this.Given(/^user has api privileges$/, function (callback) {
-        availableResourceTypes = [any.string(), any.string()];
+        availableResourceTypes = any.listOf(any.string);
 
         callback();
     });
