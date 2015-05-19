@@ -52,8 +52,11 @@ server.route({
     method: 'GET',
     path: '/{resourceType}',
     handler: function (request, reply) {
-        resourcesControlller.getListOf(request.params.resourceType, function (err, resources) {
+        var resourceType = request.params.resourceType;
+
+        resourcesControlller.getListOf(resourceType, function (err, resources) {
             reply.view('resourceList', {
+                resourceType: resourceType,
                 resources: resources
             });
         });
