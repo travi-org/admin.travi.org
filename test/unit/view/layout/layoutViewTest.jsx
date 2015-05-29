@@ -29,6 +29,9 @@ suite('layout view', function () {
             </head>,
             <body>
                 <PrimaryNav types={types} />
+                <div id="content">
+
+                </div>
             </body>
         ], rendered.props.children);
     });

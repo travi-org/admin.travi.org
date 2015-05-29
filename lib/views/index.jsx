@@ -13,6 +13,9 @@ var Component = React.createClass({
                 </head>
                 <body>
                     <PrimaryNav types={this.props.types} />
+                    <div id="content">
+
+                    </div>
                 </body>
             </html>
         );

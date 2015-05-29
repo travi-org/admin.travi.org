@@ -1,6 +1,6 @@
 'use strict';
 
-var homepage = require('../../lib/homepageController.js'),
+var homepage = require('../../lib/router.js'),
     traviApiResources = require('../../lib/traviApiResources.js'),
     any = require('../helpers/any');
 
@@ -24,7 +24,7 @@ suite('homepage controller', function () {
             'self': {'href': 'http://api.travi.org/'}
         });
 
-        homepage.resourceTypes(callback);
+        homepage.listResourceTypes(callback);
 
         assert.calledWith(callback, null, []);
     });
@@ -35,7 +35,7 @@ suite('homepage controller', function () {
         links[linkName] = {'href': any.url()};
         traviApiResources.getLinksFor.withArgs('catalog').yields(null, links);
 
-        homepage.resourceTypes(callback);
+        homepage.listResourceTypes(callback);
 
         assert.calledWith(callback, null, [linkName]);
     });

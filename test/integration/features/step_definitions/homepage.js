@@ -1,4 +1,4 @@
-var homepageController = require('../../../../lib/homepageController'),
+var router = require('../../../../lib/router'),
     assert = require('referee').assert,
     nock = require('nock'),
     any = require('../../../helpers/any');
@@ -51,7 +51,7 @@ module.exports = function () {
                 { 'Content-Type': 'application/hal+json'}
             );
 
-        homepageController.resourceTypes(function (err, types) {
+        router.listResourceTypes(function (err, types) {
             model = types;
             callback();
         });

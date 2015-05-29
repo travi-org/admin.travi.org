@@ -1,7 +1,9 @@
 'use strict';
 
 var hapi = require('hapi'),
-    homeController = require('./lib/homepageController'),
+    async = require('async'),
+
+    router = require('./lib/router'),
     resourcesControlller = require('./lib/resourcesController'),
 
     server = new hapi.Server();
@@ -40,7 +42,7 @@ server.route({
     method: 'GET',
     path: '/',
     handler: function (request, reply) {
-        homeController.resourceTypes(function (err, types) {
+        router.listResourceTypes(function (err, types) {
             reply.view('index', {
                 types: types
             });
@@ -54,12 +56,27 @@ server.route({
     handler: function (request, reply) {
         var resourceType = request.params.resourceType;
 
-        resourcesControlller.getListOf(resourceType, function (err, resources) {
-            reply.view('resourceList', {
-                resourceType: resourceType,
-                resources: resources
-            });
-        });
+        async.parallel(
+            [
+                function (callback) {
+                    router.listResourceTypes(function (err, types) {
+                        callback(null, types);
+                    });
+                },
+                function (callback) {
+                    resourcesControlller.getListOf(resourceType, function (err, resources) {
+                        callback(null, resources);
+                    });
+                }
+            ],
+            function (err, results) {
+                reply.view('resourceList', {
+                    resourceType: resourceType,
+                    resources: results[1],
+                    types: results[0]
+                });
+            }
+        );
     }
 });
 
