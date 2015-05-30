@@ -22,10 +22,12 @@ suite('primary navigation', function () {
         var links = ReactTestUtils.scryRenderedDOMComponentsWithTag(rendered, 'LI');
         assert.equal(links.length, types.length);
         links.forEach(function (item, index) {
-            assert.equal(
-                React.findDOMNode(item).textContent,
-                types[index]
-            );
+            var listItem = React.findDOMNode(item),
+                type = types[index],
+                link = listItem.childNodes[0];
+
+            assert.equal(link.textContent, type);
+            assert.equal(link.pathname, '/' + type);
         });
     });
 });

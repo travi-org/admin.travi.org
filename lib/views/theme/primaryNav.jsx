@@ -12,7 +12,7 @@ var Component = React.createClass({
                     <div className="collapse navbar-collapse">
                         <ul className="nav navbar-nav">
                             {this.props.types.map(function (type) {
-                                return <li><a href="#">{type}</a></li>
+                                return <li><a href={'/' + type}>{type}</a></li>
                             })}
                         </ul>
                     </div>
