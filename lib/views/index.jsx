@@ -1,25 +1,18 @@
 var React = require('react/addons'),
 
-    Styles = require('./layout/styles.jsx'),
-    PrimaryNav = require('./theme/primaryNav.jsx');
+    Layout = require('./layout/layout.jsx');
 
-var Component = React.createClass({
+module.exports = React.createClass({
     render: function () {
         return (
-            <html>
-                <head>
-                    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Permanent+Marker:regular" />
-                    <Styles />
-                </head>
-                <body>
-                    <PrimaryNav types={this.props.types} />
-                    <div id="content">
-
-                    </div>
-                </body>
-            </html>
+            <Layout types={this.props.types}>
+                <div className="jumbotron">
+                    <h2>Reference API Client</h2>
+                    <p>
+                        Administration for Travi.org
+                    </p>
+                </div>
+            </Layout>
         );
     }
 });
-
-module.exports = Component;

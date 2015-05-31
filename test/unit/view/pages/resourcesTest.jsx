@@ -7,7 +7,7 @@ var React = require('react'),
     proxyquire = require('proxyquire'),
 
     LayoutStub = require('../../../helpers/layoutStub.jsx'),
-    ResourceList = proxyquire('../../../../lib/views/resourceList.jsx', {'./index.jsx': LayoutStub});
+    ResourceList = proxyquire('../../../../lib/views/resourceList.jsx', {'./layout/layout.jsx': LayoutStub});
 
 suite('resource list', function () {
     test('that a message is given when no resources are available', function () {

@@ -1,6 +1,6 @@
 var React = require('react/addons'),
 
-    Layout = require('./index.jsx');
+    Layout = require('./layout/layout.jsx');
 
 module.exports = React.createClass({
     render: function () {
