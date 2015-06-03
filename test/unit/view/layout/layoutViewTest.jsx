@@ -12,28 +12,37 @@ suite('layout view', function () {
     test('that the layout markup is correct', function () {
         var types = [],
             shallowRenderer = ReactTestUtils.createRenderer(),
-            element = React.createElement(Layout, {
-                    types: types
-                }
+            element = React.createElement(
+                Layout,
+                { types: types},
+                <div/>
             ),
             rendered;
-
+        ReactTestUtils.renderIntoDocument(element);
         shallowRenderer.render(element);
         rendered = shallowRenderer.getRenderOutput();
 
         assert.equal('html', rendered.type);
-        assert.deepEqual([
+        var headElement = rendered.props.children[0];
+        var bodyElement = rendered.props.children[1];
+
+        assert.deepEqual(
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Permanent+Marker:regular" />
                 <Styles />
             </head>,
+            headElement
+        );
+
+        assert.deepEqual(
             <body>
                 <PrimaryNav types={types} />
                 <div id="content" className="container">
-
+                    <div/>
                 </div>
-            </body>
-        ], rendered.props.children);
+            </body>,
+            bodyElement
+        );
     });
 });

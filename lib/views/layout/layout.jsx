@@ -15,7 +15,7 @@ module.exports = React.createClass({
                 <body>
                     <PrimaryNav types={this.props.types} />
                     <div id="content" className="container">
-
+                    { this.props.children }
                     </div>
                 </body>
             </html>
