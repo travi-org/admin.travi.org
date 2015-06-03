@@ -2,6 +2,8 @@ var React = require('react/addons');
 
 var Component = React.createClass({
     render: function () {
+        'use strict';
+
         return (
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
@@ -12,7 +14,7 @@ var Component = React.createClass({
                     <div className="collapse navbar-collapse">
                         <ul className="nav navbar-nav">
                             {this.props.types.map(function (type) {
-                                return <li><a href={'/' + type}>{type}</a></li>
+                                return <li><a href={'/' + type}>{type}</a></li>;
                             })}
                         </ul>
                     </div>

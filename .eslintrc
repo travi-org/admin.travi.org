@@ -1,0 +1,18 @@
+---
+  plugins:
+    - react
+
+  rules:
+    quotes:
+      - 2
+      - "single"
+
+  env:
+    node: true
+
+  ecmaFeatures:
+    jsx: true
+
+  globals:
+    suite: false
+    test: false

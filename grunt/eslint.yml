@@ -1,0 +1,3 @@
+target:
+  - lib/**/*.jsx
+  - test/unit/**/*.jsx

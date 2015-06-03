@@ -4,6 +4,8 @@ var React = require('react/addons'),
 
 module.exports = React.createClass({
     render: function () {
+        'use strict';
+
         return (
             <Layout types={this.props.types}>
                 <div className="jumbotron">

@@ -5,9 +5,9 @@ var React = require('react'),
     assert = require('chai').assert,
     any = require('../../../helpers/any-for-admin'),
     proxyquire = require('proxyquire'),
+    LayoutStub = require('../../../helpers/layoutStub.jsx');
 
-    LayoutStub = require('../../../helpers/layoutStub.jsx'),
-    ResourceList = proxyquire('../../../../lib/views/resourceList.jsx', {'./layout/layout.jsx': LayoutStub});
+var ResourceList = proxyquire('../../../../lib/views/resourceList.jsx', {'./layout/layout.jsx': LayoutStub});
 
 suite('resource list', function () {
     test('that a message is given when no resources are available', function () {

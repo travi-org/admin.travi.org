@@ -6,6 +6,7 @@ build:
 lint:
   - jscs
   - jslint
+  - eslint
 
 unit: mochacov:unit
 
