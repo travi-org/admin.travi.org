@@ -38,6 +38,7 @@
     "grunt-jscs": "^1.6.0",
     "grunt-jslint": "^1.1.14",
     "grunt-mocha-cov": "^0.4.0",
+    "grunt-perfbudget": "^0.1.6",
     "grunt-sass": "^1.0.0",
     "jsdom": "^5.3.0",
     "jsx-require-extension": "^0.2.0",
