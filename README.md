@@ -1,4 +1,4 @@
-travi-admin
+travi.org-admin
 =========
 
 [![Build Status](https://img.shields.io/circleci/project/travi/travi.org-admin.svg?style=flat)](https://circleci.com/gh/travi/travi.org-admin)
