@@ -1,5 +1,5 @@
 travi.org-admin
-=========
+===============
 
 [![Build Status](https://img.shields.io/circleci/project/travi/travi.org-admin.svg?style=flat)](https://circleci.com/gh/travi/travi.org-admin)
 [![Coverage Status](http://img.shields.io/coveralls/travi/travi.org-admin.svg?style=flat)](https://coveralls.io/r/travi/travi.org-admin?branch=master)
