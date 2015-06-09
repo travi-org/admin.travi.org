@@ -41,6 +41,7 @@ suite('layout view', function () {
                 <div id="content" className="container">
                     <div/>
                 </div>
+                <script src="/resources/js/common.js"> </script>
             </body>,
             bodyElement
         );

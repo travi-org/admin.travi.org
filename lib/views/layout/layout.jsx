@@ -19,6 +19,7 @@ module.exports = React.createClass({
                     <div id="content" className="container">
                     { this.props.children }
                     </div>
+                    <script src="/resources/js/common.js"> </script>
                 </body>
             </html>
         );

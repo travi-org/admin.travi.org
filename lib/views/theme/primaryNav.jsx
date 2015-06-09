@@ -7,11 +7,18 @@ var Component = React.createClass({
         return (
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
-                    <h1 className="navbar-header">
-                        <a className="navbar-brand" href="/">Travi</a>
-                    </h1>
+                    <div className="navbar-header">
+                        <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-items">
+                            <span className="sr-only">Toggle navigation</span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                        </button>
 
-                    <div className="collapse navbar-collapse">
+                        <h1><a className="navbar-brand" href="/">Travi</a></h1>
+                    </div>
+
+                    <div className="collapse navbar-collapse" id="navbar-items">
                         <ul className="nav navbar-nav">
                             {this.props.types.map(function (type) {
                                 return <li><a href={'/' + type}>{type}</a></li>;
