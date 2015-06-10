@@ -37,9 +37,9 @@ suite('primary navigation', function () {
             assert.equal(link.pathname, type.path);
 
             if (type.active) {
-                assert.equal(link.className, 'active');
+                assert.equal(listItem.className, 'active');
             } else {
-                assert.equal(link.className, '');
+                assert.equal(listItem.className, '');
             }
         });
     });
