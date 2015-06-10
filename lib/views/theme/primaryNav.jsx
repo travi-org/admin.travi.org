@@ -21,7 +21,7 @@ var Component = React.createClass({
                     <div className="collapse navbar-collapse" id="navbar-items">
                         <ul className="nav navbar-nav">
                             {this.props.types.map(function (type) {
-                                return <li><a href={'/' + type}>{type}</a></li>;
+                                return <li><a href={type.path} className={ type.active ? 'active' : '' }>{type.text}</a></li>;
                             })}
                         </ul>
                     </div>

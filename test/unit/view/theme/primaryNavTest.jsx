@@ -10,8 +10,15 @@ var React = require('react'),
 suite('primary navigation', function () {
     test('that the resource types are listed as links', function () {
         var types = [
-                'foo',
-                'bar'
+                {
+                    text: 'foo',
+                    path: '/foo'
+                },
+                {
+                    text: 'bar',
+                    path: '/bar',
+                    active: true
+                }
             ],
             element = React.createElement(PrimaryNav, { types: types }),
             rendered = ReactTestUtils.renderIntoDocument(element),
@@ -26,8 +33,14 @@ suite('primary navigation', function () {
                 type = types[index],
                 link = listItem.childNodes[0];
 
-            assert.equal(link.textContent, type);
-            assert.equal(link.pathname, '/' + type);
+            assert.equal(link.textContent, type.text);
+            assert.equal(link.pathname, type.path);
+
+            if (type.active) {
+                assert.equal(link.className, 'active');
+            } else {
+                assert.equal(link.className, '');
+            }
         });
     });
 });

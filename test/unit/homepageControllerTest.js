@@ -37,6 +37,9 @@ suite('homepage controller', function () {
 
         homepage.listResourceTypes(callback);
 
-        assert.calledWith(callback, null, [linkName]);
+        assert.calledWith(callback, null, [{
+            text: linkName,
+            path: '/' + linkName
+        }]);
     });
 });

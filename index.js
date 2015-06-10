@@ -2,6 +2,7 @@
 
 var hapi = require('hapi'),
     async = require('async'),
+    _ = require('lodash'),
 
     router = require('./lib/router'),
     resourcesControlller = require('./lib/resourcesController'),
@@ -60,6 +61,12 @@ server.route({
             [
                 function (callback) {
                     router.listResourceTypes(function (err, types) {
+                        types = _.map(types, function (type) {
+                            type.active = resourceType === type.text;
+
+                            return type;
+                        });
+
                         callback(null, types);
                     });
                 },
