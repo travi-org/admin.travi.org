@@ -44,7 +44,6 @@
     "jsdom": "^5.4.3",
     "jsx-require-extension": "^0.2.0",
     "load-grunt-config": "^0.17.1",
-    "lodash": "^3.9.3",
     "nock": "^2.4.0",
     "proxyquire": "^1.5.0",
     "react-tools": "^0.13.3",
@@ -58,6 +57,7 @@
     "async": "^1.2.1",
     "hapi": "^8.6.1",
     "hapi-react-views": "^3.0.1",
+    "lodash": "^3.9.3",
     "react": "^0.13.3",
     "traverson": "^2.0.1",
     "traverson-hal": "^2.0.0"
