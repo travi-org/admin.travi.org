@@ -1,6 +1,7 @@
 var router = require('../../../../lib/router'),
     assert = require('referee').assert,
     nock = require('nock'),
+    _ = require('lodash'),
     any = require('../../../helpers/any');
 
 module.exports = function () {
@@ -64,7 +65,12 @@ module.exports = function () {
     });
 
     this.Then(/^top level resources are listed$/, function (callback) {
-        assert.equals(model, availableResourceTypes);
+        assert.equals(model, _.map(availableResourceTypes, function (type) {
+            return {
+                text: type,
+                path: '/' + type
+            };
+        }));
 
         callback();
     });
