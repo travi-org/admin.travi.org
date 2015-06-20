@@ -12,6 +12,7 @@ lint:
 unit: mochacov:unit
 
 integration: cucumberjs:integration
+wip: cucumberjs:wip
 
 test:
   - unit
