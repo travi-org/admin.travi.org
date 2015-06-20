@@ -10,7 +10,7 @@ module.exports = React.createClass({
         if (this.props.resources.length) {
             resources = <ul>
                 {this.props.resources.map(function (resource) {
-                    return <li>{resource}</li>;
+                    return <li key={resource.id}>{resource}</li>;
                 })}
             </ul>;
         } else {
