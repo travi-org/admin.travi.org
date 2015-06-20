@@ -71,9 +71,7 @@ server.route({
                     });
                 },
                 function (callback) {
-                    resourcesControlller.getListOf(resourceType, function (err, resources) {
-                        callback(null, resources);
-                    });
+                    resourcesControlller.getListOf(resourceType, callback);
                 }
             ],
             function (err, results) {
