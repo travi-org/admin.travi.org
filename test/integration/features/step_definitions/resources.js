@@ -80,6 +80,7 @@ module.exports = function () {
                 };
             } else if ('rides' === resourceType) {
                 mappedResource = {
+                    id: index + 1,
                     displayName: resource
                 };
             }
@@ -116,7 +117,7 @@ module.exports = function () {
     });
 
     this.Then(/^list of "([^"]*)" resources is returned$/, function (resourceType, callback) {
-        if (any.resources.hasOwnProperty(resourceType)) {
+        if (any.resources.hasOwnProperty(resourceType.substring(0, resourceType.length - 1))) {
             assertFormatMappedToViewFor(resourceType);
         } else {
             assertFormatIsUntouchedFor(resourceType);

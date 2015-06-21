@@ -7,10 +7,10 @@ any.resource = function () {
 };
 
 any.resources = {
-    rides: function () {
+    ride: function () {
         return any.string();
     },
-    users: function () {
+    user: function () {
         return {
             id: any.string(),
             'first-name': any.string(),
