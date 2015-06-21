@@ -10,7 +10,7 @@ test:
   post:
     - grunt mochacov:coverage
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
-    - cucumber.js --format=json test/integration/features/ > $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
+    - cucumber.js --format=json --tags=~@wip test/integration/features/ > $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
 
 deployment:
   staging:
