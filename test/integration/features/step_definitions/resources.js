@@ -2,13 +2,14 @@ var resourcesController = require('../../../../lib/resourcesController'),
 
     nock = require('nock'),
     assert = require('referee').assert,
-    any = require('../../../helpers/any');
+    _ = require('lodash'),
+    any = require('../../../helpers/any-for-admin');
 
 module.exports = function () {
     'use strict';
 
     var returnedResources,
-        resources = [{}, {}];
+        resources = {};
 
     function buildHalLink(href) {
         return { href: href};
@@ -24,13 +25,27 @@ module.exports = function () {
         return links;
     }
 
+    function prepareListForResponse(resourceType) {
+        var resourceList;
+
+        if (any.resources.hasOwnProperty(resourceType)) {
+            resourceList = any.listOf(any.resources[resourceType]);
+        } else {
+            resourceList = any.listOf(any.resource);
+        }
+
+        resources[resourceType] = resourceList;
+
+        return resourceList;
+    }
+
     function setupExpectedApiResponsesFor(resourceType) {
         var host = 'http://api.travi.org',
             requestPath = '/' + resourceType + any.string(),
             resourceLink = host + requestPath,
             headers = {'Content-Type': 'application/hal+json'},
             document = {};
-        document[resourceType] = resources;
+        document[resourceType] = prepareListForResponse(resourceType);
 
         nock(host)
             .get('/')
@@ -49,6 +64,30 @@ module.exports = function () {
             );
     }
 
+    function assertFormatIsUntouchedFor(resourceType) {
+        assert.equals(returnedResources, resources[resourceType]);
+    }
+
+    function assertFormatMappedToViewFor(resourceType) {
+        _.each(resources[resourceType], function (resource, index) {
+            var mappedResource;
+
+            if ('users' === resourceType) {
+                mappedResource = {
+                    id: resource.id,
+                    displayName: resource['first-name'] + ' ' + resource['last-name'],
+                    thumbnail: resource.avatar
+                };
+            } else if ('rides' === resourceType) {
+                mappedResource = {
+                    displayName: resource
+                };
+            }
+
+            assert.equals(returnedResources[index], mappedResource);
+        });
+    }
+
     this.Before(function (callback) {
         nock.disableNetConnect();
 
@@ -57,6 +96,7 @@ module.exports = function () {
 
     this.After(function (callback) {
         nock.enableNetConnect();
+        resources = {};
 
         callback();
     });
@@ -76,7 +116,11 @@ module.exports = function () {
     });
 
     this.Then(/^list of "([^"]*)" resources is returned$/, function (resourceType, callback) {
-        assert.equals(returnedResources, resources);
+        if (any.resources.hasOwnProperty(resourceType)) {
+            assertFormatMappedToViewFor(resourceType);
+        } else {
+            assertFormatIsUntouchedFor(resourceType);
+        }
 
         callback();
     });
