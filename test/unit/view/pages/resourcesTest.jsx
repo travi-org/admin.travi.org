@@ -32,9 +32,9 @@ suite('resource list', function () {
     test('that resources are listed', function () {
         var resourceType = any.string(),
             resources = [
-                'one',
-                'two',
-                'three'
+                {id: 1, displayName: 'one'},
+                {id: 2, displayName: 'two'},
+                {id: 3, displayName: 'three'}
             ],
             element = React.createElement(ResourceList, {
                 resources: resources,
@@ -53,7 +53,10 @@ suite('resource list', function () {
         assert.equal(content.type, 'ul');
         assert.equal(items.length, resources.length);
         _.each(items, function (item, index) {
-            assert.equal(item.getDOMNode().textContent, resources[index]);
+            var resource = resources[index];
+
+            assert.equal(item.getDOMNode().textContent, resource.displayName);
+            assert.equal(item._reactInternalInstance._currentElement.key, resource.id);
         });
     });
 });
