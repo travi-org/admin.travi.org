@@ -31,7 +31,7 @@ module.exports = React.createClass({
 
         return (
             <Layout types={this.props.types}>
-            {resources}
+                {resources}
             </Layout>
         );
     }
