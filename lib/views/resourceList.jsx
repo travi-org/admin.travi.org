@@ -7,10 +7,22 @@ module.exports = React.createClass({
         'use strict';
 
         var resources;
+
         if (this.props.resources.length) {
-            resources = <ul>
+            resources = <ul className="list-group">
                 {this.props.resources.map(function (resource) {
-                    return <li key={resource.id}>{resource.displayName}</li>;
+                    var thumbnail;
+
+                    if (resource.thumbnail) {
+                        thumbnail = <img src={resource.thumbnail} className="thumbnail" />;
+                    } else {
+                        thumbnail = '';
+                    }
+
+                    return <li key={resource.id} className="list-group-item">
+                        {thumbnail}
+                        {resource.displayName}
+                    </li>;
                 })}
             </ul>;
         } else {
