@@ -4,6 +4,10 @@ var Component = React.createClass({
     render: function () {
         'use strict';
 
+        function renderNavLink(type) {
+            return <li key={type.text} className={ type.active ? 'active' : '' }><a href={type.path}>{type.text}</a></li>;
+        }
+
         return (
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
@@ -20,9 +24,7 @@ var Component = React.createClass({
 
                     <div className="collapse navbar-collapse" id="navbar-items">
                         <ul className="nav navbar-nav">
-                            {this.props.types.map(function (type) {
-                                return <li key={type.text} className={ type.active ? 'active' : '' }><a href={type.path}>{type.text}</a></li>;
-                            })}
+                            {this.props.types.map(renderNavLink)}
                         </ul>
                     </div>
 
