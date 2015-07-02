@@ -58,6 +58,7 @@
     "hapi": "^8.6.1",
     "hapi-react-views": "^3.0.1",
     "lodash": "^3.9.3",
+    "negotiator": "^0.5.3",
     "react": "^0.13.3",
     "traverson": "^2.0.1",
     "traverson-hal": "^2.0.0"

@@ -5,6 +5,7 @@ var hapi = require('hapi'),
     _ = require('lodash'),
 
     router = require('./lib/router'),
+    renderer = require('./lib/renderer'),
     resourcesControlller = require('./lib/resourcesController'),
 
     server = new hapi.Server();
@@ -44,9 +45,9 @@ server.route({
     path: '/',
     handler: function (request, reply) {
         router.listResourceTypes(function (err, types) {
-            reply.view('index', {
+            renderer.render('index', {
                 types: types
-            });
+            }, request, reply);
         });
     }
 });
@@ -75,11 +76,11 @@ server.route({
                 }
             ],
             function (err, results) {
-                reply.view('resourceList', {
+                renderer.render('resourceList', {
                     resourceType: resourceType,
                     resources: results[1],
                     types: results[0]
-                });
+                }, request, reply);
             }
         );
     }
