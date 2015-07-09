@@ -1,4 +1,5 @@
-var router = require('../../../../lib/router'),
+var path = require('path'),
+    server = require(path.join(__dirname, '../../../../index.js')),
     assert = require('referee').assert,
     nock = require('nock'),
     _ = require('lodash'),
@@ -7,8 +8,8 @@ var router = require('../../../../lib/router'),
 module.exports = function () {
     'use strict';
 
-    var model,
-        availableResourceTypes;
+    var availableResourceTypes,
+        serverResponse;
 
     function buildLinksFrom(availableResourceTypes) {
         var links = {
@@ -52,24 +53,30 @@ module.exports = function () {
                 { 'Content-Type': 'application/hal+json'}
             );
 
-        router.listResourceTypes(function (err, types) {
-            model = types;
+        server.inject({
+            method: 'GET',
+            url: '/'
+        }, function (response) {
+            serverResponse = response;
             callback();
         });
     });
 
     this.Then(/^no resources are listed$/, function (callback) {
-        assert.equals(model, []);
+        assert.equals(serverResponse.payload, JSON.stringify({types: []}));
 
         callback();
     });
 
     this.Then(/^top level resources are listed$/, function (callback) {
-        assert.equals(model, _.map(availableResourceTypes, function (type) {
-            return {
-                text: type,
-                path: '/' + type
-            };
+        assert.equals(serverResponse.statusCode, 200);
+        assert.equals(serverResponse.payload, JSON.stringify({
+            types: _.map(availableResourceTypes, function (type) {
+                return {
+                    text: type,
+                    path: '/' + type
+                };
+            })
         }));
 
         callback();
