@@ -43,6 +43,7 @@
     "grunt-perfbudget": "^0.1.6",
     "grunt-sass": "^1.0.0",
     "grunt-shell-spawn": "^0.3.8",
+    "grunt-wait": "^0.1.0",
     "jsdom": "^5.4.3",
     "jsx-require-extension": "^0.2.0",
     "load-grunt-config": "^0.17.1",
