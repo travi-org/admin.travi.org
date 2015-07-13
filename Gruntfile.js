@@ -26,7 +26,7 @@ module.exports = function (grunt) {
 
         var options = this.options({
             pactServicePort: pactServicePort,
-            pactDir: 'tmp'
+            pactDir: 'pact'
         });
 
         extendGruntPlugin(grunt, require('grunt-shell-spawn/tasks/shell'), {
