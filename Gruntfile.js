@@ -26,7 +26,7 @@ module.exports = function (grunt) {
 
         var options = this.options({
             pactServicePort: pactServicePort,
-            pactDir: 'pact'
+            pactDir: 'tmp'
         });
 
         extendGruntPlugin(grunt, require('grunt-shell-spawn/tasks/shell'), {
@@ -48,7 +48,7 @@ module.exports = function (grunt) {
                     stdout: true,
                     stderr: true,
                     failOnError: true,
-                    async: true
+                    async: false
                 }
             }
         });
@@ -63,45 +63,45 @@ module.exports = function (grunt) {
             }
         });
 
-        grunt.task.run('shell:pactServerStart', 'wait:pact');
+        grunt.task.registerTask('pact-tests', 'pact tests', function () {
+            // Setup interaction when calling the root url with GET
+            mockService
+                .given('the root url')
+                .uponReceiving('a GET request for all data')
+                .withRequest('get', '/')
+                .willRespondWith({
+                    status: 200,
+                    body: [
+                        {id: 92834, text: 'random text here.'},
+                        {id: 23453, text: 'more text'}
+                    ]
+                });
 
-        // Setup interaction when calling the root url with GET
-        mockService
-            .given('the root url')
-            .uponReceiving('a GET request for all data')
-            .withRequest('get', '/')
-            .willRespondWith({
-                status: 200,
-                body: [
-                    {id: 92834, text: 'random text here.'},
-                    {id: 23453, text: 'more text'}
-                ]
+            // Setup interaction when calling the root url with POST
+            mockService
+                .given('the root url')
+                .uponReceiving('a POST request with json data')
+                .withRequest('post', '/', null, { text: 'different text' })
+                .willRespondWith({
+                    status: 200,
+                    body: Math.floor(Math.random() * 1000000) // Random 6 digit ID
+                });
+
+            mockService.setup(function (error) {
+                if (error) {
+                    console.warn('Pact wasn\'t able set up the interactions: \n' + error);
+                }
             });
 
-        // Setup interaction when calling the root url with POST
-        mockService
-            .given('the root url')
-            .uponReceiving('a POST request with json data')
-            .withRequest('post', '/', null, { text: 'different text' })
-            .willRespondWith({
-                status: 200,
-                body: Math.floor(Math.random() * 1000000) // Random 6 digit ID
+            mockService.verifyAndWrite(function (error) {
+                if (error) {
+                    console.warn('Pact wasn\'t able to verify the interactions: \n' + error);
+                } else {
+                    console.log('Pact verified and written.');
+                }
             });
-
-        mockService.setup(function (error) {
-            if (error) {
-                console.warn('Pact wasn\'t able set up the interactions: \n' + error);
-            }
         });
 
-        mockService.verifyAndWrite(function (error) {
-            if (error) {
-                console.warn('Pact wasn\'t able to verify the interactions: \n' + error);
-            } else {
-                console.log('Pact verified and written.');
-            }
-        });
-
-        grunt.task.run('shell:pactServerStop');
+        grunt.task.run('shell:pactServerStart', 'wait:pact', 'pact-tests', 'shell:pactServerStop');
     });
 };
