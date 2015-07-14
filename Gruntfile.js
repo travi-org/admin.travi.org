@@ -9,6 +9,11 @@ module.exports = function (grunt) {
         }
     });
 
+
+    grunt.registerTask("warning-exit", "Call process.exit", function () {
+        process.exit(3);
+    });
+
     grunt.registerTask('pact-consumer', 'consumer driven contract', function () {
         var extendGruntPlugin = require('extend-grunt-plugin'),
             path = require('path'),
@@ -64,10 +69,9 @@ module.exports = function (grunt) {
         });
 
         grunt.task.registerTask('pact-tests', 'pact tests', function () {
-            // Setup interaction when calling the root url with GET
             mockService
                 .given('the root url')
-                .uponReceiving('a GET request for all data')
+                .uponReceiving('a GET request for the api catalog')
                 .withRequest('get', '/')
                 .willRespondWith({
                     status: 200,
@@ -77,20 +81,17 @@ module.exports = function (grunt) {
                     ]
                 });
 
-            // Setup interaction when calling the root url with POST
-            mockService
-                .given('the root url')
-                .uponReceiving('a POST request with json data')
-                .withRequest('post', '/', null, { text: 'different text' })
-                .willRespondWith({
-                    status: 200,
-                    body: Math.floor(Math.random() * 1000000) // Random 6 digit ID
-                });
-
             mockService.setup(function (error) {
                 if (error) {
                     console.warn('Pact wasn\'t able set up the interactions: \n' + error);
                 }
+            });
+
+            mockService.run(function () {}, function (runComplete) {
+                require('./lib/traviApiResources').getLinksFor('', function () {
+
+                    runComplete();
+                });
             });
 
             mockService.verifyAndWrite(function (error) {
@@ -101,6 +102,11 @@ module.exports = function (grunt) {
                 }
             });
         });
+
+        grunt.warn = grunt.fail.warn = function (warning) {
+            grunt.log.warn(warning);
+            grunt.task.run('shell:pactServerStop', 'warning-exit');
+        };
 
         grunt.task.run('shell:pactServerStart', 'wait:pact', 'pact-tests', 'shell:pactServerStop');
     });
