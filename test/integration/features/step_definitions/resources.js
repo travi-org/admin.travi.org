@@ -40,7 +40,7 @@ module.exports = function () {
     }
 
     function setupExpectedApiResponsesFor(resourceType) {
-        var host = 'http://api.travi.org',
+        var host = 'https://api.travi.org',
             requestPath = '/' + resourceType + any.string(),
             resourceLink = host + requestPath,
             headers = {'Content-Type': 'application/hal+json'},

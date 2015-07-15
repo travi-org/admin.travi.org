@@ -21,7 +21,7 @@ suite('homepage controller', function () {
 
     test('that an empty list of resource types is returned when none are available', function () {
         traviApiResources.getLinksFor.withArgs('catalog').yields(null, {
-            'self': {'href': 'http://api.travi.org/'}
+            'self': {'href': 'https://api.travi.org/'}
         });
 
         homepage.listResourceTypes(callback);

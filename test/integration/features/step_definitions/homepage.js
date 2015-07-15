@@ -45,7 +45,7 @@ module.exports = function () {
     });
 
     this.When(/^the homepage is loaded$/, function (callback) {
-        nock('http://api.travi.org')
+        nock('https://api.travi.org')
             .get('/')
             .reply(
                 200,

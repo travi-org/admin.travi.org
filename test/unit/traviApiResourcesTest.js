@@ -24,7 +24,7 @@ suite('travi-api resource interactions', function () {
                 'self': any.url(),
                 'foo': any.url()
             };
-        traverson.from.withArgs('http://api.travi.org/').returns({
+        traverson.from.withArgs('https://api.travi.org/').returns({
             getResource: stubForGet
         });
         stubForGet.yields(null, { '_links': links });
@@ -40,7 +40,7 @@ suite('travi-api resource interactions', function () {
             responseFromApi = {},
             callback = sinon.spy();
         responseFromApi[resourceType] = resources;
-        traverson.from.withArgs('http://api.travi.org/').returns({
+        traverson.from.withArgs('https://api.travi.org/').returns({
             follow: sinon.stub().withArgs(resourceType).returns({
                 getResource: stubForGet.yields(null, responseFromApi)
             })
