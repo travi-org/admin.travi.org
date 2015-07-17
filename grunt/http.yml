@@ -1,0 +1,8 @@
+pact:
+  options:
+    url: https://pact-api.travi.org/pacts/provider/travi-api/consumer/travi.org-admin/version/1.0.0
+    method: PUT
+    json: '<%= pact %>'
+    auth:
+      user: admin
+      pass: '<%= pactBrokerPassword %>'

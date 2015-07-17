@@ -5,7 +5,9 @@ module.exports = function (grunt) {
     require('time-grunt')(grunt);
     require('load-grunt-config')(grunt, {
         config: {
-            webPageTestApiToken: process.env.WEB_PAGE_TEST_API_TOKEN
+            webPageTestApiToken: process.env.WEB_PAGE_TEST_API_TOKEN,
+            pact: grunt.file.readJSON('tmp/pacts/travi.org-admin-travi-api.json'),
+            pactBrokerPassword: process.env.PACT_BROKER_PASSWORD
         }
     });
 
