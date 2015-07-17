@@ -2,13 +2,19 @@
 module.exports = function (grunt) {
     'use strict';
 
+    var pact = 'tmp/pacts/travi.org-admin-travi-api.json';
+    var config = {
+        webPageTestApiToken: process.env.WEB_PAGE_TEST_API_TOKEN,
+        pactBrokerPassword: process.env.PACT_BROKER_PASSWORD
+    };
+
+    if (grunt.file.exists(pact)) {
+        config.pact = grunt.file.readJSON(pact);
+    }
+
     require('time-grunt')(grunt);
     require('load-grunt-config')(grunt, {
-        config: {
-            webPageTestApiToken: process.env.WEB_PAGE_TEST_API_TOKEN,
-            pact: grunt.file.readJSON('tmp/pacts/travi.org-admin-travi-api.json'),
-            pactBrokerPassword: process.env.PACT_BROKER_PASSWORD
-        }
+        config: config
     });
 
 
