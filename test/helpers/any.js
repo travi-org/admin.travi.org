@@ -26,7 +26,6 @@ function string(length) {
 
     return randomString;
 }
-
 function protocol() {
     var protocols = ['http', 'https'];
 
@@ -55,6 +54,7 @@ function listOf(constructor) {
 
 module.exports = {
     string: string,
+    int: int,
     url: url,
     listOf: listOf
 };
