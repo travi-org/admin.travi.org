@@ -4,6 +4,7 @@ var path = require('path'),
     nock = require('nock'),
     _ = require('lodash'),
     any = require('../../../helpers/any');
+require('setup-referee-sinon/globals');
 
 module.exports = function () {
     'use strict';
@@ -23,13 +24,16 @@ module.exports = function () {
     }
 
     this.Before(function (callback) {
+        nock.disableNetConnect();
         availableResourceTypes = [];
 
         callback();
     });
 
     this.After(function (callback) {
+        nock.enableNetConnect();
         nock.cleanAll();
+        serverResponse = null;
 
         callback();
     });

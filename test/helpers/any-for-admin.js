@@ -3,7 +3,9 @@
 var any = require('./any');
 
 any.resource = function () {
-    return {};
+    return {
+        id: any.int()
+    };
 };
 
 any.resources = {

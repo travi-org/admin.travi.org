@@ -5,10 +5,6 @@ var mapper = require('../../../lib/mappers/userMapper'),
     any = require('../../helpers/any-for-admin');
 
 suite('user mapper', function () {
-    test('that the expected methods are exposed', function () {
-        assert.isFunction(mapper.mapToViewList);
-    });
-
     test('that user resources mapped to view list', function () {
         var user = any.resources.user();
 

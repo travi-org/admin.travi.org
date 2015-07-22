@@ -1,15 +1,24 @@
 var resourcesController = require('../../../../lib/resourcesController'),
+    path = require('path'),
+    server = require(path.join(__dirname, '../../../../index.js')),
 
     nock = require('nock'),
     assert = require('referee').assert,
     _ = require('lodash'),
-    any = require('../../../helpers/any-for-admin');
+    any = require('../../../helpers/any-for-admin'),
+    formatio = require('formatio');
+require('setup-referee-sinon/globals');
 
 module.exports = function () {
     'use strict';
 
-    var returnedResources,
+    var existingResourceId,
+        serverResponse,
         resources = {};
+
+    function getSingularForm(resourceType) {
+        return resourceType.substring(0, resourceType.length - 1);
+    }
 
     function buildHalLink(href) {
         return { href: href};
@@ -20,7 +29,9 @@ module.exports = function () {
             'self': buildHalLink(any.url())
         };
 
-        links[resourceType] = buildHalLink(resourceLink);
+        if (resourceLink) {
+            links[resourceType] = buildHalLink(resourceLink);
+        }
 
         return links;
     }
@@ -28,11 +39,19 @@ module.exports = function () {
     function prepareListForResponse(resourceType) {
         var resourceList;
 
-        if (any.resources.hasOwnProperty(resourceType)) {
-            resourceList = any.listOf(any.resources[resourceType]);
+        if (any.resources.hasOwnProperty(getSingularForm(resourceType))) {
+            resourceList = any.listOf(any.resources[getSingularForm(resourceType)]);
         } else {
             resourceList = any.listOf(any.resource);
         }
+
+        _.map(resourceList, function (resource) {
+            if (_.isObject(resource)) {
+                resource._links = {_links: buildLinksIncluding(resourceType)};
+            }
+
+            return resource;
+        });
 
         resources[resourceType] = resourceList;
 
@@ -49,6 +68,7 @@ module.exports = function () {
 
         nock(host)
             .get('/')
+            .times(2)
             .reply(
                 200,
                 {_links: buildLinksIncluding(resourceType, resourceLink)},
@@ -65,7 +85,7 @@ module.exports = function () {
     }
 
     function assertFormatIsUntouchedFor(resourceType) {
-        assert.equals(returnedResources, resources[resourceType]);
+        assert.equals(JSON.parse(serverResponse.payload).resources, resources[resourceType]);
     }
 
     function assertFormatMappedToViewFor(resourceType) {
@@ -85,7 +105,7 @@ module.exports = function () {
                 };
             }
 
-            assert.equals(returnedResources[index], mappedResource);
+            assert.equals(JSON.parse(serverResponse.payload).resources[index], mappedResource);
         });
     }
 
@@ -97,7 +117,10 @@ module.exports = function () {
 
     this.After(function (callback) {
         nock.enableNetConnect();
+        nock.cleanAll();
         resources = {};
+        existingResourceId = null;
+        serverResponse = null;
 
         callback();
     });
@@ -108,21 +131,46 @@ module.exports = function () {
         callback();
     });
 
-    this.When(/^list of "([^"]*)" resources is requested$/, function (resourceType, callback) {
-        resourcesController.getListOf(resourceType, function (err, items) {
-            returnedResources = items;
+    this.Given(/^a "([^"]*)" exists in the api$/, function (resourceType, callback) {
+        setupExpectedApiResponsesFor(resourceType);
 
+        callback.pending();
+    });
+
+    this.When(/^list of "([^"]*)" resources is requested$/, function (resourceType, callback) {
+        server.inject({
+            method: 'GET',
+            url: '/' + resourceType
+        }, function (response) {
+            serverResponse = response;
             callback();
         });
     });
 
+    this.When(/^the "([^"]*)" is requested by id$/, function (resourceType, callback) {
+        server.inject({
+            method: 'GET',
+            url: '/' + resourceType + '/' + existingResourceId
+        }, function (response) {
+            serverResponse = response;
+            callback();
+        });
+
+        callback();
+    });
+
     this.Then(/^list of "([^"]*)" resources is returned$/, function (resourceType, callback) {
-        if (any.resources.hasOwnProperty(resourceType.substring(0, resourceType.length - 1))) {
+        if (any.resources.hasOwnProperty(getSingularForm(resourceType))) {
             assertFormatMappedToViewFor(resourceType);
         } else {
             assertFormatIsUntouchedFor(resourceType);
         }
 
         callback();
+    });
+
+    this.Then(/^the "([^"]*)" is returned$/, function (resourceType, callback) {
+        // Write code here that turns the phrase above into concrete actions
+        callback.pending();
     });
 };
