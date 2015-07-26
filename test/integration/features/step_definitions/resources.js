@@ -167,10 +167,10 @@ module.exports = function () {
             .get('/')
             .times(2)
             .reply(
-            200,
-            {_links: buildLinksIncluding(resourceType, resourceLink)},
-            headers
-        );
+                200,
+                {_links: buildLinksIncluding(resourceType, resourceLink)},
+                headers
+            );
 
         if (any.resources.hasOwnProperty(getSingularForm(resourceType))) {
             embedded[resourceType] = any.resources[getSingularForm(resourceType)]();
@@ -182,10 +182,10 @@ module.exports = function () {
         nock(host)
             .get(requestPath)
             .reply(
-            200,
-            { _embedded: embedded },
-            headers
-        );
+                200,
+                { _embedded: embedded },
+                headers
+            );
 
         callback();
     });
