@@ -37,9 +37,11 @@ suite('travi-api resource interactions', function () {
     test('that list of resources requested by following link from api catalog', function () {
         var resourceType = any.string(),
             resources = any.listOf(any.resource),
-            responseFromApi = {},
+            responseFromApi = {
+                _embedded: {}
+            },
             callback = sinon.spy();
-        responseFromApi[resourceType] = resources;
+        responseFromApi._embedded[resourceType] = resources;
         traverson.from.withArgs('https://api.travi.org/').returns({
             follow: sinon.stub().withArgs(resourceType).returns({
                 getResource: stubForGet.yields(null, responseFromApi)
@@ -49,5 +51,39 @@ suite('travi-api resource interactions', function () {
         traviApiResources.getListOf(resourceType, callback);
 
         assert.calledWith(callback, null, resources);
+    });
+
+    test('that a single resource is mapped to a list', function () {
+        var resourceType = any.string(),
+            responseFromApi = {
+                _embedded: {}
+            },
+            resource = any.resource(),
+            callback = sinon.spy();
+        responseFromApi._embedded[resourceType] = resource;
+        traverson.from.withArgs('https://api.travi.org/').returns({
+            follow: sinon.stub().withArgs(resourceType).returns({
+                getResource: stubForGet.yields(null, responseFromApi)
+            })
+        });
+
+        traviApiResources.getListOf(resourceType, callback);
+
+        assert.calledWith(callback, null, [resource]);
+    });
+
+    test('that specific resource requested by following links', function () {
+        var resourceType = any.string(),
+            resourceId = any.int(),
+            listResponse = {},
+            callback = sinon.spy();
+        listResponse[resourceType] = any.listOf(any.resource);
+        traverson.from.withArgs('https://api.travi.org/').returns({
+            follow: sinon.stub().withArgs(resourceType).returns({
+                getResource: stubForGet.yields(null, listResponse)
+            })
+        });
+
+        traviApiResources.getResourceBy(resourceType, resourceId, callback);
     });
 });

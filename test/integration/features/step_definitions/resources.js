@@ -36,18 +36,35 @@ module.exports = function () {
         return links;
     }
 
+    function buildListOf(resource) {
+        var resourceList,
+            existingResource;
+
+        resourceList = any.listOf(resource);
+
+        if (existingResourceId) {
+            existingResource = resource();
+
+            existingResource.id = existingResourceId;
+
+            resourceList.push(existingResource);
+        }
+
+        return resourceList;
+    }
+
     function prepareListForResponse(resourceType) {
         var resourceList;
 
         if (any.resources.hasOwnProperty(getSingularForm(resourceType))) {
-            resourceList = any.listOf(any.resources[getSingularForm(resourceType)]);
+            resourceList = buildListOf(any.resources[getSingularForm(resourceType)]);
         } else {
-            resourceList = any.listOf(any.resource);
+            resourceList = buildListOf(any.resource);
         }
 
         _.map(resourceList, function (resource) {
             if (_.isObject(resource)) {
-                resource._links = {_links: buildLinksIncluding(resourceType)};
+                resource._links = buildLinksIncluding();
             }
 
             return resource;
@@ -63,8 +80,10 @@ module.exports = function () {
             requestPath = '/' + resourceType + any.string(),
             resourceLink = host + requestPath,
             headers = {'Content-Type': 'application/hal+json'},
-            document = {};
-        document[resourceType] = prepareListForResponse(resourceType);
+            document = {
+                _embedded: {}
+            };
+        document._embedded[resourceType] = prepareListForResponse(resourceType);
 
         nock(host)
             .get('/')
@@ -85,12 +104,17 @@ module.exports = function () {
     }
 
     function assertFormatIsUntouchedFor(resourceType) {
-        assert.equals(JSON.parse(serverResponse.payload).resources, resources[resourceType]);
+        var list = JSON.parse(serverResponse.payload).resources;
+
+        assert.isArray(list);
+        assert.equals(list, resources[resourceType]);
     }
 
     function assertFormatMappedToViewFor(resourceType) {
+        var list = JSON.parse(serverResponse.payload).resources,
+            mappedResource;
+
         _.each(resources[resourceType], function (resource, index) {
-            var mappedResource;
 
             if ('users' === resourceType) {
                 mappedResource = {
@@ -105,7 +129,8 @@ module.exports = function () {
                 };
             }
 
-            assert.equals(JSON.parse(serverResponse.payload).resources[index], mappedResource);
+            assert.isArray(list);
+            assert.equals(list[index], mappedResource);
         });
     }
 
@@ -131,10 +156,45 @@ module.exports = function () {
         callback();
     });
 
+    this.Given(/^list of "([^"]*)" contains one entry$/, function (resourceType, callback) {
+        var embedded = {},
+            host = 'https://api.travi.org',
+            requestPath = '/' + resourceType + any.string(),
+            resourceLink = host + requestPath,
+            headers = {'Content-Type': 'application/hal+json'};
+
+        nock(host)
+            .get('/')
+            .times(2)
+            .reply(
+            200,
+            {_links: buildLinksIncluding(resourceType, resourceLink)},
+            headers
+        );
+
+        if (any.resources.hasOwnProperty(getSingularForm(resourceType))) {
+            embedded[resourceType] = any.resources[getSingularForm(resourceType)]();
+        } else {
+            embedded[resourceType] = any.resource();
+        }
+        resources[resourceType] = [embedded[resourceType]];
+
+        nock(host)
+            .get(requestPath)
+            .reply(
+            200,
+            { _embedded: embedded },
+            headers
+        );
+
+        callback();
+    });
+
     this.Given(/^a "([^"]*)" exists in the api$/, function (resourceType, callback) {
+        existingResourceId = any.int();
         setupExpectedApiResponsesFor(resourceType);
 
-        callback.pending();
+        callback();
     });
 
     this.When(/^list of "([^"]*)" resources is requested$/, function (resourceType, callback) {
@@ -155,8 +215,6 @@ module.exports = function () {
             serverResponse = response;
             callback();
         });
-
-        callback();
     });
 
     this.Then(/^list of "([^"]*)" resources is returned$/, function (resourceType, callback) {
@@ -170,7 +228,10 @@ module.exports = function () {
     });
 
     this.Then(/^the "([^"]*)" is returned$/, function (resourceType, callback) {
-        // Write code here that turns the phrase above into concrete actions
-        callback.pending();
+        var payload = JSON.parse(serverResponse.payload);
+        console.log('payload: ' + formatio.ascii(payload));
+        assert.equals(payload.id, existingResourceId);
+
+        callback();
     });
 };

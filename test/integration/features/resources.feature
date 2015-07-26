@@ -5,6 +5,12 @@ Feature: resources
         When list of "foo" resources is requested
         Then list of "foo" resources is returned
 
+    Scenario: list of size one is returned
+        Given list of "foo" contains one entry
+        When list of "foo" resources is requested
+        Then list of "foo" resources is returned
+
+
     Scenario: existing list of rides requested
         Given list of "rides" resources exists in the api
         When list of "rides" resources is requested

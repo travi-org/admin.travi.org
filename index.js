@@ -86,6 +86,14 @@ server.route({
     }
 });
 
+server.route({
+    method: 'GET',
+    path: '/{resourceType}/{id}',
+    handler: function (request, reply) {
+        reply({});
+    }
+});
+
 if (!module.parent) {
     server.start(function (err) {
         if (err) {
