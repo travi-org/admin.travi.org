@@ -36,8 +36,14 @@ function host() {
     return string() + '.' + string(20) + '.' + string(3);
 }
 
-function url() {
-    return protocol() + host() + '/' + string();
+function url(root) {
+    var path = '/' + string();
+
+    if (root) {
+        return root + path;
+    }
+
+    return protocol() + host() + path;
 }
 
 function listOf(constructor) {

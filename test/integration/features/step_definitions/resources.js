@@ -12,7 +12,9 @@ require('setup-referee-sinon/globals');
 module.exports = function () {
     'use strict';
 
-    var existingResourceId,
+    var HOST = 'https://api.travi.org',
+
+        existingResourceId,
         serverResponse,
         resources = {};
 
@@ -26,7 +28,7 @@ module.exports = function () {
 
     function buildLinksIncluding(resourceType, resourceLink) {
         var links = {
-            'self': buildHalLink(any.url())
+            'self': buildHalLink(any.url(HOST))
         };
 
         if (resourceLink) {
@@ -46,6 +48,9 @@ module.exports = function () {
             existingResource = resource();
 
             existingResource.id = existingResourceId;
+
+            console.log(existingResourceId);
+            console.log(formatio.ascii(existingResource));
 
             resourceList.push(existingResource);
         }
@@ -70,22 +75,24 @@ module.exports = function () {
             return resource;
         });
 
+        console.log(formatio.ascii(resourceList));
+
         resources[resourceType] = resourceList;
 
         return resourceList;
     }
 
     function setupExpectedApiResponsesFor(resourceType) {
-        var host = 'https://api.travi.org',
-            requestPath = '/' + resourceType + any.string(),
-            resourceLink = host + requestPath,
+        var requestPath = '/' + resourceType,
+            resourceLink = HOST + requestPath,
             headers = {'Content-Type': 'application/hal+json'},
             document = {
                 _embedded: {}
             };
         document._embedded[resourceType] = prepareListForResponse(resourceType);
 
-        nock(host)
+        nock(HOST)
+            .log(console.log)
             .get('/')
             .times(2)
             .reply(
@@ -94,13 +101,34 @@ module.exports = function () {
                 headers
             );
 
-        nock(host)
+        nock(HOST)
+            .log(console.log)
             .get(requestPath)
             .reply(
                 200,
                 document,
                 headers
             );
+
+        if (existingResourceId) {
+            _.each(document._embedded[resourceType], function (resource) {
+                if (resource.id === existingResourceId) {
+                    var link = resource._links.self.href,
+                        linkHost = link.substring(0, link.lastIndexOf('/')),
+                        path = link.substring(linkHost.length);
+
+                    nock(linkHost)
+                        .log(console.log)
+                        .get(path)
+                        .reply(
+                            200,
+                            {},
+                            headers
+                        );
+                    console.log('nocked for existing');
+                }
+            });
+        }
     }
 
     function assertFormatIsUntouchedFor(resourceType) {
@@ -159,7 +187,7 @@ module.exports = function () {
     this.Given(/^list of "([^"]*)" contains one entry$/, function (resourceType, callback) {
         var embedded = {},
             host = 'https://api.travi.org',
-            requestPath = '/' + resourceType + any.string(),
+            requestPath = '/' + resourceType,
             resourceLink = host + requestPath,
             headers = {'Content-Type': 'application/hal+json'};
 

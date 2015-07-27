@@ -90,7 +90,13 @@ server.route({
     method: 'GET',
     path: '/{resourceType}/{id}',
     handler: function (request, reply) {
-        reply({});
+        require('./lib/traviApiResources').getResourceBy(
+            request.params.resourceType,
+            request.params.id,
+            function (err, resource) {
+                reply(resource);
+            }
+        );
     }
 });
 

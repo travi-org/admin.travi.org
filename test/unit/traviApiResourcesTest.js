@@ -75,15 +75,16 @@ suite('travi-api resource interactions', function () {
     test('that specific resource requested by following links', function () {
         var resourceType = any.string(),
             resourceId = any.int(),
-            listResponse = {},
+            resource = any.resource(),
             callback = sinon.spy();
-        listResponse[resourceType] = any.listOf(any.resource);
         traverson.from.withArgs('https://api.travi.org/').returns({
-            follow: sinon.stub().withArgs(resourceType).returns({
-                getResource: stubForGet.yields(null, listResponse)
+            follow: sinon.stub().withArgs(resourceType, resourceType + '[id:' + resourceId + ']').returns({
+                getResource: stubForGet.yields(null, resource)
             })
         });
 
         traviApiResources.getResourceBy(resourceType, resourceId, callback);
+
+        assert.calledWith(callback, null, resource);
     });
 });
