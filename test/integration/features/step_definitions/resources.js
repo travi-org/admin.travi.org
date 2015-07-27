@@ -124,8 +124,8 @@ module.exports = function () {
                 };
             } else if ('rides' === resourceType) {
                 mappedResource = {
-                    id: index + 1,
-                    displayName: resource
+                    id: resource.id,
+                    displayName: resource.nickname
                 };
             }
 

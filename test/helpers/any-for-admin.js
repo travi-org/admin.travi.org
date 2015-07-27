@@ -10,7 +10,10 @@ any.resource = function () {
 
 any.resources = {
     ride: function () {
-        return any.string();
+        return {
+            id: any.int(),
+            nickname: any.string()
+        };
     },
     user: function () {
         return {
