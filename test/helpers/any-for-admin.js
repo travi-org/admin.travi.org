@@ -20,7 +20,10 @@ any.resources = {
             id: any.string(),
             'first-name': any.string(),
             'last-name': any.string(),
-            avatar: any.url()
+            avatar: {
+                src: any.url(),
+                size: any.int()
+            }
         };
     }
 };

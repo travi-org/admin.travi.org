@@ -12,7 +12,7 @@ module.exports = React.createClass({
             var thumbnail;
 
             if (resource.thumbnail) {
-                thumbnail = <img src={resource.thumbnail} className="thumbnail" />;
+                thumbnail = <img src={resource.thumbnail.src} className="thumbnail" />;
             } else {
                 thumbnail = '';
             }

@@ -64,7 +64,7 @@ suite('resource list', function () {
     test('that thumbnails are shown when defined', function () {
         var resourceType = any.string(),
             resources = [
-                {id: 1, displayName: 'one', thumbnail: any.url()}
+                {id: 1, displayName: 'one', thumbnail: {src: any.url(), size: any.int()}}
             ],
             element = React.createElement(ResourceList, {
                 resources: resources,
@@ -83,6 +83,6 @@ suite('resource list', function () {
             img = item.props.children[0];
 
         assert.equal(img.type, 'img');
-        assert.equal(resources[0].thumbnail, img.props.src);
+        assert.equal(resources[0].thumbnail.src, img.props.src);
     });
 });
