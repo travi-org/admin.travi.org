@@ -49,9 +49,6 @@ module.exports = function () {
 
             existingResource.id = existingResourceId;
 
-            console.log(existingResourceId);
-            console.log(formatio.ascii(existingResource));
-
             resourceList.push(existingResource);
         }
 
@@ -74,8 +71,6 @@ module.exports = function () {
 
             return resource;
         });
-
-        console.log(formatio.ascii(resourceList));
 
         resources[resourceType] = resourceList;
 
@@ -125,7 +120,6 @@ module.exports = function () {
                             {},
                             headers
                         );
-                    console.log('nocked for existing');
                 }
             });
         }
@@ -257,7 +251,6 @@ module.exports = function () {
 
     this.Then(/^the "([^"]*)" is returned$/, function (resourceType, callback) {
         var payload = JSON.parse(serverResponse.payload);
-        console.log('payload: ' + formatio.ascii(payload));
         assert.equals(payload.id, existingResourceId);
 
         callback();

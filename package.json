@@ -66,6 +66,6 @@
     "negotiator": "^0.5.3",
     "react": "^0.13.3",
     "traverson": "^2.0.1",
-    "traverson-hal": "^2.0.0"
+    "traverson-hal": "git://github.com/travi/traverson-hal.git#embed-secondary"
   }
 }
