@@ -17,4 +17,18 @@ suite('user mapper', function () {
             mapper.mapToViewList([user])
         );
     });
+
+    test('that user mapped to view', function () {
+        var user = any.resources.user();
+
+        assert.equals(
+            {
+                id: user.id,
+                displayName: user['first-name'] + ' ' + user['last-name'],
+                thumbnail: user.avatar
+            },
+            mapper.mapToView(user)
+        );
+
+    });
 });

@@ -15,4 +15,13 @@ suite('default mapper', function () {
         assert.same(viewList, list);
         assert.equals(viewList, list);
     });
+
+    test('that the original resource is returned untouched', function () {
+        var resource = {foo: 'bar'},
+
+            view = mapper.mapToView(resource);
+
+        assert.same(view, resource);
+        assert.equals(view, resource);
+    });
 });
