@@ -4,10 +4,12 @@ var React = require('react'),
 
 module.exports = React.createClass({
     render: function () {
+        'use strict';
+
         return (
             <Layout types={this.props.types}>
 
             </Layout>
-        )
+        );
     }
 });

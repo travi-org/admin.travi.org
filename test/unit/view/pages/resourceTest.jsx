@@ -6,6 +6,8 @@ var React = require('react'),
 var Resource = proxyquire('../../../../lib/views/resource.jsx', {'./layout/layout.jsx': LayoutStub});
 
 suite('resource', function () {
+    'use strict';
+
     test('that the resource is displayed', function () {
         var element = React.createElement(Resource, {
 
