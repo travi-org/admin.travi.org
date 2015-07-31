@@ -20,6 +20,18 @@ server.views({
     path: 'lib/views'
 });
 
+function populatePrimaryNav(callback, resourceType) {
+    router.listResourceTypes(function (err, types) {
+        types = _.map(types, function (type) {
+            type.active = resourceType === type.text;
+
+            return type;
+        });
+
+        callback(null, types);
+    });
+}
+
 server.route({
     method: 'GET',
     path: '/resources/{param*}',
@@ -61,15 +73,7 @@ server.route({
         async.parallel(
             [
                 function (callback) {
-                    router.listResourceTypes(function (err, types) {
-                        types = _.map(types, function (type) {
-                            type.active = resourceType === type.text;
-
-                            return type;
-                        });
-
-                        callback(null, types);
-                    });
+                    populatePrimaryNav(callback, resourceType);
                 },
                 function (callback) {
                     resourcesControlller.getListOf(resourceType, callback);
@@ -90,11 +94,27 @@ server.route({
     method: 'GET',
     path: '/{resourceType}/{id}',
     handler: function (request, reply) {
-        require('./lib/traviApiResources').getResourceBy(
-            request.params.resourceType,
-            request.params.id,
-            function (err, resource) {
-                reply(resource);
+        var resourceType = request.params.resourceType;
+
+        async.parallel(
+            [
+                function (callback) {
+                    populatePrimaryNav(callback, resourceType);
+                },
+                function (callback) {
+                    resourcesControlller.getResource(
+                        request.params.resourceType,
+                        request.params.id,
+                        callback
+                    );
+                }
+            ],
+            function (err, results) {
+                renderer.render('resource', {
+                    resourceType: resourceType,
+                    resource: results[1],
+                    types: results[0]
+                }, request, reply);
             }
         );
     }
