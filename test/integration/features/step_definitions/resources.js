@@ -251,7 +251,7 @@ module.exports = function () {
 
     this.Then(/^the "([^"]*)" is returned$/, function (resourceType, callback) {
         var payload = JSON.parse(serverResponse.payload);
-        assert.equals(payload.id, existingResourceId);
+        assert.equals(payload.resource.id, existingResourceId);
 
         callback();
     });

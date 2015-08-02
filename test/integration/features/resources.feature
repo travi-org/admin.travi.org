@@ -25,9 +25,8 @@ Feature: resources
     Scenario: non-existing list of resources requested
         Given list of "widgets" resources does not exist in the api
         When list of "widgets" resources is requested
-        Then list of "widgets" resources is returned
+        Then list of "widgets" resources is reported to be "Not Found"
 
-    @wip
     Scenario: existing resource requested by id
         Given a "foo" exists in the api
         When the "foo" is requested by id
