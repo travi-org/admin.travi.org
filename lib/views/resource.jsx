@@ -8,7 +8,8 @@ module.exports = React.createClass({
 
         return (
             <Layout types={this.props.types}>
-
+                <h3>{this.props.resource.displayName}</h3>
+                <p>content</p>
             </Layout>
         );
     }

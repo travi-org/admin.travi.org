@@ -1,5 +1,7 @@
 var React = require('react'),
     ReactTestUtils = require('react/lib/ReactTestUtils'),
+    assert = require('chai').assert,
+    any = require('../../../helpers/any-for-admin'),
     proxyquire = require('proxyquire'),
     LayoutStub = require('../../../helpers/layoutStub.jsx');
 
@@ -9,13 +11,19 @@ suite('resource', function () {
     'use strict';
 
     test('that the resource is displayed', function () {
-        var element = React.createElement(Resource, {
-
+        var resource = {id: any.string(), displayName: any.string()},
+            element = React.createElement(Resource, {
+                resource: resource
             }),
             rendered = ReactTestUtils.renderIntoDocument(element),
             layoutComponent = ReactTestUtils.findRenderedComponentWithType(rendered, LayoutStub),
             content = layoutComponent.props.children;
 
-        console.log(content);
+        assert.equal(content[0].type, 'h3');
+        assert.equal(
+            React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(layoutComponent, 'h3')).textContent,
+            resource.displayName
+        );
+        assert.equal(content[1].type, 'p');
     });
 });
