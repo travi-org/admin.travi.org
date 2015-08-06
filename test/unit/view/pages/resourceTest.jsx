@@ -16,14 +16,11 @@ suite('resource', function () {
                 resource: resource
             }),
             rendered = ReactTestUtils.renderIntoDocument(element),
-            layoutComponent = ReactTestUtils.findRenderedComponentWithType(rendered, LayoutStub),
-            content = layoutComponent.props.children;
+            layoutComponent = ReactTestUtils.findRenderedComponentWithType(rendered, LayoutStub);
 
-        assert.equal(content[0].type, 'h3');
         assert.equal(
             React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(layoutComponent, 'h3')).textContent,
             resource.displayName
         );
-        assert.equal(content[1].type, 'p');
     });
 });
