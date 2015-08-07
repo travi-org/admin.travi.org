@@ -10,10 +10,12 @@ suite('default mapper', function () {
     test('that the original list is returned untouched', function () {
         var list = [{foo: 'bar'}],
 
-            viewList = mapper.mapToViewList(list);
+            viewList = mapper.mapToViewList(list),
 
-        assert.same(viewList, list);
-        assert.equals(viewList, list);
+            view = viewList[0];
+
+        assert.equals(view.foo, 'bar');
+        assert.equals(view._links, {});
     });
 
     test('that the original resource is returned untouched', function () {
@@ -21,7 +23,7 @@ suite('default mapper', function () {
 
             view = mapper.mapToView(resource);
 
-        assert.same(view, resource);
-        assert.equals(view, resource);
+        assert.equals(view.foo, 'bar');
+        assert.equals(view._links, {});
     });
 });

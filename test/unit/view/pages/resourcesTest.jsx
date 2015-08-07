@@ -32,9 +32,9 @@ suite('resource list', function () {
     test('that resources are listed', function () {
         var resourceType = any.string(),
             resources = [
-                {id: 1, displayName: 'one'},
-                {id: 2, displayName: 'two'},
-                {id: 3, displayName: 'three'}
+                {id: 1, displayName: 'one', _links: {}},
+                {id: 2, displayName: 'two', _links: {}},
+                {id: 3, displayName: 'three', _links: {}}
             ],
             element = React.createElement(ResourceList, {
                 resources: resources,
@@ -64,7 +64,7 @@ suite('resource list', function () {
     test('that thumbnails are shown when defined', function () {
         var resourceType = any.string(),
             resources = [
-                {id: 1, displayName: 'one', thumbnail: {src: any.url(), size: any.int()}}
+                {id: 1, displayName: 'one', thumbnail: {src: any.url(), size: any.int()}, _links: {}}
             ],
             element = React.createElement(ResourceList, {
                 resources: resources,
@@ -84,5 +84,31 @@ suite('resource list', function () {
 
         assert.equal(img.type, 'img');
         assert.equal(resources[0].thumbnail.src, img.props.src);
+    });
+
+    test('that list item links to resource when link is provided', function () {
+        var selfLink = any.url(),
+            resourceType = any.string(),
+            resources = [
+                {id: 1, displayName: 'one', _links: {self: {href: selfLink}}}
+            ],
+            element = React.createElement(ResourceList, {
+                resources: resources,
+                resourceType: resourceType,
+                types: [
+                    'foo',
+                    'bar'
+                ]
+            }),
+            rendered = ReactTestUtils.renderIntoDocument(element);
+
+        var layoutComponent = ReactTestUtils.findRenderedComponentWithType(rendered, LayoutStub),
+            items = ReactTestUtils.scryRenderedDOMComponentsWithTag(layoutComponent, 'li');
+
+        var item = items[0],
+            link = item.props.children[1];
+
+        assert.equal(link.type, 'a');
+        assert.equal(selfLink, link.props.href);
     });
 });

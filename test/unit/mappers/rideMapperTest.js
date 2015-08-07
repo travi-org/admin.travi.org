@@ -11,7 +11,8 @@ suite('ride mapper', function () {
         assert.equals(
             [{
                 id: ride.id,
-                displayName: ride.nickname
+                displayName: ride.nickname,
+                _links: {}
             }],
             mapper.mapToViewList([ride])
         );
@@ -23,7 +24,8 @@ suite('ride mapper', function () {
         assert.equals(
             {
                 id: ride.id,
-                displayName: ride.nickname
+                displayName: ride.nickname,
+                _links: {}
             },
             mapper.mapToView(ride)
         );

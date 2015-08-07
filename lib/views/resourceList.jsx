@@ -9,18 +9,20 @@ module.exports = React.createClass({
         var resources;
 
         function renderResourceAsListItem(resource) {
-            var thumbnail;
+            var thumbnail = '',
+                link;
 
             if (resource.thumbnail) {
                 thumbnail = <img src={resource.thumbnail.src} className="thumbnail" />;
-            } else {
-                thumbnail = '';
             }
 
-            return <li key={resource.id} className="list-group-item">
-                {thumbnail}
-                {resource.displayName}
-            </li>;
+            if (resource._links.self) {
+                link = <a href={resource._links.self.href}>{resource.displayName}</a>;
+            } else {
+                link = resource.displayName;
+            }
+
+            return <li key={resource.id} className="list-group-item">{thumbnail}{link}</li>;
         }
 
         if (this.props.resources.length) {

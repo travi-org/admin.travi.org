@@ -12,7 +12,8 @@ suite('user mapper', function () {
             [{
                 id: user.id,
                 displayName: user['first-name'] + ' ' + user['last-name'],
-                thumbnail: user.avatar
+                thumbnail: user.avatar,
+                _links: {}
             }],
             mapper.mapToViewList([user])
         );
@@ -25,7 +26,8 @@ suite('user mapper', function () {
             {
                 id: user.id,
                 displayName: user['first-name'] + ' ' + user['last-name'],
-                thumbnail: user.avatar
+                thumbnail: user.avatar,
+                _links: {}
             },
             mapper.mapToView(user)
         );
