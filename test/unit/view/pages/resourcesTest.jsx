@@ -32,9 +32,9 @@ suite('resource list', function () {
     test('that resources are listed', function () {
         var resourceType = any.string(),
             resources = [
-                {id: 1, displayName: 'one', _links: {}},
-                {id: 2, displayName: 'two', _links: {}},
-                {id: 3, displayName: 'three', _links: {}}
+                {id: 1, displayName: 'one', links: {}},
+                {id: 2, displayName: 'two', links: {}},
+                {id: 3, displayName: 'three', links: {}}
             ],
             element = React.createElement(ResourceList, {
                 resources: resources,
@@ -64,7 +64,7 @@ suite('resource list', function () {
     test('that thumbnails are shown when defined', function () {
         var resourceType = any.string(),
             resources = [
-                {id: 1, displayName: 'one', thumbnail: {src: any.url(), size: any.int()}, _links: {}}
+                {id: 1, displayName: 'one', thumbnail: {src: any.url(), size: any.int()}, links: {}}
             ],
             element = React.createElement(ResourceList, {
                 resources: resources,
@@ -90,7 +90,7 @@ suite('resource list', function () {
         var selfLink = any.url(),
             resourceType = any.string(),
             resources = [
-                {id: 1, displayName: 'one', _links: {self: {href: selfLink}}}
+                {id: 1, displayName: 'one', links: {self: {href: selfLink}}}
             ],
             element = React.createElement(ResourceList, {
                 resources: resources,

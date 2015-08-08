@@ -13,7 +13,7 @@ suite('user mapper', function () {
                 id: user.id,
                 displayName: user['first-name'] + ' ' + user['last-name'],
                 thumbnail: user.avatar,
-                _links: {}
+                links: {}
             }],
             mapper.mapToViewList([user])
         );
@@ -27,7 +27,7 @@ suite('user mapper', function () {
                 id: user.id,
                 displayName: user['first-name'] + ' ' + user['last-name'],
                 thumbnail: user.avatar,
-                _links: {}
+                links: {}
             },
             mapper.mapToView(user)
         );

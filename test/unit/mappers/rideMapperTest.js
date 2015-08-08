@@ -12,7 +12,7 @@ suite('ride mapper', function () {
             [{
                 id: ride.id,
                 displayName: ride.nickname,
-                _links: {}
+                links: {}
             }],
             mapper.mapToViewList([ride])
         );
@@ -25,7 +25,7 @@ suite('ride mapper', function () {
             {
                 id: ride.id,
                 displayName: ride.nickname,
-                _links: {}
+                links: {}
             },
             mapper.mapToView(ride)
         );

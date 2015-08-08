@@ -15,7 +15,7 @@ suite('default mapper', function () {
             view = viewList[0];
 
         assert.equals(view.foo, 'bar');
-        assert.equals(view._links, {});
+        assert.equals(view.links, {});
     });
 
     test('that the original resource is returned untouched', function () {
@@ -24,6 +24,6 @@ suite('default mapper', function () {
             view = mapper.mapToView(resource);
 
         assert.equals(view.foo, 'bar');
-        assert.equals(view._links, {});
+        assert.equals(view.links, {});
     });
 });

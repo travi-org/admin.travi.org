@@ -129,7 +129,7 @@ module.exports = function () {
         var list = JSON.parse(serverResponse.payload).resources;
 
         assert.isArray(list);
-        assert.equals(list, resources[resourceType]);
+        assert.match(list, resources[resourceType]);
     }
 
     function assertFormatMappedToViewFor(resourceType) {
@@ -152,7 +152,7 @@ module.exports = function () {
             }
 
             assert.isArray(list);
-            assert.equals(list[index], mappedResource);
+            assert.match(list[index], mappedResource);
         });
     }
 

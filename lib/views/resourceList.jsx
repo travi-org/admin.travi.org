@@ -16,8 +16,8 @@ module.exports = React.createClass({
                 thumbnail = <img src={resource.thumbnail.src} className="thumbnail" />;
             }
 
-            if (resource._links.self) {
-                link = <a href={resource._links.self.href}>{resource.displayName}</a>;
+            if (resource.links.self) {
+                link = <a href={resource.links.self.href}>{resource.displayName}</a>;
             } else {
                 link = resource.displayName;
             }
