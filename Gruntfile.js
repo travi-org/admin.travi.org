@@ -18,7 +18,8 @@ module.exports = function (grunt) {
         jitGrunt: {
             staticMappings: {
                 mochacov: 'grunt-mocha-cov',
-                cucumberjs: 'grunt-cucumber'
+                cucumberjs: 'grunt-cucumber',
+                bower: 'grunt-bower-task'
             }
         }
     });
