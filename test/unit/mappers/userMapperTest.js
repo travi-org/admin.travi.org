@@ -31,6 +31,19 @@ suite('user mapper', function () {
             },
             mapper.mapToView(user)
         );
+    });
 
+    test('that self link defined when defined in api', function () {
+        var user = any.resources.user();
+        user._links.self = any.url();
+
+        assert.equals(
+            {
+                'self': {
+                    href: '/users/' + user.id
+                }
+            },
+            mapper.mapToView(user).links
+        );
     });
 });

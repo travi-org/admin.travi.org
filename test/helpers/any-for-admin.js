@@ -23,7 +23,8 @@ any.resources = {
             avatar: {
                 src: any.url(),
                 size: any.int()
-            }
+            },
+            _links: {}
         };
     }
 };
