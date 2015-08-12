@@ -12,7 +12,8 @@ any.resources = {
     ride: function () {
         return {
             id: any.int(),
-            nickname: any.string()
+            nickname: any.string(),
+            _links: {}
         };
     },
     user: function () {

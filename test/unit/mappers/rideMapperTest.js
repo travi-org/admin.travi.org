@@ -30,4 +30,18 @@ suite('ride mapper', function () {
             mapper.mapToView(ride)
         );
     });
+
+    test('that self link defined when defined in api', function () {
+        var ride = any.resources.ride();
+        ride._links.self = any.url();
+
+        assert.equals(
+            {
+                'self': {
+                    href: '/rides/' + ride.id
+                }
+            },
+            mapper.mapToView(ride).links
+        );
+    });
 });
