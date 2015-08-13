@@ -65,6 +65,7 @@
     "lodash": "^3.9.3",
     "negotiator": "^0.5.3",
     "react": "^0.13.3",
+    "stampit": "^2.1.0",
     "traverson": "^2.0.1",
     "traverson-hal": "^2.0.1"
   }
