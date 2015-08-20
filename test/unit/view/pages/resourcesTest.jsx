@@ -47,16 +47,16 @@ suite('resource list', function () {
             rendered = ReactTestUtils.renderIntoDocument(element);
 
         var layoutComponent = ReactTestUtils.findRenderedComponentWithType(rendered, LayoutStub),
-            content = layoutComponent.props.children,
-            items = ReactTestUtils.scryRenderedDOMComponentsWithTag(layoutComponent, 'li');
+            content = React.Children.only(layoutComponent.props.children);
 
         assert.equal(content.type, 'ul');
-        assert.equal(items.length, resources.length);
-        _.each(items, function (item, index) {
+        assert.equal(React.Children.count(content.props.children), resources.length);
+        React.Children.forEach(content.props.children, function (item, index) {
             var resource = resources[index];
 
-            assert.equal(React.findDOMNode(item).textContent, resource.displayName);
-            assert.equal(item._reactInternalInstance._currentElement.key, resource.id);
+            assert.equal(item.type, 'li');
+            assert.equal(item.props.children[1], resource.displayName);
+            assert.equal(item.key, resource.id);
             assert.notEqual(item.props.children[0].type, 'img');
         });
     });

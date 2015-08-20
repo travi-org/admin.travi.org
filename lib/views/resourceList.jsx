@@ -26,7 +26,7 @@ module.exports = React.createClass({
         }
 
         if (this.props.resources.length) {
-            resources = <ul className="list-group"> {this.props.resources.map(renderResourceAsListItem)} </ul>;
+            resources = <ul className="list-group">{this.props.resources.map(renderResourceAsListItem)}</ul>;
         } else {
             resources = <p className="alert alert-info">No { this.props.resourceType } are available</p>;
         }
