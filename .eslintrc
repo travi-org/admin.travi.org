@@ -9,10 +9,7 @@
 
   env:
     node: true
+    es6: true
 
   ecmaFeatures:
     jsx: true
-
-  globals:
-    suite: false
-    test: false

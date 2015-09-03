@@ -41,7 +41,9 @@ suite('travi-api resource interactions', function () {
                 _embedded: {}
             },
             callback = sinon.spy();
+        /*eslint-disable no-underscore-dangle */
         responseFromApi._embedded[resourceType] = resources;
+        /*eslint-enable no-underscore-dangle */
         traverson.from.withArgs('https://api.travi.org/').returns({
             follow: sinon.stub().withArgs(resourceType).returns({
                 getResource: stubForGet.yields(null, responseFromApi)
@@ -60,7 +62,9 @@ suite('travi-api resource interactions', function () {
             },
             resource = any.resource(),
             callback = sinon.spy();
+        /*eslint-disable no-underscore-dangle */
         responseFromApi._embedded[resourceType] = resource;
+        /*eslint-enable no-underscore-dangle */
         traverson.from.withArgs('https://api.travi.org/').returns({
             follow: sinon.stub().withArgs(resourceType).returns({
                 getResource: stubForGet.yields(null, responseFromApi)

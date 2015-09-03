@@ -10,3 +10,4 @@ test:
     - test/**/*.js
   options:
     config: true
+    esnext: true

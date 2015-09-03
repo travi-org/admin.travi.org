@@ -81,10 +81,12 @@ module.exports = function () {
         var requestPath = '/' + resourceType,
             resourceLink = HOST + requestPath,
             headers = {'Content-Type': 'application/hal+json'},
+            embedded = {
+                [resourceType]: prepareListForResponse(resourceType)
+            },
             document = {
-                _embedded: {}
+                _embedded: embedded
             };
-        document._embedded[resourceType] = prepareListForResponse(resourceType);
 
         nock(HOST)
             .log(console.log)

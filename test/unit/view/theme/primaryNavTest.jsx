@@ -34,7 +34,7 @@ suite('primary navigation', function () {
                 link = listItem.childNodes[0];
 
             assert.equal(link.textContent, type.text);
-            assert.equal(link.pathname, type.path);
+            assert.equal(link.href, type.path);
 
             if (type.active) {
                 assert.equal(listItem.className, 'active');
