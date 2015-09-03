@@ -12,6 +12,13 @@ var hapi = require('hapi'),
 
 server.connection({port: process.env.PORT || 3333});
 
+server.register(require('inert'), function () { return; });
+server.register(require('vision'), function (err) {
+    if (err) {
+        console.log('Failed to load vision.');
+    }
+});
+
 server.views({
     engines: {
         jsx: require('hapi-react-views')
