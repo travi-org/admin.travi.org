@@ -1,6 +1,6 @@
 machine:
   node:
-    version: iojs-v1.3.0
+    version: iojs-v3.0.0
 
 dependencies:
   pre:
