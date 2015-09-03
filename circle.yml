@@ -5,6 +5,7 @@ machine:
 dependencies:
   pre:
     - npm install -g cucumber
+    - npm install -g grunt-cli
 
 test:
   post:
