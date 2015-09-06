@@ -13,3 +13,6 @@
 
   ecmaFeatures:
     jsx: true
+
+  extends:
+    - eslint:recommended

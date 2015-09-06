@@ -3,7 +3,6 @@
 var React = require('react'),
     ReactTestUtils = require('react/lib/ReactTestUtils'),
     assert = require('chai').assert,
-    _ = require('lodash'),
     any = require('../../../helpers/any-for-admin'),
     proxyquire = require('proxyquire'),
     LayoutStub = require('../../../helpers/layoutStub.jsx');
