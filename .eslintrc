@@ -5,7 +5,7 @@
   rules:
     quotes:
       - 2
-      - "single"
+      - single
 
   env:
     node: true
