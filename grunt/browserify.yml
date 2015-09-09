@@ -1,0 +1,4 @@
+dist:
+  files:
+    resources/js/view.js: lib/views/resourceList.jsx
+  transform: babelify
