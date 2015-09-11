@@ -15,12 +15,13 @@ suite('wrapper view', function () {
             element = React.createElement(
                 Wrap,
                 data,
-                <div/>
+                <section id="content" />
             ),
             rendered = ReactTestUtils.renderIntoDocument(element);
 
         var wrap = ReactTestUtils.findRenderedDOMComponentWithTag(rendered, 'div');
         var nav = ReactTestUtils.findRenderedComponentWithType(wrap, PrimaryNav);
+        ReactTestUtils.findRenderedDOMComponentWithTag(wrap, 'section');
 
         assert.equal(wrap.props.id, 'wrap');
         assert.deepEqual(nav.props, data);
