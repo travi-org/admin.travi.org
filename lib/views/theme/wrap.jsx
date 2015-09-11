@@ -5,7 +5,7 @@ var React = require('react'),
 module.exports = React.createClass({
     render: function () {
         return (
-            <div id="wrap">
+            <div id="wrap" className="container">
                 <PrimaryNav types={this.props.types} />
                 { this.props.children }
             </div>
