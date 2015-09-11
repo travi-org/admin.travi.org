@@ -2,6 +2,7 @@ build:
   - clean
   - bower
   - sass
+  - browserify
   - uglify
 
 lint:
