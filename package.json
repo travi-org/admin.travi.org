@@ -70,7 +70,7 @@
   "dependencies": {
     "async": "^1.4.2",
     "hapi": "^9.0.4",
-    "hapi-react-views": "^3.1.0",
+    "hapi-mustache": "0.0.1",
     "inert": "^3.0.1",
     "lodash": "^3.10.1",
     "negotiator": "^0.5.3",

@@ -21,7 +21,7 @@ server.register(require('vision'), function (err) {
 
 server.views({
     engines: {
-        jsx: require('hapi-react-views')
+        mustache: require('hapi-mustache')
     },
     relativeTo: __dirname,
     path: 'lib/views'

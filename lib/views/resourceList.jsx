@@ -1,6 +1,6 @@
 var React = require('react/addons'),
 
-    Layout = require('./layout/layout.jsx');
+    Wrap = require('./theme/wrap.jsx');
 
 module.exports = React.createClass({
     render: function () {
@@ -32,9 +32,9 @@ module.exports = React.createClass({
         }
 
         return (
-            <Layout types={this.props.types}>
+            <Wrap types={this.props.types}>
                 {resources}
-            </Layout>
+            </Wrap>
         );
     }
 });

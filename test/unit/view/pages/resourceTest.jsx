@@ -5,7 +5,7 @@ var React = require('react'),
     proxyquire = require('proxyquire'),
     LayoutStub = require('../../../helpers/layoutStub.jsx');
 
-var Resource = proxyquire('../../../../lib/views/resource.jsx', {'./layout/layout.jsx': LayoutStub});
+var Resource = proxyquire('../../../../lib/views/resource.jsx', {'./theme/wrap.jsx': LayoutStub});
 
 suite('resource', function () {
     'use strict';

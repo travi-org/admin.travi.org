@@ -46,6 +46,10 @@ function url(root) {
     return protocol() + host() + path;
 }
 
+function simpleObject() {
+    return {foo: 'bar'};
+}
+
 function listOf(constructor) {
     var list = [],
         listSize = int(),
@@ -62,5 +66,6 @@ module.exports = {
     string: string,
     int: int,
     url: url,
+    simpleObject: simpleObject,
     listOf: listOf
 };
