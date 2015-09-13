@@ -1,14 +1,22 @@
-var any = require('../../helpers/any'),
-    assert = require('chai').assert;
+'use strict';
+
+var director = require('director'),
+    router = require('../../../lib/client/router');
 
 suite('client-side router', function () {
+    teardown(function () {
+        director.Router.restore();
+    });
+
     test('that the router exists', function () {
-        var instance = any.simpleObject();
+        var instance = {
+            init: sinon.spy()
+        };
 
-        sinon.stub(require('director'), 'Router').returns(instance);
+        sinon.stub(director, 'Router').returns(instance);
 
-        var router = require('../../../lib/client/router');
+        router.init();
 
-        assert.equal(router, instance);
+        sinon.assert.calledOnce(instance.init);
     });
 });
