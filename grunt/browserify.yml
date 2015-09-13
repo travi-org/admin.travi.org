@@ -1,6 +1,7 @@
 dist:
   files:
     resources/js/view.js: lib/views/resourceList.jsx
+    resources/js/app.js: lib/client/app.js
   options:
     transform:
       - babelify
