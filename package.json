@@ -13,7 +13,7 @@
     "start": "node index.js"
   },
   "engines": {
-    "iojs": "3.0.x"
+    "node": "4.0.x"
   },
   "config": {
     "blanket": {
