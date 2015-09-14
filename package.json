@@ -76,7 +76,7 @@
     "lodash": "^3.10.1",
     "negotiator": "^0.5.3",
     "react": "^0.13.3",
-    "stampit": "^2.1.0",
+    "stampit": "^2.1.1",
     "traverson": "^2.1.0",
     "traverson-hal": "^2.1.0",
     "vision": "^3.0.0"
