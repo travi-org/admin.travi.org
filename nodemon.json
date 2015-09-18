@@ -1,0 +1,12 @@
+{
+    "ext": "js jsx",
+    "env": {
+        "NODE_ENV": "development"
+    },
+    "ignore": [
+        ".git",
+        ".idea",
+        "node_modules",
+        "bower_components"
+    ]
+}

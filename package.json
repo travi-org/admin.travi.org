@@ -10,7 +10,8 @@
   },
   "scripts": {
     "test": "grunt",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "engines": {
     "node": "4.0.x"
