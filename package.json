@@ -64,7 +64,7 @@
     "referee": "1.1.1",
     "referee-sinon": "1.0.2",
     "setup-referee-sinon": "0.3.0",
-    "sinon": "1.17.0",
+    "sinon": "1.17.1",
     "time-grunt": "1.2.1"
   },
   "dependencies": {
