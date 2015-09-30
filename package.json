@@ -76,7 +76,7 @@
     "inert": "3.0.1",
     "jsx-require-extension": "0.2.0",
     "lodash": "3.10.1",
-    "negotiator": "0.5.3",
+    "negotiator": "0.6.0",
     "react": "0.13.3",
     "react-router": "1.0.0-rc1",
     "stampit": "2.1.1",
