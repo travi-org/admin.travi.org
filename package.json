@@ -37,7 +37,7 @@
     "babelify": "6.3.0",
     "chai": "3.3.0",
     "eslint": "1.5.1",
-    "eslint-plugin-react": "3.5.0",
+    "eslint-plugin-react": "3.5.1",
     "extend-grunt-plugin": "0.1.0",
     "formatio": "1.1.2",
     "grunt": "0.4.5",
