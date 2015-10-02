@@ -53,7 +53,7 @@
     "grunt-mocha-cov": "0.4.0",
     "grunt-perfbudget": "0.1.6",
     "grunt-sass": "1.0.0",
-    "grunt-shell-spawn": "0.3.9",
+    "grunt-shell-spawn": "0.3.10",
     "grunt-wait": "0.1.0",
     "jsdom": "6.5.1",
     "load-grunt-config": "0.17.2",
