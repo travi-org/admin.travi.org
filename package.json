@@ -70,7 +70,7 @@
   "dependencies": {
     "async": "1.4.2",
     "director": "1.2.8",
-    "hapi": "10.3.0",
+    "hapi": "10.4.0",
     "hapi-mustache": "0.0.1",
     "history": "1.11.0",
     "inert": "3.0.1",
