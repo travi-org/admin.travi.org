@@ -72,7 +72,7 @@
     "director": "1.2.8",
     "hapi": "10.4.0",
     "hapi-mustache": "0.0.1",
-    "history": "1.12.2",
+    "history": "1.12.3",
     "inert": "3.0.1",
     "jsx-require-extension": "0.2.0",
     "lodash": "3.10.1",
