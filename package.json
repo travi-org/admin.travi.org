@@ -78,7 +78,7 @@
     "lodash": "3.10.1",
     "negotiator": "0.6.0",
     "react": "0.13.3",
-    "react-router": "1.0.0-rc1",
+    "react-router": "1.0.0-rc2",
     "stampit": "2.1.1",
     "traverson": "2.1.0",
     "traverson-hal": "2.1.0",
