@@ -12,9 +12,7 @@ suite('route renderer', function () {
 
     setup(function () {
         sinon.stub(React, 'renderToString');
-        sinon.stub(reactRouter, 'match', function (options, callback) {
-            matchCallback = callback;
-        });
+        sinon.stub(reactRouter, 'match');
     });
 
     teardown(function () {
@@ -33,7 +31,7 @@ suite('route renderer', function () {
 
         refute.called(callback);
 
-        matchCallback(null);
+        reactRouter.match.yield(null);
 
         assert.calledWith(callback, null, renderedContent);
     });
@@ -44,7 +42,7 @@ suite('route renderer', function () {
             callback = sinon.spy();
         renderer.routeTo(any.url(), callback);
 
-        matchCallback(error);
+        reactRouter.match.yield(error);
 
         assert.calledWith(callback, error);
     });
