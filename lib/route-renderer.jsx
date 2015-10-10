@@ -1,9 +1,10 @@
 const
     React = require('react'),
-    reactRouter = require('react-router');
+    reactRouter = require('react-router'),
+    routes = require('./routes.jsx');
 
 function routeTo(location, callback) {
-    reactRouter.match(null, function (error) {
+    reactRouter.match({routes, location}, function (error) {
         callback(error, React.renderToString());
     });
 }

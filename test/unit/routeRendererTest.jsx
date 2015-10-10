@@ -3,7 +3,8 @@ const
     reactRouter = require('react-router'),
     any = require('../helpers/any'),
 
-    renderer = require('../../lib/route-renderer');
+    renderer = require('../../lib/route-renderer'),
+    routes = require('../../lib/routes.jsx');
 
 suite('route renderer', function () {
     'use strict';
@@ -23,15 +24,17 @@ suite('route renderer', function () {
     test('that rendered html yielded for proper route', function () {
         const
             renderedContent = any.string(),
-            callback = sinon.spy();
+            callback = sinon.spy(),
+            location = any.url();
         //reactRouter.match.yields(any.string());
         React.renderToString.returns(renderedContent);
 
-        renderer.routeTo(any.url(), callback);
+        renderer.routeTo(location, callback);
 
         refute.called(callback);
 
-        reactRouter.match.yield(null);
+        assert.calledWith(reactRouter.match, {routes, location});
+        reactRouter.match.yield(null, null, any.string());
 
         assert.calledWith(callback, null, renderedContent);
     });
