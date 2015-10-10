@@ -9,8 +9,6 @@ const
 suite('route renderer', function () {
     'use strict';
 
-    let matchCallback;
-
     setup(function () {
         sinon.stub(React, 'renderToString');
         sinon.stub(reactRouter, 'match');
