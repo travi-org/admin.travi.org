@@ -5,9 +5,15 @@ const React = require('react'),
     renderer = require('../../lib/route-renderer');
 
 suite('route renderer', function () {
+    'use strict';
+
+    let matchCallback;
+
     setup(function () {
         sinon.stub(React, 'renderToString');
-        sinon.stub(reactRouter, 'match');
+        sinon.stub(reactRouter, 'match', function (options, callback) {
+            matchCallback = callback;
+        });
     });
 
     teardown(function () {
@@ -22,6 +28,10 @@ suite('route renderer', function () {
         React.renderToString.returns(renderedContent);
 
         renderer.routeTo(any.url(), callback);
+
+        refute.called(callback);
+
+        matchCallback();
 
         assert.calledWith(callback, null, renderedContent);
     });
