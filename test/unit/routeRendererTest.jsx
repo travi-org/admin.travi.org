@@ -1,4 +1,5 @@
-const React = require('react'),
+const
+    React = require('react'),
     reactRouter = require('react-router'),
     any = require('../helpers/any'),
 
@@ -22,7 +23,8 @@ suite('route renderer', function () {
     });
 
     test('that rendered html yielded for proper route', function () {
-        const renderedContent = any.string(),
+        const
+            renderedContent = any.string(),
             callback = sinon.spy();
         //reactRouter.match.yields(any.string());
         React.renderToString.returns(renderedContent);
@@ -31,8 +33,19 @@ suite('route renderer', function () {
 
         refute.called(callback);
 
-        matchCallback();
+        matchCallback(null);
 
         assert.calledWith(callback, null, renderedContent);
+    });
+
+    test('that errors bubble', function () {
+        const
+            error = any.simpleObject(),
+            callback = sinon.spy();
+        renderer.routeTo(any.url(), callback);
+
+        matchCallback(error);
+
+        assert.calledWith(callback, error);
     });
 });

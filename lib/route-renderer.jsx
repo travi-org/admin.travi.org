@@ -3,8 +3,8 @@ const
     reactRouter = require('react-router');
 
 function routeTo(location, callback) {
-    reactRouter.match(null, function () {
-        callback(null, React.renderToString());
+    reactRouter.match(null, function (error) {
+        callback(error, React.renderToString());
     });
 }
 
