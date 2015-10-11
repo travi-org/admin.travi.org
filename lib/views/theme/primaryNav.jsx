@@ -4,8 +4,18 @@ var Component = React.createClass({
     render: function () {
         'use strict';
 
+        let list;
+
         function renderNavLink(type) {
             return <li key={type.text} className={ type.active ? 'active' : '' }><a href={type.path}>{type.text}</a></li>;
+        }
+
+        if (this.props.types) {
+            list = <div className="collapse navbar-collapse" id="navbar-items">
+                <ul className="nav navbar-nav">
+                    {this.props.types.map(renderNavLink)}
+                </ul>
+            </div>;
         }
 
         return (
@@ -24,7 +34,7 @@ var Component = React.createClass({
 
                     <div className="collapse navbar-collapse" id="navbar-items">
                         <ul className="nav navbar-nav">
-                            {this.props.types.map(renderNavLink)}
+                            {list}
                         </ul>
                     </div>
 

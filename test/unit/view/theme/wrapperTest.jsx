@@ -1,29 +1,39 @@
 'use strict';
 
 var React = require('react'),
-    ReactTestUtils = require('react/lib/ReactTestUtils'),
+    dom = require('react-dom'),
     assert = require('chai').assert,
     proxyquire = require('proxyquire'),
+    any = require('../../../helpers/any'),
 
     PrimaryNav = require('../../../helpers/primaryNavStub.jsx');
 var Wrap = proxyquire('../../../../lib/views/theme/wrap.jsx', {'./primaryNav.jsx': PrimaryNav});
 
 
 suite('wrapper view', function () {
+    let node;
+
+    beforeEach(function () {
+        node = document.createElement('div')
+    });
+
+    afterEach(function () {
+        dom.unmountComponentAtNode(node)
+    });
+
     test('that the layout markup is correct', function () {
-        var data = {types: []},
+        var data = {types: any.listOf(any.string)},
             element = React.createElement(
                 Wrap,
                 data,
                 <section id="content" />
-            ),
-            rendered = ReactTestUtils.renderIntoDocument(element);
+            );
 
-        var wrap = ReactTestUtils.findRenderedDOMComponentWithTag(rendered, 'div');
-        var nav = ReactTestUtils.findRenderedComponentWithType(wrap, PrimaryNav);
-        ReactTestUtils.findRenderedDOMComponentWithTag(wrap, 'section');
-
-        assert.equal(wrap.props.id, 'wrap');
-        assert.deepEqual(nav.props, data);
+        dom.render(element, node, function () {
+            assert.equal(1, node.querySelectorAll('#wrap').length);
+            assert.equal(1, node.querySelectorAll('#wrap section').length);
+            assert.equal(1, node.querySelectorAll('#primary-nav').length);
+            assert.equal(data.types.length, node.querySelectorAll('#nav-items li').length)
+        });
     });
 });
