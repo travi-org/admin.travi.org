@@ -5,3 +5,4 @@
   globals:
     sinon: false
     assert: false
+    refute: false

@@ -1,7 +1,12 @@
-const React = require('react');
+const
+    React = require('react'),
+    reactRouter = require('react-router'),
+    routes = require('./routes.jsx');
 
 function routeTo(location, callback) {
-    callback(null, React.renderToString());
+    reactRouter.match({routes, location}, function (error) {
+        callback(error, React.renderToString());
+    });
 }
 
 module.exports = {
