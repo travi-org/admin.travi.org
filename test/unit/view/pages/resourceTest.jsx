@@ -1,4 +1,5 @@
 var React = require('react'),
+    dom = require('react-dom'),
     ReactTestUtils = require('react/lib/ReactTestUtils'),
     assert = require('chai').assert,
     any = require('../../../helpers/any-for-admin'),
@@ -19,7 +20,7 @@ suite('resource', function () {
             layoutComponent = ReactTestUtils.findRenderedComponentWithType(rendered, LayoutStub);
 
         assert.equal(
-            React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(layoutComponent, 'h3')).textContent,
+            dom.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(layoutComponent, 'h3')).textContent,
             resource.displayName
         );
     });
