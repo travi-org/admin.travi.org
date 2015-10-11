@@ -6,3 +6,4 @@
     sinon: false
     assert: false
     refute: false
+    document: false
