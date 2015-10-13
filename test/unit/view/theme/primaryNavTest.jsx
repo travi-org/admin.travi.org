@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react'),
+    dom = require('react-dom'),
     ReactTestUtils = require('react/lib/ReactTestUtils'),
     assert = require('chai').assert,
 
@@ -29,7 +30,7 @@ suite('primary navigation', function () {
         var links = ReactTestUtils.scryRenderedDOMComponentsWithTag(rendered, 'LI');
         assert.equal(links.length, types.length);
         links.forEach(function (item, index) {
-            var listItem = React.findDOMNode(item),
+            var listItem = dom.findDOMNode(item),
                 type = types[index],
                 link = listItem.childNodes[0];
 

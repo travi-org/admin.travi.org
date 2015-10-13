@@ -1,6 +1,7 @@
 const
     React = require('react'),
     reactRouter = require('react-router'),
+    RoutingContext = reactRouter.RoutingContext,
     any = require('../helpers/any'),
 
     renderer = require('../../lib/route-renderer'),
@@ -11,11 +12,13 @@ suite('route renderer', function () {
 
     setup(function () {
         sinon.stub(React, 'renderToString');
+        sinon.stub(React, 'createElement');
         sinon.stub(reactRouter, 'match');
     });
 
     teardown(function () {
         React.renderToString.restore();
+        React.createElement.restore();
         reactRouter.match.restore();
     });
 
@@ -23,16 +26,18 @@ suite('route renderer', function () {
         const
             renderedContent = any.string(),
             callback = sinon.spy(),
-            location = any.url();
-        //reactRouter.match.yields(any.string());
-        React.renderToString.returns(renderedContent);
+            location = any.url(),
+            renderProps = any.simpleObject(),
+            context = any.simpleObject();
+        React.createElement.withArgs(RoutingContext, renderProps).returns(context);
+        React.renderToString.withArgs(context).returns(renderedContent);
 
         renderer.routeTo(location, callback);
 
         refute.called(callback);
 
         assert.calledWith(reactRouter.match, {routes, location});
-        reactRouter.match.yield(null, null, any.string());
+        reactRouter.match.yield(null, null, renderProps);
 
         assert.calledWith(callback, null, renderedContent);
     });

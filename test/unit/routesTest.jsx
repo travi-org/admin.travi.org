@@ -2,7 +2,9 @@ const
     React = require('react'), //eslint-disable-line no-unused-vars
     dom = require('react-dom'),
     reactRouter = require('react-router'),
-    Router = reactRouter.Router;
+    Router = reactRouter.Router,
+
+    routes = require('../../lib/routes.jsx');
 
 suite('routes', function () {
     'use strict';
@@ -17,8 +19,6 @@ suite('routes', function () {
     });
 
     test('that the root route is defined', function () {
-        const routes = require('../../lib/routes.jsx');
-
         dom.render((
             <Router>
                 { routes }
