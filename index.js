@@ -127,6 +127,8 @@ server.route({
     }
 });
 
+//require('./lib/server/renderingHandler').configureHandlerFor(server);
+
 if (!module.parent) {
     server.start(function (err) {
         if (err) {
