@@ -6,7 +6,7 @@ const
     handler = proxyquire('../../../lib/server/renderingHandler', {
         'negotiator': Negotiator
     }),
-    routeRenderer = require('../../../lib/route-renderer.jsx'),
+    routeRenderer = require('../../../lib/server/route-renderer.jsx'),
     history = require('history');
 
 suite('rendering handler', function () {

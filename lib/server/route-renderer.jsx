@@ -3,7 +3,7 @@ const
     ReactDOMServer = require('react-dom/server'),
     reactRouter = require('react-router'),
     RoutingContext = reactRouter.RoutingContext,
-    routes = require('./routes.jsx');
+    routes = require('./../routes.jsx');
 
 function routeTo(location, callback) {
     reactRouter.match({routes, location}, function (error, redirectLocation, renderProps) {

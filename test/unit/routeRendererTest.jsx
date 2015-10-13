@@ -5,7 +5,7 @@ const
     RoutingContext = reactRouter.RoutingContext,
     any = require('../helpers/any'),
 
-    renderer = require('../../lib/route-renderer'),
+    renderer = require('../../lib/server/route-renderer'),
     routes = require('../../lib/routes.jsx');
 
 suite('route renderer', function () {
