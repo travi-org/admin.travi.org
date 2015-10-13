@@ -10,7 +10,9 @@ var renderToStringStub = sinon.stub(),
     reactComponent = any.simpleObject(),
     renderer = proxyquire('../../lib/renderer.js', {
         'react': {
-            createElement: createElementStub,
+            createElement: createElementStub
+        },
+        'react-dom/server': {
             renderToString: renderToStringStub
         }
     });

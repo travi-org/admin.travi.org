@@ -1,5 +1,6 @@
 const
     React = require('react'),
+    ReactDOMServer = require('react-dom/server'),
     reactRouter = require('react-router'),
     RoutingContext = reactRouter.RoutingContext,
     any = require('../helpers/any'),
@@ -11,13 +12,13 @@ suite('route renderer', function () {
     'use strict';
 
     setup(function () {
-        sinon.stub(React, 'renderToString');
+        sinon.stub(ReactDOMServer, 'renderToString');
         sinon.stub(React, 'createElement');
         sinon.stub(reactRouter, 'match');
     });
 
     teardown(function () {
-        React.renderToString.restore();
+        ReactDOMServer.renderToString.restore();
         React.createElement.restore();
         reactRouter.match.restore();
     });
@@ -30,7 +31,7 @@ suite('route renderer', function () {
             renderProps = any.simpleObject(),
             context = any.simpleObject();
         React.createElement.withArgs(RoutingContext, renderProps).returns(context);
-        React.renderToString.withArgs(context).returns(renderedContent);
+        ReactDOMServer.renderToString.withArgs(context).returns(renderedContent);
 
         renderer.routeTo(location, callback);
 
