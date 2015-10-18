@@ -33,7 +33,7 @@ suite('content-negotiating renderer', function () {
                 view: sinon.spy()
             };
         sinon.stub(viewProxy, 'getComponent').withArgs(viewName).returns(reactComponent);
-        createElementStub.withArgs(reactComponent, data).returns(reactComponent);
+        createElementStub.withArgs(reactComponent, data).returns(reactElement);
         renderToStringStub.withArgs(reactElement).returns(viewRenderedToString);
 
         renderer.render(viewName, data, {

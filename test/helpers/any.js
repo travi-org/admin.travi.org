@@ -47,7 +47,9 @@ function url(root) {
 }
 
 function simpleObject() {
-    return {foo: 'bar'};
+    return {
+        [string()]: string()
+    };
 }
 
 function listOf(constructor) {
