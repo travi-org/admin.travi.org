@@ -15,13 +15,15 @@ suite('rendering handler', function () {
 
     let sandbox,
         mediaType,
-        request;
+        request = {
+            url: any.url()
+        };
     const primaryNav = any.listOf(any.string);
 
     setup(function () {
         sandbox = sinon.sandbox.create();
         sandbox.stub(routeRenderer, 'routeTo');
-        sandbox.stub(history, 'createLocation')
+        sandbox.stub(history, 'createLocation');
         sandbox.stub(resourceList, 'listResourceTypes').yields(null, primaryNav);
 
         request = any.simpleObject();
@@ -56,7 +58,7 @@ suite('rendering handler', function () {
             location = any.simpleObject(),
             renderedContent = any.string();
         mediaType.returns('text/html');
-        history.createLocation.withArgs('/').returns(location);
+        history.createLocation.withArgs(request.url).returns(location);
 
         handler.configureHandlerFor({
             ext: extension
