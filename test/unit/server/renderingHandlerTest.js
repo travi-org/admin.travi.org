@@ -3,11 +3,12 @@ const
 
     Negotiator = sinon.stub(),
     proxyquire = require('proxyquire'),
-    handler = proxyquire('../../../lib/server/renderingHandler', {
+    history = require('history'),
+    handler = proxyquire('../../../lib/server/rendering-handler', {
         'negotiator': Negotiator
     }),
     routeRenderer = require('../../../lib/server/route-renderer.jsx'),
-    history = require('history');
+    resourceList = require('../../../lib/router');
 
 suite('rendering handler', function () {
     'use strict';
@@ -15,11 +16,13 @@ suite('rendering handler', function () {
     let sandbox,
         mediaType,
         request;
+    const primaryNav = any.listOf(any.string);
 
     setup(function () {
         sandbox = sinon.sandbox.create();
         sandbox.stub(routeRenderer, 'routeTo');
-        sandbox.stub(history, 'createLocation');
+        sandbox.stub(history, 'createLocation')
+        sandbox.stub(resourceList, 'listResourceTypes').yields(null, primaryNav);
 
         request = any.simpleObject();
         mediaType = sinon.stub();
@@ -61,7 +64,9 @@ suite('rendering handler', function () {
 
         refute.called(reply.view);
 
-        assert.calledWith(routeRenderer.routeTo, location);
+        assert.calledWith(routeRenderer.routeTo, location, {
+            primaryNav: primaryNav
+        });
         routeRenderer.routeTo.yield(null, renderedContent);
 
         assert.calledWith(reply.view, 'layout/layout', {

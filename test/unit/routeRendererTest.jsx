@@ -3,6 +3,7 @@ const
     ReactDOMServer = require('react-dom/server'),
     reactRouter = require('react-router'),
     RoutingContext = reactRouter.RoutingContext,
+    DataWrapper = require('../../lib/server/temp-data-wrapper'),
     any = require('../helpers/any'),
 
     renderer = require('../../lib/server/route-renderer'),
@@ -29,11 +30,14 @@ suite('route renderer', function () {
             callback = sinon.spy(),
             location = any.url(),
             renderProps = any.simpleObject(),
-            context = any.simpleObject();
+            context = any.simpleObject(),
+            wrapped = any.simpleObject(),
+            data = any.simpleObject();
         React.createElement.withArgs(RoutingContext, renderProps).returns(context);
-        ReactDOMServer.renderToString.withArgs(context).returns(renderedContent);
+        React.createElement.withArgs(DataWrapper, { data }, context).returns(wrapped);
+        ReactDOMServer.renderToString.withArgs(wrapped).returns(renderedContent);
 
-        renderer.routeTo(location, callback);
+        renderer.routeTo(location, data, callback);
 
         refute.called(callback);
 
@@ -47,7 +51,7 @@ suite('route renderer', function () {
         const
             error = any.simpleObject(),
             callback = sinon.spy();
-        renderer.routeTo(any.url(), callback);
+        renderer.routeTo(any.url(), any.simpleObject(), callback);
 
         reactRouter.match.yield(error);
 

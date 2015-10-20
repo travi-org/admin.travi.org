@@ -3,11 +3,15 @@ const
     ReactDOMServer = require('react-dom/server'),
     reactRouter = require('react-router'),
     RoutingContext = reactRouter.RoutingContext,
+    DataWrapper = require('./temp-data-wrapper'),
+
     routes = require('./../routes.jsx');
 
-function routeTo(location, callback) {
+function routeTo(location, data, callback) {
     reactRouter.match({routes, location}, function (error, redirectLocation, renderProps) {
-        callback(error, ReactDOMServer.renderToString(<RoutingContext {...renderProps} />));
+        callback(error, ReactDOMServer.renderToString(
+            <DataWrapper data={ data }><RoutingContext {...renderProps} /></DataWrapper>
+        ));
     });
 }
 
