@@ -57,7 +57,7 @@
     "grunt-wait": "0.1.0",
     "jsdom": "7.0.2",
     "load-grunt-config": "0.17.2",
-    "nock": "2.15.0",
+    "nock": "2.16.0",
     "pact-consumer-js-dsl": "0.2.1",
     "proxyquire": "1.7.3",
     "react-tools": "0.13.3",
