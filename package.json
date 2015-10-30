@@ -34,7 +34,7 @@
     ]
   },
   "devDependencies": {
-    "babelify": "6.4.0",
+    "babelify": "7.0.1",
     "chai": "3.4.0",
     "eslint": "1.7.3",
     "eslint-plugin-react": "3.6.3",
