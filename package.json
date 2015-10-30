@@ -71,7 +71,7 @@
   "dependencies": {
     "async": "1.5.0",
     "director": "1.2.8",
-    "hapi": "11.0.2",
+    "hapi": "11.0.3",
     "hapi-mustache": "0.0.1",
     "history": "1.13.0",
     "inert": "3.2.0",
