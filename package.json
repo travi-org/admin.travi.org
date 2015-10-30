@@ -37,6 +37,7 @@
     "babelify": "6.4.0",
     "chai": "3.4.0",
     "eslint": "1.7.3",
+    "eslint-plugin-cucumber": "0.0.1",
     "eslint-plugin-react": "3.6.3",
     "extend-grunt-plugin": "0.1.0",
     "formatio": "1.1.2",

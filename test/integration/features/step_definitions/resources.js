@@ -1,12 +1,10 @@
-var resourcesController = require('../../../../lib/resourcesController'),
-    path = require('path'),
+var path = require('path'),
     server = require(path.join(__dirname, '../../../../index.js')),
 
     nock = require('nock'),
     assert = require('referee').assert,
     _ = require('lodash'),
-    any = require('../../../helpers/any-for-admin'),
-    formatio = require('formatio');
+    any = require('../../../helpers/any-for-admin');
 require('setup-referee-sinon/globals');
 
 module.exports = function () {
@@ -89,7 +87,7 @@ module.exports = function () {
             };
 
         nock(HOST)
-            .log(console.log)
+            .log(console.log)   //eslint-disable-line no-console
             .get('/')
             .times(2)
             .reply(
@@ -99,7 +97,7 @@ module.exports = function () {
             );
 
         nock(HOST)
-            .log(console.log)
+            .log(console.log)   //eslint-disable-line no-console
             .get(requestPath)
             .reply(
                 200,
@@ -115,7 +113,7 @@ module.exports = function () {
                         path = link.substring(linkHost.length);
 
                     nock(linkHost)
-                        .log(console.log)
+                        .log(console.log)   //eslint-disable-line no-console
                         .get(path)
                         .reply(
                             200,
@@ -241,20 +239,20 @@ module.exports = function () {
         });
     });
 
-    this.Then(/^list of "([^"]*)" resources is returned$/, function (resourceType, callback) {
+    this.Then(/^list of "([^"]*)" resources is returned$/, function (resourceType, done) {
         if (any.resources.hasOwnProperty(getSingularForm(resourceType))) {
             assertFormatMappedToViewFor(resourceType);
         } else {
             assertFormatIsUntouchedFor(resourceType);
         }
 
-        callback();
+        done();
     });
 
-    this.Then(/^the "([^"]*)" is returned$/, function (resourceType, callback) {
+    this.Then(/^the "([^"]*)" is returned$/, function (resourceType, done) {
         var payload = JSON.parse(serverResponse.payload);
         assert.equals(payload.resource.id, existingResourceId);
 
-        callback();
+        done();
     });
 };

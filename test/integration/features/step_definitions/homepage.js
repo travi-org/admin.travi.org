@@ -66,13 +66,13 @@ module.exports = function () {
         });
     });
 
-    this.Then(/^no resources are listed$/, function (callback) {
+    this.Then(/^no resources are listed$/, function (done) {
         assert.equals(serverResponse.payload, JSON.stringify({types: []}));
 
-        callback();
+        done();
     });
 
-    this.Then(/^top level resources are listed$/, function (callback) {
+    this.Then(/^top level resources are listed$/, function (done) {
         assert.equals(serverResponse.statusCode, 200);
         assert.equals(serverResponse.payload, JSON.stringify({
             types: _.map(availableResourceTypes, function (type) {
@@ -83,7 +83,7 @@ module.exports = function () {
             })
         }));
 
-        callback();
+        done();
     });
 
 };
