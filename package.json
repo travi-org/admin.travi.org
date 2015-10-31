@@ -34,7 +34,7 @@
     ]
   },
   "devDependencies": {
-    "babel-preset-react": "^6.0.12",
+    "babel-preset-react": "^6.0.14",
     "babelify": "7.0.2",
     "chai": "3.4.0",
     "eslint": "1.7.3",
