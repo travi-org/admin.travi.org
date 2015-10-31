@@ -5,7 +5,7 @@ module.exports = React.createClass({
         return (
             <span id="primary-nav">
                 <ul id="nav-items">
-                    {this.props.types.map(function (type) {
+                    {this.props.primaryNav.map(function (type) {
                         return <li key={type} />;
                     })}
                 </ul>
