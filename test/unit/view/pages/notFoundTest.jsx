@@ -1,5 +1,5 @@
 const
-    React = require('react'),
+    React = require('react'),   //eslint-disable-line no-unused-vars
     cheerio = require('cheerio'),
     reactDom = require('react-dom/server'),
 
