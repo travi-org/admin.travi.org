@@ -3,9 +3,8 @@
 const
     any = require('../../../helpers/any'),
 
-    React = require('react'),
+    React = require('react'),   //eslint-disable-line no-unused-vars
     dom = require('react-dom'),
-    ReactTestUtils = require('react/lib/ReactTestUtils'),
     assert = require('chai').assert,
     _ = require('lodash'),
 
