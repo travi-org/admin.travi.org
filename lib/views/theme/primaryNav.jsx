@@ -1,6 +1,6 @@
 var React = require('react');
 
-var Component = React.createClass({
+module.exports = React.createClass({
     render: function () {
         'use strict';
 
@@ -10,10 +10,10 @@ var Component = React.createClass({
             return <li key={type.text} className={ type.active ? 'active' : '' }><a href={type.path}>{type.text}</a></li>;
         }
 
-        if (this.props.types) {
+        if (this.props.primaryNav) {
             list = <div className="collapse navbar-collapse" id="navbar-items">
                 <ul className="nav navbar-nav">
-                    {this.props.types.map(renderNavLink)}
+                    {this.props.primaryNav.map(renderNavLink)}
                 </ul>
             </div>;
         }
@@ -43,5 +43,3 @@ var Component = React.createClass({
         );
     }
 });
-
-module.exports = Component;

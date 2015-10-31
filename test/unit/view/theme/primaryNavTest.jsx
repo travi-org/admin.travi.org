@@ -1,47 +1,56 @@
 'use strict';
 
-var React = require('react'),
+const
+    any = require('../../../helpers/any'),
+
+    React = require('react'),
     dom = require('react-dom'),
     ReactTestUtils = require('react/lib/ReactTestUtils'),
     assert = require('chai').assert,
+    _ = require('lodash'),
 
     PrimaryNav = require('../../../../lib/views/theme/primaryNav.jsx');
 
-
 suite('primary navigation', function () {
+    let node;
+
+    beforeEach(function () {
+        node = document.createElement('div');
+    });
+
+    afterEach(function () {
+        dom.unmountComponentAtNode(node);
+    });
+
     test('that the resource types are listed as links', function () {
-        var types = [
-                {
-                    text: 'foo',
-                    path: '/foo'
-                },
-                {
-                    text: 'bar',
-                    path: '/bar',
-                    active: true
+        const primaryNav = any.listOf(function () {
+            return {
+                text: any.string(),
+                path: any.url()
+            };
+        });
+
+        dom.render(<PrimaryNav primaryNav={primaryNav} />, node, function () {
+            var renderedDOMNode = node.childNodes[0];
+
+            assert.equal(renderedDOMNode.tagName, 'NAV');
+
+            const links = node.querySelectorAll('li');
+            assert.equal(links.length, primaryNav.length);
+            _.each(links, function (item, index) {
+                var listItem = dom.findDOMNode(item),
+                    type = primaryNav[index],
+                    link = listItem.childNodes[0];
+
+                assert.equal(link.textContent, type.text);
+                assert.equal(link.href, type.path);
+
+                if (type.active) {
+                    assert.equal(listItem.className, 'active');
+                } else {
+                    assert.equal(listItem.className, '');
                 }
-            ],
-            element = React.createElement(PrimaryNav, { types: types }),
-            rendered = ReactTestUtils.renderIntoDocument(element),
-            renderedDOMNode = React.findDOMNode(rendered);
-
-        assert.equal(renderedDOMNode.tagName, 'NAV');
-
-        var links = ReactTestUtils.scryRenderedDOMComponentsWithTag(rendered, 'LI');
-        assert.equal(links.length, types.length);
-        links.forEach(function (item, index) {
-            var listItem = dom.findDOMNode(item),
-                type = types[index],
-                link = listItem.childNodes[0];
-
-            assert.equal(link.textContent, type.text);
-            assert.equal(link.href, type.path);
-
-            if (type.active) {
-                assert.equal(listItem.className, 'active');
-            } else {
-                assert.equal(listItem.className, '');
-            }
+            });
         });
     });
 });
