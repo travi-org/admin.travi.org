@@ -12,16 +12,17 @@ const
 suite('route renderer', function () {
     'use strict';
 
+    let sandbox;
+
     setup(function () {
-        sinon.stub(ReactDOMServer, 'renderToString');
-        sinon.stub(React, 'createElement');
-        sinon.stub(reactRouter, 'match');
+        sandbox = sinon.sandbox.create();
+        sandbox.stub(ReactDOMServer, 'renderToString');
+        sandbox.stub(React, 'createElement');
+        sandbox.stub(reactRouter, 'match');
     });
 
     teardown(function () {
-        ReactDOMServer.renderToString.restore();
-        React.createElement.restore();
-        reactRouter.match.restore();
+        sandbox.restore();
     });
 
     test('that rendered html yielded for proper route', function () {
