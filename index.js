@@ -5,7 +5,6 @@ var hapi = require('hapi'),
     _ = require('lodash'),
 
     router = require('./lib/router'),
-    renderer = require('./lib/renderer'),
     resourcesControlller = require('./lib/resourcesController'),
 
     server = new hapi.Server();
@@ -64,9 +63,9 @@ server.route({
     path: '/',
     handler: function (request, reply) {
         router.listResourceTypes(function (err, types) {
-            renderer.render('index', {
-                types: types
-            }, request, reply);
+            reply.view('index', {
+                foo: types
+            });
         });
     }
 });
@@ -75,25 +74,12 @@ server.route({
     method: 'GET',
     path: '/{resourceType}',
     handler: function (request, reply) {
-        var resourceType = request.params.resourceType;
-
-        async.parallel(
-            [
-                function (callback) {
-                    populatePrimaryNav(callback, resourceType);
-                },
-                function (callback) {
-                    resourcesControlller.getListOf(resourceType, callback);
-                }
-            ],
-            function (err, results) {
-                renderer.render('resourceList', {
-                    resourceType: resourceType,
-                    resources: results[1],
-                    types: results[0]
-                }, request, reply);
-            }
-        );
+        resourcesControlller.getListOf(request.params.resourceType, function (err, resources) {
+            reply.view('resourceList', {
+                resourceType: request.params.resourceType,
+                resources: resources
+            });
+        });
     }
 });
 
@@ -101,33 +87,16 @@ server.route({
     method: 'GET',
     path: '/{resourceType}/{id}',
     handler: function (request, reply) {
-        var resourceType = request.params.resourceType;
-
-        async.parallel(
-            [
-                function (callback) {
-                    populatePrimaryNav(callback, resourceType);
-                },
-                function (callback) {
-                    resourcesControlller.getResource(
-                        request.params.resourceType,
-                        request.params.id,
-                        callback
-                    );
-                }
-            ],
-            function (err, results) {
-                renderer.render('resource', {
-                    resourceType: resourceType,
-                    resource: results[1],
-                    types: results[0]
-                }, request, reply);
-            }
-        );
+        resourcesControlller.getResource(request.params.resourceType, request.params.id, function (err, resource) {
+            reply.view('resource', {
+                resourceType: request.params.resourceType,
+                resource: resource
+            });
+        });
     }
 });
 
-//require('./lib/server/renderingHandler').configureHandlerFor(server);
+require('./lib/server/rendering-handler').configureHandlerFor(server);
 
 if (!module.parent) {
     server.start(function (err) {
