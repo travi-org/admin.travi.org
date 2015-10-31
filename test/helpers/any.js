@@ -33,7 +33,7 @@ function protocol() {
 }
 
 function host() {
-    return string() + '.' + string(20) + '.' + string(3);
+    return (string() + '.' + string(20) + '.' + string(3)).toLowerCase();
 }
 
 function url(root) {
