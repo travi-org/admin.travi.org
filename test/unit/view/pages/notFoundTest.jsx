@@ -1,9 +1,11 @@
 const
-    React = require('react'),   //eslint-disable-line no-unused-vars
+    React = require('react'),
     cheerio = require('cheerio'),
     reactDom = require('react-dom/server'),
 
-    NotFound = require('../../../../lib/views/not-found.jsx');
+    createNotFound = require('../../../../lib/views/not-found.jsx'),
+    NotFound = createNotFound(React);
+
 require('setup-referee-sinon/globals');
 
 suite('not found', function () {
