@@ -1,8 +1,10 @@
-var React = require('react'),
-
-    Wrap = require('./theme/wrap.jsx');
+var React = require('react');
 
 module.exports = React.createClass({
+    contextTypes: {
+        data: React.PropTypes.object.isRequired
+    },
+
     render: function () {
         'use strict';
 
@@ -25,16 +27,12 @@ module.exports = React.createClass({
             return <li key={resource.id} className="list-group-item">{thumbnail}{link}</li>;
         }
 
-        if (this.props.resources.length) {
-            resources = <ul className="list-group">{this.props.resources.map(renderResourceAsListItem)}</ul>;
+        if (this.context.data.resources.length) {
+            resources = <ul className="list-group">{ this.context.data.resources.map(renderResourceAsListItem) }</ul>;
         } else {
-            resources = <p className="alert alert-info">No { this.props.resourceType } are available</p>;
+            resources = <p className="alert alert-info">No { this.context.data.resourceType } are available</p>;
         }
 
-        return (
-            <Wrap types={this.props.types}>
-                {resources}
-            </Wrap>
-        );
+        return resources;
     }
 });

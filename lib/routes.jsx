@@ -8,7 +8,7 @@ const
 
     Wrap = require('./views/theme/wrap.jsx'),
     Index = require('./views/index.jsx')(React),
-    ResourceList = require('./views/resourceList.jsx'),
+    ResourceList = require('./views/resource-list.jsx'),
 
     NotFound = require('./views/not-found.jsx')(React);
 

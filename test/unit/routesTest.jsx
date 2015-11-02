@@ -16,7 +16,7 @@ const
         }),
         './views/index.jsx': React => () => <div>index</div>,
         './views/not-found.jsx': React => () => <div>not-found</div>,
-        './views/resourceList.jsx': React.createClass({
+        './views/resource-list.jsx': React.createClass({
             render: () => <div>resources</div>
         })
     });
