@@ -63,7 +63,7 @@ server.route({
     path: '/',
     handler: function (request, reply) {
         router.listResourceTypes(function (err, types) {
-            reply.view('index', {
+            reply({
                 foo: types
             });
         });
@@ -75,7 +75,7 @@ server.route({
     path: '/{resourceType}',
     handler: function (request, reply) {
         resourcesControlller.getListOf(request.params.resourceType, function (err, resources) {
-            reply.view('resourceList', {
+            reply({
                 resourceType: request.params.resourceType,
                 resources: resources
             });
@@ -88,7 +88,7 @@ server.route({
     path: '/{resourceType}/{id}',
     handler: function (request, reply) {
         resourcesControlller.getResource(request.params.resourceType, request.params.id, function (err, resource) {
-            reply.view('resource', {
+            reply({
                 resourceType: request.params.resourceType,
                 resource: resource
             });
