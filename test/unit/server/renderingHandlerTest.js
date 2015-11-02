@@ -3,6 +3,7 @@ const
 
     Negotiator = sinon.stub(),
     proxyquire = require('proxyquire'),
+    _ = require('lodash'),
     history = require('history'),
     handler = proxyquire('../../../lib/server/rendering-handler', {
         'negotiator': Negotiator
@@ -13,12 +14,10 @@ const
 suite('rendering handler', function () {
     'use strict';
 
+    const primaryNav = any.listOf(any.string);
     let sandbox,
         mediaType,
-        request = {
-            url: any.url()
-        };
-    const primaryNav = any.listOf(any.string);
+        request;
 
     setup(function () {
         sandbox = sinon.sandbox.create();
@@ -27,6 +26,7 @@ suite('rendering handler', function () {
         sandbox.stub(resourceList, 'listResourceTypes').yields(null, primaryNav);
 
         request = any.simpleObject();
+        request.url = any.url();
         mediaType = sinon.stub();
         Negotiator.withArgs(request).returns({
             mediaType: mediaType
@@ -52,6 +52,7 @@ suite('rendering handler', function () {
     });
 
     test('that an html request returns a rendered view', function () {
+        request.response = {source: any.simpleObject()};
         const
             reply = { view: sinon.spy() },
             extension = sinon.stub().withArgs('onPreResponse').yields(request, reply),
@@ -66,9 +67,9 @@ suite('rendering handler', function () {
 
         refute.called(reply.view);
 
-        assert.calledWith(routeRenderer.routeTo, location, {
+        assert.calledWith(routeRenderer.routeTo, location, _.extend({}, request.response.source, {
             primaryNav: primaryNav
-        });
+        }));
         routeRenderer.routeTo.yield(null, renderedContent);
 
         assert.calledWith(reply.view, 'layout/layout', {
