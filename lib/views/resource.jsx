@@ -3,13 +3,15 @@ var React = require('react'),
     Wrap = require('./theme/wrap.jsx');
 
 module.exports = React.createClass({
+    contextTypes: {
+        data: React.PropTypes.object.isRequired
+    },
+
     render: function () {
         'use strict';
 
         return (
-            <Wrap types={this.props.types}>
-                <h3>{this.props.resource.displayName}</h3>
-            </Wrap>
+            <h3>{this.context.data.resource.displayName}</h3>
         );
     }
 });

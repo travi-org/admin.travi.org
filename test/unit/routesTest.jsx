@@ -18,6 +18,9 @@ const
         './views/not-found.jsx': React => () => <div>not-found</div>,
         './views/resource-list.jsx': React.createClass({
             render: () => <div>resources</div>
+        }),
+        './views/resource.jsx': React.createClass({
+            render: () => <div>resource</div>
         })
     });
 
@@ -64,6 +67,16 @@ suite('routes', function () {
         });
     });
 
+    test('that the ride route is defined', function () {
+        dom.render((
+            <Router history={createHistory('/rides/8')}>
+                { routes }
+            </Router>
+        ), node, function () {
+            assert.equals(node.textContent, 'wrapper resource');
+        });
+    });
+
     test('that the users route is defined', function () {
         dom.render((
             <Router history={createHistory('/users')}>
@@ -71,6 +84,16 @@ suite('routes', function () {
             </Router>
         ), node, function () {
             assert.equals(node.textContent, 'wrapper resources');
+        });
+    });
+
+    test('that the user route is defined', function () {
+        dom.render((
+            <Router history={createHistory('/users/4')}>
+                { routes }
+            </Router>
+        ), node, function () {
+            assert.equals(node.textContent, 'wrapper resource');
         });
     });
 });
