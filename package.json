@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "babel-preset-react": "^6.0.14",
-    "babelify": "7.1.0",
+    "babelify": "7.2.0",
     "chai": "3.4.0",
     "cheerio": "^0.19.0",
     "eslint": "1.8.0",
