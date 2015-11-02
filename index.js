@@ -26,17 +26,17 @@ server.views({
     path: 'lib/views'
 });
 
-function populatePrimaryNav(callback, resourceType) {
-    router.listResourceTypes(function (err, types) {
-        types = _.map(types, function (type) {
-            type.active = resourceType === type.text;
-
-            return type;
-        });
-
-        callback(null, types);
-    });
-}
+//function populatePrimaryNav(callback, resourceType) {
+//    router.listResourceTypes(function (err, types) {
+//        types = _.map(types, function (type) {
+//            type.active = resourceType === type.text;
+//
+//            return type;
+//        });
+//
+//        callback(null, types);
+//    });
+//}
 
 server.route({
     method: 'GET',
@@ -64,7 +64,7 @@ server.route({
     handler: function (request, reply) {
         router.listResourceTypes(function (err, types) {
             reply({
-                foo: types
+                primaryNav: types
             });
         });
     }

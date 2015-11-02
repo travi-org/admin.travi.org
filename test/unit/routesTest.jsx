@@ -1,14 +1,12 @@
 const
     React = require('react'), //eslint-disable-line no-unused-vars
-    ReactTestUtils = require('react-addons-test-utils'),
-    shallowRenderer = ReactTestUtils.createRenderer(),
     dom = require('react-dom'),
     reactRouter = require('react-router'),
     Router = reactRouter.Router,
     createHistory = require('history/lib/createMemoryHistory'),
 
     proxyquire = require('proxyquire'),
-    routes = proxyquire('../../lib/routes.jsx', {
+    routes = proxyquire('../../lib/routes.jsx', {                       /*eslint-disable no-unused-vars */
         './views/theme/wrap.jsx': React.createClass({
             render: function () {
                 return (<div>wrapper { this.props.children }</div>);
@@ -20,7 +18,7 @@ const
             render: () => <div>resources</div>
         }),
         './views/resource.jsx': React.createClass({
-            render: () => <div>resource</div>
+            render: () => <div>resource</div>                           /*eslint-enable no-unused-vars */
         })
     });
 

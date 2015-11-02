@@ -1,6 +1,4 @@
-var React = require('react'),
-
-    Wrap = require('./theme/wrap.jsx');
+var React = require('react');
 
 module.exports = React.createClass({
     contextTypes: {

@@ -1,7 +1,7 @@
-var React = require('react'),
+const
+    React = require('react'),
     reactDom = require('react-dom/server'),
     cheerio = require('cheerio'),
-    ReactTestUtils = require('react/lib/ReactTestUtils'),
     assert = require('chai').assert,
     any = require('../../../helpers/any-for-admin'),
     proxyquire = require('proxyquire'),
