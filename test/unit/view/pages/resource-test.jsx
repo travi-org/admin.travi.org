@@ -5,7 +5,7 @@ const
     assert = require('chai').assert,
     any = require('../../../helpers/any-for-admin'),
     proxyquire = require('proxyquire'),
-    DataWrapper = require('../../../../lib/server/temp-data-wrapper'),
+    DataWrapper = require('../../../../lib/server/view/temp-data-wrapper'),
     LayoutStub = require('../../../helpers/layoutStub.jsx');
 
 var Resource = proxyquire('../../../../lib/views/resource.jsx', {'./theme/wrap.jsx': LayoutStub});

@@ -2,7 +2,7 @@ app:
   src:
     - index.js
     - lib/**/*.js
-    - "!lib/server/*.js"
+    - "!lib/server/**/*.js"
   directives:
     node: true
     unparam: true
@@ -14,7 +14,7 @@ test:
   src:
     - test/**/*.js
     - "!test/integration/features/step_definitions/resources.js"
-    - "!test/unit/server/*.js"
+    - "!test/unit/server/**/*.js"
     - "!test/helpers/any.js"
   directives:
     node: true

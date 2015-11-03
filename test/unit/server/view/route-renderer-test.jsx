@@ -3,11 +3,11 @@ const
     ReactDOMServer = require('react-dom/server'),
     reactRouter = require('react-router'),
     RoutingContext = reactRouter.RoutingContext,
-    DataWrapper = require('../../../lib/server/temp-data-wrapper'),
-    any = require('../../helpers/any'),
+    DataWrapper = require('../../../../lib/server/view/temp-data-wrapper'),
+    any = require('../../../helpers/any'),
 
-    renderer = require('../../../lib/server/route-renderer'),
-    routes = require('../../../lib/routes.jsx');
+    renderer = require('../../../../lib/server/view/route-renderer'),
+    routes = require('../../../../lib/routes.jsx');
 
 suite('route renderer', function () {
     'use strict';

@@ -1,15 +1,15 @@
 const
-    any = require('../../helpers/any'),
+    any = require('../../../helpers/any'),
 
     Negotiator = sinon.stub(),
     proxyquire = require('proxyquire'),
     _ = require('lodash'),
     history = require('history'),
-    handler = proxyquire('../../../lib/server/rendering-handler', {
+    handler = proxyquire('../../../../lib/server/view/rendering-handler', {
         'negotiator': Negotiator
     }),
-    routeRenderer = require('../../../lib/server/route-renderer.jsx'),
-    resourceList = require('../../../lib/router');
+    routeRenderer = require('../../../../lib/server/view/route-renderer.jsx'),
+    resourceList = require('../../../../lib/router');
 
 suite('rendering handler', function () {
     'use strict';

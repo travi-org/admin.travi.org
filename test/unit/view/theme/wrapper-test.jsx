@@ -7,7 +7,7 @@ var React = require('react'),   //eslint-disable-line no-unused-vars
     any = require('../../../helpers/any'),
 
     PrimaryNav = require('../../../helpers/primaryNavStub.jsx');
-var DataWrapper = require('../../../../lib/server/temp-data-wrapper'),
+var DataWrapper = require('../../../../lib/server/view/temp-data-wrapper'),
     Wrap = proxyquire('../../../../lib/views/theme/wrap.jsx', {'./primaryNav.jsx': PrimaryNav});
 
 

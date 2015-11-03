@@ -1,6 +1,6 @@
 'use strict';
 
-const assets = require('../../../lib/server/static-assets');
+const assets = require('../../../../lib/server/view/static-assets');
 
 suite('static assets', function () {
     test('that the plugin is defined', function () {

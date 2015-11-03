@@ -5,7 +5,7 @@ const
     RoutingContext = reactRouter.RoutingContext,
     DataWrapper = require('./temp-data-wrapper'),
 
-    routes = require('./../routes.jsx');
+    routes = require('./../../routes.jsx');
 
 function routeTo(location, data, callback) {
     reactRouter.match({routes, location}, function (error, redirectLocation, renderProps) {
