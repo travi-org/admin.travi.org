@@ -1,5 +1,5 @@
 var path = require('path'),
-    server = require(path.join(__dirname, '../../../../index.js')),
+    loadApi = require(path.join(__dirname, '../../../../lib/server/app.js')),
     assert = require('referee').assert,
     nock = require('nock'),
     _ = require('lodash'),
@@ -57,12 +57,14 @@ module.exports = function () {
                 { 'Content-Type': 'application/hal+json'}
             );
 
-        server.inject({
-            method: 'GET',
-            url: '/'
-        }, function (response) {
-            serverResponse = response;
-            callback();
+        loadApi.then(function (server) {
+            server.inject({
+                method: 'GET',
+                url: '/'
+            }, function (response) {
+                serverResponse = response;
+                callback();
+            });
         });
     });
 

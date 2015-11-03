@@ -38,16 +38,22 @@ suite('rendering handler', function () {
         Negotiator.reset();
     });
 
+    test('that the plugin is defined', function () {
+        assert.equals(handler.register.attributes, {
+            name: 'rendering-handler'
+        });
+    });
+
     test('that a non-html request is forwarded with no modification', function () {
         const
+            next = sinon.spy(),
             reply = { continue: sinon.spy() },
             extension = sinon.stub().withArgs('onPreResponse').yields(request, reply);
         mediaType.returns('text/foo');
 
-        handler.configureHandlerFor({
-            ext: extension
-        });
+        handler.register({ext: extension}, null, next);
 
+        assert.calledOnce(next);
         assert.calledOnce(reply.continue);
     });
 
@@ -61,9 +67,7 @@ suite('rendering handler', function () {
         mediaType.returns('text/html');
         history.createLocation.withArgs(request.url).returns(location);
 
-        handler.configureHandlerFor({
-            ext: extension
-        });
+        handler.register({ext: extension}, null, sinon.spy());
 
         refute.called(reply.view);
 

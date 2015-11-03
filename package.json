@@ -10,8 +10,8 @@
   },
   "scripts": {
     "test": "grunt",
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node lib/server/app.js",
+    "dev": "nodemon lib/server/app.js"
   },
   "engines": {
     "node": "4.0.x"
@@ -73,6 +73,7 @@
   "dependencies": {
     "async": "1.5.0",
     "director": "1.2.8",
+    "glue": "^2.4.0",
     "hapi": "11.0.3",
     "hapi-mustache": "0.0.1",
     "history": "1.13.0",
@@ -86,6 +87,7 @@
     "stampit": "2.1.1",
     "traverson": "2.1.0",
     "traverson-hal": "2.1.0",
-    "vision": "3.0.0"
+    "vision": "3.0.0",
+    "visionary": "^3.0.1"
   }
 }

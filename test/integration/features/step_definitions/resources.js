@@ -1,5 +1,5 @@
 var path = require('path'),
-    server = require(path.join(__dirname, '../../../../index.js')),
+    loadApi = require(path.join(__dirname, '../../../../lib/server/app.js')),
 
     nock = require('nock'),
     assert = require('referee').assert,
@@ -220,22 +220,26 @@ module.exports = function () {
     });
 
     this.When(/^list of "([^"]*)" resources is requested$/, function (resourceType, callback) {
-        server.inject({
-            method: 'GET',
-            url: '/' + resourceType
-        }, function (response) {
-            serverResponse = response;
-            callback();
+        loadApi.then(function (server) {
+            server.inject({
+                method: 'GET',
+                url: '/' + resourceType
+            }, function (response) {
+                serverResponse = response;
+                callback();
+            });
         });
     });
 
     this.When(/^the "([^"]*)" is requested by id$/, function (resourceType, callback) {
-        server.inject({
-            method: 'GET',
-            url: '/' + resourceType + '/' + existingResourceId
-        }, function (response) {
-            serverResponse = response;
-            callback();
+        loadApi.then(function (server) {
+            server.inject({
+                method: 'GET',
+                url: '/' + resourceType + '/' + existingResourceId
+            }, function (response) {
+                serverResponse = response;
+                callback();
+            });
         });
     });
 
