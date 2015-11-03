@@ -9,7 +9,7 @@ const
         'negotiator': Negotiator
     }),
     routeRenderer = require('../../../../lib/server/view/route-renderer.jsx'),
-    resourceList = require('../../../../lib/router');
+    resourcesController = require('../../../../lib/resourcesController');
 
 suite('rendering handler', function () {
     'use strict';
@@ -23,7 +23,7 @@ suite('rendering handler', function () {
         sandbox = sinon.sandbox.create();
         sandbox.stub(routeRenderer, 'routeTo');
         sandbox.stub(history, 'createLocation');
-        sandbox.stub(resourceList, 'listResourceTypes').yields(null, primaryNav);
+        sandbox.stub(resourcesController, 'listResourceTypes').yields(null, primaryNav);
 
         request = any.simpleObject();
         request.url = any.url();
