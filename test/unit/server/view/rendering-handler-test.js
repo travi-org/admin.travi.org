@@ -9,7 +9,7 @@ const
         'negotiator': Negotiator
     }),
     routeRenderer = require('../../../../lib/server/view/route-renderer.jsx'),
-    resourcesController = require('../../../../lib/resourcesController');
+    resourcesController = require('../../../../lib/server/resources/resources-controller');
 
 suite('rendering handler', function () {
     'use strict';

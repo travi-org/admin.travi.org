@@ -1,8 +1,8 @@
 'use strict';
 
-var mapper = require('../../../lib/mappers/rideMapper'),
+var mapper = require('../../../../../lib/server/resources/mappers/ride-mapper'),
 
-    any = require('../../helpers/any-for-admin');
+    any = require('../../../../helpers/any-for-admin');
 
 suite('ride mapper', function () {
     test('that ride resources mapped to view list', function () {

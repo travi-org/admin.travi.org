@@ -1,6 +1,6 @@
 'use strict';
 
-var mapper = require('../../../lib/mappers/defaultMapper');
+var mapper = require('../../../../../lib/server/resources/mappers/default-mapper');
 
 suite('default mapper', function () {
     test('that the expected methods are exposed', function () {

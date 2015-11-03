@@ -1,8 +1,8 @@
 'use strict';
 
-var resourcesController = require('../../../../lib/resourcesController'),
+var resourcesController = require('../../../../lib/server/resources/resources-controller'),
     traviApiResources = require('../../../../lib/traviApiResources.js'),
-    resourceMapperFactory = require('../../../../lib/resourceMapperFactory'),
+    resourceMapperFactory = require('../../../../lib/server/resources/mappers/resource-mapper-factory'),
 
     any = require('../../../helpers/any-for-admin');
 

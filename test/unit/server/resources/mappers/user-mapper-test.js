@@ -1,8 +1,8 @@
 'use strict';
 
-var mapper = require('../../../lib/mappers/userMapper'),
+var mapper = require('../../../../../lib/server/resources/mappers/user-mapper'),
 
-    any = require('../../helpers/any-for-admin');
+    any = require('../../../../helpers/any-for-admin');
 
 suite('user mapper', function () {
     test('that user resources mapped to view list', function () {
