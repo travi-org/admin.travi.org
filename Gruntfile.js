@@ -103,7 +103,7 @@ module.exports = function (grunt) {
             });
 
             mockService.run(function () {}, function (runComplete) {
-                require('./lib/traviApiResources').getLinksFor('', function () {
+                require('./lib/server/resources/travi-api-resources').getLinksFor('', function () {
 
                     runComplete();
                 });

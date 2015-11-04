@@ -1,6 +1,6 @@
 'use strict';
 
-var traviApiResources = require('../../lib/traviApiResources.js'),
+var traviApiResources = require('../../lib/server/resources/travi-api-resources.js'),
     traverson = require('traverson'),
     any = require('../helpers/any-for-admin');
 
