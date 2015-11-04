@@ -14,7 +14,11 @@ const
 suite('rendering handler', function () {
     'use strict';
 
-    const primaryNav = any.listOf(any.string);
+    const primaryNav = any.listOf(function () {
+        return {
+            text: any.string()
+        };
+    });
     let sandbox,
         mediaType,
         request;
@@ -58,7 +62,7 @@ suite('rendering handler', function () {
     });
 
     test('that an html request returns a rendered view', function () {
-        request.response = {source: any.simpleObject()};
+        request.response = {source: {resourceType: primaryNav[2].text}};
         const
             reply = { view: sinon.spy() },
             extension = sinon.stub().withArgs('onPreResponse').yields(request, reply),
@@ -72,7 +76,9 @@ suite('rendering handler', function () {
         refute.called(reply.view);
 
         assert.calledWith(routeRenderer.routeTo, location, _.extend({}, request.response.source, {
-            primaryNav: primaryNav
+            primaryNav: _.map(primaryNav, function (item, index) {
+                return _.extend({}, item, {active: index === 2})
+            })
         }));
         routeRenderer.routeTo.yield(null, renderedContent);
 
