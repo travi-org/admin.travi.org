@@ -7,3 +7,6 @@
     assert: false
     refute: false
     document: false
+
+  extends:
+    - defaults/configurations/walmart/es6
