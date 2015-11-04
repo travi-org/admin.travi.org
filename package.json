@@ -34,7 +34,7 @@
     ]
   },
   "devDependencies": {
-    "babel-preset-react": "^6.0.14",
+    "babel-preset-react": "^6.0.15",
     "babelify": "7.2.0",
     "chai": "3.4.0",
     "cheerio": "^0.19.0",
@@ -83,10 +83,10 @@
     "negotiator": "0.6.0",
     "react": "0.14.2",
     "react-dom": "^0.14.2",
-    "react-router": "1.0.0-rc3",
+    "react-router": "1.0.0-rc4",
     "stampit": "2.1.1",
-    "traverson": "2.1.0",
-    "traverson-hal": "2.1.0",
+    "traverson": "3.0.0",
+    "traverson-hal": "4.0.0",
     "vision": "4.0.0",
     "visionary": "^3.0.1"
   }
