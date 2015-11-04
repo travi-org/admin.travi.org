@@ -8,5 +8,19 @@
     refute: false
     document: false
 
+  rules:
+    quotes:
+      - 2
+      - single
+    indent:
+      - 2
+      - 4
+    no-mixed-requires:
+      - 1
+      - false
+    one-var:
+      - 2
+      - always
+
   extends:
     - defaults/configurations/walmart/es6
