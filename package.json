@@ -72,7 +72,6 @@
   },
   "dependencies": {
     "async": "1.5.0",
-    "bluebird": "2.2.1",
     "director": "1.2.8",
     "glue": "^2.4.0",
     "hapi": "11.0.5",
@@ -83,12 +82,12 @@
     "lodash": "3.10.1",
     "negotiator": "0.6.0",
     "react": "0.14.2",
-    "react-dom": "0.14.2",
+    "react-dom": "^0.14.2",
     "react-router": "1.0.0-rc4",
     "stampit": "2.1.1",
     "traverson": "3.0.0",
     "traverson-hal": "4.0.0",
     "vision": "4.0.0",
-    "visionary": "3.0.1"
+    "visionary": "^3.0.1"
   }
 }
