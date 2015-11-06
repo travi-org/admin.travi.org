@@ -11,6 +11,7 @@ unit:
     reporters: spec
 
 coverage:
+  files: test/unit/**/*-test.js
   options:
     coveralls: true
 
