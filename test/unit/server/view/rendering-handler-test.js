@@ -19,6 +19,7 @@ suite('rendering handler', function () {
             text: any.string()
         };
     }, {min: 5});
+
     let sandbox,
         mediaType,
         request;
