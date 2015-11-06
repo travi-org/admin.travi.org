@@ -52,10 +52,14 @@ function simpleObject() {
     };
 }
 
-function listOf(constructor) {
+function listOf(constructor, options) {
     var list = [],
         listSize = int(),
         i;
+
+    if (options && options.min) {
+        listSize += options.min;
+    }
 
     for (i = 0; i < listSize; i += 1) {
         list.push(constructor());
