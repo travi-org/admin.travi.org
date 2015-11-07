@@ -23,19 +23,15 @@ module.exports = function () {
         return links;
     }
 
-    this.Before(function (callback) {
+    this.Before(function () {
         nock.disableNetConnect();
         availableResourceTypes = [];
-
-        callback();
     });
 
-    this.After(function (callback) {
+    this.After(function () {
         nock.enableNetConnect();
         nock.cleanAll();
         serverResponse = null;
-
-        callback();
     });
 
     this.Given(/^user has no api privileges$/, function (callback) {
