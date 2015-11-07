@@ -21,6 +21,7 @@
     one-var:
       - 2
       - always
+    prefer-arrow-callback: 0
 
   extends:
     - defaults/configurations/walmart/es6
