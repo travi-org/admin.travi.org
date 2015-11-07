@@ -87,7 +87,7 @@ module.exports = function () {
             };
 
         nock(HOST)
-            .log(console.log)   //eslint-disable-line no-console
+            //.log(console.log)   //eslint-disable-line no-console
             .get('/')
             .times(2)
             .reply(
@@ -97,7 +97,7 @@ module.exports = function () {
             );
 
         nock(HOST)
-            .log(console.log)   //eslint-disable-line no-console
+            //.log(console.log)   //eslint-disable-line no-console
             .get(requestPath)
             .reply(
                 200,
@@ -113,7 +113,7 @@ module.exports = function () {
                         path = link.substring(linkHost.length);
 
                     nock(linkHost)
-                        .log(console.log)   //eslint-disable-line no-console
+                        //.log(console.log)   //eslint-disable-line no-console
                         .get(path)
                         .reply(
                             200,
