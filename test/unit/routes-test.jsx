@@ -13,8 +13,8 @@ const
                 return <div>wrapper { this.props.children }</div>;
             }
         }),
-        './views/index.jsx': (React) => () => <div>index</div>,
-        './views/not-found.jsx': (React) => () => <div>not-found</div>,
+        './views/index.jsx': (React) => () => <div>index</div>,             //eslint-disable-line no-shadow
+        './views/not-found.jsx': (React) => () => <div>not-found</div>,     //eslint-disable-line no-shadow
         './views/resource-list.jsx': React.createClass({
             render: () => <div>resources</div>
         }),
