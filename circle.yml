@@ -7,10 +7,15 @@ dependencies:
     - npm install -g cucumber
     - npm install -g grunt-cli
 
-#test:
-#  post:
+test:
+  post:
+    - grunt mochacov:junit
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit
+    - find . -type f -regex ".*/logs/junit/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+
 #    - grunt mochacov:coverage
 #    - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
+
 #    - cucumber.js --format=json --tags=~@wip test/integration/features/ --out $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
 
 deployment:

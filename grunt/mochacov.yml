@@ -1,14 +1,13 @@
 options:
-  ui: tdd
   files: test/unit/**/*-test.js*
-  compilers:
-    - jsx:jsx-require-extension
-  require:
-    - test/unit/view/jsDomSetup.js
 
 unit:
   options:
-    reporters: spec
+    reporter: spec
+
+junit:
+  options:
+    reporter: mocha-junit-reporter
 
 coverage:
   files: test/unit/**/*-test.js
