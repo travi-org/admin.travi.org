@@ -11,7 +11,7 @@ test:
   post:
     - grunt mochacov:junit
     - mkdir -p $CIRCLE_TEST_REPORTS/junit
-    - find . -type f -regex ".*/logs/junit/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+    - find . -type f -regex ".*/logs/unit/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
 
 #    - grunt mochacov:coverage
 #    - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
