@@ -1,6 +1,5 @@
-'use strict';
-
-var resourcesController = require('../../../../lib/server/resources/resources-controller'),
+const
+    resourcesController = require('../../../../lib/server/resources/resources-controller'),
     traviApiResources = require('../../../../lib/server/resources/travi-api-resources.js'),
     resourceMapperFactory = require('../../../../lib/server/resources/mappers/resource-mapper-factory'),
 
@@ -47,12 +46,13 @@ suite('resources controller', function () {
 
         assert.calledWith(callback, null, [{
             text: linkName,
-            path: '/' + linkName
+            path: `/${linkName}`
         }]);
     });
 
     test('that resources are requested from the api by type', function () {
-        var callback = sinon.spy(),
+        const
+            callback = sinon.spy(),
             resourceType = any.string(),
             resourceList = any.listOf(any.resource),
             mappedList = [
@@ -70,7 +70,8 @@ suite('resources controller', function () {
     });
 
     test('that resource is requested from the api', function () {
-        var resourceType = any.string(),
+        const
+            resourceType = any.string(),
             resourceId = any.string(),
             callback = sinon.spy(),
             resource = any.resource(),

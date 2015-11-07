@@ -1,6 +1,4 @@
-'use strict';
-
-var router = require('../../../lib/client/router');
+const router = require('../../../lib/client/router');
 
 suite('client-side app', function () {
     teardown(function () {

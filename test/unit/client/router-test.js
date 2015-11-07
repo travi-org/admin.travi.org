@@ -1,6 +1,4 @@
-'use strict';
-
-var director = require('director'),
+const director = require('director'),
     router = require('../../../lib/client/router');
 
 suite('client-side router', function () {
@@ -9,7 +7,7 @@ suite('client-side router', function () {
     });
 
     test('that the router exists', function () {
-        var instance = {
+        const instance = {
             init: sinon.spy()
         };
 

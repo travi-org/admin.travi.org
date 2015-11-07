@@ -2,12 +2,13 @@ const
     React = require('react'),
     ReactDOMServer = require('react-dom/server'),
     reactRouter = require('react-router'),
-    RoutingContext = reactRouter.RoutingContext,
     DataWrapper = require('../../../../lib/server/view/temp-data-wrapper'),
     any = require('../../../helpers/any'),
 
     renderer = require('../../../../lib/server/view/route-renderer'),
     routes = require('../../../../lib/routes.jsx');
+
+const RoutingContext = reactRouter.RoutingContext;
 
 suite('route renderer', function () {
     'use strict';

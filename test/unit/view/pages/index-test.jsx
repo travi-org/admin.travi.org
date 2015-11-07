@@ -3,8 +3,9 @@ const
     cheerio = require('cheerio'),
     reactDom = require('react-dom/server'),
 
-    createIndex = require('../../../../lib/views/index.jsx'),
-    Index = createIndex(React);
+    createIndex = require('../../../../lib/views/index.jsx');
+
+const Index = createIndex(React);
 
 require('setup-referee-sinon/globals');
 

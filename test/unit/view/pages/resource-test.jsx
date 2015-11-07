@@ -8,17 +8,16 @@ const
     DataWrapper = require('../../../../lib/server/view/temp-data-wrapper'),
     LayoutStub = require('../../../helpers/layoutStub.jsx');
 
-var Resource = proxyquire('../../../../lib/views/resource.jsx', {'./theme/wrap.jsx': LayoutStub});
+const Resource = proxyquire('../../../../lib/views/resource.jsx', {'./theme/wrap.jsx': LayoutStub});
 
 suite('resource', function () {
-    'use strict';
-
     test('that the resource is displayed', function () {
-        const data = {
-            resource: {id: any.string(), displayName: any.string()}
-        };
+        const
+            data = {
+                resource: {id: any.string(), displayName: any.string()}
+            },
 
-        const $ = cheerio.load(reactDom.renderToStaticMarkup(<DataWrapper data={data} ><Resource /></DataWrapper>));
+            $ = cheerio.load(reactDom.renderToStaticMarkup(<DataWrapper data={data} ><Resource /></DataWrapper>));
 
         assert.equal($('h3').text(), data.resource.displayName);
     });

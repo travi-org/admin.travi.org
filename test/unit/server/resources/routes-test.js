@@ -1,11 +1,11 @@
-'use strict';
-
 const
     any = require('../../../helpers/any'),
     resources = require('../../../../lib/server/resources/routes'),
     resourcesController = require('../../../../lib/server/resources/resources-controller');
 
 suite('landing config', function () {
+    'use strict';
+
     let sandbox;
 
     setup(function () {
@@ -31,9 +31,7 @@ suite('landing config', function () {
             resourceType = any.string(),
             server = {
                 route: sinon.stub().yieldsTo('handler', {
-                    params: {
-                        resourceType: resourceType
-                    }
+                    params: {resourceType}
                 }, reply)
             },
             resourceList = any.listOf(any.simpleObject);
@@ -47,7 +45,7 @@ suite('landing config', function () {
             path: '/{resourceType}'
         }));
         assert.calledWith(reply, {
-            resourceType: resourceType,
+            resourceType,
             resources: resourceList
         });
     });
@@ -59,9 +57,7 @@ suite('landing config', function () {
             resourceType = any.string(),
             server = {
                 route: sinon.stub().yieldsTo('handler', {
-                    params: {
-                        resourceType: resourceType
-                    }
+                    params: {resourceType}
                 }, reply)
             },
             resource = any.simpleObject();
@@ -74,9 +70,6 @@ suite('landing config', function () {
             method: 'GET',
             path: '/{resourceType}/{id}'
         }));
-        assert.calledWith(reply, {
-            resourceType: resourceType,
-            resource: resource
-        });
+        assert.calledWith(reply, {resourceType, resource});
     });
 });

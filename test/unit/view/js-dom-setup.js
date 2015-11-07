@@ -1,9 +1,7 @@
-'use strict';
-
-var jsdom = require('jsdom');
+const jsdom = require('jsdom');
 
 function setupDom() {
-    var baseMarkup = '<!DOCTYPE html>',
+    const baseMarkup = '<!DOCTYPE html>',
         window = jsdom.jsdom(baseMarkup).defaultView;
 
     global.window = window;

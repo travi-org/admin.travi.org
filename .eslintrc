@@ -6,6 +6,9 @@
     quotes:
       - 2
       - single
+    func-style:
+      - 2
+      - declaration
 
   env:
     node: true

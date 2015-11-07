@@ -1,5 +1,3 @@
-'use strict';
-
 const assets = require('../../../../lib/server/view/static-assets');
 
 suite('static assets', function () {
@@ -14,7 +12,7 @@ suite('static assets', function () {
             next = sinon.spy(),
             route = sinon.spy();
 
-        assets.register({route: route}, null, next);
+        assets.register({route}, null, next);
 
         assert.calledOnce(next);
         assert.calledWith(route, {

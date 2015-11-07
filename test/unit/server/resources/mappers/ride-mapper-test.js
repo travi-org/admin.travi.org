@@ -1,12 +1,10 @@
-'use strict';
-
-var mapper = require('../../../../../lib/server/resources/mappers/ride-mapper'),
-
+const
+    mapper = require('../../../../../lib/server/resources/mappers/ride-mapper'),
     any = require('../../../../helpers/any-for-admin');
 
 suite('ride mapper', function () {
     test('that ride resources mapped to view list', function () {
-        var ride = any.resources.ride();
+        const ride = any.resources.ride();
 
         assert.equals(
             [{
@@ -19,7 +17,7 @@ suite('ride mapper', function () {
     });
 
     test('that ride mapped to view', function () {
-        var ride = any.resources.ride();
+        const ride = any.resources.ride();
 
         assert.equals(
             {
@@ -32,13 +30,13 @@ suite('ride mapper', function () {
     });
 
     test('that self link defined when defined in api', function () {
-        var ride = any.resources.ride();
+        const ride = any.resources.ride();
         ride._links.self = any.url();
 
         assert.equals(
             {
                 'self': {
-                    href: '/rides/' + ride.id
+                    href: `/rides/${ride.id}`
                 }
             },
             mapper.mapToView(ride).links

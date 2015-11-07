@@ -1,6 +1,4 @@
-'use strict';
-
-var mapper = require('../../../../../lib/server/resources/mappers/default-mapper');
+const mapper = require('../../../../../lib/server/resources/mappers/default-mapper');
 
 suite('default mapper', function () {
     test('that the expected methods are exposed', function () {
@@ -8,7 +6,8 @@ suite('default mapper', function () {
     });
 
     test('that the original list is returned untouched', function () {
-        var list = [{foo: 'bar'}],
+        const
+            list = [{foo: 'bar'}],
 
             viewList = mapper.mapToViewList(list),
 
@@ -19,7 +18,8 @@ suite('default mapper', function () {
     });
 
     test('that the original resource is returned untouched', function () {
-        var resource = {foo: 'bar'},
+        const
+            resource = {foo: 'bar'},
 
             view = mapper.mapToView(resource);
 

@@ -1,5 +1,3 @@
-'use strict';
-
 const
     any = require('../../../helpers/any'),
 
@@ -11,6 +9,8 @@ const
     PrimaryNav = require('../../../../lib/views/theme/primaryNav.jsx');
 
 suite('primary navigation', function () {
+    'use strict';
+
     let node;
 
     beforeEach(function () {
@@ -30,14 +30,15 @@ suite('primary navigation', function () {
         });
 
         dom.render(<PrimaryNav primaryNav={primaryNav} />, node, function () {
-            var renderedDOMNode = node.childNodes[0];
+            const renderedDOMNode = node.childNodes[0];
 
             assert.equal(renderedDOMNode.tagName, 'NAV');
 
             const links = node.querySelectorAll('li');
             assert.equal(links.length, primaryNav.length);
             _.each(links, function (item, index) {
-                var listItem = dom.findDOMNode(item),
+                const
+                    listItem = dom.findDOMNode(item),
                     type = primaryNav[index],
                     link = listItem.childNodes[0];
 

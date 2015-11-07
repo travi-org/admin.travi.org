@@ -1,3 +1,7 @@
+# 0 - turn the rule off
+# 1 - turn the rule on as a warning (doesn't affect exit code)
+# 2 - turn the rule on as an error (exit code is 1 when triggered)
+
 ---
   env:
     mocha: true
@@ -9,6 +13,13 @@
     document: false
 
   rules:
+    max-nested-callbacks:
+      - 2
+      - 4
+    max-len:
+      - 2
+      - 120
+      - 4
     quotes:
       - 2
       - single
@@ -21,6 +32,9 @@
     one-var:
       - 2
       - always
+    func-style:
+      - 2
+      - declaration
     prefer-arrow-callback: 0
 
   extends:

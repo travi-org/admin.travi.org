@@ -1,15 +1,16 @@
 const
-    any = require('../../../helpers/any'),
-
-    Negotiator = sinon.stub(),
     proxyquire = require('proxyquire'),
-    _ = require('lodash'),
+    routeRenderer = require('../../../../lib/server/view/route-renderer.jsx'),
+    resourcesController = require('../../../../lib/server/resources/resources-controller'),
     history = require('history'),
+    _ = require('lodash'),
+    any = require('../../../helpers/any');
+
+const
+    Negotiator = sinon.stub(),
     handler = proxyquire('../../../../lib/server/view/rendering-handler', {
         'negotiator': Negotiator
-    }),
-    routeRenderer = require('../../../../lib/server/view/route-renderer.jsx'),
-    resourcesController = require('../../../../lib/server/resources/resources-controller');
+    });
 
 suite('rendering handler', function () {
     'use strict';
@@ -33,9 +34,7 @@ suite('rendering handler', function () {
         request = any.simpleObject();
         request.url = any.url();
         mediaType = sinon.stub();
-        Negotiator.withArgs(request).returns({
-            mediaType: mediaType
-        });
+        Negotiator.withArgs(request).returns({mediaType});
     });
 
     teardown(function () {
@@ -78,13 +77,11 @@ suite('rendering handler', function () {
 
         assert.calledWith(routeRenderer.routeTo, location, _.extend({}, request.response.source, {
             primaryNav: _.map(primaryNav, function (item, index) {
-                return _.extend({}, item, {active: index === 2})
+                return _.extend({}, item, {active: index === 2});
             })
         }));
         routeRenderer.routeTo.yield(null, renderedContent);
 
-        assert.calledWith(reply.view, 'layout/layout', {
-            renderedContent: renderedContent
-        });
+        assert.calledWith(reply.view, 'layout/layout', {renderedContent});
     });
 });

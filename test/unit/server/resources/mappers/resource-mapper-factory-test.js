@@ -1,6 +1,4 @@
-'use strict';
-
-var mapperFactory = require('../../../../../lib/server/resources/mappers/resource-mapper-factory');
+const mapperFactory = require('../../../../../lib/server/resources/mappers/resource-mapper-factory');
 
 suite('resource mapper factory', function () {
     test('that the default mapper is returned when a specific mapper is not available', function () {

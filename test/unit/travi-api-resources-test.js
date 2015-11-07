@@ -1,13 +1,14 @@
-'use strict';
-
-var traviApiResources = require('../../lib/server/resources/travi-api-resources.js'),
+const
+    traviApiResources = require('../../lib/server/resources/travi-api-resources.js'),
     traverson = require('traverson'),
     any = require('../helpers/any-for-admin');
 
 require('setup-referee-sinon/globals');
 
 suite('travi-api resource interactions', function () {
-    var stubForGet;
+    'use strict';
+
+    let stubForGet;
 
     setup(function () {
         stubForGet = sinon.stub();
@@ -19,7 +20,8 @@ suite('travi-api resource interactions', function () {
     });
 
     test('that links are requested from the api catalog', function () {
-        var callback = sinon.spy(),
+        const
+            callback = sinon.spy(),
             links = {
                 'self': any.url(),
                 'foo': any.url()
@@ -35,7 +37,8 @@ suite('travi-api resource interactions', function () {
     });
 
     test('that list of resources requested by following link from api catalog', function () {
-        var resourceType = any.string(),
+        const
+            resourceType = any.string(),
             resources = any.listOf(any.resource),
             responseFromApi = {
                 _embedded: {}
@@ -56,7 +59,8 @@ suite('travi-api resource interactions', function () {
     });
 
     test('that a single resource is mapped to a list', function () {
-        var resourceType = any.string(),
+        const
+            resourceType = any.string(),
             responseFromApi = {
                 _embedded: {}
             },
@@ -77,12 +81,13 @@ suite('travi-api resource interactions', function () {
     });
 
     test('that specific resource requested by following links', function () {
-        var resourceType = any.string(),
+        const
+            resourceType = any.string(),
             resourceId = any.int(),
             resource = any.resource(),
             callback = sinon.spy();
         traverson.from.withArgs('https://api.travi.org/').returns({
-            follow: sinon.stub().withArgs(resourceType, resourceType + '[id:' + resourceId + ']').returns({
+            follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
                 getResource: stubForGet.yields(null, resource)
             })
         });
