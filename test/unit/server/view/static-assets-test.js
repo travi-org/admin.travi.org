@@ -1,3 +1,5 @@
+'use strict';
+
 const assets = require('../../../../lib/server/view/static-assets');
 
 suite('static assets', function () {

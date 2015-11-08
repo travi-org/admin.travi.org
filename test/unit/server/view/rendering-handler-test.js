@@ -1,3 +1,5 @@
+'use strict';
+
 const
     proxyquire = require('proxyquire'),
     routeRenderer = require('../../../../lib/server/view/route-renderer.jsx'),
@@ -7,8 +9,6 @@ const
     any = require('../../../helpers/any');
 
 suite('rendering handler', function () {
-    'use strict';
-
     const
         Negotiator = sinon.stub(),
         handler = proxyquire('../../../../lib/server/view/rendering-handler', {

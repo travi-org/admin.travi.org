@@ -1,3 +1,5 @@
+'use strict';
+
 const director = require('director'),
     router = require('../../../lib/client/router');
 

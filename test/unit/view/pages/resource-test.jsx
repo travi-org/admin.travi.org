@@ -1,3 +1,5 @@
+'use strict';
+
 const
     React = require('react'),
     reactDom = require('react-dom/server'),

@@ -1,3 +1,5 @@
+'use strict';
+
 const
     mapper = require('../../../../../lib/server/resources/mappers/ride-mapper'),
     any = require('../../../../helpers/any-for-admin');

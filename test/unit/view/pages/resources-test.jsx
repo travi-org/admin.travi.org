@@ -1,3 +1,5 @@
+'use strict';
+
 const
     React = require('react'),
     reactDom = require('react-dom/server'),
@@ -9,8 +11,6 @@ const
     LayoutStub = require('../../../helpers/layoutStub.jsx');
 
 suite('resource list', function () {
-    'use strict';
-
     const ResourceList = proxyquire('../../../../lib/views/resource-list.jsx', {'./theme/wrap.jsx': LayoutStub});
 
     test('that a message is given when no resources are available', function () {

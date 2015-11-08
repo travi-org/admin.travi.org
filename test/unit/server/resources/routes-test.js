@@ -1,11 +1,11 @@
+'use strict';
+
 const
     any = require('../../../helpers/any'),
     resources = require('../../../../lib/server/resources/routes'),
     resourcesController = require('../../../../lib/server/resources/resources-controller');
 
 suite('landing config', function () {
-    'use strict';
-
     let sandbox;
 
     setup(function () {

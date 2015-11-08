@@ -1,3 +1,5 @@
+'use strict';
+
 const
     traviApiResources = require('../../lib/server/resources/travi-api-resources.js'),
     traverson = require('traverson'),
@@ -6,8 +8,6 @@ const
 require('setup-referee-sinon/globals');
 
 suite('travi-api resource interactions', function () {
-    'use strict';
-
     let stubForGet;
 
     setup(function () {

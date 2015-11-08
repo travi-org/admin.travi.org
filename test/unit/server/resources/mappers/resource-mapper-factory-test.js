@@ -1,3 +1,5 @@
+'use strict';
+
 const mapperFactory = require('../../../../../lib/server/resources/mappers/resource-mapper-factory');
 
 suite('resource mapper factory', function () {

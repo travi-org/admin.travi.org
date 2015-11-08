@@ -1,3 +1,5 @@
+'use strict';
+
 const
     resourcesController = require('../../../../lib/server/resources/resources-controller'),
     traviApiResources = require('../../../../lib/server/resources/travi-api-resources.js'),

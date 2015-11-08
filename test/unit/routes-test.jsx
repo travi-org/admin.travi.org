@@ -1,3 +1,5 @@
+'use strict';
+
 const
     React = require('react'), //eslint-disable-line no-unused-vars
     dom = require('react-dom'),
@@ -6,8 +8,6 @@ const
     proxyquire = require('proxyquire');
 
 suite('routes', function () {
-    'use strict';
-
     const
         Router = reactRouter.Router,
         routes = proxyquire('../../lib/routes.jsx', {

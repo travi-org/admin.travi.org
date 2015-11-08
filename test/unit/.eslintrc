@@ -12,6 +12,9 @@
     refute: false
     document: false
 
+  ecmaFeatures:
+    modules: false
+
   extends:
     - defaults/configurations/walmart/es6
 

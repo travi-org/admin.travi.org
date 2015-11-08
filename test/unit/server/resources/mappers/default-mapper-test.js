@@ -1,3 +1,5 @@
+'use strict';
+
 const mapper = require('../../../../../lib/server/resources/mappers/default-mapper');
 
 suite('default mapper', function () {

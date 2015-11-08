@@ -1,3 +1,5 @@
+'use strict';
+
 const
     React = require('react'),   //eslint-disable-line no-unused-vars
     dom = require('react-dom'),
@@ -8,8 +10,6 @@ const
     PrimaryNav = require('../../../helpers/primaryNavStub.jsx');
 
 suite('wrapper view', function () {
-    'use strict';
-
     const Wrap = proxyquire('../../../../lib/views/theme/wrap.jsx', {'./primaryNav.jsx': PrimaryNav});
     let node;
 

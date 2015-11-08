@@ -1,3 +1,5 @@
+'use strict';
+
 const
     mapper = require('../../../../../lib/server/resources/mappers/user-mapper'),
     any = require('../../../../helpers/any-for-admin');

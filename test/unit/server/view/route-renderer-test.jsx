@@ -1,3 +1,5 @@
+'use strict';
+
 const
     React = require('react'),
     ReactDOMServer = require('react-dom/server'),
@@ -9,8 +11,6 @@ const
     routes = require('../../../../lib/routes.jsx');
 
 suite('route renderer', function () {
-    'use strict';
-
     const RoutingContext = reactRouter.RoutingContext;
     let sandbox;
 

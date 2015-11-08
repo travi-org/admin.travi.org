@@ -1,3 +1,5 @@
+'use strict';
+
 const
     any = require('../../../helpers/any'),
 
@@ -9,8 +11,6 @@ const
     PrimaryNav = require('../../../../lib/views/theme/primaryNav.jsx');
 
 suite('primary navigation', function () {
-    'use strict';
-
     let node;
 
     beforeEach(function () {
