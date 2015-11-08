@@ -5,7 +5,7 @@ const
     cheerio = require('cheerio'),
     reactDom = require('react-dom/server'),
 
-    createNotFound = require('../../../../lib/views/not-found.jsx');
+    createNotFound = require('../../../../../lib/shared/views/not-found.jsx');
 
 require('setup-referee-sinon/globals');
 

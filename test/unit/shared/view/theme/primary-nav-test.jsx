@@ -1,15 +1,15 @@
 'use strict';
 
 const
-    any = require('../../../helpers/any'),
+    any = require('../../../../helpers/any'),
 
     React = require('react'),   //eslint-disable-line no-unused-vars
     dom = require('react-dom/server'),
     cheerio = require('cheerio'),
     assert = require('chai').assert,
 
-    HistoryWrapper = require('../../../helpers/history-wrapper'),
-    PrimaryNav = require('../../../../lib/views/theme/primary-nav.jsx');
+    HistoryWrapper = require('../../../../helpers/history-wrapper'),
+    PrimaryNav = require('../../../../../lib/shared/views/theme/primary-nav.jsx');
 
 suite('primary navigation', function () {
     test('that the resource types are listed as links', function () {

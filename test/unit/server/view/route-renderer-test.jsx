@@ -8,7 +8,7 @@ const
     any = require('../../../helpers/any'),
 
     renderer = require('../../../../lib/server/view/route-renderer'),
-    routes = require('../../../../lib/routes.jsx');
+    routes = require('../../../../lib/shared/routes.jsx');
 
 suite('route renderer', function () {
     const RoutingContext = reactRouter.RoutingContext;

@@ -5,13 +5,13 @@ const
     reactDom = require('react-dom/server'),
     cheerio = require('cheerio'),
     assert = require('chai').assert,
-    any = require('../../../helpers/any-for-admin'),
+    any = require('../../../../helpers/any-for-admin'),
     proxyquire = require('proxyquire'),
-    DataWrapper = require('../../../../lib/server/view/temp-data-wrapper'),
-    LayoutStub = require('../../../helpers/layoutStub.jsx');
+    DataWrapper = require('../../../../../lib/server/view/temp-data-wrapper'),
+    LayoutStub = require('../../../../helpers/layoutStub.jsx');
 
 suite('resource', function () {
-    const Resource = proxyquire('../../../../lib/views/resource.jsx', {'./theme/wrap.jsx': LayoutStub});
+    const Resource = proxyquire('../../../../../lib/shared/views/resource.jsx', {'./theme/wrap.jsx': LayoutStub});
 
     test('that the resource is displayed', function () {
         const

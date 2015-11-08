@@ -5,12 +5,12 @@ const
     dom = require('react-dom'),
     assert = require('chai').assert,
     proxyquire = require('proxyquire'),
-    any = require('../../../helpers/any'),
-    DataWrapper = require('../../../../lib/server/view/temp-data-wrapper'),
-    PrimaryNav = require('../../../helpers/primaryNavStub.jsx');
+    any = require('../../../../helpers/any'),
+    DataWrapper = require('../../../../../lib/server/view/temp-data-wrapper'),
+    PrimaryNav = require('../../../../helpers/primaryNavStub.jsx');
 
 suite('wrapper view', function () {
-    const Wrap = proxyquire('../../../../lib/views/theme/wrap.jsx', {'./primary-nav.jsx': PrimaryNav});
+    const Wrap = proxyquire('../../../../../lib/shared/views/theme/wrap.jsx', {'./primary-nav.jsx': PrimaryNav});
     let node;
 
     beforeEach(function () {

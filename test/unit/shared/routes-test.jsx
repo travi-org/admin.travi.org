@@ -5,13 +5,13 @@ const
     dom = require('react-dom'),
     reactRouter = require('react-router'),
     createHistory = require('history/lib/createMemoryHistory'),
-    DataWrapper = require('../../lib/server/view/temp-data-wrapper'),
+    DataWrapper = require('../../../lib/server/view/temp-data-wrapper'),
     proxyquire = require('proxyquire');
 
 suite('routes', function () {
     const
         Router = reactRouter.Router,
-        routes = proxyquire('../../lib/routes.jsx', {
+        routes = proxyquire('../../../lib/shared/routes.jsx', {
             './views/theme/wrap.jsx': React.createClass({
                 render() {
                     return <div>wrapper { this.props.children }</div>;
