@@ -9,24 +9,3 @@ app:
     nomen: true
   options:
     errorsOnly: true
-
-test:
-  src:
-    - test/**/*.js
-    - "!test/integration/features/step_definitions/resources.js"
-    - "!test/unit/server/**/*.js"
-    - "!test/helpers/any.js"
-  directives:
-    node: true
-    regexp: true
-    unparam: true
-    nomen: true
-    predef:
-      - suite
-      - setup
-      - teardown
-      - test
-      - assert
-      - sinon
-  options:
-    errorsOnly: true
