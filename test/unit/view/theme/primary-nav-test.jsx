@@ -9,24 +9,8 @@ const
     cheerio = require('cheerio'),
     assert = require('chai').assert,
 
+    HistoryWrapper = require('../../../helpers/history-wrapper'),
     PrimaryNav = require('../../../../lib/views/theme/primary-nav.jsx');
-
-class HistoryWrapper extends React.Component {
-    getChildContext() {
-
-        return {
-            history: history.createMemoryHistory()
-        };
-    }
-
-    render() {
-
-        return this.props.children;
-    }
-}
-HistoryWrapper.childContextTypes = {
-    history: React.PropTypes.object
-};
 
 suite('primary navigation', function () {
     test('that the resource types are listed as links', function () {
