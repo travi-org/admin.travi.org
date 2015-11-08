@@ -1,6 +1,6 @@
 var React = require('react'),
 
-    PrimaryNav = require('./primaryNav.jsx');
+    PrimaryNav = require('./primary-nav.jsx');
 
 module.exports = React.createClass({
     contextTypes: {

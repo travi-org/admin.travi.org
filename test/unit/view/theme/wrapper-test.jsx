@@ -10,7 +10,7 @@ const
     PrimaryNav = require('../../../helpers/primaryNavStub.jsx');
 
 suite('wrapper view', function () {
-    const Wrap = proxyquire('../../../../lib/views/theme/wrap.jsx', {'./primaryNav.jsx': PrimaryNav});
+    const Wrap = proxyquire('../../../../lib/views/theme/wrap.jsx', {'./primary-nav.jsx': PrimaryNav});
     let node;
 
     beforeEach(function () {

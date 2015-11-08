@@ -8,7 +8,7 @@ const
     assert = require('chai').assert,
     _ = require('lodash'),
 
-    PrimaryNav = require('../../../../lib/views/theme/primaryNav.jsx');
+    PrimaryNav = require('../../../../lib/views/theme/primary-nav.jsx');
 
 suite('primary navigation', function () {
     let node;
