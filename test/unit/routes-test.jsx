@@ -5,6 +5,7 @@ const
     dom = require('react-dom'),
     reactRouter = require('react-router'),
     createHistory = require('history/lib/createMemoryHistory'),
+    DataWrapper = require('../../lib/server/view/temp-data-wrapper'),
     proxyquire = require('proxyquire');
 
 suite('routes', function () {
@@ -37,9 +38,11 @@ suite('routes', function () {
 
     test('that the root route is defined', function () {
         dom.render(
-            <Router history={createHistory('/')}>
-                { routes }
-            </Router>, node, function () {
+            <DataWrapper data={{}} >
+                <Router history={createHistory('/')}>
+                    { routes }
+                </Router>
+            </DataWrapper>, node, function () {
                 assert.equals(node.textContent, 'wrapper index');
             }
         );
@@ -47,9 +50,11 @@ suite('routes', function () {
 
     test('that the not-found route is defined', function () {
         dom.render(
-            <Router history={createHistory('/foo')}>
-                { routes }
-            </Router>, node, function () {
+            <DataWrapper data={{}} >
+                <Router history={createHistory('/foo')}>
+                    { routes }
+                </Router>
+            </DataWrapper>, node, function () {
                 assert.equals(node.textContent, 'wrapper not-found');
             }
         );
@@ -57,9 +62,11 @@ suite('routes', function () {
 
     test('that the rides route is defined', function () {
         dom.render(
-            <Router history={createHistory('/rides')}>
-                { routes }
-            </Router>, node, function () {
+            <DataWrapper data={{}} >
+                <Router history={createHistory('/rides')}>
+                    { routes }
+                </Router>
+            </DataWrapper>, node, function () {
                 assert.equals(node.textContent, 'wrapper resources');
             }
         );
@@ -67,9 +74,11 @@ suite('routes', function () {
 
     test('that the ride route is defined', function () {
         dom.render(
-            <Router history={createHistory('/rides/8')}>
-                { routes }
-            </Router>, node, function () {
+            <DataWrapper data={{}} >
+                <Router history={createHistory('/rides/8')}>
+                    { routes }
+                </Router>
+            </DataWrapper>, node, function () {
                 assert.equals(node.textContent, 'wrapper resource');
             }
         );
@@ -77,9 +86,11 @@ suite('routes', function () {
 
     test('that the users route is defined', function () {
         dom.render(
-            <Router history={createHistory('/users')}>
-                { routes }
-            </Router>, node, function () {
+            <DataWrapper data={{}} >
+                <Router history={createHistory('/users')}>
+                    { routes }
+                </Router>
+            </DataWrapper>, node, function () {
                 assert.equals(node.textContent, 'wrapper resources');
             }
         );
@@ -87,9 +98,11 @@ suite('routes', function () {
 
     test('that the user route is defined', function () {
         dom.render(
-            <Router history={createHistory('/users/4')}>
-                { routes }
-            </Router>, node, function () {
+            <DataWrapper data={{}} >
+                <Router history={createHistory('/users/4')}>
+                    { routes }
+                </Router>
+            </DataWrapper>, node, function () {
                 assert.equals(node.textContent, 'wrapper resource');
             }
         );
