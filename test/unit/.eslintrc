@@ -11,32 +11,12 @@
   ecmaFeatures:
     modules: false
 
-  extends:
-    - defaults/configurations/walmart/es6
-
   rules:
     react/jsx-uses-react: 2
-    prefer-arrow-callback: 0
     no-mixed-requires: 2
     max-nested-callbacks:
-      - 2
-      - 4
-    max-len:
-      - 2
-      - 120
-      - 4
-    quotes:
-      - 2
-      - single
-    indent:
       - 2
       - 4
     no-mixed-requires:
       - 1
       - false
-    one-var:
-      - 2
-      - always
-    func-style:
-      - 2
-      - declaration

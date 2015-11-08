@@ -12,11 +12,23 @@
 
   extends:
     - eslint:recommended
+    - defaults/configurations/walmart/es6
 
   rules:
+    prefer-arrow-callback: 0
     quotes:
       - 2
       - single
+    indent:
+      - 2
+      - 4
+    max-len:
+      - 2
+      - 120
+      - 4
+    one-var:
+      - 2
+      - always
     func-style:
       - 2
       - declaration
