@@ -7,13 +7,10 @@ const
     DataWrapper = require('../../../../lib/server/view/temp-data-wrapper'),
     PrimaryNav = require('../../../helpers/primaryNavStub.jsx');
 
-const
-    Wrap = proxyquire('../../../../lib/views/theme/wrap.jsx', {'./primaryNav.jsx': PrimaryNav});
-
-
 suite('wrapper view', function () {
     'use strict';
 
+    const Wrap = proxyquire('../../../../lib/views/theme/wrap.jsx', {'./primaryNav.jsx': PrimaryNav});
     let node;
 
     beforeEach(function () {

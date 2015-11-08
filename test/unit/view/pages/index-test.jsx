@@ -5,11 +5,11 @@ const
 
     createIndex = require('../../../../lib/views/index.jsx');
 
-const Index = createIndex(React);
-
 require('setup-referee-sinon/globals');
 
 suite('index', function () {
+    const Index = createIndex(React);
+
     test('that the proper content is displayed', function () {
         const $ = cheerio.load(reactDom.renderToStaticMarkup(<Index />));
 

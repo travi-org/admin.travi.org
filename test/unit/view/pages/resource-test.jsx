@@ -8,9 +8,9 @@ const
     DataWrapper = require('../../../../lib/server/view/temp-data-wrapper'),
     LayoutStub = require('../../../helpers/layoutStub.jsx');
 
-const Resource = proxyquire('../../../../lib/views/resource.jsx', {'./theme/wrap.jsx': LayoutStub});
-
 suite('resource', function () {
+    const Resource = proxyquire('../../../../lib/views/resource.jsx', {'./theme/wrap.jsx': LayoutStub});
+
     test('that the resource is displayed', function () {
         const
             data = {

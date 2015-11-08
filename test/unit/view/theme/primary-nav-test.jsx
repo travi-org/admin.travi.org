@@ -30,11 +30,12 @@ suite('primary navigation', function () {
         });
 
         dom.render(<PrimaryNav primaryNav={primaryNav} />, node, function () {
+            let links;
             const renderedDOMNode = node.childNodes[0];
 
             assert.equal(renderedDOMNode.tagName, 'NAV');
 
-            const links = node.querySelectorAll('li');
+            links = node.querySelectorAll('li');
             assert.equal(links.length, primaryNav.length);
             _.each(links, function (item, index) {
                 const

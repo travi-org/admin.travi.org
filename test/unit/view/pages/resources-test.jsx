@@ -8,10 +8,10 @@ const
     DataWrapper = require('../../../../lib/server/view/temp-data-wrapper'),
     LayoutStub = require('../../../helpers/layoutStub.jsx');
 
-const ResourceList = proxyquire('../../../../lib/views/resource-list.jsx', {'./theme/wrap.jsx': LayoutStub});
-
 suite('resource list', function () {
     'use strict';
+
+    const ResourceList = proxyquire('../../../../lib/views/resource-list.jsx', {'./theme/wrap.jsx': LayoutStub});
 
     test('that a message is given when no resources are available', function () {
         let $message;

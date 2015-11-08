@@ -8,11 +8,10 @@ const
     renderer = require('../../../../lib/server/view/route-renderer'),
     routes = require('../../../../lib/routes.jsx');
 
-const RoutingContext = reactRouter.RoutingContext;
-
 suite('route renderer', function () {
     'use strict';
 
+    const RoutingContext = reactRouter.RoutingContext;
     let sandbox;
 
     setup(function () {

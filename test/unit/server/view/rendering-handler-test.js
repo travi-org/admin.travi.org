@@ -6,20 +6,22 @@ const
     _ = require('lodash'),
     any = require('../../../helpers/any');
 
-const
-    Negotiator = sinon.stub(),
-    handler = proxyquire('../../../../lib/server/view/rendering-handler', {
-        'negotiator': Negotiator
-    });
-
 suite('rendering handler', function () {
     'use strict';
 
-    const primaryNav = any.listOf(function () {
-        return {
-            text: any.string()
-        };
-    }, {min: 5});
+    const
+        Negotiator = sinon.stub(),
+        handler = proxyquire('../../../../lib/server/view/rendering-handler', {
+            'negotiator': Negotiator
+        }),
+        primaryNav = any.listOf(
+            function () {
+                return {
+                    text: any.string()
+                };
+            },
+            {min: 5}
+        );
 
     let sandbox,
         mediaType,

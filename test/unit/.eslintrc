@@ -12,9 +12,13 @@
     refute: false
     document: false
 
+  extends:
+    - defaults/configurations/walmart/es6
+
   rules:
     react/jsx-uses-react: 2
     prefer-arrow-callback: 0
+    no-mixed-requires: 2
     max-nested-callbacks:
       - 2
       - 4
@@ -37,6 +41,3 @@
     func-style:
       - 2
       - declaration
-
-  extends:
-    - defaults/configurations/walmart/es6

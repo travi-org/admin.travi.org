@@ -5,27 +5,26 @@ const
     createHistory = require('history/lib/createMemoryHistory'),
     proxyquire = require('proxyquire');
 
-const
-    Router = reactRouter.Router,
-    routes = proxyquire('../../lib/routes.jsx', {
-        './views/theme/wrap.jsx': React.createClass({
-            render() {
-                return <div>wrapper { this.props.children }</div>;
-            }
-        }),
-        './views/index.jsx': (React) => () => <div>index</div>,             //eslint-disable-line no-shadow
-        './views/not-found.jsx': (React) => () => <div>not-found</div>,     //eslint-disable-line no-shadow
-        './views/resource-list.jsx': React.createClass({
-            render: () => <div>resources</div>
-        }),
-        './views/resource.jsx': React.createClass({
-            render: () => <div>resource</div>
-        })
-    });
-
 suite('routes', function () {
     'use strict';
 
+    const
+        Router = reactRouter.Router,
+        routes = proxyquire('../../lib/routes.jsx', {
+            './views/theme/wrap.jsx': React.createClass({
+                render() {
+                    return <div>wrapper { this.props.children }</div>;
+                }
+            }),
+            './views/index.jsx': (React) => () => <div>index</div>,             //eslint-disable-line no-shadow
+            './views/not-found.jsx': (React) => () => <div>not-found</div>,     //eslint-disable-line no-shadow
+            './views/resource-list.jsx': React.createClass({
+                render: () => <div>resources</div>
+            }),
+            './views/resource.jsx': React.createClass({
+                render: () => <div>resource</div>
+            })
+        });
     let node;
 
     beforeEach(function () {

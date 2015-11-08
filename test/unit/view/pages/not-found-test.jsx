@@ -5,11 +5,11 @@ const
 
     createNotFound = require('../../../../lib/views/not-found.jsx');
 
-const NotFound = createNotFound(React);
-
 require('setup-referee-sinon/globals');
 
 suite('not found', function () {
+    const NotFound = createNotFound(React);
+
     test('that the proper content is displayed', function () {
         const $ = cheerio.load(reactDom.renderToStaticMarkup(<NotFound />));
 
