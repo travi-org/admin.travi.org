@@ -1,4 +1,7 @@
-var React = require('react');
+var React = require('react'),
+    router = require('react-router'),
+    Link = router.Link,
+    IndexLink = router.IndexLink;
 
 module.exports = React.createClass({
     render: function () {
@@ -7,7 +10,7 @@ module.exports = React.createClass({
         let list;
 
         function renderNavLink(type) {
-            return <li key={type.text} className={ type.active ? 'active' : '' }><a href={type.path}>{type.text}</a></li>;
+            return <li key={type.text} className={ type.active ? 'active' : '' }><Link to={type.path}>{type.text}</Link></li>;
         }
 
         if (this.props.primaryNav) {
@@ -29,7 +32,7 @@ module.exports = React.createClass({
                             <span className="icon-bar"></span>
                         </button>
 
-                        <h1><a className="navbar-brand" href="/">Travi</a></h1>
+                        <h1><IndexLink className="navbar-brand" to="/">Travi</IndexLink></h1>
                     </div>
 
                     <div className="collapse navbar-collapse" id="navbar-items">
