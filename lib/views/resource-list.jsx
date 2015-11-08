@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react'),
+    Link = require('react-router').Link;
 
 module.exports = React.createClass({
     contextTypes: {
@@ -19,7 +20,7 @@ module.exports = React.createClass({
             }
 
             if (resource.links.self) {
-                link = <a href={resource.links.self.href}>{resource.displayName}</a>;
+                link = <Link to={resource.links.self.href}>{resource.displayName}</Link>;
             } else {
                 link = resource.displayName;
             }

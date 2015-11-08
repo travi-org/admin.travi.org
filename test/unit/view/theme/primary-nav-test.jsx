@@ -5,7 +5,6 @@ const
 
     React = require('react'),   //eslint-disable-line no-unused-vars
     dom = require('react-dom/server'),
-    history = require('history'),
     cheerio = require('cheerio'),
     assert = require('chai').assert,
 

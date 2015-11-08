@@ -7,6 +7,7 @@ const
     assert = require('chai').assert,
     any = require('../../../helpers/any-for-admin'),
     proxyquire = require('proxyquire'),
+    HistoryWrapper = require('../../../helpers/history-wrapper'),
     DataWrapper = require('../../../../lib/server/view/temp-data-wrapper'),
     LayoutStub = require('../../../helpers/layoutStub.jsx');
 
@@ -83,7 +84,13 @@ suite('resource list', function () {
                 ]
             },
 
-            $ = cheerio.load(reactDom.renderToStaticMarkup(<DataWrapper data={data} ><ResourceList /></DataWrapper>));
+            $ = cheerio.load(reactDom.renderToStaticMarkup(
+                <HistoryWrapper>
+                    <DataWrapper data={data} >
+                        <ResourceList />
+                    </DataWrapper>
+                </HistoryWrapper>
+            ));
 
         assert.equal($('li > a').attr('href'), selfLink);
     });
