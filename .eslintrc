@@ -16,6 +16,7 @@
 
   rules:
     prefer-arrow-callback: 0
+    prefer-template: 2
     quotes:
       - 2
       - single
@@ -32,3 +33,6 @@
     func-style:
       - 2
       - declaration
+    yoda:
+      - 2
+      - always
