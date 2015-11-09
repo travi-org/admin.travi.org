@@ -88,7 +88,7 @@
     "negotiator": "0.6.0",
     "react": "0.14.2",
     "react-dom": "^0.14.2",
-    "react-router": "1.0.0-rc4",
+    "react-router": "1.0.0",
     "stampit": "2.1.1",
     "traverson": "3.0.0",
     "traverson-hal": "4.0.0",
