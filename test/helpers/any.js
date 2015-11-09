@@ -13,31 +13,31 @@ function int(max) {
 }
 
 function string(length) {
-    var chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
-        randomString = '',
+    const CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let randomString = '',
         randomNumber,
         i;
 
     length = length || 8;
     for (i = 0; i < length; i += 1) {
-        randomNumber = int(chars.length);
-        randomString += chars.substring(randomNumber, randomNumber + 1);
+        randomNumber = int(CHARS.length);
+        randomString += CHARS.substring(randomNumber, randomNumber + 1);
     }
 
     return randomString;
 }
 function protocol() {
-    var protocols = ['http', 'https'];
+    const PROTOCOLS = ['http', 'https'];
 
-    return protocols[int(protocols.length)] + '://';
+    return `${PROTOCOLS[int(PROTOCOLS.length)]}://`;
 }
 
 function host() {
-    return (string() + '.' + string(20) + '.' + string(3)).toLowerCase();
+    return `${string()}.${string(20)}.${string(3)}`.toLowerCase();
 }
 
 function url(root) {
-    var path = '/' + string();
+    const path = `/${string()}`;
 
     if (root) {
         return root + path;
@@ -53,9 +53,9 @@ function simpleObject() {
 }
 
 function listOf(constructor, options) {
-    var list = [],
-        listSize = int(),
-        i;
+    let i,
+        listSize = int();
+    const list = [];
 
     if (options && options.min) {
         listSize += options.min;
@@ -69,9 +69,9 @@ function listOf(constructor, options) {
 }
 
 module.exports = {
-    string: string,
-    int: int,
-    url: url,
-    simpleObject: simpleObject,
-    listOf: listOf
+    string,
+    int,
+    url,
+    simpleObject,
+    listOf
 };

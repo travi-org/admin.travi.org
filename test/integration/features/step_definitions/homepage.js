@@ -1,4 +1,7 @@
-var path = require('path'),
+'use strict';
+
+const
+    path = require('path'),
     loadApi = require(path.join(__dirname, '../../../../lib/server/app.js')),
     assert = require('referee').assert,
     nock = require('nock'),
@@ -7,19 +10,18 @@ var path = require('path'),
 require('setup-referee-sinon/globals');
 
 module.exports = function () {
-    'use strict';
-
-    var availableResourceTypes,
+    let availableResourceTypes,
         serverResponse;
 
-    function buildLinksFrom(availableResourceTypes) {
-        var links = {
+    function buildLinksFrom(availableTypes) {
+        const links = {
             'self': any.url()
         };
 
-        availableResourceTypes.forEach(function (type) {
+        availableTypes.forEach(function (type) {
             links[type] = any.url();
         });
+
         return links;
     }
 
@@ -76,7 +78,7 @@ module.exports = function () {
             primaryNav: _.map(availableResourceTypes, function (type) {
                 return {
                     text: type,
-                    path: '/' + type
+                    path: `/${type}`
                 };
             })
         }));

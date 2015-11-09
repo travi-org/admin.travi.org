@@ -6,16 +6,11 @@ const
     cheerio = require('cheerio'),
     assert = require('chai').assert,
     any = require('../../../../helpers/any-for-admin'),
-    proxyquire = require('proxyquire'),
     HistoryWrapper = require('../../../../helpers/history-wrapper'),
     DataWrapper = require('../../../../../lib/server/view/temp-data-wrapper'),
-    LayoutStub = require('../../../../helpers/layoutStub.jsx');
+    ResourceList = require('../../../../../lib/shared/views/resource-list.jsx');
 
 suite('resource list', function () {
-    const ResourceList = proxyquire('../../../../../lib/shared/views/resource-list.jsx', {
-        './theme/wrap.jsx': LayoutStub
-    });
-
     test('that a message is given when no resources are available', function () {
         let $message;
         const

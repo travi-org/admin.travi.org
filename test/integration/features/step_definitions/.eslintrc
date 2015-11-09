@@ -4,3 +4,11 @@
 
   rules:
     cucumber/async-then: 2
+    new-cap:
+      - 2
+      - capIsNewExceptions:
+        - Before
+        - After
+        - Given
+        - When
+        - Then

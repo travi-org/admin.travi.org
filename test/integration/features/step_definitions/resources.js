@@ -1,4 +1,7 @@
-var path = require('path'),
+'use strict';
+
+const
+    path = require('path'),
     loadApi = require(path.join(__dirname, '../../../../lib/server/app.js')),
 
     nock = require('nock'),
@@ -8,24 +11,22 @@ var path = require('path'),
 require('setup-referee-sinon/globals');
 
 module.exports = function () {
-    'use strict';
+    const HOST = 'https://api.travi.org';
 
-    var HOST = 'https://api.travi.org',
-
+    let resources = {},
         existingResourceId,
-        serverResponse,
-        resources = {};
+        serverResponse;
 
     function getSingularForm(resourceType) {
         return resourceType.substring(0, resourceType.length - 1);
     }
 
     function buildHalLink(href) {
-        return { href: href};
+        return {href};
     }
 
     function buildLinksIncluding(resourceType, resourceLink) {
-        var links = {
+        const links = {
             'self': buildHalLink(any.url(HOST))
         };
 
@@ -37,7 +38,7 @@ module.exports = function () {
     }
 
     function buildListOf(resource) {
-        var resourceList,
+        let resourceList,
             existingResource;
 
         resourceList = any.listOf(resource);
@@ -54,7 +55,7 @@ module.exports = function () {
     }
 
     function prepareListForResponse(resourceType) {
-        var resourceList;
+        let resourceList;
 
         if (any.resources.hasOwnProperty(getSingularForm(resourceType))) {
             resourceList = buildListOf(any.resources[getSingularForm(resourceType)]);
@@ -76,7 +77,8 @@ module.exports = function () {
     }
 
     function setupExpectedApiResponsesFor(resourceType) {
-        var requestPath = '/' + resourceType,
+        const
+            requestPath = `/${resourceType}`,
             resourceLink = HOST + requestPath,
             headers = {'Content-Type': 'application/hal+json'},
             embedded = {
@@ -108,13 +110,14 @@ module.exports = function () {
         if (existingResourceId) {
             _.each(document._embedded[resourceType], function (resource) {
                 if (resource.id === existingResourceId) {
-                    var link = resource._links.self.href,
+                    const
+                        link = resource._links.self.href,
                         linkHost = link.substring(0, link.lastIndexOf('/')),
-                        path = link.substring(linkHost.length);
+                        resourcePath = link.substring(linkHost.length);
 
                     nock(linkHost)
                         .log(console.log)   //eslint-disable-line no-console
-                        .get(path)
+                        .get(resourcePath)
                         .reply(
                             200,
                             {},
@@ -126,22 +129,22 @@ module.exports = function () {
     }
 
     function assertFormatIsUntouchedFor(resourceType) {
-        var list = JSON.parse(serverResponse.payload).resources;
+        const list = JSON.parse(serverResponse.payload).resources;
 
         assert.isArray(list);
         assert.match(list, resources[resourceType]);
     }
 
     function assertFormatMappedToViewFor(resourceType) {
-        var list = JSON.parse(serverResponse.payload).resources,
-            mappedResource;
+        const list = JSON.parse(serverResponse.payload).resources;
+        let mappedResource;
 
         _.each(resources[resourceType], function (resource, index) {
 
             if ('users' === resourceType) {
                 mappedResource = {
                     id: resource.id,
-                    displayName: resource['first-name'] + ' ' + resource['last-name'],
+                    displayName: `${resource['first-name']} ${resource['last-name']}`,
                     thumbnail: resource.avatar
                 };
             } else if ('rides' === resourceType) {
@@ -175,9 +178,10 @@ module.exports = function () {
     });
 
     this.Given(/^list of "([^"]*)" contains one entry$/, function (resourceType, callback) {
-        var embedded = {},
+        const
+            embedded = {},
             host = 'https://api.travi.org',
-            requestPath = '/' + resourceType,
+            requestPath = `/${resourceType}`,
             resourceLink = host + requestPath,
             headers = {'Content-Type': 'application/hal+json'};
 
@@ -219,7 +223,7 @@ module.exports = function () {
         loadApi.then(function (server) {
             server.inject({
                 method: 'GET',
-                url: '/' + resourceType
+                url: `/${resourceType}`
             }, function (response) {
                 serverResponse = response;
                 callback();
@@ -231,7 +235,7 @@ module.exports = function () {
         loadApi.then(function (server) {
             server.inject({
                 method: 'GET',
-                url: '/' + resourceType + '/' + existingResourceId
+                url: `/${resourceType}/${existingResourceId}`
             }, function (response) {
                 serverResponse = response;
                 callback();
@@ -250,7 +254,8 @@ module.exports = function () {
     });
 
     this.Then(/^the "([^"]*)" is returned$/, function (resourceType, done) {
-        var payload = JSON.parse(serverResponse.payload);
+        const payload = JSON.parse(serverResponse.payload);
+
         assert.equals(payload.resource.id, existingResourceId);
 
         done();

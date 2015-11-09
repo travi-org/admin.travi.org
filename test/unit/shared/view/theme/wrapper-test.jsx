@@ -7,7 +7,7 @@ const
     proxyquire = require('proxyquire'),
     any = require('../../../../helpers/any'),
     DataWrapper = require('../../../../../lib/server/view/temp-data-wrapper'),
-    PrimaryNav = require('../../../../helpers/primaryNavStub.jsx');
+    PrimaryNav = require('../../../../helpers/primary-nav-stub.jsx');
 
 suite('wrapper view', function () {
     const Wrap = proxyquire('../../../../../lib/shared/views/theme/wrap.jsx', {'./primary-nav.jsx': PrimaryNav});

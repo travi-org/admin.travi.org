@@ -1,6 +1,6 @@
 'use strict';
 
-var any = require('./any');
+const any = require('./any');
 
 any.resource = function () {
     return {
@@ -9,14 +9,14 @@ any.resource = function () {
 };
 
 any.resources = {
-    ride: function () {
+    ride() {
         return {
             id: any.int(),
             nickname: any.string(),
             _links: {}
         };
     },
-    user: function () {
+    user() {
         return {
             id: any.string(),
             'first-name': any.string(),

@@ -79,7 +79,7 @@ suite('rendering handler', function () {
 
         assert.calledWith(routeRenderer.routeTo, location, _.extend({}, request.response.source, {
             primaryNav: _.map(primaryNav, function (item, index) {
-                return _.extend({}, item, {active: index === 2});
+                return _.extend({}, item, {active: 2 === index});
             })
         }));
         routeRenderer.routeTo.yield(null, renderedContent);
