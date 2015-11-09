@@ -1,4 +1,7 @@
-var React = require('react'),
+'use strict';
+
+const
+    React = require('react'),
     Link = require('react-router').Link;
 
 module.exports = React.createClass({
@@ -6,13 +9,11 @@ module.exports = React.createClass({
         data: React.PropTypes.object.isRequired
     },
 
-    render: function () {
-        'use strict';
-
-        var resources;
+    render() {
+        let resources;
 
         function renderResourceAsListItem(resource) {
-            var thumbnail = '',
+            let thumbnail = '',
                 link;
 
             if (resource.thumbnail) {

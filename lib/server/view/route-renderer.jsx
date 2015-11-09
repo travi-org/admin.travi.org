@@ -1,3 +1,5 @@
+'use strict';
+
 const
     React = require('react'), //eslint-disable-line no-unused-vars
     ReactDOMServer = require('react-dom/server'),
@@ -15,6 +17,4 @@ function routeTo(location, data, callback) {
     });
 }
 
-module.exports = {
-    routeTo: routeTo
-};
+module.exports = {routeTo};

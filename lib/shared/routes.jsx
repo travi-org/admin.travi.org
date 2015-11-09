@@ -13,13 +13,11 @@ const
 
     NotFound = require('./views/not-found.jsx')(React);
 
-module.exports = (
-    <Route path='/' component={Wrap}>
-        <IndexRoute component={Index} />
-        <Route path='rides' component={ResourceList} />
-        <Route path='/rides/:id' component={Resource} />
-        <Route path='users' component={ResourceList} />
-        <Route path='/users/:id' component={Resource} />
-        <Route path="*" component={NotFound}/>
-    </Route>
-);
+module.exports = <Route path="/" component={Wrap}>
+    <IndexRoute component={Index} />
+    <Route path="rides" component={ResourceList} />
+    <Route path="/rides/:id" component={Resource} />
+    <Route path="users" component={ResourceList} />
+    <Route path="/users/:id" component={Resource} />
+    <Route path="*" component={NotFound}/>
+</Route>;

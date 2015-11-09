@@ -1,5 +1,7 @@
-var React = require('react'),
+'use strict';
 
+const
+    React = require('react'),
     PrimaryNav = require('./primary-nav.jsx');
 
 module.exports = React.createClass({
@@ -7,12 +9,10 @@ module.exports = React.createClass({
         data: React.PropTypes.object.isRequired
     },
 
-    render: function () {
-        return (
-            <div id="wrap" className="container">
-                <PrimaryNav {...this.context.data} />
-                { this.props.children }
-            </div>
-        );
+    render() {
+        return <div id="wrap" className="container">
+            <PrimaryNav {...this.context.data} />
+            { this.props.children }
+        </div>;
     }
 });
