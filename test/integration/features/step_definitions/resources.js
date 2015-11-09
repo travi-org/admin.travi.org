@@ -7,158 +7,158 @@ const
     nock = require('nock'),
     assert = require('referee').assert,
     _ = require('lodash'),
-    any = require('../../../helpers/any-for-admin');
+    any = require('../../../helpers/any-for-admin'),
+
+    HOST = 'https://api.travi.org';
 require('setup-referee-sinon/globals');
 
-module.exports = function () {
-    const HOST = 'https://api.travi.org';
+let resources = {},
+    existingResourceId,
+    serverResponse;
 
-    let resources = {},
-        existingResourceId,
-        serverResponse;
+function getSingularForm(resourceType) {
+    return resourceType.substring(0, resourceType.length - 1);
+}
 
-    function getSingularForm(resourceType) {
-        return resourceType.substring(0, resourceType.length - 1);
+function buildHalLink(href) {
+    return {href};
+}
+
+function buildLinksIncluding(resourceType, resourceLink) {
+    const links = {
+        'self': buildHalLink(any.url(HOST))
+    };
+
+    if (resourceLink) {
+        links[resourceType] = buildHalLink(resourceLink);
     }
 
-    function buildHalLink(href) {
-        return {href};
+    return links;
+}
+
+function buildListOf(resource) {
+    let resourceList,
+        existingResource;
+
+    resourceList = any.listOf(resource);
+
+    if (existingResourceId) {
+        existingResource = resource();
+
+        existingResource.id = existingResourceId;
+
+        resourceList.push(existingResource);
     }
 
-    function buildLinksIncluding(resourceType, resourceLink) {
-        const links = {
-            'self': buildHalLink(any.url(HOST))
+    return resourceList;
+}
+
+function prepareListForResponse(resourceType) {
+    let resourceList;
+
+    if (any.resources.hasOwnProperty(getSingularForm(resourceType))) {
+        resourceList = buildListOf(any.resources[getSingularForm(resourceType)]);
+    } else {
+        resourceList = buildListOf(any.resource);
+    }
+
+    _.map(resourceList, function (resource) {
+        if (_.isObject(resource)) {
+            resource._links = buildLinksIncluding();
+        }
+
+        return resource;
+    });
+
+    resources[resourceType] = resourceList;
+
+    return resourceList;
+}
+
+function setupExpectedApiResponsesFor(resourceType) {
+    const
+        requestPath = `/${resourceType}`,
+        resourceLink = HOST + requestPath,
+        headers = {'Content-Type': 'application/hal+json'},
+        embedded = {
+            [resourceType]: prepareListForResponse(resourceType)
+        },
+        document = {
+            _embedded: embedded
         };
 
-        if (resourceLink) {
-            links[resourceType] = buildHalLink(resourceLink);
-        }
+    nock(HOST)
+        .log(console.log)   //eslint-disable-line no-console
+        .get('/')
+        .times(2)
+        .reply(
+        200,
+        {_links: buildLinksIncluding(resourceType, resourceLink)},
+        headers
+    );
 
-        return links;
-    }
+    nock(HOST)
+        .log(console.log)   //eslint-disable-line no-console
+        .get(requestPath)
+        .reply(
+        200,
+        document,
+        headers
+    );
 
-    function buildListOf(resource) {
-        let resourceList,
-            existingResource;
+    if (existingResourceId) {
+        _.each(document._embedded[resourceType], function (resource) {
+            if (resource.id === existingResourceId) {
+                const
+                    link = resource._links.self.href,
+                    linkHost = link.substring(0, link.lastIndexOf('/')),
+                    resourcePath = link.substring(linkHost.length);
 
-        resourceList = any.listOf(resource);
-
-        if (existingResourceId) {
-            existingResource = resource();
-
-            existingResource.id = existingResourceId;
-
-            resourceList.push(existingResource);
-        }
-
-        return resourceList;
-    }
-
-    function prepareListForResponse(resourceType) {
-        let resourceList;
-
-        if (any.resources.hasOwnProperty(getSingularForm(resourceType))) {
-            resourceList = buildListOf(any.resources[getSingularForm(resourceType)]);
-        } else {
-            resourceList = buildListOf(any.resource);
-        }
-
-        _.map(resourceList, function (resource) {
-            if (_.isObject(resource)) {
-                resource._links = buildLinksIncluding();
+                nock(linkHost)
+                    .log(console.log)   //eslint-disable-line no-console
+                    .get(resourcePath)
+                    .reply(
+                    200,
+                    {},
+                    headers
+                );
             }
-
-            return resource;
         });
-
-        resources[resourceType] = resourceList;
-
-        return resourceList;
     }
+}
 
-    function setupExpectedApiResponsesFor(resourceType) {
-        const
-            requestPath = `/${resourceType}`,
-            resourceLink = HOST + requestPath,
-            headers = {'Content-Type': 'application/hal+json'},
-            embedded = {
-                [resourceType]: prepareListForResponse(resourceType)
-            },
-            document = {
-                _embedded: embedded
+function assertFormatIsUntouchedFor(resourceType) {
+    const list = JSON.parse(serverResponse.payload).resources;
+
+    assert.isArray(list);
+    assert.match(list, resources[resourceType]);
+}
+
+function assertFormatMappedToViewFor(resourceType) {
+    const list = JSON.parse(serverResponse.payload).resources;
+    let mappedResource;
+
+    _.each(resources[resourceType], function (resource, index) {
+
+        if ('users' === resourceType) {
+            mappedResource = {
+                id: resource.id,
+                displayName: `${resource['first-name']} ${resource['last-name']}`,
+                thumbnail: resource.avatar
             };
-
-        nock(HOST)
-            .log(console.log)   //eslint-disable-line no-console
-            .get('/')
-            .times(2)
-            .reply(
-                200,
-                {_links: buildLinksIncluding(resourceType, resourceLink)},
-                headers
-            );
-
-        nock(HOST)
-            .log(console.log)   //eslint-disable-line no-console
-            .get(requestPath)
-            .reply(
-                200,
-                document,
-                headers
-            );
-
-        if (existingResourceId) {
-            _.each(document._embedded[resourceType], function (resource) {
-                if (resource.id === existingResourceId) {
-                    const
-                        link = resource._links.self.href,
-                        linkHost = link.substring(0, link.lastIndexOf('/')),
-                        resourcePath = link.substring(linkHost.length);
-
-                    nock(linkHost)
-                        .log(console.log)   //eslint-disable-line no-console
-                        .get(resourcePath)
-                        .reply(
-                            200,
-                            {},
-                            headers
-                        );
-                }
-            });
+        } else if ('rides' === resourceType) {
+            mappedResource = {
+                id: resource.id,
+                displayName: resource.nickname
+            };
         }
-    }
-
-    function assertFormatIsUntouchedFor(resourceType) {
-        const list = JSON.parse(serverResponse.payload).resources;
 
         assert.isArray(list);
-        assert.match(list, resources[resourceType]);
-    }
+        assert.match(list[index], mappedResource);
+    });
+}
 
-    function assertFormatMappedToViewFor(resourceType) {
-        const list = JSON.parse(serverResponse.payload).resources;
-        let mappedResource;
-
-        _.each(resources[resourceType], function (resource, index) {
-
-            if ('users' === resourceType) {
-                mappedResource = {
-                    id: resource.id,
-                    displayName: `${resource['first-name']} ${resource['last-name']}`,
-                    thumbnail: resource.avatar
-                };
-            } else if ('rides' === resourceType) {
-                mappedResource = {
-                    id: resource.id,
-                    displayName: resource.nickname
-                };
-            }
-
-            assert.isArray(list);
-            assert.match(list[index], mappedResource);
-        });
-    }
-
+module.exports = function () {
     this.Before(function () {
         nock.disableNetConnect();
     });
