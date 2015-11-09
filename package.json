@@ -57,7 +57,6 @@
     "grunt-cucumberjs": "^0.8.0",
     "grunt-eslint": "17.3.1",
     "grunt-http": "1.6.0",
-    "grunt-jscs": "2.3.0",
     "grunt-mocha-cov": "0.4.0",
     "grunt-perfbudget": "0.1.8",
     "grunt-sass": "1.1.0",

@@ -1,8 +1,0 @@
-{
-    "validateQuoteMarks": "'",
-    "requireCamelCaseOrUpperCaseIdentifiers": true,
-    "validateLineBreaks": "LF",
-    "disallowMultipleLineBreaks": true,
-    "maximumLineLength": 120,
-    "requireCapitalizedConstructors": true
-}
