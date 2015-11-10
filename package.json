@@ -91,7 +91,7 @@
     "react-router": "1.0.0",
     "stampit": "2.1.1",
     "traverson": "3.1.0",
-    "traverson-hal": "4.0.0",
+    "traverson-hal": "4.1.1",
     "vision": "4.0.1",
     "visionary": "^4.0.0"
   }
