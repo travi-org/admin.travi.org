@@ -70,7 +70,12 @@ suite('rendering handler', function () {
             reply = { view: sinon.spy() },
             extension = sinon.stub().withArgs('onPreResponse').yields(request, reply),
             location = any.simpleObject(),
-            renderedContent = any.string();
+            renderedContent = any.string(),
+            data = _.extend({}, request.response.source, {
+                primaryNav: _.map(primaryNav, function (item, index) {
+                    return _.extend({}, item, {active: 2 === index});
+                })
+            });
         mediaType.returns('text/html');
         history.createLocation.withArgs(request.url).returns(location);
 
@@ -78,14 +83,10 @@ suite('rendering handler', function () {
 
         refute.called(reply.view);
 
-        assert.calledWith(routeRenderer.routeTo, location, _.extend({}, request.response.source, {
-            primaryNav: _.map(primaryNav, function (item, index) {
-                return _.extend({}, item, {active: 2 === index});
-            })
-        }));
+        assert.calledWith(routeRenderer.routeTo, location, data);
         routeRenderer.routeTo.yield(null, renderedContent);
 
-        assert.calledWith(reply.view, 'layout/layout', {renderedContent});
+        assert.calledWith(reply.view, 'layout/layout', {renderedContent, initialData: JSON.stringify(data)});
     });
 
     test('that error bubbles', function () {
