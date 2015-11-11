@@ -25,8 +25,8 @@ suite('wrapper view', function () {
         const data = {primaryNav: any.listOf(any.string)};
 
         dom.render(<DataWrapper data={data} ><Wrap><section id="content" /></Wrap></DataWrapper>, node, function () {
-            assert.equal(1, node.querySelectorAll('#wrap').length);
-            assert.equal(1, node.querySelectorAll('#wrap section').length);
+            assert.equal(node.children[0].className, 'container');
+            assert.equal(1, node.querySelectorAll('section').length);
             assert.equal(1, node.querySelectorAll('#primary-nav').length);
             assert.equal(data.primaryNav.length, node.querySelectorAll('#nav-items li').length);
         });

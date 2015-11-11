@@ -10,7 +10,7 @@ module.exports = React.createClass({
     },
 
     render() {
-        return <div id="wrap" className="container">
+        return <div className="container">
             <PrimaryNav {...this.context.data} />
             { this.props.children }
         </div>;
