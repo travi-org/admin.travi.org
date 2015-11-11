@@ -1,6 +1,8 @@
 {
     "presets": ["react"],
     "env": {
-        "retainLines": true
+        "development": {
+            "retainLines": true
+        }
     }
 }
