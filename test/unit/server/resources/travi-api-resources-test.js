@@ -1,9 +1,9 @@
 'use strict';
 
 const
-    traviApiResources = require('../../../lib/server/resources/travi-api-resources.js'),
+    traviApiResources = require('../../../../lib/server/resources/travi-api-resources.js'),
     traverson = require('traverson'),
-    any = require('../../helpers/any-for-admin');
+    any = require('../../../helpers/any-for-admin');
 
 require('setup-referee-sinon/globals');
 

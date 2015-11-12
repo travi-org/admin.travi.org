@@ -71,6 +71,18 @@ suite('resources controller', function () {
         assert.calledWith(callback, null, mappedList);
     });
 
+    test('that error bubbles for api request for resources', function () {
+        const
+            callback = sinon.spy(),
+            resourceType = any.string(),
+            error = any.simpleObject();
+        traviApiResources.getListOf.withArgs(resourceType).yields(error);
+
+        resourcesController.getListOf(resourceType, callback);
+
+        assert.calledWith(callback, error);
+    });
+
     test('that resource is requested from the api', function () {
         const
             resourceType = any.string(),
@@ -86,5 +98,18 @@ suite('resources controller', function () {
         resourcesController.getResource(resourceType, resourceId, callback);
 
         assert.calledWith(callback, null, mappedResource);
+    });
+
+    test('that error bubbles for api request for resource', function () {
+        const
+            resourceType = any.string(),
+            resourceId = any.string(),
+            callback = sinon.spy(),
+            error = any.simpleObject();
+        traviApiResources.getResourceBy.withArgs(resourceType, resourceId).yields(error);
+
+        resourcesController.getResource(resourceType, resourceId, callback);
+
+        assert.calledWith(callback, error);
     });
 });
