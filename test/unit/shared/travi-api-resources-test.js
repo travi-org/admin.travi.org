@@ -96,4 +96,21 @@ suite('travi-api resource interactions', function () {
 
         assert.calledWith(callback, null, resource);
     });
+
+    test('that error bubbles from resource request', function () {
+        const
+            resourceType = any.string(),
+            resourceId = any.int(),
+            callback = sinon.spy(),
+            error = any.simpleObject();
+        traverson.from.withArgs('https://api.travi.org/').returns({
+            follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
+                getResource: stubForGet.yields(error)
+            })
+        });
+
+        traviApiResources.getResourceBy(resourceType, resourceId, callback);
+
+        assert.calledWith(callback, error);
+    });
 });
