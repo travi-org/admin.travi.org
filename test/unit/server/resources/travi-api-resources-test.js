@@ -58,6 +58,22 @@ suite('travi-api resource interactions', function () {
         assert.calledWith(callback, null, resources);
     });
 
+    test('that error bubbles from resources request', function () {
+        const
+            resourceType = any.string(),
+            error = any.simpleObject(),
+            callback = sinon.spy();
+        traverson.from.withArgs('https://api.travi.org/').returns({
+            follow: sinon.stub().withArgs(resourceType).returns({
+                getResource: stubForGet.yields(error)
+            })
+        });
+
+        traviApiResources.getListOf(resourceType, callback);
+
+        assert.calledWith(callback, error);
+    });
+
     test('that a single resource is mapped to a list', function () {
         const
             resourceType = any.string(),
