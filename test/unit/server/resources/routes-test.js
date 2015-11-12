@@ -3,7 +3,7 @@
 const
     any = require('../../../helpers/any'),
     resources = require('../../../../lib/server/resources/routes'),
-    resourcesController = require('../../../../lib/server/resources/resources-controller');
+    resourcesController = require('../../../../lib/server/resources/controller');
 
 suite('landing config', function () {
     let sandbox;

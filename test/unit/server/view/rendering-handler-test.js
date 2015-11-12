@@ -3,7 +3,7 @@
 const
     proxyquire = require('proxyquire'),
     routeRenderer = require('../../../../lib/server/view/route-renderer.jsx'),
-    resourcesController = require('../../../../lib/server/resources/resources-controller'),
+    resourcesController = require('../../../../lib/server/resources/controller'),
     history = require('history'),
     _ = require('lodash'),
     any = require('../../../helpers/any');
