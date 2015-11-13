@@ -6,3 +6,4 @@ tmp/
 logs/
 
 Rakefile
+newrelic_agent.log
