@@ -11,7 +11,7 @@ const
     ResourceList = require('./views/resource-list.jsx'),
     Resource = require('./views/resource.jsx'),
 
-    NotFound = require('./views/not-found.jsx')(React);
+    NotFound = require('./views/errors/not-found.jsx')(React);
 
 module.exports = <Route path="/" component={Wrap}>
     <IndexRoute component={Index} />
