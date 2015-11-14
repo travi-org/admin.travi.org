@@ -52,6 +52,17 @@ suite('resources controller', function () {
         }]);
     });
 
+    test('that error bubbles for api request for recource-types', function () {
+        const
+            callback = sinon.spy(),
+            error = any.simpleObject();
+        traviApiResources.getLinksFor.withArgs('catalog').yields(error);
+
+        resourcesController.listResourceTypes(callback);
+
+        assert.calledWith(callback, error);
+    });
+
     test('that resources are requested from the api by type', function () {
         const
             callback = sinon.spy(),

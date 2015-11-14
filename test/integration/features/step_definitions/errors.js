@@ -27,7 +27,7 @@ module.exports = function () {
     });
 
     this.Then(/^a "([^"]*)" error should be returned$/, function (statusCode, done) {
-        assert.equals(this.serverResponse.statusCode, statusCode);
+        assert.equals(this.serverResponse.statusCode, parseInt(statusCode, 10));
 
         done();
     });

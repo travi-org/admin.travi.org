@@ -1,6 +1,5 @@
 Feature: errors
 
-    @wip
     Scenario: api response error
         Given the api is down
         When the homepage is loaded
