@@ -10,8 +10,9 @@ const
 require('setup-referee-sinon/globals');
 
 module.exports = function () {
-    let availableResourceTypes,
-        serverResponse;
+    this.World = require('../support/world.js').World;
+
+    let availableResourceTypes;
 
     function buildLinksFrom(availableTypes) {
         const links = {
@@ -33,7 +34,7 @@ module.exports = function () {
     this.After(function () {
         nock.enableNetConnect();
         nock.cleanAll();
-        serverResponse = null;
+        this.serverResponse = null;
     });
 
     this.Given(/^user has no api privileges$/, function (callback) {
@@ -55,26 +56,26 @@ module.exports = function () {
                 { 'Content-Type': 'application/hal+json'}
             );
 
-        loadApi.then(function (server) {
+        loadApi.then((server) => {
             server.inject({
                 method: 'GET',
                 url: '/'
-            }, function (response) {
-                serverResponse = response;
+            }, (response) => {
+                this.serverResponse = response;
                 callback();
             });
         });
     });
 
     this.Then(/^no resources are listed$/, function (done) {
-        assert.equals(serverResponse.payload, JSON.stringify({primaryNav: []}));
+        assert.equals(this.serverResponse.payload, JSON.stringify({primaryNav: []}));
 
         done();
     });
 
     this.Then(/^top level resources are listed$/, function (done) {
-        assert.equals(serverResponse.statusCode, 200);
-        assert.equals(serverResponse.payload, JSON.stringify({
+        assert.equals(this.serverResponse.statusCode, 200);
+        assert.equals(this.serverResponse.payload, JSON.stringify({
             primaryNav: _.map(availableResourceTypes, function (type) {
                 return {
                     text: type,
