@@ -44,4 +44,19 @@ suite('landing config', function () {
             primaryNav: types
         });
     });
+
+    test('that error bubbles', function () {
+        const
+            reply = sinon.spy(),
+            next = sinon.spy(),
+            error = any.simpleObject(),
+            server = {
+                route: sinon.stub().yieldsTo('handler', null, reply)
+            };
+        resourcesController.listResourceTypes.yields(error);
+
+        landing.register(server, null, next);
+
+        assert.calledWith(reply, error);
+    });
 });

@@ -90,13 +90,13 @@ suite('rendering handler', function () {
     test('that error bubbles', function () {
         const
             reply = sinon.spy(),
-            callback = any.simpleObject(),
+            error = any.simpleObject(),
             extension = sinon.stub().withArgs('onPreResponse').yields(request, reply);
         mediaType.returns('text/html');
-        resourcesController.listResourceTypes.yields(callback);
+        resourcesController.listResourceTypes.yields(error);
 
         handler.register({ext: extension}, null, sinon.spy());
 
-        assert.calledWith(reply, callback);
+        assert.calledWith(reply, error);
     });
 });
