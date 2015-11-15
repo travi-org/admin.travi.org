@@ -1,9 +1,6 @@
 'use strict';
 
 const
-    path = require('path'),
-    loadApi = require(path.join(__dirname, '../../../../lib/server/app.js')),
-
     nock = require('nock'),
     assert = require('referee').assert,
     _ = require('lodash'),
@@ -89,21 +86,20 @@ function setupExpectedApiResponsesFor(resourceType) {
     nock(HOST)
         .log(console.log)   //eslint-disable-line no-console
         .get('/')
-        .times(2)
         .reply(
-        200,
-        {_links: buildLinksIncluding(resourceType, resourceLink)},
-        headers
-    );
+            200,
+            {_links: buildLinksIncluding(resourceType, resourceLink)},
+            headers
+        );
 
     nock(HOST)
         .log(console.log)   //eslint-disable-line no-console
         .get(requestPath)
         .reply(
-        200,
-        document,
-        headers
-    );
+            200,
+            document,
+            headers
+        );
 
     if (existingResourceId) {
         _.each(document._embedded[resourceType], function (resource) {
@@ -117,10 +113,10 @@ function setupExpectedApiResponsesFor(resourceType) {
                     .log(console.log)   //eslint-disable-line no-console
                     .get(resourcePath)
                     .reply(
-                    200,
-                    {},
-                    headers
-                );
+                        200,
+                        {},
+                        headers
+                    );
             }
         });
     }
@@ -218,27 +214,11 @@ module.exports = function () {
     });
 
     this.When(/^list of "([^"]*)" resources is requested$/, function (resourceType, callback) {
-        loadApi.then((server) => {
-            server.inject({
-                method: 'GET',
-                url: `/${resourceType}`
-            }, (response) => {
-                this.serverResponse = response;
-                callback();
-            });
-        });
+        this.makeRequestTo(`/${resourceType}`, callback);
     });
 
     this.When(/^the "([^"]*)" is requested by id$/, function (resourceType, callback) {
-        loadApi.then((server) => {
-            server.inject({
-                method: 'GET',
-                url: `/${resourceType}/${existingResourceId}`
-            }, (response) => {
-                this.serverResponse = response;
-                callback();
-            });
-        });
+        this.makeRequestTo(`/${resourceType}/${existingResourceId}`, callback);
     });
 
     this.Then(/^list of "([^"]*)" resources is returned$/, function (resourceType, done) {

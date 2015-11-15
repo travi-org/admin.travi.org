@@ -1,8 +1,6 @@
 'use strict';
 
 const
-    path = require('path'),
-    loadApi = require(path.join(__dirname, '../../../../lib/server/app.js')),
     assert = require('referee').assert,
     nock = require('nock'),
     _ = require('lodash'),
@@ -37,40 +35,34 @@ module.exports = function () {
         this.serverResponse = null;
     });
 
-    this.Given(/^user has no api privileges$/, function (callback) {
-        callback();
-    });
-
-    this.Given(/^user has api privileges$/, function (callback) {
-        availableResourceTypes = any.listOf(any.string);
-
-        callback();
-    });
-
-    this.When(/^the homepage is loaded$/, function (callback) {
+    function stubApiCall() {
         nock('https://api.travi.org')
             .log(console.log)   //eslint-disable-line no-console
             .get('/')
             .times(2)
             .reply(
                 200,
-                { _links: buildLinksFrom(availableResourceTypes)},
-                { 'Content-Type': 'application/hal+json'}
+                {_links: buildLinksFrom(availableResourceTypes)},
+                {'Content-Type': 'application/hal+json'}
             );
+    }
 
-        loadApi.then((server) => {
-            const mime = this.mime;
-            server.inject({
-                method: 'GET',
-                url: '/',
-                headers: {
-                    'Accept': mime
-                }
-            }, (response) => {
-                this.serverResponse = response;
-                callback();
-            });
-        });
+    this.Given(/^user has no api privileges$/, function (callback) {
+        stubApiCall();
+
+        callback();
+    });
+
+    this.Given(/^user has api privileges$/, function (callback) {
+        availableResourceTypes = any.listOf(any.string);
+
+        stubApiCall();
+
+        callback();
+    });
+
+    this.When(/^the homepage is loaded$/, function (callback) {
+        this.makeRequestTo('/', callback);
     });
 
     this.Then(/^no resources are listed$/, function (done) {
