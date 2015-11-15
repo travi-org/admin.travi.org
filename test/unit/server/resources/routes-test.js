@@ -50,6 +50,24 @@ suite('landing config', function () {
         });
     });
 
+    test('that error bubbles for list route', function () {
+        const
+            reply = sinon.spy(),
+            next = sinon.spy(),
+            resourceType = any.string(),
+            server = {
+                route: sinon.stub().yieldsTo('handler', {
+                    params: {resourceType}
+                }, reply)
+            },
+            error = any.simpleObject();
+        resourcesController.getListOf.yields(error);
+
+        resources.register(server, null, next);
+
+        assert.calledWith(reply, error);
+    });
+
     test('that the single resource route is configured', function () {
         const
             reply = sinon.spy(),
@@ -71,5 +89,23 @@ suite('landing config', function () {
             path: '/{resourceType}/{id}'
         }));
         assert.calledWith(reply, {resourceType, resource});
+    });
+
+    test('that error bubbles for resource route', function () {
+        const
+            reply = sinon.spy(),
+            next = sinon.spy(),
+            resourceType = any.string(),
+            server = {
+                route: sinon.stub().yieldsTo('handler', {
+                    params: {resourceType}
+                }, reply)
+            },
+            error = any.simpleObject();
+        resourcesController.getResource.yields(error);
+
+        resources.register(server, null, next);
+
+        assert.calledWith(reply, error);
     });
 });
