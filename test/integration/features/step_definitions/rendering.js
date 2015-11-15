@@ -22,15 +22,18 @@ module.exports = function () {
     });
 
     this.Then(/^the primary nav is rendered$/, function (done) {
-        const $ = cheerio.load(this.serverResponse.payload);
+        const
+            $ = cheerio.load(this.getResponseBody()),
+            $primaryNav = $('#wrap').find('ul.navbar-nav');
 
-        assert.equals($('#wrap ul.navbar-nav').length, 1);
+        assert.equals($primaryNav.length, 1);
+        assert.equals(this.availableResourceTypes.length, $primaryNav.find('> li').length);
 
         done();
     });
 
     this.Then(/^the "([^"]*)" route is rendered$/, function (arg1, done) {
-        const $ = cheerio.load(this.serverResponse.payload);
+        const $ = cheerio.load(this.getResponseBody());
 
         assert.equals($('div.jumbotron').length, 1);
 

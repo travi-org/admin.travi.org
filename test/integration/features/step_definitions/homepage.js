@@ -10,8 +10,6 @@ require('setup-referee-sinon/globals');
 module.exports = function () {
     this.World = require('../support/world.js').World;
 
-    let availableResourceTypes;
-
     function buildLinksFrom(availableTypes) {
         const links = {
             'self': any.url()
@@ -26,7 +24,7 @@ module.exports = function () {
 
     this.Before(function () {
         nock.disableNetConnect();
-        availableResourceTypes = [];
+        this.availableResourceTypes = [];
     });
 
     this.After(function () {
@@ -42,21 +40,23 @@ module.exports = function () {
             .times(2)
             .reply(
                 200,
-                {_links: buildLinksFrom(availableResourceTypes)},
+                {_links: buildLinksFrom(this.availableResourceTypes)},
                 {'Content-Type': 'application/hal+json'}
             );
     }
 
     this.Given(/^user has no api privileges$/, function (callback) {
-        stubApiCall();
+        stubApiCall.call(this);
 
         callback();
     });
 
     this.Given(/^user has api privileges$/, function (callback) {
-        availableResourceTypes = any.listOf(any.string);
+        this.availableResourceTypes = any.listOf(any.string, {
+            min: 1
+        });
 
-        stubApiCall();
+        stubApiCall.call(this);
 
         callback();
     });
@@ -74,7 +74,7 @@ module.exports = function () {
     this.Then(/^top level resources are listed$/, function (done) {
         assert.equals(this.serverResponse.statusCode, 200);
         assert.equals(this.serverResponse.payload, JSON.stringify({
-            primaryNav: _.map(availableResourceTypes, function (type) {
+            primaryNav: _.map(this.availableResourceTypes, function (type) {
                 return {
                     text: type,
                     path: `/${type}`

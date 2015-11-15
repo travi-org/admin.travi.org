@@ -20,4 +20,6 @@ module.exports.World = function World() {
             });
         });
     };
+
+    this.getResponseBody = () => this.serverResponse.payload;
 };
