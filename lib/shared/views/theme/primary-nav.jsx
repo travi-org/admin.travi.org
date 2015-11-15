@@ -38,11 +38,7 @@ module.exports = React.createClass({
                     <h1><IndexLink className="navbar-brand" to="/">Travi</IndexLink></h1>
                 </div>
 
-                <div className="collapse navbar-collapse" id="navbar-items">
-                    <ul className="nav navbar-nav">
-                        {list}
-                    </ul>
-                </div>
+                {list}
 
             </div>
         </nav>;
