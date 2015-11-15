@@ -13,8 +13,7 @@ const
 require('setup-referee-sinon/globals');
 
 let resources = {},
-    existingResourceId,
-    serverResponse;
+    existingResourceId;
 
 function getSingularForm(resourceType) {
     return resourceType.substring(0, resourceType.length - 1);
@@ -127,15 +126,12 @@ function setupExpectedApiResponsesFor(resourceType) {
     }
 }
 
-function assertFormatIsUntouchedFor(resourceType) {
-    const list = JSON.parse(serverResponse.payload).resources;
-
+function assertFormatIsUntouchedFor(resourceType, list) {
     assert.isArray(list);
     assert.match(list, resources[resourceType]);
 }
 
-function assertFormatMappedToViewFor(resourceType) {
-    const list = JSON.parse(serverResponse.payload).resources;
+function assertFormatMappedToViewFor(resourceType, list) {
     let mappedResource;
 
     _.each(resources[resourceType], function (resource, index) {
@@ -159,6 +155,8 @@ function assertFormatMappedToViewFor(resourceType) {
 }
 
 module.exports = function () {
+    this.World = require('../support/world.js').World;
+
     this.Before(function () {
         nock.disableNetConnect();
     });
@@ -168,7 +166,7 @@ module.exports = function () {
         nock.cleanAll();
         resources = {};
         existingResourceId = null;
-        serverResponse = null;
+        this.serverResponse = null;
     });
 
     this.Given(/^list of "([^"]*)" resources exists in the api$/, function (resourceType, callback) {
@@ -220,41 +218,43 @@ module.exports = function () {
     });
 
     this.When(/^list of "([^"]*)" resources is requested$/, function (resourceType, callback) {
-        loadApi.then(function (server) {
+        loadApi.then((server) => {
             server.inject({
                 method: 'GET',
                 url: `/${resourceType}`
-            }, function (response) {
-                serverResponse = response;
+            }, (response) => {
+                this.serverResponse = response;
                 callback();
             });
         });
     });
 
     this.When(/^the "([^"]*)" is requested by id$/, function (resourceType, callback) {
-        loadApi.then(function (server) {
+        loadApi.then((server) => {
             server.inject({
                 method: 'GET',
                 url: `/${resourceType}/${existingResourceId}`
-            }, function (response) {
-                serverResponse = response;
+            }, (response) => {
+                this.serverResponse = response;
                 callback();
             });
         });
     });
 
     this.Then(/^list of "([^"]*)" resources is returned$/, function (resourceType, done) {
+        const list = JSON.parse(this.serverResponse.payload).resources;
+
         if (any.resources.hasOwnProperty(getSingularForm(resourceType))) {
-            assertFormatMappedToViewFor(resourceType);
+            assertFormatMappedToViewFor(resourceType, list);
         } else {
-            assertFormatIsUntouchedFor(resourceType);
+            assertFormatIsUntouchedFor(resourceType, list);
         }
 
         done();
     });
 
     this.Then(/^the "([^"]*)" is returned$/, function (resourceType, done) {
-        const payload = JSON.parse(serverResponse.payload);
+        const payload = JSON.parse(this.serverResponse.payload);
 
         assert.equals(payload.resource.id, existingResourceId);
 
