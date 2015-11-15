@@ -49,7 +49,9 @@ module.exports = function () {
 
     this.When(/^the homepage is loaded$/, function (callback) {
         nock('https://api.travi.org')
+            .log(console.log)   //eslint-disable-line no-console
             .get('/')
+            .times(2)
             .reply(
                 200,
                 { _links: buildLinksFrom(availableResourceTypes)},
@@ -57,9 +59,13 @@ module.exports = function () {
             );
 
         loadApi.then((server) => {
+            const mime = this.mime;
             server.inject({
                 method: 'GET',
-                url: '/'
+                url: '/',
+                headers: {
+                    'Accept': mime
+                }
             }, (response) => {
                 this.serverResponse = response;
                 callback();
