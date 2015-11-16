@@ -46,8 +46,6 @@ module.exports = function () {
     this.Then(/^the resource\-list route is rendered$/, function (done) {
         const $ = cheerio.load(this.getResponseBody());
 
-        console.log($('#wrap').html());
-
         assert.equals($('ul.list-group').length, 1);
 
         done();

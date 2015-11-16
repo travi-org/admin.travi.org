@@ -65,5 +65,5 @@ module.exports.World = function World() {
             {_links: buildApiResponseLinks.call(this)},
             {'Content-Type': 'application/hal+json'}
         );
-    }
+    };
 };
