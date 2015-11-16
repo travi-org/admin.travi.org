@@ -68,6 +68,8 @@ function prepareListForResponse(resourceType) {
 
     resources[resourceType] = resourceList;
 
+    this.resourceCount = resourceList.length;
+
     return resourceList;
 }
 
@@ -77,7 +79,7 @@ function setupExpectedApiResponsesFor(resourceType) {
         resourceLink = HOST + requestPath,
         headers = {'Content-Type': 'application/hal+json'},
         embedded = {
-            [resourceType]: prepareListForResponse(resourceType)
+            [resourceType]: prepareListForResponse.call(this, resourceType)
         },
         document = {
             _embedded: embedded

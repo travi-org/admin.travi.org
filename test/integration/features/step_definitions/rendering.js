@@ -44,9 +44,11 @@ module.exports = function () {
     });
 
     this.Then(/^the resource\-list route is rendered$/, function (done) {
-        const $ = cheerio.load(this.getResponseBody());
+        const $ = cheerio.load(this.getResponseBody()),
+            $resources = $('ul.list-group');
 
-        assert.equals($('ul.list-group').length, 1);
+        assert.equals($resources.length, 1);
+        assert.equals($resources.find('li').length, this.resourceCount);
 
         done();
     });
