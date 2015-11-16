@@ -8,4 +8,5 @@ Feature: homepage
     Scenario: some api privileges
         Given user has api privileges
         When the homepage is loaded
-        Then top level resources are listed
+        Then a "200" status code should be returned
+        And top level resources are listed
