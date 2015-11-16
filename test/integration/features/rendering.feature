@@ -7,20 +7,26 @@ Feature: HTML Rendering
         Then the primary nav is rendered
         And the "index" route is rendered
 
-    @wip
     Scenario: html requested for list page
         Given html is requested
+        And user has api privileges
+        And list of "foo" resources exists in the api
         When list of "foo" resources is requested
+        Then a "200" status code should be returned
+        And the primary nav is rendered
 
     @wip
     Scenario: html requested for single resource
         Given html is requested
         When the "foo" is requested by id
+        Then the primary nav is rendered
 
     @wip
     Scenario: html requested when error occurs
         Given html is requested
+        Then the primary nav is rendered
 
     @wip
     Scenario: html requested for missing page
         Given html is requested
+        Then the primary nav is rendered

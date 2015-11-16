@@ -64,7 +64,8 @@ suite('rendering handler', function () {
     });
 
     test('that an html request returns a rendered view', function () {
-        request.response = {source: {resourceType: primaryNav[2].text}};
+        request.params = {resourceType: primaryNav[2].text};
+        request.response = {source: any.simpleObject()};
         const
             reply = { view: sinon.spy() },
             extension = sinon.stub().withArgs('onPreResponse').yields(request, reply),
@@ -98,5 +99,22 @@ suite('rendering handler', function () {
         handler.register({ext: extension}, null, sinon.spy());
 
         assert.calledWith(reply, error);
+    });
+
+    test('that data defaults to empty object since error case does not set response.source', function () {
+        request.params = {};
+        request.response = {};
+        const
+            reply = { view: sinon.spy() },
+            extension = sinon.stub().withArgs('onPreResponse').yields(request, reply),
+            location = any.simpleObject(),
+            renderedContent = any.string();
+        mediaType.returns('text/html');
+        history.createLocation.withArgs(request.url).returns(location);
+        routeRenderer.routeTo.yields(null, renderedContent);
+
+        handler.register({ext: extension}, null, sinon.spy());
+
+        assert.calledWith(reply.view, 'layout/layout', {renderedContent});
     });
 });

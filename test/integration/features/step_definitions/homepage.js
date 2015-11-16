@@ -66,14 +66,14 @@ module.exports = function () {
     });
 
     this.Then(/^no resources are listed$/, function (done) {
-        assert.equals(this.serverResponse.payload, JSON.stringify({primaryNav: []}));
+        assert.equals(this.getResponseBody(), JSON.stringify({primaryNav: []}));
 
         done();
     });
 
     this.Then(/^top level resources are listed$/, function (done) {
         assert.equals(this.serverResponse.statusCode, 200);
-        assert.equals(this.serverResponse.payload, JSON.stringify({
+        assert.equals(this.getResponseBody(), JSON.stringify({
             primaryNav: _.map(this.availableResourceTypes, function (type) {
                 return {
                     text: type,

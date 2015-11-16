@@ -222,7 +222,7 @@ module.exports = function () {
     });
 
     this.Then(/^list of "([^"]*)" resources is returned$/, function (resourceType, done) {
-        const list = JSON.parse(this.serverResponse.payload).resources;
+        const list = JSON.parse(this.getResponseBody()).resources;
 
         if (any.resources.hasOwnProperty(getSingularForm(resourceType))) {
             assertFormatMappedToViewFor(resourceType, list);
@@ -234,7 +234,7 @@ module.exports = function () {
     });
 
     this.Then(/^the "([^"]*)" is returned$/, function (resourceType, done) {
-        const payload = JSON.parse(this.serverResponse.payload);
+        const payload = JSON.parse(this.getResponseBody());
 
         assert.equals(payload.resource.id, existingResourceId);
 

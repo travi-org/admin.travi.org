@@ -2,22 +2,26 @@ Feature: resources
 
     Scenario: existing list requested
         Given list of "foo" resources exists in the api
+        And user has api privileges
         When list of "foo" resources is requested
         Then list of "foo" resources is returned
 
     Scenario: list of size one is returned
         Given list of "foo" contains one entry
+        And user has api privileges
         When list of "foo" resources is requested
         Then list of "foo" resources is returned
 
 
     Scenario: existing list of rides requested
         Given list of "rides" resources exists in the api
+        And user has api privileges
         When list of "rides" resources is requested
         Then list of "rides" resources is returned
 
     Scenario: existing list of users requested
         Given list of "users" resources exists in the api
+        And user has api privileges
         When list of "users" resources is requested
         Then list of "users" resources is returned
 
@@ -29,6 +33,7 @@ Feature: resources
 
     Scenario: existing resource requested by id
         Given a "foo" exists in the api
+        And user has api privileges
         When the "foo" is requested by id
         Then the "foo" is returned
 

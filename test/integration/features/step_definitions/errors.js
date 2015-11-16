@@ -21,12 +21,13 @@ module.exports = function () {
         nock('https://api.travi.org')
             .log(console.log)   //eslint-disable-line no-console
             .get('/')
+            .times(2)
             .replyWithError('something awful happened');
 
         callback();
     });
 
-    this.Then(/^a "([^"]*)" error should be returned$/, function (statusCode, done) {
+    this.Then(/^a "([^"]*)" status code should be returned$/, function (statusCode, done) {
         assert.equals(this.serverResponse.statusCode, parseInt(statusCode, 10));
 
         done();

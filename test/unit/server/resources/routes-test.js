@@ -5,7 +5,7 @@ const
     resources = require('../../../../lib/server/resources/routes'),
     resourcesController = require('../../../../lib/server/resources/controller');
 
-suite('landing config', function () {
+suite('server routes config', function () {
     let sandbox;
 
     setup(function () {
@@ -45,7 +45,6 @@ suite('landing config', function () {
             path: '/{resourceType}'
         }));
         assert.calledWith(reply, {
-            resourceType,
             resources: resourceList
         });
     });
@@ -88,7 +87,7 @@ suite('landing config', function () {
             method: 'GET',
             path: '/{resourceType}/{id}'
         }));
-        assert.calledWith(reply, {resourceType, resource});
+        assert.calledWith(reply, {resource});
     });
 
     test('that error bubbles for resource route', function () {
