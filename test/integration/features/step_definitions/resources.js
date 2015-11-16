@@ -92,6 +92,11 @@ function setupExpectedApiResponsesFor(resourceType) {
             headers
         );
 
+    this.apiResponseShouldIncludeLinkFor({
+        rel: resourceType,
+        path: resourceLink
+    });
+
     nock(HOST)
         .log(console.log)   //eslint-disable-line no-console
         .get(requestPath)
@@ -163,10 +168,11 @@ module.exports = function () {
         resources = {};
         existingResourceId = null;
         this.serverResponse = null;
+        this.apiResponseLinks = {};
     });
 
     this.Given(/^list of "([^"]*)" resources exists in the api$/, function (resourceType, callback) {
-        setupExpectedApiResponsesFor(resourceType);
+        setupExpectedApiResponsesFor.call(this, resourceType);
 
         callback();
     });
@@ -208,7 +214,7 @@ module.exports = function () {
 
     this.Given(/^a "([^"]*)" exists in the api$/, function (resourceType, callback) {
         existingResourceId = any.int();
-        setupExpectedApiResponsesFor(resourceType);
+        setupExpectedApiResponsesFor.call(this, resourceType);
 
         callback();
     });

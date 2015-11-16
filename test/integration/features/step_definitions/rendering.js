@@ -27,15 +27,28 @@ module.exports = function () {
             $primaryNav = $('#wrap').find('ul.navbar-nav');
 
         assert.equals($primaryNav.length, 1);
-        assert.equals(this.availableResourceTypes.length, $primaryNav.find('> li').length);
+        assert.equals(
+            this.availableResourceTypes.length + Object.keys(this.apiResponseLinks).length,
+            $primaryNav.find('> li').length
+        );
 
         done();
     });
 
-    this.Then(/^the "([^"]*)" route is rendered$/, function (arg1, done) {
+    this.Then(/^the index route is rendered$/, function (done) {
         const $ = cheerio.load(this.getResponseBody());
 
         assert.equals($('div.jumbotron').length, 1);
+
+        done();
+    });
+
+    this.Then(/^the resource\-list route is rendered$/, function (done) {
+        const $ = cheerio.load(this.getResponseBody());
+
+        console.log($('#wrap').html());
+
+        assert.equals($('ul.list-group').length, 1);
 
         done();
     });
