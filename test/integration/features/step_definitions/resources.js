@@ -85,15 +85,6 @@ function setupExpectedApiResponsesFor(resourceType) {
             _embedded: embedded
         };
 
-    nock(HOST)
-        .log(console.log)   //eslint-disable-line no-console
-        .get('/')
-        .reply(
-            200,
-            {_links: buildLinksIncluding(resourceType, resourceLink)},
-            headers
-        );
-
     this.apiResponseShouldIncludeLinkFor({
         rel: resourceType,
         path: resourceLink
