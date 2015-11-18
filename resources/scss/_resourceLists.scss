@@ -1,11 +1,11 @@
 $thumb-size: 32px;
-li .thumbnail {
-    height: $thumb-size;
-    width: $thumb-size;
-    margin: 0 10px 0 0;
-    border-radius: $thumb-size / 2;
-    border: none;
-    display: inline;
-    padding: 0;
 
+li .thumbnail {
+  border: 0;
+  border-radius: $thumb-size / 2;
+  display: inline;
+  height: $thumb-size;
+  margin: 0 10px 0 0;
+  padding: 0;
+  width: $thumb-size;
 }

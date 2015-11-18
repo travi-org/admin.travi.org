@@ -5,7 +5,9 @@ build:
   - browserify
   - uglify
 
-lint: eslint
+lint:
+  - scsslint
+  - eslint
 
 unit: mochacov:unit
 
