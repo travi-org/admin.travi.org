@@ -43,6 +43,8 @@ function buildListOf(resource) {
 
         existingResource.id = existingResourceId;
 
+        this.existingResource = existingResource;
+
         resourceList.push(existingResource);
     }
 
@@ -53,9 +55,9 @@ function prepareListForResponse(resourceType) {
     let resourceList;
 
     if (any.resources.hasOwnProperty(getSingularForm(resourceType))) {
-        resourceList = buildListOf(any.resources[getSingularForm(resourceType)]);
+        resourceList = buildListOf.call(this, any.resources[getSingularForm(resourceType)]);
     } else {
-        resourceList = buildListOf(any.resource);
+        resourceList = buildListOf.call(this, any.resource);
     }
 
     _.map(resourceList, function (resource) {

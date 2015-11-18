@@ -44,11 +44,26 @@ module.exports = function () {
     });
 
     this.Then(/^the resource\-list route is rendered$/, function (done) {
-        const $ = cheerio.load(this.getResponseBody()),
+        const
+            $ = cheerio.load(this.getResponseBody()),
             $resources = $('ul.list-group');
 
         assert.equals($resources.length, 1);
         assert.equals($resources.find('li').length, this.resourceCount);
+
+        done();
+    });
+
+    this.Then(/^the resource route is rendered$/, function (done) {
+        const
+            $ = cheerio.load(this.getResponseBody()),
+            $heading = $('h3');
+
+        assert.equals($heading.length, 1);
+        assert.equals(
+            $heading.text(),
+            `${this.existingResource['first-name']} ${this.existingResource['last-name']}`
+        );
 
         done();
     });
