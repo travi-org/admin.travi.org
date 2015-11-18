@@ -1,0 +1,9 @@
+engines:
+  eslint:
+    enabled: true
+  scss-lint:
+    enabled: true
+  fixme:
+    enabled: true
+  bundler-audit:
+    enabled: true
