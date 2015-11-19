@@ -1,12 +1,16 @@
-/*global module*/
-module.exports = function (grunt) {
-    'use strict';
+/*global refute */
+/*eslint filenames/filenames: 0 */
 
-    var pact = 'tmp/pacts/travi.org-admin-travi-api.json';
-    var config = {
-        webPageTestApiToken: process.env.WEB_PAGE_TEST_API_TOKEN,
-        pactBrokerPassword: process.env.PACT_BROKER_PASSWORD
-    };
+'use strict';
+
+module.exports = function (grunt) {
+
+    const
+        pact = 'tmp/pacts/travi.org-admin-travi-api.json',
+        config = {
+            webPageTestApiToken: process.env.WEB_PAGE_TEST_API_TOKEN,
+            pactBrokerPassword: process.env.PACT_BROKER_PASSWORD
+        };
 
     if (grunt.file.exists(pact)) {
         config.pact = grunt.file.readJSON(pact);
@@ -14,7 +18,7 @@ module.exports = function (grunt) {
 
     require('time-grunt')(grunt);
     require('load-grunt-config')(grunt, {
-        config: config,
+        config,
         jitGrunt: {
             staticMappings: {
                 mochacov: 'grunt-mocha-cov',
@@ -26,13 +30,13 @@ module.exports = function (grunt) {
     });
 
 
-    grunt.registerTask("warning-exit", "Call process.exit", function () {
+    grunt.registerTask('warning-exit', 'Call process.exit', function () {
         process.exit(3);
     });
 
     grunt.registerTask('pact-consumer', 'consumer driven contract', function () {
-        var extendGruntPlugin = require('extend-grunt-plugin'),
-            path = require('path'),
+        const
+            extendGruntPlugin = require('extend-grunt-plugin'),
             Pact = require('pact-consumer-js-dsl'),
 
             pactServicePort = 1234,
@@ -40,22 +44,19 @@ module.exports = function (grunt) {
                 consumer: 'travi.org-admin',
                 provider: 'travi-api',
                 port: pactServicePort,
-                done: function (err) {
+                done(err) {
                     refute.defined(err);
                 }
+            }),
+            options = this.options({    //eslint-disable-line no-invalid-this
+                pactServicePort,
+                pactDir: 'tmp'
             });
-
-        var options = this.options({
-            pactServicePort: pactServicePort,
-            pactDir: 'tmp'
-        });
 
         extendGruntPlugin(grunt, require('grunt-shell-spawn/tasks/shell'), {
             'shell.pactServerStart': {
-                command: 'bundle exec pact-mock-service start -p ' +
-                options.pactServicePort + ' -l ' +
-                options.pactDir + '/pact.log --pact-dir ' +
-                options.pactDir + '/pacts',
+                command: `bundle exec pact-mock-service start -p ${options.pactServicePort}`
+                    + ` -l ${options.pactDir}/pact.log --pact-dir ${options.pactDir}/pacts`,
                 options: {
                     stdout: true,
                     stderr: true,
@@ -64,7 +65,7 @@ module.exports = function (grunt) {
                 }
             },
             'shell.pactServerStop': {
-                command: 'bundle exec pact-mock-service stop -p ' + options.pactServicePort,
+                command: `bundle exec pact-mock-service stop -p ${options.pactServicePort}`,
                 options: {
                     stdout: true,
                     stderr: true,
@@ -75,7 +76,8 @@ module.exports = function (grunt) {
         });
 
 
-        //wait for server to start. there's got to be a better way to handle this, but it may be tough since the startup gets backgrounded
+        //wait for server to start. there's got to be a better way to handle this, but it may be tough since the
+        // startup gets backgrounded
         extendGruntPlugin(grunt, require('grunt-wait/tasks/wait'), {
             'wait.pact': {
                 options: {
@@ -99,7 +101,10 @@ module.exports = function (grunt) {
 
             mockService.setup(function (error) {
                 if (error) {
-                    console.warn('Pact wasn\'t able set up the interactions: \n' + error);
+                    console.warn(       //eslint-disable-line no-console
+                        `Pact wasn't able set up the interactions:
+                        ${error}`
+                    );
                 }
             });
 
@@ -112,9 +117,12 @@ module.exports = function (grunt) {
 
             mockService.verifyAndWrite(function (error) {
                 if (error) {
-                    console.warn('Pact wasn\'t able to verify the interactions: \n' + error);
+                    console.warn(       //eslint-disable-line no-console
+                        `Pact wasn't able to verify the interactions:
+                        ${error}`
+                    );
                 } else {
-                    console.log('Pact verified and written.');
+                    console.log('Pact verified and written.');      //eslint-disable-line no-console
                 }
             });
         });

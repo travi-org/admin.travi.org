@@ -1,3 +1,4 @@
 target:
+  - Gruntfile.js
   - lib/**/*.js*
   - test/**/*.js*
