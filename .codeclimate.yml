@@ -7,3 +7,9 @@ engines:
     enabled: true
   bundler-audit:
     enabled: true
+
+ratings:
+  paths:
+  - Gemfile.lock
+  - "**.js"
+  - "**.jsx"
