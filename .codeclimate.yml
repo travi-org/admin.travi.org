@@ -13,3 +13,6 @@ ratings:
   - Gemfile.lock
   - "**.js"
   - "**.jsx"
+
+exclude_paths:
+  - newrelic.js
