@@ -109,13 +109,18 @@ suite('rendering handler', function () {
             reply = { view: sinon.spy() },
             extension = sinon.stub().withArgs('onPreResponse').yields(request, reply),
             location = any.simpleObject(),
-            renderedContent = any.string();
+            renderedContent = any.string(),
+            data = _.extend({}, request.response.source, {
+                primaryNav: _.map(primaryNav, function (item) {
+                    return _.extend({}, item, {active: false});
+                })
+            });
         mediaType.returns('text/html');
         history.createLocation.withArgs(request.url).returns(location);
         routeRenderer.routeTo.yields(null, renderedContent);
 
         handler.register({ext: extension}, null, sinon.spy());
 
-        assert.calledWith(reply.view, 'layout/layout', {renderedContent});
+        assert.calledWith(reply.view, 'layout/layout', {renderedContent, initialData: JSON.stringify(data)});
     });
 });
