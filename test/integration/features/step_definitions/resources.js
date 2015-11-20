@@ -36,7 +36,7 @@ function buildListOf(resource) {
     let resourceList,
         existingResource;
 
-    resourceList = any.listOf(resource);
+    resourceList = any.listOf(resource, {min: 1});
 
     if (existingResourceId) {
         existingResource = resource();
