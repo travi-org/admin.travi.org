@@ -49,7 +49,7 @@ module.exports = function () {
 
     this.Then(/^top level resources are listed$/, function (done) {
         assert.equals(this.getResponseBody(), JSON.stringify({
-            primaryNav: _.map(this.availableResourceTypes, function (type) {
+            primaryNav: _.map(this.availableResourceTypes, (type) => {
                 return {
                     text: type,
                     path: `/${type}`

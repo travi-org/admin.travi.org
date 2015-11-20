@@ -10,7 +10,7 @@ const
     routes = require('./../../shared/routes.jsx');
 
 function routeTo(location, data, callback) {
-    reactRouter.match({routes, location}, function (error, redirectLocation, renderProps) {
+    reactRouter.match({routes, location}, (error, redirectLocation, renderProps) => {
         callback(error, ReactDOMServer.renderToString(
             <DataWrapper data={ data }><RoutingContext {...renderProps} /></DataWrapper>
         ));

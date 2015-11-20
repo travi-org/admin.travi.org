@@ -48,7 +48,7 @@ module.exports.World = function World() {
             }
         }
 
-        this.availableResourceTypes.forEach(function (type) {
+        this.availableResourceTypes.forEach((type) => {
             links[type] = buildHalLink(any.url());
         });
 

@@ -30,7 +30,7 @@ module.exports = function (grunt) {
     });
 
 
-    grunt.registerTask('warning-exit', 'Call process.exit', function () {
+    grunt.registerTask('warning-exit', 'Call process.exit', () => {
         process.exit(3);
     });
 
@@ -86,7 +86,7 @@ module.exports = function (grunt) {
             }
         });
 
-        grunt.task.registerTask('pact-tests', 'pact tests', function () {
+        grunt.task.registerTask('pact-tests', 'pact tests', () => {
             mockService
                 .given('the root url')
                 .uponReceiving('a GET request for the api catalog')
@@ -99,7 +99,7 @@ module.exports = function (grunt) {
                     ]
                 });
 
-            mockService.setup(function (error) {
+            mockService.setup((error) => {
                 if (error) {
                     console.warn(       //eslint-disable-line no-console
                         `Pact wasn't able set up the interactions:
@@ -108,14 +108,11 @@ module.exports = function (grunt) {
                 }
             });
 
-            mockService.run(function () {}, function (runComplete) {
-                require('./lib/server/resources/travi-api-resources').getLinksFor('', function () {
-
-                    runComplete();
-                });
+            mockService.run(() => {}, (runComplete) => {
+                require('./lib/server/resources/travi-api-resources').getLinksFor('', runComplete);
             });
 
-            mockService.verifyAndWrite(function (error) {
+            mockService.verifyAndWrite((error) => {
                 if (error) {
                     console.warn(       //eslint-disable-line no-console
                         `Pact wasn't able to verify the interactions:

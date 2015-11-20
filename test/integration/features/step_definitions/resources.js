@@ -60,7 +60,7 @@ function prepareListForResponse(resourceType) {
         resourceList = buildListOf.call(this, any.resource);
     }
 
-    _.map(resourceList, function (resource) {
+    _.map(resourceList, (resource) => {
         if (_.isObject(resource)) {
             resource._links = buildLinksIncluding();
         }
@@ -102,7 +102,7 @@ function setupExpectedApiResponsesFor(resourceType) {
         );
 
     if (existingResourceId) {
-        _.each(document._embedded[resourceType], function (resource) {
+        _.each(document._embedded[resourceType], (resource) => {
             if (resource.id === existingResourceId) {
                 const
                     link = resource._links.self.href,
@@ -130,7 +130,7 @@ function assertFormatIsUntouchedFor(resourceType, list) {
 function assertFormatMappedToViewFor(resourceType, list) {
     let mappedResource;
 
-    _.each(resources[resourceType], function (resource, index) {
+    _.each(resources[resourceType], (resource, index) => {
 
         if ('users' === resourceType) {
             mappedResource = {
@@ -153,11 +153,11 @@ function assertFormatMappedToViewFor(resourceType, list) {
 module.exports = function () {
     this.World = require('../support/world.js').World;
 
-    this.Before(function () {
+    this.Before(() => {
         nock.disableNetConnect();
     });
 
-    this.After(function () {
+    this.After(() => {
         nock.enableNetConnect();
         nock.cleanAll();
         resources = {};
@@ -172,7 +172,7 @@ module.exports = function () {
         callback();
     });
 
-    this.Given(/^list of "([^"]*)" contains one entry$/, function (resourceType, callback) {
+    this.Given(/^list of "([^"]*)" contains one entry$/, (resourceType, callback) => {
         const
             embedded = {},
             host = 'https://api.travi.org',
