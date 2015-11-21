@@ -21,10 +21,9 @@
   "config": {
     "blanket": {
       "pattern": "///[\\w-]+\\.js$/",
-      "data-cover-never": [
-        "node_modules",
-        "public",
-        "test"
+      "data-cover-ecmaVersion": 6,
+      "data-cover-only": [
+        "lib/"
       ]
     }
   },
