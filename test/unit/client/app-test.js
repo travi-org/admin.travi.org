@@ -1,17 +1,44 @@
 'use strict';
 
-const router = require('../../../lib/client/router');
+const
+    React = require('react'),
+    Router = require('react-router').Router,
+    dom = require('react-dom'),
+    AsyncProps = require('async-props').default,
+    proxyquire = require('proxyquire'),
+    any = require('../../helpers/any'),
+    routes = require('../../../lib/shared/routes.jsx'),
+    history = any.simpleObject();
+
+function simulatePageLoad() {
+    proxyquire('../../../lib/client/app.jsx', {
+        'history/lib/createBrowserHistory': sinon.stub().returns(history)
+    });
+}
 
 suite('client-side app', function () {
+    let sandbox;
+
+    setup(function () {
+        sandbox = sinon.sandbox.create();
+        sandbox.stub(dom, 'render');
+        sandbox.stub(React, 'createElement');
+    });
+
     teardown(function () {
-        router.init.restore();
+        sandbox.restore();
     });
 
     test('that app exists', function () {
-        sinon.stub(router, 'init');
+        const routerComponent = any.simpleObject();
+        React.createElement.withArgs(Router, {
+            history: history,
+            children: routes,
+            RoutingContext: AsyncProps
+        }).returns(routerComponent);
 
-        require('../../../lib/client/app.js');
+        simulatePageLoad();
 
-        sinon.assert.calledOnce(router.init);
+        assert.calledWith(dom.render, routerComponent, document.getElementById('wrap'));
     });
 });
