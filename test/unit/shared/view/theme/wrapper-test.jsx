@@ -3,32 +3,50 @@
 const
     React = require('react'),   //eslint-disable-line no-unused-vars
     dom = require('react-dom'),
-    assert = require('chai').assert,
     proxyquire = require('proxyquire'),
     any = require('../../../../helpers/any'),
-    DataWrapper = require('../../../../../lib/server/view/temp-data-wrapper'),
+    repository = require('../../../../../lib/client/repository'),
     PrimaryNav = require('../../../../helpers/primary-nav-stub.jsx');
 
 suite('wrapper view', function () {
     const Wrap = proxyquire('../../../../../lib/shared/views/theme/wrap.jsx', {'./primary-nav.jsx': PrimaryNav});
-    let node;
+    let node,
+        sandbox;
 
-    beforeEach(function () {
+    setup(function () {
+        sandbox = sinon.sandbox.create();
+        sandbox.stub(repository, 'getResourceTypes');
+
         node = document.createElement('div');
     });
 
-    afterEach(function () {
+    teardown(function () {
+        sandbox.restore();
+
         dom.unmountComponentAtNode(node);
     });
 
     test('that the layout markup is correct', function () {
         const data = {primaryNav: any.listOf(any.string)};
 
-        dom.render(<DataWrapper data={data} ><Wrap><section id="content" /></Wrap></DataWrapper>, node, function () {
-            assert.equal(node.children[0].className, 'container');
-            assert.equal(1, node.querySelectorAll('section').length);
-            assert.equal(1, node.querySelectorAll('#primary-nav').length);
-            assert.equal(data.primaryNav.length, node.querySelectorAll('#nav-items li').length);
+        dom.render(<Wrap {...data}><section id="content" /></Wrap>, node, function () {
+            assert.equals(node.children[0].className, 'container');
+            assert.equals(1, node.querySelectorAll('section').length);
+            assert.equals(1, node.querySelectorAll('#primary-nav').length);
+            assert.equals(data.primaryNav.length, node.querySelectorAll('#nav-items li').length);
         });
+    });
+
+    test('that data is fetched by loadProps', function () {
+        const
+            callback = sinon.spy(),
+            params = {
+                type: any.string(),
+                id: any.int()
+            };
+
+        Wrap.loadProps(null, callback);
+
+        assert.calledWith(repository.getResourceTypes, callback);
     });
 });

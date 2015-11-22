@@ -2,16 +2,19 @@
 
 const
     React = require('react'),
-    PrimaryNav = require('./primary-nav.jsx');
+    PrimaryNav = require('./primary-nav.jsx'),
+    repository = require('../../../client/repository');
 
 module.exports = React.createClass({
-    contextTypes: {
-        data: React.PropTypes.object.isRequired
+    statics: {
+        loadProps(params, callback) {
+            repository.getResourceTypes(callback);
+        }
     },
 
     render() {
         return <div className="container">
-            <PrimaryNav {...this.context.data} />
+            <PrimaryNav primaryNav={this.props.primaryNav} />
             { this.props.children }
         </div>;
     }

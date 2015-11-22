@@ -4,13 +4,23 @@ const
     React = require('react'),
     reactDom = require('react-dom/server'),
     cheerio = require('cheerio'),
-    assert = require('chai').assert,
     any = require('../../../../helpers/any-for-admin'),
+    repository = require('../../../../../lib/client/repository'),
     HistoryWrapper = require('../../../../helpers/history-wrapper'),
-    DataWrapper = require('../../../../../lib/server/view/temp-data-wrapper'),
     ResourceList = require('../../../../../lib/shared/views/resource-list.jsx');
 
 suite('resource list', function () {
+    let sandbox;
+
+    setup(function () {
+        sandbox = sinon.sandbox.create();
+        sandbox.stub(repository, 'getResources');
+    });
+
+    teardown(function () {
+        sandbox.restore();
+    });
+
     test('that a message is given when no resources are available', function () {
         let $message;
         const
@@ -19,11 +29,11 @@ suite('resource list', function () {
                 resources: []
             },
 
-            $ = cheerio.load(reactDom.renderToStaticMarkup(<DataWrapper data={data} ><ResourceList /></DataWrapper>));
+            $ = cheerio.load(reactDom.renderToStaticMarkup(<ResourceList {...data} />));
 
         $message = $('p');
-        assert.equal(1, $message.length);
-        assert.equal($message.text(), `No ${data.resourceType} are available`);
+        assert.equals(1, $message.length);
+        assert.equals($message.text(), `No ${data.resourceType} are available`);
     });
 
     test('that resources are listed', function () {
@@ -38,37 +48,36 @@ suite('resource list', function () {
                 ]
             },
 
-            $ = cheerio.load(reactDom.renderToString(<DataWrapper data={data} ><ResourceList /></DataWrapper>));
+            $ = cheerio.load(reactDom.renderToString(<ResourceList {...data} />));
 
-        assert.equal(1, $('ul').length);
+        assert.equals(1, $('ul').length);
 
         $items = $('li');
-        assert.equal($items.length, data.resources.length);
+        assert.equals($items.length, data.resources.length);
         $items.each(function (index, item) {
             let key;
             const
                 resource = data.resources[index],
                 $item = $(item);
 
-            assert.equal($item.text(), resource.displayName);
+            assert.equals($item.text(), resource.displayName);
             key = $item.data('reactid');
-            assert.equal(key.substring(key.indexOf('$') + 1), resource.id);
-            assert.equal($item.children('img').length, 0);
+            assert.equals(key.substring(key.indexOf('$') + 1), `${resource.id}`);
+            assert.equals($item.children('img').length, 0);
         });
     });
 
     test('that thumbnails are shown when defined', function () {
-        const
-            data = {
+        const data = {
                 resourceType: any.string(),
                 resources: [
                     {id: 1, displayName: 'one', thumbnail: {src: any.url(), size: any.int()}, links: {}}
                 ]
             },
 
-            $ = cheerio.load(reactDom.renderToStaticMarkup(<DataWrapper data={data} ><ResourceList /></DataWrapper>));
+            $ = cheerio.load(reactDom.renderToStaticMarkup(<ResourceList {...data} />));
 
-        assert.equal($('img').attr('src'), data.resources[0].thumbnail.src);
+        assert.equals($('img').attr('src'), data.resources[0].thumbnail.src);
     });
 
     test('that list item links to resource when link is provided', function () {
@@ -81,14 +90,20 @@ suite('resource list', function () {
                 ]
             },
 
-            $ = cheerio.load(reactDom.renderToStaticMarkup(
-                <HistoryWrapper>
-                    <DataWrapper data={data} >
-                        <ResourceList />
-                    </DataWrapper>
-                </HistoryWrapper>
-            ));
+            $ = cheerio.load(reactDom.renderToStaticMarkup(<HistoryWrapper><ResourceList {...data}/></HistoryWrapper>));
 
-        assert.equal($('li > a').attr('href'), selfLink);
+        assert.equals($('li > a').attr('href'), selfLink);
+    });
+
+    test('that data is fetched by loadProps', function () {
+        const
+            callback = sinon.spy(),
+            params = {
+                type: any.string()
+            };
+
+        ResourceList.loadProps(params, callback);
+
+        assert.calledWith(repository.getResources, params.type, callback);
     });
 });

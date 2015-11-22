@@ -4,20 +4,42 @@ const
     React = require('react'),
     reactDom = require('react-dom/server'),
     cheerio = require('cheerio'),
-    assert = require('chai').assert,
     any = require('../../../../helpers/any-for-admin'),
-    DataWrapper = require('../../../../../lib/server/view/temp-data-wrapper'),
+    repository = require('../../../../../lib/client/repository'),
     Resource = require('../../../../../lib/shared/views/resource.jsx');
 
 suite('resource', function () {
+    let sandbox;
+
+    setup(function () {
+        sandbox = sinon.sandbox.create();
+        sandbox.stub(repository, 'getResource');
+    });
+
+    teardown(function () {
+        sandbox.restore();
+    });
+
     test('that the resource is displayed', function () {
-        const
-            data = {
+        const data = {
                 resource: {id: any.string(), displayName: any.string()}
             },
 
-            $ = cheerio.load(reactDom.renderToStaticMarkup(<DataWrapper data={data} ><Resource /></DataWrapper>));
+            $ = cheerio.load(reactDom.renderToStaticMarkup(<Resource {...data} />));
 
-        assert.equal($('h3').text(), data.resource.displayName);
+        assert.equals($('h3').text(), data.resource.displayName);
+    });
+
+    test('that data is fetched by loadProps', function () {
+        const
+            callback = sinon.spy(),
+            params = {
+                type: any.string(),
+                id: any.int()
+            };
+
+        Resource.loadProps(params, callback);
+
+        assert.calledWith(repository.getResource, params.type, params.id, callback);
     });
 });

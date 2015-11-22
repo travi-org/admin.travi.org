@@ -2,11 +2,14 @@
 
 const
     React = require('react'),
-    Link = require('react-router').Link;
+    Link = require('react-router').Link,
+    repository = require('../../client/repository');
 
 module.exports = React.createClass({
-    contextTypes: {
-        data: React.PropTypes.object.isRequired
+    statics: {
+        loadProps(params, callback) {
+            repository.getResources(params.type, callback);
+        }
     },
 
     render() {
@@ -29,10 +32,10 @@ module.exports = React.createClass({
             return <li key={resource.id} className="list-group-item">{thumbnail}{link}</li>;
         }
 
-        if (this.context.data.resources.length) {
-            resources = <ul className="list-group">{ this.context.data.resources.map(renderResourceAsListItem) }</ul>;
+        if (this.props.resources.length) {
+            resources = <ul className="list-group">{ this.props.resources.map(renderResourceAsListItem) }</ul>;
         } else {
-            resources = <p className="alert alert-info">No { this.context.data.resourceType } are available</p>;
+            resources = <p className="alert alert-info">No { this.props.resourceType } are available</p>;
         }
 
         return resources;

@@ -1,13 +1,17 @@
 'use strict';
 
-const React = require('react');
+const
+    React = require('react'),
+    repository = require('../../client/repository');
 
 module.exports = React.createClass({
-    contextTypes: {
-        data: React.PropTypes.object.isRequired
+    statics: {
+        loadProps(params, callback) {
+            repository.getResource(params.type, params.id, callback);
+        }
     },
 
     render() {
-        return <h3>{this.context.data.resource.displayName}</h3>;
+        return <h3>{this.props.resource.displayName}</h3>;
     }
 });
