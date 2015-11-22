@@ -38,12 +38,7 @@ suite('wrapper view', function () {
     });
 
     test('that data is fetched by loadProps', function () {
-        const
-            callback = sinon.spy(),
-            params = {
-                type: any.string(),
-                id: any.int()
-            };
+        const callback = sinon.spy();
 
         Wrap.loadProps(null, callback);
 

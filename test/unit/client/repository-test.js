@@ -8,9 +8,7 @@ const
 suite('client repository', function () {
     const
         xhr = sinon.stub(),
-        repository = proxyquire('../../../lib/client/repository', {
-            xhr: xhr
-        });
+        repository = proxyquire('../../../lib/client/repository', {xhr});
 
     test('that resource is requested from server by id', function () {
         const

@@ -7,17 +7,17 @@ const
     AsyncProps = require('async-props').default,
     proxyquire = require('proxyquire'),
     any = require('../../helpers/any'),
-    routes = require('../../../lib/shared/routes.jsx'),
-    history = any.simpleObject();
-
-function simulatePageLoad() {
-    proxyquire('../../../lib/client/app.jsx', {
-        'history/lib/createBrowserHistory': sinon.stub().returns(history)
-    });
-}
+    routes = require('../../../lib/shared/routes.jsx');
 
 suite('client-side app', function () {
+    const history = any.simpleObject();
     let sandbox;
+
+    function simulatePageLoad() {
+        proxyquire('../../../lib/client/app.jsx', {
+            'history/lib/createBrowserHistory': sinon.stub().returns(history)
+        });
+    }
 
     setup(function () {
         sandbox = sinon.sandbox.create();
@@ -32,7 +32,7 @@ suite('client-side app', function () {
     test('that app exists', function () {
         const routerComponent = any.simpleObject();
         React.createElement.withArgs(Router, {
-            history: history,
+            history,
             children: routes,
             RoutingContext: AsyncProps
         }).returns(routerComponent);
