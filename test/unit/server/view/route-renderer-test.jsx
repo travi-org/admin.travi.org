@@ -4,8 +4,8 @@ const
     React = require('react'),
     ReactDOMServer = require('react-dom/server'),
     reactRouter = require('react-router'),
-    DataWrapper = require('../../../../lib/server/view/temp-data-wrapper'),
     any = require('../../../helpers/any'),
+    _ = require('lodash'),
 
     renderer = require('../../../../lib/server/view/route-renderer'),
     routes = require('../../../../lib/shared/routes.jsx');
@@ -32,11 +32,9 @@ suite('route renderer', function () {
             location = any.url(),
             renderProps = any.simpleObject(),
             context = any.simpleObject(),
-            wrapped = any.simpleObject(),
             data = any.simpleObject();
-        React.createElement.withArgs(RoutingContext, renderProps).returns(context);
-        React.createElement.withArgs(DataWrapper, { data }, context).returns(wrapped);
-        ReactDOMServer.renderToString.withArgs(wrapped).returns(renderedContent);
+        React.createElement.withArgs(RoutingContext, sinon.match(renderProps)).returns(context);
+        ReactDOMServer.renderToString.withArgs(context).returns(renderedContent);
 
         renderer.routeTo(location, data, callback);
 
@@ -46,6 +44,24 @@ suite('route renderer', function () {
         reactRouter.match.yield(null, null, renderProps);
 
         assert.calledWith(callback, null, renderedContent);
+    });
+
+    test('that default data is passed as props when element created by router', function () {
+        const
+            callback = sinon.spy(),
+            location = any.url(),
+            renderProps = any.simpleObject(),
+            props = any.simpleObject(),
+            data = any.simpleObject(),
+            dummyComponent = React.createClass({
+                render: () => <div>dummy component</div>
+            });
+        reactRouter.match.yields(null, null, renderProps);
+        React.createElement.withArgs(RoutingContext).yieldsTo('createElement', dummyComponent, props);
+
+        renderer.routeTo(location, data, callback);
+
+        assert.calledWith(React.createElement, dummyComponent, _.extend({}, props, data));
     });
 
     test('that errors bubble', function () {
