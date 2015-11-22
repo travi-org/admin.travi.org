@@ -51,7 +51,7 @@ suite('routes', function () {
     test('that the not-found route is defined', function () {
         dom.render(
             <DataWrapper data={{}} >
-                <Router history={createHistory('/foo')}>
+                <Router history={createHistory('/foo/bar/baz')}>
                     { routes }
                 </Router>
             </DataWrapper>, node, function () {
