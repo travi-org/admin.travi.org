@@ -71,10 +71,11 @@ suite('rendering handler', function () {
             extension = sinon.stub().withArgs('onPreResponse').yields(request, reply),
             location = any.simpleObject(),
             renderedContent = any.string(),
+            primaryNavWithActiveLink = _.map(primaryNav, function (item, index) {
+                return _.extend({}, item, {active: 2 === index});
+            }),
             data = _.extend({}, request.response.source, {
-                primaryNav: _.map(primaryNav, function (item, index) {
-                    return _.extend({}, item, {active: 2 === index});
-                })
+                primaryNav: primaryNavWithActiveLink
             });
         mediaType.returns('text/html');
         history.createLocation.withArgs(request.url).returns(location);
@@ -86,7 +87,10 @@ suite('rendering handler', function () {
         assert.calledWith(routeRenderer.routeTo, location, data);
         routeRenderer.routeTo.yield(null, renderedContent);
 
-        assert.calledWith(reply.view, 'layout/layout', {renderedContent, initialData: JSON.stringify(data)});
+        assert.calledWith(reply.view, 'layout/layout', {renderedContent, initialData: JSON.stringify([
+            {primaryNav: primaryNavWithActiveLink},
+            data
+        ])});
     });
 
     test('that error bubbles', function () {
@@ -121,6 +125,6 @@ suite('rendering handler', function () {
 
         handler.register({ext: extension}, null, sinon.spy());
 
-        assert.calledWith(reply.view, 'layout/layout', {renderedContent, initialData: JSON.stringify(data)});
+        assert.calledWith(reply.view, 'layout/layout', {renderedContent, initialData: JSON.stringify([data])});
     });
 });
