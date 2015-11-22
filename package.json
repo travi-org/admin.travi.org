@@ -70,7 +70,7 @@
     "proxyquire": "1.7.3",
     "react-addons-test-utils": "^0.14.3",
     "referee": "1.2.0",
-    "referee-sinon": "1.0.2",
+    "referee-sinon": "1.0.3",
     "setup-referee-sinon": "0.3.0",
     "sinon": "1.17.2",
     "time-grunt": "1.2.2"
