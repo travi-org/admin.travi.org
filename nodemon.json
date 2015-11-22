@@ -3,6 +3,10 @@
     "env": {
         "NODE_ENV": "development"
     },
+    "watch": [
+        "lib/server",
+        "lib/shared"
+    ],
     "ignore": [
         ".git",
         ".idea",
