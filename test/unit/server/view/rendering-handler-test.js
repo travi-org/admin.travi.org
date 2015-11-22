@@ -8,14 +8,14 @@ const
     _ = require('lodash'),
     any = require('../../../helpers/any');
 
-suite('rendering handler', function () {
+suite('rendering handler', () => {
     const
         Negotiator = sinon.stub(),
         handler = proxyquire('../../../../lib/server/view/rendering-handler', {
             'negotiator': Negotiator
         }),
         primaryNav = any.listOf(
-            function () {
+            () => {
                 return {
                     text: any.string()
                 };
@@ -27,7 +27,7 @@ suite('rendering handler', function () {
         mediaType,
         request;
 
-    setup(function () {
+    setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(routeRenderer, 'routeTo');
         sandbox.stub(history, 'createLocation');
@@ -39,18 +39,18 @@ suite('rendering handler', function () {
         Negotiator.withArgs(request).returns({mediaType});
     });
 
-    teardown(function () {
+    teardown(() => {
         sandbox.restore();
         Negotiator.reset();
     });
 
-    test('that the plugin is defined', function () {
+    test('that the plugin is defined', () => {
         assert.equals(handler.register.attributes, {
             name: 'rendering-handler'
         });
     });
 
-    test('that a non-html request is forwarded with no modification', function () {
+    test('that a non-html request is forwarded with no modification', () => {
         const
             next = sinon.spy(),
             reply = { continue: sinon.spy() },
@@ -63,7 +63,7 @@ suite('rendering handler', function () {
         assert.calledOnce(reply.continue);
     });
 
-    test('that an html request returns a rendered view', function () {
+    test('that an html request returns a rendered view', () => {
         request.params = {resourceType: primaryNav[2].text};
         request.response = {source: any.simpleObject()};
         const
@@ -71,7 +71,7 @@ suite('rendering handler', function () {
             extension = sinon.stub().withArgs('onPreResponse').yields(request, reply),
             location = any.simpleObject(),
             renderedContent = any.string(),
-            primaryNavWithActiveLink = _.map(primaryNav, function (item, index) {
+            primaryNavWithActiveLink = _.map(primaryNav, (item, index) => {
                 return _.extend({}, item, {active: 2 === index});
             }),
             data = _.extend({}, request.response.source, {
@@ -93,7 +93,7 @@ suite('rendering handler', function () {
         ])});
     });
 
-    test('that error bubbles', function () {
+    test('that error bubbles', () => {
         const
             reply = sinon.spy(),
             error = any.simpleObject(),
@@ -106,7 +106,7 @@ suite('rendering handler', function () {
         assert.calledWith(reply, error);
     });
 
-    test('that data defaults to empty object since error case does not set response.source', function () {
+    test('that data defaults to empty object since error case does not set response.source', () => {
         request.params = {};
         request.response = {};
         const
@@ -115,7 +115,7 @@ suite('rendering handler', function () {
             location = any.simpleObject(),
             renderedContent = any.string(),
             data = _.extend({}, request.response.source, {
-                primaryNav: _.map(primaryNav, function (item) {
+                primaryNav: _.map(primaryNav, (item) => {
                     return _.extend({}, item, {active: false});
                 })
             });

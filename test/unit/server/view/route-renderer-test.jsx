@@ -10,22 +10,22 @@ const
     renderer = require('../../../../lib/server/view/route-renderer'),
     routes = require('../../../../lib/shared/routes.jsx');
 
-suite('route renderer', function () {
+suite('route renderer', () => {
     const RoutingContext = reactRouter.RoutingContext;
     let sandbox;
 
-    setup(function () {
+    setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(ReactDOMServer, 'renderToString');
         sandbox.stub(React, 'createElement');
         sandbox.stub(reactRouter, 'match');
     });
 
-    teardown(function () {
+    teardown(() => {
         sandbox.restore();
     });
 
-    test('that rendered html yielded for proper route', function () {
+    test('that rendered html yielded for proper route', () => {
         const
             renderedContent = any.string(),
             callback = sinon.spy(),
@@ -46,7 +46,7 @@ suite('route renderer', function () {
         assert.calledWith(callback, null, renderedContent);
     });
 
-    test('that default data is passed as props when element created by router', function () {
+    test('that default data is passed as props when element created by router', () => {
         const
             callback = sinon.spy(),
             location = any.url(),
@@ -64,7 +64,7 @@ suite('route renderer', function () {
         assert.calledWith(React.createElement, dummyComponent, _.extend({}, props, data));
     });
 
-    test('that errors bubble', function () {
+    test('that errors bubble', () => {
         const
             error = any.simpleObject(),
             callback = sinon.spy();

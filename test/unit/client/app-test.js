@@ -9,7 +9,7 @@ const
     any = require('../../helpers/any'),
     routes = require('../../../lib/shared/routes.jsx');
 
-suite('client-side app', function () {
+suite('client-side app', () => {
     const history = any.simpleObject();
     let sandbox;
 
@@ -19,17 +19,17 @@ suite('client-side app', function () {
         });
     }
 
-    setup(function () {
+    setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(dom, 'render');
         sandbox.stub(React, 'createElement');
     });
 
-    teardown(function () {
+    teardown(() => {
         sandbox.restore();
     });
 
-    test('that app exists', function () {
+    test('that app exists', () => {
         const routerComponent = any.simpleObject();
         React.createElement.withArgs(Router, {
             history,

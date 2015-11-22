@@ -4,8 +4,8 @@ const
     mapper = require('../../../../../lib/server/resources/mappers/ride-mapper'),
     any = require('../../../../helpers/any-for-admin');
 
-suite('ride mapper', function () {
-    test('that ride resources mapped to view list', function () {
+suite('ride mapper', () => {
+    test('that ride resources mapped to view list', () => {
         const ride = any.resources.ride();
 
         assert.equals(
@@ -18,7 +18,7 @@ suite('ride mapper', function () {
         );
     });
 
-    test('that ride mapped to view', function () {
+    test('that ride mapped to view', () => {
         const ride = any.resources.ride();
 
         assert.equals(
@@ -31,7 +31,7 @@ suite('ride mapper', function () {
         );
     });
 
-    test('that self link defined when defined in api', function () {
+    test('that self link defined when defined in api', () => {
         const ride = any.resources.ride();
         ride._links.self = any.url();
 

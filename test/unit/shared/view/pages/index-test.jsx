@@ -9,10 +9,10 @@ const
 
 require('setup-referee-sinon/globals');
 
-suite('index', function () {
+suite('index', () => {
     const Index = createIndex(React);
 
-    test('that the proper content is displayed', function () {
+    test('that the proper content is displayed', () => {
         const $ = cheerio.load(reactDom.renderToStaticMarkup(<Index />));
 
         assert.equals($('h2').text(), 'Reference API Client');

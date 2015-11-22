@@ -5,26 +5,26 @@ const
     resources = require('../../../../lib/server/resources/routes'),
     resourcesController = require('../../../../lib/server/resources/controller');
 
-suite('server routes config', function () {
+suite('server routes config', () => {
     let sandbox;
 
-    setup(function () {
+    setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(resourcesController, 'getListOf');
         sandbox.stub(resourcesController, 'getResource');
     });
 
-    teardown(function () {
+    teardown(() => {
         sandbox.restore();
     });
 
-    test('that the plugin is defined', function () {
+    test('that the plugin is defined', () => {
         assert.equals(resources.register.attributes, {
             name: 'resources-routes'
         });
     });
 
-    test('that the list route is configured', function () {
+    test('that the list route is configured', () => {
         const
             reply = sinon.spy(),
             next = sinon.spy(),
@@ -49,7 +49,7 @@ suite('server routes config', function () {
         });
     });
 
-    test('that error bubbles for list route', function () {
+    test('that error bubbles for list route', () => {
         const
             reply = sinon.spy(),
             next = sinon.spy(),
@@ -67,7 +67,7 @@ suite('server routes config', function () {
         assert.calledWith(reply, error);
     });
 
-    test('that the single resource route is configured', function () {
+    test('that the single resource route is configured', () => {
         const
             reply = sinon.spy(),
             next = sinon.spy(),
@@ -90,7 +90,7 @@ suite('server routes config', function () {
         assert.calledWith(reply, {resource});
     });
 
-    test('that error bubbles for resource route', function () {
+    test('that error bubbles for resource route', () => {
         const
             reply = sinon.spy(),
             next = sinon.spy(),

@@ -2,14 +2,14 @@
 
 const assets = require('../../../../lib/server/view/static-assets');
 
-suite('static assets', function () {
-    test('that the plugin is defined', function () {
+suite('static assets', () => {
+    test('that the plugin is defined', () => {
         assert.equals(assets.register.attributes, {
             name: 'static-assets'
         });
     });
 
-    test('that the static asset routes are configured', function () {
+    test('that the static asset routes are configured', () => {
         const
             next = sinon.spy(),
             route = sinon.spy();

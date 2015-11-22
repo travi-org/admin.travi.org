@@ -9,22 +9,22 @@ const
 
 require('setup-referee-sinon/globals');
 
-suite('resources controller', function () {
-    setup(function () {
+suite('resources controller', () => {
+    setup(() => {
         sinon.stub(traviApiResources, 'getListOf');
         sinon.stub(traviApiResources, 'getResourceBy');
         sinon.stub(traviApiResources, 'getLinksFor');
         sinon.stub(resourceMapperFactory, 'getMapperFor');
     });
 
-    teardown(function () {
+    teardown(() => {
         traviApiResources.getListOf.restore();
         traviApiResources.getResourceBy.restore();
         traviApiResources.getLinksFor.restore();
         resourceMapperFactory.getMapperFor.restore();
     });
 
-    test('that an empty list of resource types is returned when none are available', function () {
+    test('that an empty list of resource types is returned when none are available', () => {
         const callback = sinon.spy();
 
         traviApiResources.getLinksFor.withArgs('catalog').yields(null, {
@@ -36,7 +36,7 @@ suite('resources controller', function () {
         assert.calledWith(callback, null, []);
     });
 
-    test('that link rels are listed when links are present', function () {
+    test('that link rels are listed when links are present', () => {
         const
             callback = sinon.spy(),
             linkName = any.string(),
@@ -52,7 +52,7 @@ suite('resources controller', function () {
         }]);
     });
 
-    test('that error bubbles for api request for recource-types', function () {
+    test('that error bubbles for api request for recource-types', () => {
         const
             callback = sinon.spy(),
             error = any.simpleObject();
@@ -63,7 +63,7 @@ suite('resources controller', function () {
         assert.calledWith(callback, error);
     });
 
-    test('that resources are requested from the api by type', function () {
+    test('that resources are requested from the api by type', () => {
         const
             callback = sinon.spy(),
             resourceType = any.string(),
@@ -82,7 +82,7 @@ suite('resources controller', function () {
         assert.calledWith(callback, null, mappedList);
     });
 
-    test('that error bubbles for api request for resources', function () {
+    test('that error bubbles for api request for resources', () => {
         const
             callback = sinon.spy(),
             resourceType = any.string(),
@@ -94,7 +94,7 @@ suite('resources controller', function () {
         assert.calledWith(callback, error);
     });
 
-    test('that resource is requested from the api', function () {
+    test('that resource is requested from the api', () => {
         const
             resourceType = any.string(),
             resourceId = any.string(),
@@ -111,7 +111,7 @@ suite('resources controller', function () {
         assert.calledWith(callback, null, mappedResource);
     });
 
-    test('that error bubbles for api request for resource', function () {
+    test('that error bubbles for api request for resource', () => {
         const
             resourceType = any.string(),
             resourceId = any.string(),

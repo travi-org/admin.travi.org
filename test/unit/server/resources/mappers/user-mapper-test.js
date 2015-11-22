@@ -4,8 +4,8 @@ const
     mapper = require('../../../../../lib/server/resources/mappers/user-mapper'),
     any = require('../../../../helpers/any-for-admin');
 
-suite('user mapper', function () {
-    test('that user resources mapped to view list', function () {
+suite('user mapper', () => {
+    test('that user resources mapped to view list', () => {
         const user = any.resources.user();
 
         assert.equals(
@@ -19,7 +19,7 @@ suite('user mapper', function () {
         );
     });
 
-    test('that user mapped to view', function () {
+    test('that user mapped to view', () => {
         const user = any.resources.user();
 
         assert.equals(
@@ -33,7 +33,7 @@ suite('user mapper', function () {
         );
     });
 
-    test('that self link defined when defined in api', function () {
+    test('that self link defined when defined in api', () => {
         const user = any.resources.user();
         user._links.self = any.url();
 

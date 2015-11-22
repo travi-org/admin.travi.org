@@ -9,19 +9,19 @@ const
     HistoryWrapper = require('../../../../helpers/history-wrapper'),
     ResourceList = require('../../../../../lib/shared/views/resource-list.jsx');
 
-suite('resource list', function () {
+suite('resource list', () => {
     let sandbox;
 
-    setup(function () {
+    setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(repository, 'getResources');
     });
 
-    teardown(function () {
+    teardown(() => {
         sandbox.restore();
     });
 
-    test('that a message is given when no resources are available', function () {
+    test('that a message is given when no resources are available', () => {
         let $message;
         const
             data = {
@@ -36,7 +36,7 @@ suite('resource list', function () {
         assert.equals($message.text(), `No ${data.resourceType} are available`);
     });
 
-    test('that resources are listed', function () {
+    test('that resources are listed', () => {
         let $items;
         const
             data = {
@@ -54,7 +54,7 @@ suite('resource list', function () {
 
         $items = $('li');
         assert.equals($items.length, data.resources.length);
-        $items.each(function (index, item) {
+        $items.each((index, item) => {
             let key;
             const
                 resource = data.resources[index],
@@ -67,7 +67,7 @@ suite('resource list', function () {
         });
     });
 
-    test('that thumbnails are shown when defined', function () {
+    test('that thumbnails are shown when defined', () => {
         const data = {
                 resourceType: any.string(),
                 resources: [
@@ -80,7 +80,7 @@ suite('resource list', function () {
         assert.equals($('img').attr('src'), data.resources[0].thumbnail.src);
     });
 
-    test('that list item links to resource when link is provided', function () {
+    test('that list item links to resource when link is provided', () => {
         const
             selfLink = any.url(),
             data = {
@@ -95,7 +95,7 @@ suite('resource list', function () {
         assert.equals($('li > a').attr('href'), selfLink);
     });
 
-    test('that data is fetched by loadProps', function () {
+    test('that data is fetched by loadProps', () => {
         const
             callback = sinon.spy(),
             params = {

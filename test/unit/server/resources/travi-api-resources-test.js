@@ -7,19 +7,19 @@ const
 
 require('setup-referee-sinon/globals');
 
-suite('travi-api resource interactions', function () {
+suite('travi-api resource interactions', () => {
     let stubForGet;
 
-    setup(function () {
+    setup(() => {
         stubForGet = sinon.stub();
         sinon.stub(traverson, 'from');
     });
 
-    teardown(function () {
+    teardown(() => {
         traverson.from.restore();
     });
 
-    test('that links are requested from the api catalog', function () {
+    test('that links are requested from the api catalog', () => {
         const
             callback = sinon.spy(),
             links = {
@@ -36,7 +36,7 @@ suite('travi-api resource interactions', function () {
         assert.calledWith(callback, null, links);
     });
 
-    test('that list of resources requested by following link from api catalog', function () {
+    test('that list of resources requested by following link from api catalog', () => {
         const
             resourceType = any.string(),
             resources = any.listOf(any.resource),
@@ -58,7 +58,7 @@ suite('travi-api resource interactions', function () {
         assert.calledWith(callback, null, resources);
     });
 
-    test('that error bubbles from resources request', function () {
+    test('that error bubbles from resources request', () => {
         const
             resourceType = any.string(),
             error = any.simpleObject(),
@@ -74,7 +74,7 @@ suite('travi-api resource interactions', function () {
         assert.calledWith(callback, error);
     });
 
-    test('that a single resource is mapped to a list', function () {
+    test('that a single resource is mapped to a list', () => {
         const
             resourceType = any.string(),
             responseFromApi = {
@@ -96,7 +96,7 @@ suite('travi-api resource interactions', function () {
         assert.calledWith(callback, null, [resource]);
     });
 
-    test('that specific resource requested by following links', function () {
+    test('that specific resource requested by following links', () => {
         const
             resourceType = any.string(),
             resourceId = any.int(),
@@ -113,7 +113,7 @@ suite('travi-api resource interactions', function () {
         assert.calledWith(callback, null, resource);
     });
 
-    test('that error bubbles from resource request', function () {
+    test('that error bubbles from resource request', () => {
         const
             resourceType = any.string(),
             resourceId = any.int(),

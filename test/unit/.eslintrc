@@ -14,7 +14,6 @@
   rules:
     react/jsx-uses-react: 2
     no-mixed-requires: 2
-    prefer-arrow-callback: 0
     max-nested-callbacks:
       - 2
       - 4

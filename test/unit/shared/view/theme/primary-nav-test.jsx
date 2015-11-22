@@ -11,10 +11,10 @@ const
     HistoryWrapper = require('../../../../helpers/history-wrapper'),
     PrimaryNav = require('../../../../../lib/shared/views/theme/primary-nav.jsx');
 
-suite('primary navigation', function () {
-    test('that the resource types are listed as links', function () {
+suite('primary navigation', () => {
+    test('that the resource types are listed as links', () => {
         const
-            primaryNav = any.listOf(function () {
+            primaryNav = any.listOf(() => {
                 return {
                     text: any.string(),
                     path: any.url()
@@ -28,7 +28,7 @@ suite('primary navigation', function () {
 
         assert.equal($('nav').length, 1);
         assert.equal($items.length, primaryNav.length);
-        $items.each(function (index, item) {
+        $items.each((index, item) => {
             const
                 $item = $(item),
                 type = primaryNav[index],

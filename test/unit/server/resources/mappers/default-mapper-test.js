@@ -2,12 +2,12 @@
 
 const mapper = require('../../../../../lib/server/resources/mappers/default-mapper');
 
-suite('default mapper', function () {
-    test('that the expected methods are exposed', function () {
+suite('default mapper', () => {
+    test('that the expected methods are exposed', () => {
         assert.isFunction(mapper.mapToViewList);
     });
 
-    test('that the original list is returned untouched', function () {
+    test('that the original list is returned untouched', () => {
         const
             list = [{foo: 'bar'}],
 
@@ -19,7 +19,7 @@ suite('default mapper', function () {
         assert.equals(view.links, {});
     });
 
-    test('that the original resource is returned untouched', function () {
+    test('that the original resource is returned untouched', () => {
         const
             resource = {foo: 'bar'},
 

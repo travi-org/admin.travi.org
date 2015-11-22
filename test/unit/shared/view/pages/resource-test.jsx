@@ -8,19 +8,19 @@ const
     repository = require('../../../../../lib/client/repository'),
     Resource = require('../../../../../lib/shared/views/resource.jsx');
 
-suite('resource', function () {
+suite('resource', () => {
     let sandbox;
 
-    setup(function () {
+    setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(repository, 'getResource');
     });
 
-    teardown(function () {
+    teardown(() => {
         sandbox.restore();
     });
 
-    test('that the resource is displayed', function () {
+    test('that the resource is displayed', () => {
         const data = {
                 resource: {id: any.string(), displayName: any.string()}
             },
@@ -30,7 +30,7 @@ suite('resource', function () {
         assert.equals($('h3').text(), data.resource.displayName);
     });
 
-    test('that data is fetched by loadProps', function () {
+    test('that data is fetched by loadProps', () => {
         const
             callback = sinon.spy(),
             params = {

@@ -9,10 +9,10 @@ const
 
 require('setup-referee-sinon/globals');
 
-suite('not found', function () {
+suite('not found', () => {
     const NotFound = createNotFound(React);
 
-    test('that the proper content is displayed', function () {
+    test('that the proper content is displayed', () => {
         const $ = cheerio.load(reactDom.renderToStaticMarkup(<NotFound />));
 
         assert.equals($('h2').text(), '404');

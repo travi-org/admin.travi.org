@@ -5,25 +5,25 @@ const
     landing = require('../../../../lib/server/core/landing'),
     resourcesController = require('../../../../lib/server/resources/controller');
 
-suite('landing config', function () {
+suite('landing config', () => {
     let sandbox;
 
-    setup(function () {
+    setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(resourcesController, 'listResourceTypes');
     });
 
-    teardown(function () {
+    teardown(() => {
         sandbox.restore();
     });
 
-    test('that the plugin is defined', function () {
+    test('that the plugin is defined', () => {
         assert.equals(landing.register.attributes, {
             name: 'landing'
         });
     });
 
-    test('that the landing page route is configured', function () {
+    test('that the landing page route is configured', () => {
         const
             reply = sinon.spy(),
             next = sinon.spy(),
@@ -45,7 +45,7 @@ suite('landing config', function () {
         });
     });
 
-    test('that error bubbles', function () {
+    test('that error bubbles', () => {
         const
             reply = sinon.spy(),
             next = sinon.spy(),

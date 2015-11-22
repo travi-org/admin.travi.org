@@ -7,7 +7,7 @@ const
     createHistory = require('history/lib/createMemoryHistory'),
     proxyquire = require('proxyquire');
 
-suite('routes', function () {
+suite('routes', () => {
     const
         Router = reactRouter.Router,
         routes = proxyquire('../../../lib/shared/routes.jsx', {
@@ -27,69 +27,69 @@ suite('routes', function () {
         });
     let node;
 
-    beforeEach(function () {
+    beforeEach(() => {
         node = document.createElement('div');
     });
 
-    afterEach(function () {
+    afterEach(() => {
         dom.unmountComponentAtNode(node);
     });
 
-    test('that the root route is defined', function () {
+    test('that the root route is defined', () => {
         dom.render(
             <Router history={createHistory('/')}>
                 { routes }
-            </Router>, node, function () {
+            </Router>, node, () => {
                 assert.equals(node.textContent, 'wrapper index');
             }
         );
     });
 
-    test('that the not-found route is defined', function () {
+    test('that the not-found route is defined', () => {
         dom.render(
             <Router history={createHistory('/foo/bar/baz')}>
                 { routes }
-            </Router>, node, function () {
+            </Router>, node, () => {
                 assert.equals(node.textContent, 'wrapper not-found');
             }
         );
     });
 
-    test('that the rides route is defined', function () {
+    test('that the rides route is defined', () => {
         dom.render(
             <Router history={createHistory('/rides')}>
                 { routes }
-            </Router>, node, function () {
+            </Router>, node, () => {
                 assert.equals(node.textContent, 'wrapper resources');
             }
         );
     });
 
-    test('that the ride route is defined', function () {
+    test('that the ride route is defined', () => {
         dom.render(
             <Router history={createHistory('/rides/8')}>
                 { routes }
-            </Router>, node, function () {
+            </Router>, node, () => {
                 assert.equals(node.textContent, 'wrapper resource');
             }
         );
     });
 
-    test('that the users route is defined', function () {
+    test('that the users route is defined', () => {
         dom.render(
             <Router history={createHistory('/users')}>
                 { routes }
-            </Router>, node, function () {
+            </Router>, node, () => {
                 assert.equals(node.textContent, 'wrapper resources');
             }
         );
     });
 
-    test('that the user route is defined', function () {
+    test('that the user route is defined', () => {
         dom.render(
             <Router history={createHistory('/users/4')}>
                 { routes }
-            </Router>, node, function () {
+            </Router>, node, () => {
                 assert.equals(node.textContent, 'wrapper resource');
             }
         );

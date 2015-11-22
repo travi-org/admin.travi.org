@@ -5,12 +5,12 @@ const
     sinon = require('sinon'),
     proxyquire = require('proxyquire');
 
-suite('client repository', function () {
+suite('client repository', () => {
     const
         xhr = sinon.stub(),
         repository = proxyquire('../../../lib/client/repository', {xhr});
 
-    test('that resource is requested from server by id', function () {
+    test('that resource is requested from server by id', () => {
         const
             data = [any.simpleObject()],
             type = any.string(),
@@ -28,7 +28,7 @@ suite('client repository', function () {
         assert.calledWith(callback, null, data);
     });
 
-    test('that error bubbles when getting a resource by id', function () {
+    test('that error bubbles when getting a resource by id', () => {
         const
             error = any.simpleObject(),
             callback = sinon.spy(),
@@ -41,7 +41,7 @@ suite('client repository', function () {
         assert.calledWith(callback, error);
     });
 
-    test('that a list of resources is requested from server', function () {
+    test('that a list of resources is requested from server', () => {
         const
             data = [any.simpleObject()],
             type = any.string(),
@@ -58,7 +58,7 @@ suite('client repository', function () {
         assert.calledWith(callback, null, data);
     });
 
-    test('that error bubbles when getting a resource list', function () {
+    test('that error bubbles when getting a resource list', () => {
         const
             error = any.simpleObject(),
             callback = sinon.spy(),
@@ -70,7 +70,7 @@ suite('client repository', function () {
         assert.calledWith(callback, error);
     });
 
-    test('that the list of resource types is requested from server', function () {
+    test('that the list of resource types is requested from server', () => {
         const
             data = [any.simpleObject()],
             callback = sinon.spy();
@@ -86,7 +86,7 @@ suite('client repository', function () {
         assert.calledWith(callback, null, data);
     });
 
-    test('that error bubbles when getting a resource list', function () {
+    test('that error bubbles when getting a resource list', () => {
         const
             error = any.simpleObject(),
             callback = sinon.spy();
