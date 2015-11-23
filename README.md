@@ -21,4 +21,4 @@ an acceptable way to piece together `hapi` and `react` to support the following:
 - [ ] OpenID
 - [x] Thin HATEOAS/Hal client
 - [ ] OAuth client
-* API driven form validation
+- [ ] API driven form validation
