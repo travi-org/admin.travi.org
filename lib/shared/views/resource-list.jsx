@@ -3,7 +3,9 @@
 const
     React = require('react'),
     Link = require('react-router').Link,
-    repository = require('../../client/repository');
+    repository = require('../../client/repository'),
+    ListGroup = require('react-bootstrap').ListGroup,
+    ListGroupItem = require('react-bootstrap').ListGroupItem;
 
 module.exports = React.createClass({
     statics: {
@@ -29,11 +31,11 @@ module.exports = React.createClass({
                 link = resource.displayName;
             }
 
-            return <li key={resource.id} className="list-group-item">{thumbnail}{link}</li>;
+            return <ListGroupItem key={resource.id}>{thumbnail}{link}</ListGroupItem>;
         }
 
         if (this.props.resources.length) {
-            resources = <ul className="list-group">{ this.props.resources.map(renderResourceAsListItem) }</ul>;
+            resources = <ListGroup>{ this.props.resources.map(renderResourceAsListItem) }</ListGroup>;
         } else {
             resources = <p className="alert alert-info">No { this.props.resourceType } are available</p>;
         }

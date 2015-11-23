@@ -62,7 +62,7 @@ suite('resource list', () => {
 
             assert.equals($item.text(), resource.displayName);
             key = $item.data('reactid');
-            assert.equals(key.substring(key.indexOf('$') + 1), `${resource.id}`);
+            assert.equals(key.substring(key.lastIndexOf('$') + 1), `${resource.id}`);
             assert.equals($item.children('img').length, 0);
         });
     });
