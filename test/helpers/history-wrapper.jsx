@@ -6,8 +6,11 @@ const
 
 class HistoryWrapper extends React.Component {
     getChildContext() {
+        const historyInstance = history.createMemoryHistory();
+        historyInstance.isActive = function () {};
+
         return {
-            history: history.createMemoryHistory()
+            history: historyInstance
         };
     }
 
@@ -15,6 +18,7 @@ class HistoryWrapper extends React.Component {
         return this.props.children;
     }
 }
+
 HistoryWrapper.childContextTypes = {
     history: React.PropTypes.object
 };

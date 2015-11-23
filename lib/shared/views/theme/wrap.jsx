@@ -13,9 +13,11 @@ module.exports = React.createClass({
     },
 
     render() {
-        return <div className="container">
-            <PrimaryNav primaryNav={this.props.primaryNav} />
-            { this.props.children }
-        </div>;
+        return (
+            <div className="container">
+                <PrimaryNav primaryNav={this.props.primaryNav} />
+                { this.props.children }
+            </div>
+        );
     }
 });

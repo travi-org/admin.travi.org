@@ -3,44 +3,35 @@
 const
     React = require('react'),
     router = require('react-router'),
-    Link = router.Link,
-    IndexLink = router.IndexLink;
+    IndexLink = router.IndexLink,
+
+    Navbar = require('react-bootstrap').Navbar,
+    NavItem = require('react-bootstrap').NavItem,
+    Nav = require('react-bootstrap').Nav,
+    LinkContainer = require('react-router-bootstrap').LinkContainer;
 
 module.exports = React.createClass({
     render() {
-        let list;
-
-        function renderNavLink(type) {
-            return <li key={type.text} className={ type.active ? 'active' : '' }>
-                <Link to={type.path}>{type.text}</Link>
-            </li>;
-        }
-
-        if (this.props.primaryNav) {
-            list = <div className="collapse navbar-collapse" id="navbar-items">
-                <ul className="nav navbar-nav">
-                    {this.props.primaryNav.map(renderNavLink)}
-                </ul>
-            </div>;
-        }
-
-        return <nav className="navbar navbar-default">
-            <div className="container-fluid">
-                <div className="navbar-header">
-                    <button type="button" className="navbar-toggle collapsed"
-                            data-toggle="collapse" data-target="#navbar-items">
-                        <span className="sr-only">Toggle navigation</span>
-                        <span className="icon-bar"></span>
-                        <span className="icon-bar"></span>
-                        <span className="icon-bar"></span>
-                    </button>
-
-                    <h1><IndexLink className="navbar-brand" to="/">Travi</IndexLink></h1>
-                </div>
-
-                {list}
-
-            </div>
-        </nav>;
+        return (
+            <Navbar>
+                <Navbar.Header>
+                    <Navbar.Brand>
+                        <h1><IndexLink className="navbar-brand" to="/">Travi</IndexLink></h1>
+                    </Navbar.Brand>
+                    <Navbar.Toggle />
+                </Navbar.Header>
+                <Navbar.Collapse>
+                    <Nav>
+                    {this.props.primaryNav.map((resourceType) => (
+                        <LinkContainer to={resourceType.path} key={resourceType.text}>
+                            <NavItem>
+                                {resourceType.text}
+                            </NavItem>
+                        </LinkContainer>
+                    ))}
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
+        );
     }
 });

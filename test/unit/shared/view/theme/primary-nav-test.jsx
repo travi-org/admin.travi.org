@@ -36,12 +36,6 @@ suite('primary navigation', () => {
 
             assert.equal($link.text(), type.text);
             assert.equal($link.attr('href'), type.path);
-
-            if (type.active) {
-                assert.isTrue($item.hasClass('active'));
-            } else {
-                assert.isFalse($item.hasClass('active'));
-            }
         });
     });
 });
