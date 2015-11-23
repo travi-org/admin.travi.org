@@ -13,12 +13,12 @@ an acceptable way to piece together `hapi` and `react` to support the following:
 
 ### Core Concepts
 
-* Universal Rendering
-* Progressive Enhancement
-* Cut the Mustard
-* Intelligent management of client-side dependencies
-* Performance
-* OpenID
-* Thin HATEOAS/Hal client
-* OAuth client
+- [x] Universal Rendering
+- [x] Progressive Enhancement
+- [ ] Cut the Mustard
+- [ ] Intelligent management of client-side dependencies
+- [ ] Performance
+- [ ] OpenID
+- [x] Thin HATEOAS/Hal client
+- [ ] OAuth client
 * API driven form validation
