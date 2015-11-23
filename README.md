@@ -13,10 +13,10 @@ an acceptable way to piece together `hapi` and `react` to support the following:
 
 ### Core Concepts
 
+* Universal Rendering
 * Progressive Enhancement
 * Cut the Mustard
 * Intelligent management of client-side dependencies
-* Isomorphic Views
 * Performance
 * OpenID
 * Thin HATEOAS/Hal client
