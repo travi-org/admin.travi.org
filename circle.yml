@@ -23,4 +23,4 @@ deployment:
   staging:
     branch: master
     heroku:
-      appname: infinite-lowlands-5332
+      appname: travi-org-admin
