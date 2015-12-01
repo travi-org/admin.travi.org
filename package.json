@@ -53,7 +53,7 @@
     "grunt-cli": "0.1.13",
     "grunt-contrib-clean": "0.7.0",
     "grunt-contrib-uglify": "0.11.0",
-    "grunt-cucumberjs": "0.8.1",
+    "grunt-cucumberjs": "0.8.2",
     "grunt-eslint": "17.3.1",
     "grunt-http": "1.6.0",
     "grunt-mocha-cov": "0.4.0",
