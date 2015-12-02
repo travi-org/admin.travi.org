@@ -8,8 +8,16 @@ function float(max) {
     return Math.random() * max;
 }
 
-function int(max) {
-    return Math.floor(float(max));
+function int(options) {
+    const limits = options || {},
+
+        integer = Math.floor(float(limits.max));
+
+    if (limits.min) {
+        return integer + limits.min;
+    }
+
+    return integer;
 }
 
 function string(length) {
@@ -20,7 +28,7 @@ function string(length) {
 
     length = length || 8;
     for (i = 0; i < length; i += 1) {
-        randomNumber = int(CHARS.length);
+        randomNumber = int({max: CHARS.length});
         randomString += CHARS.substring(randomNumber, randomNumber + 1);
     }
 
@@ -29,7 +37,7 @@ function string(length) {
 function protocol() {
     const PROTOCOLS = ['http', 'https'];
 
-    return `${PROTOCOLS[int(PROTOCOLS.length)]}://`;
+    return `${PROTOCOLS[int({max: PROTOCOLS.length})]}://`;
 }
 
 function host() {
@@ -71,6 +79,7 @@ function listOf(constructor, options) {
 module.exports = {
     string,
     int,
+    float,
     url,
     simpleObject,
     listOf

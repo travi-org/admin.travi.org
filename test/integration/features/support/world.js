@@ -55,7 +55,7 @@ module.exports.World = function World() {
         return links;
     }
 
-    this.stubApiCall = () => {
+    this.stubApiCatalogCall = () => {
         nock('https://api.travi.org')
             .log(console.log)   //eslint-disable-line no-console
             .get('/')

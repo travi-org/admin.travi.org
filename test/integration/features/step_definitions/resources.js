@@ -208,7 +208,7 @@ module.exports = function () {
     });
 
     this.Given(/^a "([^"]*)" exists in the api$/, function (resourceType, callback) {
-        existingResourceId = any.int();
+        existingResourceId = any.int({min: 1});
         setupExpectedApiResponsesFor.call(this, resourceType);
 
         callback();

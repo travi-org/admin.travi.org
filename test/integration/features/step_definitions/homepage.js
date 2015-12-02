@@ -22,7 +22,7 @@ module.exports = function () {
     });
 
     this.Given(/^user has no api privileges$/, function (callback) {
-        this.stubApiCall();
+        this.stubApiCatalogCall();
 
         callback();
     });
@@ -32,7 +32,7 @@ module.exports = function () {
             min: 1
         });
 
-        this.stubApiCall();
+        this.stubApiCatalogCall();
 
         callback();
     });
