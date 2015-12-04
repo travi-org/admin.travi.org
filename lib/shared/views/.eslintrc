@@ -1,5 +1,0 @@
----
-  rules:
-    react/jsx-uses-react: 2
-    react/wrap-multilines: 2
-    no-extra-parens: 0
