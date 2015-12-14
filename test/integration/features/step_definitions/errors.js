@@ -7,16 +7,6 @@ const
 module.exports = function () {
     this.World = require('../support/world.js').World;
 
-    this.Before(() => {
-        nock.disableNetConnect();
-    });
-
-    this.After(function () {
-        nock.enableNetConnect();
-        nock.cleanAll();
-        this.serverResponse = null;
-    });
-
     this.Given(/^the api is down$/, (callback) => {
         nock('https://api.travi.org')
             .log(console.log)   //eslint-disable-line no-console

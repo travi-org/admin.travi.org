@@ -2,40 +2,11 @@
 
 const
     assert = require('referee').assert,
-    nock = require('nock'),
-    _ = require('lodash'),
-    any = require('../../../helpers/any');
+    _ = require('lodash');
 require('setup-referee-sinon/globals');
 
 module.exports = function () {
     this.World = require('../support/world.js').World;
-
-    this.Before(function () {
-        nock.disableNetConnect();
-        this.availableResourceTypes = [];
-    });
-
-    this.After(function () {
-        nock.enableNetConnect();
-        nock.cleanAll();
-        this.serverResponse = null;
-    });
-
-    this.Given(/^user has no api privileges$/, function (callback) {
-        this.stubApiCatalogCall();
-
-        callback();
-    });
-
-    this.Given(/^user has api privileges$/, function (callback) {
-        this.availableResourceTypes = any.listOf(any.string, {
-            min: 1
-        });
-
-        this.stubApiCatalogCall();
-
-        callback();
-    });
 
     this.When(/^the homepage is loaded$/, function (callback) {
         this.makeRequestTo('/', callback);
