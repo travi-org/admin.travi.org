@@ -12,5 +12,6 @@ junit:
 coverage:
   files: test/unit/**/*-test.js
   options:
+    quiet: true
     coveralls: true
 
