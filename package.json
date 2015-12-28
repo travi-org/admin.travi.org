@@ -80,7 +80,7 @@
     "async": "1.5.0",
     "async-props": "0.2.2",
     "director": "1.2.8",
-    "glue": "2.4.0",
+    "glue": "3.0.0",
     "good": "6.4.0",
     "good-console": "5.2.0",
     "hapi": "11.1.4",
