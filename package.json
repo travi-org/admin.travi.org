@@ -68,7 +68,7 @@
     "nock": "3.6.0",
     "pact-consumer-js-dsl": "0.2.1",
     "proxyquire": "1.7.3",
-    "react-addons-test-utils": "0.14.3",
+    "react-addons-test-utils": "0.14.5",
     "referee": "1.2.0",
     "referee-sinon": "1.0.3",
     "setup-referee-sinon": "0.3.0",
