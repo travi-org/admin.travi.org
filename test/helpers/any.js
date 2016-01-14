@@ -1,5 +1,10 @@
 'use strict';
 
+const
+    DEFAULT_STRING_LENGTH = 8,
+    TLD_LENGTH = 3,
+    HOST_LENGTH = 20;
+
 function float(max) {
     if (undefined === max || 0 > max) {
         max = 100;
@@ -26,7 +31,7 @@ function string(length) {
         randomNumber,
         i;
 
-    length = length || 8;
+    length = length || DEFAULT_STRING_LENGTH;
     for (i = 0; i < length; i += 1) {
         randomNumber = int({max: CHARS.length});
         randomString += CHARS.substring(randomNumber, randomNumber + 1);
@@ -41,7 +46,7 @@ function protocol() {
 }
 
 function host() {
-    return `${string()}.${string(20)}.${string(3)}`.toLowerCase();
+    return `${string()}.${string(HOST_LENGTH)}.${string(TLD_LENGTH)}`.toLowerCase();
 }
 
 function url(root) {

@@ -10,7 +10,8 @@ module.exports = function (grunt) {
         config = {
             webPageTestApiToken: process.env.WEB_PAGE_TEST_API_TOKEN,
             pactBrokerPassword: process.env.PACT_BROKER_PASSWORD
-        };
+        },
+        EXIT_CODE = 3;
 
     if (grunt.file.exists(pact)) {
         config.pact = grunt.file.readJSON(pact);
@@ -31,7 +32,7 @@ module.exports = function (grunt) {
 
 
     grunt.registerTask('warning-exit', 'Call process.exit', () => {
-        process.exit(3);
+        process.exit(EXIT_CODE);
     });
 
     grunt.registerTask('pact-consumer', 'consumer driven contract', function () {

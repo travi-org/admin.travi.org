@@ -6,7 +6,8 @@ const
     _ = require('lodash'),
     any = require('../../../helpers/any-for-admin'),
 
-    HOST = 'https://api.travi.org';
+    HOST = 'https://api.travi.org',
+    HTTP_SUCCESS = 200;
 require('setup-referee-sinon/globals');
 
 let resources = {},
@@ -96,7 +97,7 @@ function setupExpectedApiResponsesFor(resourceType) {
         .log(console.log)   //eslint-disable-line no-console
         .get(requestPath)
         .reply(
-            200,
+            HTTP_SUCCESS,
             document,
             headers
         );
@@ -113,7 +114,7 @@ function setupExpectedApiResponsesFor(resourceType) {
                     .log(console.log)   //eslint-disable-line no-console
                     .get(resourcePath)
                     .reply(
-                        200,
+                        HTTP_SUCCESS,
                         {},
                         headers
                     );
@@ -184,7 +185,7 @@ module.exports = function () {
             .get('/')
             .times(2)
             .reply(
-                200,
+                HTTP_SUCCESS,
                 {_links: buildLinksIncluding(resourceType, resourceLink)},
                 headers
             );
@@ -199,7 +200,7 @@ module.exports = function () {
         nock(host)
             .get(requestPath)
             .reply(
-                200,
+                HTTP_SUCCESS,
                 { _embedded: embedded },
                 headers
             );

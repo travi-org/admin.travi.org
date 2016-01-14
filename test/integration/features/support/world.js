@@ -6,7 +6,8 @@ const
     any = require('../../../helpers/any'),
     loadApi = require(path.join(__dirname, '../../../../lib/server/app.js')),
 
-    HOST = 'https://api.travi.org';
+    HOST = 'https://api.travi.org',
+    HTTP_SUCCESS = 200;
 
 module.exports.World = function World() {
     this.apiResponseLinks = {};
@@ -61,7 +62,7 @@ module.exports.World = function World() {
             .get('/')
             .times(2)
             .reply(
-            200,
+            HTTP_SUCCESS,
             {_links: buildApiResponseLinks.call(this)},
             {'Content-Type': 'application/hal+json'}
         );
