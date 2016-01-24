@@ -15,10 +15,12 @@ an acceptable way to piece together `hapi` and `react` to support the following:
 
 - [x] Universal Rendering
 - [x] Progressive Enhancement
-- [ ] Cut the Mustard
 - [ ] Intelligent management of client-side dependencies
+    - [ ] Cut the Mustard
+    - [ ] Progressive Enhancement based on browser capabilities
+    - [ ] Lazy Loading
 - [ ] Performance
-- [ ] OpenID
-- [x] Thin HATEOAS/Hal client
-- [ ] OAuth client
+- [ ] OpenID Authentication
+- [x] Thin Hal Hypermedia client
+- [ ] OAuth/Oz client
 - [ ] API driven form validation
