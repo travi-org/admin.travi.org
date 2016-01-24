@@ -24,3 +24,10 @@ an acceptable way to piece together `hapi` and `react` to support the following:
 - [x] Thin Hal Hypermedia client
 - [ ] OAuth/Oz client
 - [ ] API driven form validation
+ 
+### Key Technology
+- [x] [Hapi](https://hapijs.com)
+- [x] [Traverson](https://github.com/basti1302/traverson) with the [HAL adapter](https://github.com/basti1302/traverson-hal)
+- [x] [React](https://facebook.github.io/react/)
+- [x] [React-router](https://github.com/rackt/react-router)
+- [ ] [Redux](http://rackt.org/redux/)
