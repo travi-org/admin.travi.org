@@ -90,7 +90,7 @@
     "lodash": "4.0.1",
     "negotiator": "0.6.0",
     "newrelic": "1.25.1",
-    "react": "0.14.6",
+    "react": "0.14.7",
     "react-bootstrap": "0.28.2",
     "react-dom": "0.14.6",
     "react-router": "1.0.3",
