@@ -67,7 +67,7 @@
     "mocha-junit-reporter": "1.9.1",
     "nock": "7.0.2",
     "pact-consumer-js-dsl": "0.2.1",
-    "proxyquire": "1.7.3",
+    "proxyquire": "1.7.4",
     "react-addons-test-utils": "0.14.7",
     "referee": "1.2.0",
     "referee-sinon": "1.0.3",
