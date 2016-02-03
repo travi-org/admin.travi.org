@@ -1,6 +1,9 @@
 'use strict';
 
-const jsdom = require('jsdom');
+const
+    jsdom = require('jsdom'),
+    chai = require('chai'),
+    chaiImmutable = require('chai-immutable');
 
 function setupDom() {
     const baseMarkup = '<!DOCTYPE html>',
@@ -12,3 +15,4 @@ function setupDom() {
 }
 
 setupDom();
+chai.use(chaiImmutable);

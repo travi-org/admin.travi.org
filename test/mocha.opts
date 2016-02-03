@@ -1,4 +1,4 @@
 --ui tdd
--r ./test/unit/shared/view/js-dom-setup.js
+-r ./test/helpers/mocha-setup.js
 --compilers jsx:jsx-require-extension
 --reporter-options mochaFile=./logs/unit/test-results.xml

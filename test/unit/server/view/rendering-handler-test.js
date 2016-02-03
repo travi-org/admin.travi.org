@@ -4,7 +4,7 @@ const
     proxyquire = require('proxyquire'),
     routeRenderer = require('../../../../lib/server/view/route-renderer.jsx'),
     resourcesController = require('../../../../lib/server/resources/controller'),
-    reducer = require('../../../../lib/shared/reducer'),
+    reducer = require('../../../../lib/shared/store/reducer'),
     redux = require('redux'),
     history = require('history'),
     _ = require('lodash'),
@@ -85,7 +85,7 @@ suite('rendering handler', () => {
             });
         mediaType.returns('text/html');
         history.createLocation.withArgs(request.url).returns(location);
-        redux.createStore.withArgs(reducer).returns({
+        redux.createStore.withArgs(reducer, request.response.source).returns({
             getState: getReduxState
         });
         getReduxState.returns(reduxState);
@@ -108,6 +108,7 @@ suite('rendering handler', () => {
     });
 
     test('that error bubbles', () => {
+        request.response = {};
         const
             reply = sinon.spy(),
             error = any.simpleObject(),

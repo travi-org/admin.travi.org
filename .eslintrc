@@ -41,3 +41,7 @@
     linebreak-style:
       - 2
       - unix
+    new-cap:
+      - 2
+      - capIsNewExceptions:
+        - Map
