@@ -64,7 +64,7 @@ suite('rendering handler', () => {
 
         assert.calledOnce(next);
         assert.calledOnce(reply.continue);
-        refute.called(redux.createStore)
+        refute.called(redux.createStore);
     });
 
     test('that an html request returns a rendered view', () => {
