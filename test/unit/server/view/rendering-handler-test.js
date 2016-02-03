@@ -4,6 +4,8 @@ const
     proxyquire = require('proxyquire'),
     routeRenderer = require('../../../../lib/server/view/route-renderer.jsx'),
     resourcesController = require('../../../../lib/server/resources/controller'),
+    reducer = require('../../../../lib/shared/reducer'),
+    redux = require('redux'),
     history = require('history'),
     _ = require('lodash'),
     any = require('../../../helpers/any');
@@ -29,6 +31,7 @@ suite('rendering handler', () => {
 
     setup(() => {
         sandbox = sinon.sandbox.create();
+        sandbox.stub(redux, 'createStore');
         sandbox.stub(routeRenderer, 'routeTo');
         sandbox.stub(history, 'createLocation');
         sandbox.stub(resourcesController, 'listResourceTypes').yields(null, primaryNav);
@@ -61,6 +64,7 @@ suite('rendering handler', () => {
 
         assert.calledOnce(next);
         assert.calledOnce(reply.continue);
+        refute.called(redux.createStore)
     });
 
     test('that an html request returns a rendered view', () => {
@@ -71,6 +75,8 @@ suite('rendering handler', () => {
             extension = sinon.stub().withArgs('onPreResponse').yields(request, reply),
             location = any.simpleObject(),
             renderedContent = any.string(),
+            getReduxState = sinon.stub(),
+            reduxState = any.simpleObject(),
             primaryNavWithActiveLink = _.map(primaryNav, (item, index) => {
                 return _.extend({}, item, {active: 2 === index});
             }),
@@ -79,6 +85,10 @@ suite('rendering handler', () => {
             });
         mediaType.returns('text/html');
         history.createLocation.withArgs(request.url).returns(location);
+        redux.createStore.withArgs(reducer).returns({
+            getState: getReduxState
+        });
+        getReduxState.returns(reduxState);
 
         handler.register({ext: extension}, null, sinon.spy());
 
@@ -87,10 +97,14 @@ suite('rendering handler', () => {
         assert.calledWith(routeRenderer.routeTo, location, data);
         routeRenderer.routeTo.yield(null, renderedContent);
 
-        assert.calledWith(reply.view, 'layout/layout', {renderedContent, initialData: JSON.stringify([
-            {primaryNav: primaryNavWithActiveLink},
-            data
-        ])});
+        assert.calledWith(reply.view, 'layout/layout', {
+            renderedContent,
+            initialData: JSON.stringify([
+                {primaryNav: primaryNavWithActiveLink},
+                data
+            ]),
+            initialState: JSON.stringify(reduxState)
+        });
     });
 
     test('that error bubbles', () => {
@@ -118,13 +132,19 @@ suite('rendering handler', () => {
                 primaryNav: _.map(primaryNav, (item) => {
                     return _.extend({}, item, {active: false});
                 })
-            });
+            }),
+            reduxState = any.simpleObject();
+        redux.createStore.returns({getState: sinon.stub().returns(reduxState)});
         mediaType.returns('text/html');
         history.createLocation.withArgs(request.url).returns(location);
         routeRenderer.routeTo.yields(null, renderedContent);
 
         handler.register({ext: extension}, null, sinon.spy());
 
-        assert.calledWith(reply.view, 'layout/layout', {renderedContent, initialData: JSON.stringify([data])});
+        assert.calledWith(reply.view, 'layout/layout', {
+            renderedContent,
+            initialData: JSON.stringify([data]),
+            initialState: JSON.stringify(reduxState)
+        });
     });
 });
