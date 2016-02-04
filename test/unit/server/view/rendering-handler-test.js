@@ -6,6 +6,7 @@ const
     resourcesController = require('../../../../lib/server/resources/controller'),
     reducer = require('../../../../lib/shared/store/reducer'),
     redux = require('redux'),
+    immutable = require('immutable'),
     history = require('history'),
     _ = require('lodash'),
     any = require('../../../helpers/any');
@@ -75,8 +76,11 @@ suite('rendering handler', () => {
             extension = sinon.stub().withArgs('onPreResponse').yields(request, reply),
             location = any.simpleObject(),
             renderedContent = any.string(),
-            getReduxState = sinon.stub(),
             reduxState = any.simpleObject(),
+            store = {
+                getState: sinon.stub().returns(reduxState),
+                dispatch: sinon.spy()
+            },
             primaryNavWithActiveLink = _.map(primaryNav, (item, index) => {
                 return _.extend({}, item, {active: 2 === index});
             }),
@@ -85,10 +89,7 @@ suite('rendering handler', () => {
             });
         mediaType.returns('text/html');
         history.createLocation.withArgs(request.url).returns(location);
-        redux.createStore.withArgs(reducer, request.response.source).returns({
-            getState: getReduxState
-        });
-        getReduxState.returns(reduxState);
+        redux.createStore.withArgs(reducer, immutable.fromJS(request.response.source)).returns(store);
 
         handler.register({ext: extension}, null, sinon.spy());
 
@@ -97,6 +98,10 @@ suite('rendering handler', () => {
         assert.calledWith(routeRenderer.routeTo, location, data);
         routeRenderer.routeTo.yield(null, renderedContent);
 
+        assert.calledWith(store.dispatch, {
+            type: 'SET_PRIMARY_NAV',
+            nav: primaryNavWithActiveLink
+        });
         assert.calledWith(reply.view, 'layout/layout', {
             renderedContent,
             initialData: JSON.stringify([
@@ -135,7 +140,10 @@ suite('rendering handler', () => {
                 })
             }),
             reduxState = any.simpleObject();
-        redux.createStore.returns({getState: sinon.stub().returns(reduxState)});
+        redux.createStore.returns({
+            getState: sinon.stub().returns(reduxState),
+            dispatch: sinon.spy()
+        });
         mediaType.returns('text/html');
         history.createLocation.withArgs(request.url).returns(location);
         routeRenderer.routeTo.yields(null, renderedContent);
