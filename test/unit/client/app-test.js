@@ -4,6 +4,7 @@
 const
     React = require('react'),
     Router = require('react-router').Router,
+    Provider = require('react-redux').Provider,
     dom = require('react-dom'),
     redux = require('redux'),
     AsyncProps = require('async-props').default,
@@ -39,16 +40,20 @@ suite('client-side app', () => {
     });
 
     test('that the app renders', () => {
-        const routerComponent = any.simpleObject();
+        const
+            routerComponent = any.simpleObject(),
+            providerComponent = any.simpleObject(),
+            store = any.simpleObject();
+        redux.createStore.withArgs(reducer, initialState).returns(store);
         React.createElement.withArgs(Router, {
             history,
             children: routes,
             RoutingContext: AsyncProps
         }).returns(routerComponent);
+        React.createElement.withArgs(Provider, {store}, routerComponent).returns(providerComponent);
 
         simulatePageLoad();
 
-        assert.calledWith(redux.createStore, reducer, initialState);
-        assert.calledWith(dom.render, routerComponent, document.getElementById('wrap'));
+        assert.calledWith(dom.render, providerComponent, document.getElementById('wrap'));
     });
 });
