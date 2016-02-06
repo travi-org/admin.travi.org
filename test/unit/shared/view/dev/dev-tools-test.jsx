@@ -3,7 +3,7 @@
 const
     any = require('../../../../helpers/any'),
     proxyquire = require('proxyquire'),
-    React = require('React'),
+    React = require('react'),
     LogMonitor = require('redux-devtools-log-monitor').default;
 
 suite('redux dev-tools', () => {
