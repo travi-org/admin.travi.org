@@ -2,7 +2,7 @@ build:
   - clean
   - bower
   - sass
-  - browserify
+  - webpack:build
   - uglify
 
 lint:
