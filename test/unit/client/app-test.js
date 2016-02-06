@@ -10,18 +10,19 @@ const
     AsyncProps = require('async-props').default,
     proxyquire = require('proxyquire'),
     any = require('../../helpers/any'),
-    routes = require('../../../lib/shared/routes.jsx'),
-    reducer = require('../../../lib/shared/store/reducer');
+    routes = require('../../../lib/shared/routes.jsx');
 
 suite('client-side app', () => {
     let sandbox;
     const
         history = any.simpleObject(),
-        initialState = any.simpleObject();
+        initialState = any.simpleObject(),
+        store = any.simpleObject();
 
     function simulatePageLoad() {
         proxyquire('../../../lib/client/app.jsx', {
-            'history/lib/createBrowserHistory': sinon.stub().returns(history)
+            'history/lib/createBrowserHistory': sinon.stub().returns(history),
+            '../shared/store/configure': sinon.stub().withArgs(initialState).returns(store)
         });
     }
 
@@ -42,9 +43,7 @@ suite('client-side app', () => {
     test('that the app renders', () => {
         const
             routerComponent = any.simpleObject(),
-            providerComponent = any.simpleObject(),
-            store = any.simpleObject();
-        redux.createStore.withArgs(reducer, initialState).returns(store);
+            providerComponent = any.simpleObject();
         React.createElement.withArgs(Router, {
             history,
             children: routes,

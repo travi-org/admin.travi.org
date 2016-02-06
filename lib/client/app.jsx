@@ -8,13 +8,11 @@ const
     createBrowserHistory = require('history/lib/createBrowserHistory'),
     Router = require('react-router').Router,
     Provider = require('react-redux').Provider,
-    redux = require('redux'),
     routes = require('../shared/routes.jsx'),
-    reducer = require('../shared/store/reducer'),
-    store = redux.createStore(reducer, window.__INITIAL_STATE__);
+    configureStore = require('../shared/store/configure');
 
 dom.render(
-    <Provider store={store}>
+    <Provider store={configureStore(window.__INITIAL_STATE__)}>
         <Router history={createBrowserHistory()} children={routes} RoutingContext={AsyncProps} />
     </Provider>,
     document.getElementById('wrap')
