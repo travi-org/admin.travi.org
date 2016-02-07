@@ -27,18 +27,10 @@
       ]
     }
   },
-  "browserify": {
-    "transform": [
-      [
-        "babelify"
-      ]
-    ]
-  },
   "devDependencies": {
     "babel-core": "6.4.5",
     "babel-loader": "6.2.2",
     "babel-preset-react": "6.3.13",
-    "babelify": "7.2.0",
     "balanced-match": "0.3.0",
     "chai": "3.5.0",
     "chai-immutable": "1.5.3",
@@ -54,7 +46,6 @@
     "formatio": "1.1.3",
     "grunt": "0.4.5",
     "grunt-bower-task": "0.4.0",
-    "grunt-browserify": "4.0.1",
     "grunt-cli": "0.1.13",
     "grunt-contrib-clean": "0.7.0",
     "grunt-contrib-uglify": "0.11.1",
