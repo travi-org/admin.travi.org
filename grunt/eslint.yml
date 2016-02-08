@@ -1,4 +1,6 @@
 target:
-  - Gruntfile.js
+  - "*.js"
+  - "!newrelic.js"
+  - grunt/**/*.js
   - lib/**/*.js*
   - test/**/*.js*
