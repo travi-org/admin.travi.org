@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "babel-core": "6.5.1",
+    "babel-eslint": "4.1.8",
     "babel-loader": "6.2.2",
     "babel-preset-es2015": "6.5.0",
     "babel-preset-react": "6.5.0",
@@ -39,7 +40,7 @@
     "concat-map": "0.0.1",
     "cucumber": "0.9.4",
     "eslint": "1.10.3",
-    "eslint-config-defaults": "8.0.2",
+    "eslint-config-defaults": "9.0.0",
     "eslint-plugin-cucumber": "0.1.0",
     "eslint-plugin-filenames": "0.2.0",
     "eslint-plugin-react": "3.16.1",
