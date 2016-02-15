@@ -4,7 +4,7 @@ const
     React = require('react'), //eslint-disable-line no-unused-vars
     ReactDOMServer = require('react-dom/server'),
     reactRouter = require('react-router'),
-    RoutingContext = reactRouter.RoutingContext,
+    RouterContext = reactRouter.RouterContext,
 
     routes = require('./../../shared/routes.jsx'),
 
@@ -19,7 +19,7 @@ function routeTo(location, data, callback) {
 
     reactRouter.match({routes, location}, (error, redirectLocation, renderProps) => {
         callback(error, ReactDOMServer.renderToString(
-            <RoutingContext {...renderProps} createElement={createElement} />
+            <RouterContext {...renderProps} createElement={createElement} />
         ));
     });
 }

@@ -11,7 +11,7 @@ const
     routes = require('../../../../lib/shared/routes.jsx');
 
 suite('route renderer', () => {
-    const RoutingContext = reactRouter.RoutingContext;
+    const RouterContext = reactRouter.RouterContext;
     let sandbox;
 
     setup(() => {
@@ -33,7 +33,7 @@ suite('route renderer', () => {
             renderProps = any.simpleObject(),
             context = any.simpleObject(),
             data = any.simpleObject();
-        React.createElement.withArgs(RoutingContext, sinon.match(renderProps)).returns(context);
+        React.createElement.withArgs(RouterContext, sinon.match(renderProps)).returns(context);
         ReactDOMServer.renderToString.withArgs(context).returns(renderedContent);
 
         renderer.routeTo(location, data, callback);
@@ -57,7 +57,7 @@ suite('route renderer', () => {
                 render: () => <div>dummy component</div>
             });
         reactRouter.match.yields(null, null, renderProps);
-        React.createElement.withArgs(RoutingContext).yieldsTo('createElement', dummyComponent, props);
+        React.createElement.withArgs(RouterContext).yieldsTo('createElement', dummyComponent, props);
 
         renderer.routeTo(location, data, callback);
 
