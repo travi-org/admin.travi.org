@@ -12,13 +12,23 @@ const
 
 suite('route renderer', () => {
     const RouterContext = reactRouter.RouterContext;
-    let sandbox;
+    let sandbox,
+        history,
+        url,
+        location;
 
     setup(() => {
+        url = any.url();
+        location = any.simpleObject();
+        history = {
+            createLocation: sinon.stub().withArgs(url).returns(location)
+        };
+
         sandbox = sinon.sandbox.create();
         sandbox.stub(ReactDOMServer, 'renderToString');
         sandbox.stub(React, 'createElement');
         sandbox.stub(reactRouter, 'match');
+        sandbox.stub(reactRouter, 'createMemoryHistory').returns(history);
     });
 
     teardown(() => {
@@ -29,14 +39,13 @@ suite('route renderer', () => {
         const
             renderedContent = any.string(),
             callback = sinon.spy(),
-            location = any.url(),
             renderProps = any.simpleObject(),
             context = any.simpleObject(),
             data = any.simpleObject();
         React.createElement.withArgs(RouterContext, sinon.match(renderProps)).returns(context);
         ReactDOMServer.renderToString.withArgs(context).returns(renderedContent);
 
-        renderer.routeTo(location, data, callback);
+        renderer.routeTo(url, data, callback);
 
         refute.called(callback);
 
@@ -49,7 +58,6 @@ suite('route renderer', () => {
     test('that default data is passed as props when element created by router', () => {
         const
             callback = sinon.spy(),
-            location = any.url(),
             renderProps = any.simpleObject(),
             props = any.simpleObject(),
             data = any.simpleObject(),
@@ -59,7 +67,7 @@ suite('route renderer', () => {
         reactRouter.match.yields(null, null, renderProps);
         React.createElement.withArgs(RouterContext).yieldsTo('createElement', dummyComponent, props);
 
-        renderer.routeTo(location, data, callback);
+        renderer.routeTo(url, data, callback);
 
         assert.calledWith(React.createElement, dummyComponent, _.extend({}, props, data));
     });
@@ -68,7 +76,7 @@ suite('route renderer', () => {
         const
             error = any.simpleObject(),
             callback = sinon.spy();
-        renderer.routeTo(any.url(), any.simpleObject(), callback);
+        renderer.routeTo(url, any.simpleObject(), callback);
 
         reactRouter.match.yield(error);
 

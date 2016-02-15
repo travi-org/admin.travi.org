@@ -10,14 +10,16 @@ const
 
     _ = require('lodash');
 
-function routeTo(location, data, callback) {
+function routeTo(url, data, callback) {
     function createElement(Component, props) {
         const extended = _.extend({}, data, props);
 
         return <Component {...extended}/>;
     }
 
-    reactRouter.match({routes, location}, (error, redirectLocation, renderProps) => {
+    const history = reactRouter.createMemoryHistory();
+
+    reactRouter.match({routes, location: history.createLocation(url)}, (error, redirectLocation, renderProps) => {
         callback(error, ReactDOMServer.renderToString(
             <RouterContext {...renderProps} createElement={createElement} />
         ));

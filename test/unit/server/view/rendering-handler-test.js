@@ -74,7 +74,6 @@ suite('rendering handler', () => {
         const
             reply = { view: sinon.spy() },
             extension = sinon.stub().withArgs('onPreResponse').yields(request, reply),
-            location = any.simpleObject(),
             renderedContent = any.string(),
             reduxState = any.simpleObject(),
             store = {
@@ -88,14 +87,13 @@ suite('rendering handler', () => {
                 primaryNav: primaryNavWithActiveLink
             });
         mediaType.returns('text/html');
-        history.createLocation.withArgs(request.url).returns(location);
         redux.createStore.withArgs(reducer, immutable.fromJS(request.response.source)).returns(store);
 
         handler.register({ext: extension}, null, sinon.spy());
 
         refute.called(reply.view);
 
-        assert.calledWith(routeRenderer.routeTo, location, data);
+        assert.calledWith(routeRenderer.routeTo, request.url, data);
         routeRenderer.routeTo.yield(null, renderedContent);
 
         assert.calledWith(store.dispatch, {
