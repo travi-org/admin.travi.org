@@ -4,6 +4,7 @@ const
     React = require('react'),
     ReactDOMServer = require('react-dom/server'),
     reactRouter = require('react-router'),
+    Provider = require('react-redux').Provider,
     any = require('../../../helpers/any'),
     _ = require('lodash'),
 
@@ -41,11 +42,14 @@ suite('route renderer', () => {
             callback = sinon.spy(),
             renderProps = any.simpleObject(),
             context = any.simpleObject(),
-            data = any.simpleObject();
+            providerComponent = any.simpleObject(),
+            data = any.simpleObject(),
+            store = any.simpleObject();
         React.createElement.withArgs(RouterContext, sinon.match(renderProps)).returns(context);
-        ReactDOMServer.renderToString.withArgs(context).returns(renderedContent);
+        React.createElement.withArgs(Provider, {store}, context).returns(providerComponent);
+        ReactDOMServer.renderToString.withArgs(providerComponent).returns(renderedContent);
 
-        renderer.routeTo(url, data, callback);
+        renderer.routeTo(url, data, store, callback);
 
         refute.called(callback);
 
@@ -67,7 +71,7 @@ suite('route renderer', () => {
         reactRouter.match.yields(null, null, renderProps);
         React.createElement.withArgs(RouterContext).yieldsTo('createElement', dummyComponent, props);
 
-        renderer.routeTo(url, data, callback);
+        renderer.routeTo(url, data, {}, callback);
 
         assert.calledWith(React.createElement, dummyComponent, _.extend({}, props, data));
     });
@@ -76,7 +80,7 @@ suite('route renderer', () => {
         const
             error = any.simpleObject(),
             callback = sinon.spy();
-        renderer.routeTo(url, any.simpleObject(), callback);
+        renderer.routeTo(url, any.simpleObject(), {}, callback);
 
         reactRouter.match.yield(error);
 

@@ -93,7 +93,7 @@ suite('rendering handler', () => {
 
         refute.called(reply.view);
 
-        assert.calledWith(routeRenderer.routeTo, request.url, data);
+        assert.calledWith(routeRenderer.routeTo, request.url, data, store);
         routeRenderer.routeTo.yield(null, renderedContent);
 
         assert.calledWith(store.dispatch, {
