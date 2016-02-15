@@ -2,15 +2,15 @@
 
 const
     React = require('react'),
-    history = require('history');
+    reactRouter = require('react-router');
 
 class HistoryWrapper extends React.Component {
     getChildContext() {
-        const historyInstance = history.createMemoryHistory();
+        const historyInstance = reactRouter.createMemoryHistory();
         historyInstance.isActive = function () {};
 
         return {
-            history: historyInstance
+            router: historyInstance
         };
     }
 
@@ -20,7 +20,7 @@ class HistoryWrapper extends React.Component {
 }
 
 HistoryWrapper.childContextTypes = {
-    history: React.PropTypes.object
+    router: React.PropTypes.object
 };
 
 module.exports = HistoryWrapper;
