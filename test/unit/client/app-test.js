@@ -32,7 +32,7 @@ suite('client-side app', () => {
         sandbox.stub(React, 'createElement');
         sandbox.stub(redux, 'createStore');
 
-        window.__INITIAL_STATE__ = initialState;
+        window.__INITIAL_STATE__ = JSON.stringify(initialState);
     });
 
     teardown(() => {

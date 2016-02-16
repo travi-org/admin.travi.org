@@ -12,7 +12,7 @@ const
     configureStore = require('../shared/store/configure');
 
 dom.render(
-    <Provider store={configureStore(window.__INITIAL_STATE__)}>
+    <Provider store={configureStore(JSON.parse(window.__INITIAL_STATE__))}>
         <Router history={createBrowserHistory()} children={routes} RoutingContext={AsyncProps} />
     </Provider>,
     document.getElementById('wrap')
