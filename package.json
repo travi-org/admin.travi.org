@@ -81,7 +81,6 @@
   },
   "dependencies": {
     "async": "1.5.2",
-    "async-props": "0.2.2",
     "glue": "3.2.0",
     "good": "6.6.0",
     "good-console": "5.3.1",

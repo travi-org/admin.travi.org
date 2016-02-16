@@ -7,7 +7,6 @@ const
     Provider = require('react-redux').Provider,
     dom = require('react-dom'),
     redux = require('redux'),
-    AsyncProps = require('async-props').default,
     proxyquire = require('proxyquire'),
     any = require('../../helpers/any'),
     routes = require('../../../lib/shared/routes.jsx');
@@ -46,8 +45,7 @@ suite('client-side app', () => {
             providerComponent = any.simpleObject();
         React.createElement.withArgs(Router, {
             history,
-            children: routes,
-            RoutingContext: AsyncProps
+            children: routes
         }).returns(routerComponent);
         React.createElement.withArgs(Provider, {store}, routerComponent).returns(providerComponent);
 

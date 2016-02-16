@@ -4,7 +4,6 @@
 const
     dom = require('react-dom'),
     React = require('react'),
-    AsyncProps = require('async-props').default,
     createBrowserHistory = require('history/lib/createBrowserHistory'),
     Router = require('react-router').Router,
     Provider = require('react-redux').Provider,
@@ -13,7 +12,7 @@ const
 
 dom.render(
     <Provider store={configureStore(JSON.parse(window.__INITIAL_STATE__))}>
-        <Router history={createBrowserHistory()} children={routes} RoutingContext={AsyncProps} />
+        <Router history={createBrowserHistory()} children={routes} />
     </Provider>,
     document.getElementById('wrap')
 );
