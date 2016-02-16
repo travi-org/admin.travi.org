@@ -1,3 +1,4 @@
+/*global window */
 'use strict';
 
 const
@@ -21,7 +22,7 @@ suite('store creation for production', () => {
         sandbox.restore();
 
         if (window.devToolsExtension) {
-            delete window.devToolsExtension
+            delete window.devToolsExtension;
         }
     });
 
