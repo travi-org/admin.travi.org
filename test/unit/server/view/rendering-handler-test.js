@@ -83,9 +83,7 @@ suite('rendering handler', () => {
             primaryNavWithActiveLink = _.map(primaryNav, (item, index) => {
                 return _.extend({}, item, {active: 2 === index});
             }),
-            data = _.extend({}, request.response.source, {
-                primaryNav: primaryNavWithActiveLink
-            });
+            data = _.extend({}, request.response.source);
         mediaType.returns('text/html');
         redux.createStore.withArgs(reducer, immutable.fromJS(request.response.source)).returns(store);
 
@@ -102,10 +100,6 @@ suite('rendering handler', () => {
         });
         assert.calledWith(reply.view, 'layout/layout', {
             renderedContent,
-            initialData: JSON.stringify([
-                {primaryNav: primaryNavWithActiveLink},
-                data
-            ]),
             initialState: JSON.stringify(reduxState)
         });
     });
@@ -122,36 +116,5 @@ suite('rendering handler', () => {
         handler.register({ext: extension}, null, sinon.spy());
 
         assert.calledWith(reply, error);
-    });
-
-    test('that data defaults to empty object since error case does not set response.source', () => {
-        request.params = {};
-        request.response = {};
-        const
-            reply = { view: sinon.spy() },
-            extension = sinon.stub().withArgs('onPreResponse').yields(request, reply),
-            location = any.simpleObject(),
-            renderedContent = any.string(),
-            data = _.extend({}, request.response.source, {
-                primaryNav: _.map(primaryNav, (item) => {
-                    return _.extend({}, item, {active: false});
-                })
-            }),
-            reduxState = any.simpleObject();
-        redux.createStore.returns({
-            getState: sinon.stub().returns(reduxState),
-            dispatch: sinon.spy()
-        });
-        mediaType.returns('text/html');
-        history.createLocation.withArgs(request.url).returns(location);
-        routeRenderer.routeTo.yields(null, renderedContent);
-
-        handler.register({ext: extension}, null, sinon.spy());
-
-        assert.calledWith(reply.view, 'layout/layout', {
-            renderedContent,
-            initialData: JSON.stringify([data]),
-            initialState: JSON.stringify(reduxState)
-        });
     });
 });
