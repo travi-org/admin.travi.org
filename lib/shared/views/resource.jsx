@@ -2,16 +2,16 @@
 
 const
     React = require('react'),
-    repository = require('../../client/repository');
+    connect = require('react-redux').connect,
 
-module.exports = React.createClass({
-    statics: {
-        loadProps(params, callback) {
-            repository.getResource(params.type, params.id, callback);
+    Resource = React.createClass({
+        render() {
+            return <h3>{this.props.resource.displayName}</h3>;
         }
-    },
+    });
 
-    render() {
-        return <h3>{this.props.resource.displayName}</h3>;
-    }
-});
+module.exports = connect((state) => {
+    return {
+        resource: state.get('resource').toJS()
+    };
+})(Resource);

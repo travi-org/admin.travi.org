@@ -3,24 +3,15 @@
 const
     React = require('react'),
     reactDom = require('react-dom/server'),
+    redux = require('redux'),
+    Immutable = require('immutable'),
     cheerio = require('cheerio'),
     any = require('../../../../helpers/any-for-admin'),
-    repository = require('../../../../../lib/client/repository'),
     HistoryWrapper = require('../../../../helpers/history-wrapper'),
-    ResourceList = require('../../../../../lib/shared/views/resource-list.jsx');
+    ResourceList = require('../../../../../lib/shared/views/resource-list.jsx'),
+    Provider = require('react-redux').Provider;
 
 suite('resource list', () => {
-    let sandbox;
-
-    setup(() => {
-        sandbox = sinon.sandbox.create();
-        sandbox.stub(repository, 'getResources');
-    });
-
-    teardown(() => {
-        sandbox.restore();
-    });
-
     test('that a message is given when no resources are available', () => {
         let $message;
         const
@@ -29,7 +20,10 @@ suite('resource list', () => {
                 resources: []
             },
 
-            $ = cheerio.load(reactDom.renderToStaticMarkup(<ResourceList {...data} />));
+            $ = cheerio.load(reactDom.renderToStaticMarkup(
+                <Provider store={redux.createStore((state) => state, Immutable.fromJS(data))}>
+                    <ResourceList />
+                </Provider>));
 
         $message = $('p');
         assert.equals(1, $message.length);
@@ -48,7 +42,10 @@ suite('resource list', () => {
                 ]
             },
 
-            $ = cheerio.load(reactDom.renderToString(<ResourceList {...data} />));
+            $ = cheerio.load(reactDom.renderToString(
+                <Provider store={redux.createStore((state) => state, Immutable.fromJS(data))}>
+                    <ResourceList {...data} />
+                </Provider>));
 
         assert.equals(1, $('ul').length);
 
@@ -75,7 +72,10 @@ suite('resource list', () => {
                 ]
             },
 
-            $ = cheerio.load(reactDom.renderToStaticMarkup(<ResourceList {...data} />));
+            $ = cheerio.load(reactDom.renderToStaticMarkup(
+                <Provider store={redux.createStore((state) => state, Immutable.fromJS(data))}>
+                    <ResourceList {...data} />
+                </Provider>));
 
         assert.equals($('img').attr('src'), data.resources[0].thumbnail.src);
     });
@@ -90,20 +90,11 @@ suite('resource list', () => {
                 ]
             },
 
-            $ = cheerio.load(reactDom.renderToStaticMarkup(<HistoryWrapper><ResourceList {...data}/></HistoryWrapper>));
+            $ = cheerio.load(reactDom.renderToStaticMarkup(
+                <Provider store={redux.createStore((state) => state, Immutable.fromJS(data))}>
+                    <HistoryWrapper><ResourceList {...data}/></HistoryWrapper>
+                </Provider>));
 
         assert.equals($('li > a').attr('href'), selfLink);
-    });
-
-    test('that data is fetched by loadProps', () => {
-        const
-            callback = sinon.spy(),
-            params = {
-                type: any.string()
-            };
-
-        ResourceList.loadProps(params, callback);
-
-        assert.calledWith(repository.getResources, params.type, callback);
     });
 });

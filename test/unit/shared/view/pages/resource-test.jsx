@@ -3,10 +3,13 @@
 const
     React = require('react'),
     reactDom = require('react-dom/server'),
+    redux = require('redux'),
     cheerio = require('cheerio'),
+    Immutable = require('immutable'),
     any = require('../../../../helpers/any-for-admin'),
     repository = require('../../../../../lib/client/repository'),
-    Resource = require('../../../../../lib/shared/views/resource.jsx');
+    Resource = require('../../../../../lib/shared/views/resource.jsx'),
+    Provider = require('react-redux').Provider;
 
 suite('resource', () => {
     let sandbox;
@@ -21,25 +24,13 @@ suite('resource', () => {
     });
 
     test('that the resource is displayed', () => {
-        const data = {
-                resource: {id: any.string(), displayName: any.string()}
-            },
+        const data = {resource: {id: any.string(), displayName: any.string()}},
 
-            $ = cheerio.load(reactDom.renderToStaticMarkup(<Resource {...data} />));
+            $ = cheerio.load(reactDom.renderToStaticMarkup(
+                <Provider store={redux.createStore((state) => state, Immutable.fromJS(data))}>
+                    <Resource />
+                </Provider>));
 
         assert.equals($('h3').text(), data.resource.displayName);
-    });
-
-    test('that data is fetched by loadProps', () => {
-        const
-            callback = sinon.spy(),
-            params = {
-                type: any.string(),
-                id: any.int()
-            };
-
-        Resource.loadProps(params, callback);
-
-        assert.calledWith(repository.getResource, params.type, params.id, callback);
     });
 });
