@@ -3,6 +3,7 @@
 
 const
     redux = require('redux'),
+    Immutable = require('immutable'),
     any = require('../../../helpers/any'),
     reducer = require('../../../../lib/shared/store/reducer'),
     configureStore = require('../../../../lib/shared/store/configure.prod');
@@ -27,7 +28,7 @@ suite('store creation for production', () => {
     });
 
     test('that redux store is created from provided initial state', () => {
-        redux.createStore.withArgs(reducer, initialState).returns(store);
+        redux.createStore.withArgs(reducer, Immutable.fromJS(initialState)).returns(store);
 
         assert.equals(configureStore(initialState), store);
     });
@@ -36,7 +37,7 @@ suite('store creation for production', () => {
         const
             enhancer = any.simpleObject();
         window.devToolsExtension = sinon.stub().returns(enhancer);
-        redux.createStore.withArgs(reducer, initialState, enhancer).returns(store);
+        redux.createStore.withArgs(reducer, Immutable.fromJS(initialState), enhancer).returns(store);
 
         configureStore(initialState);
 

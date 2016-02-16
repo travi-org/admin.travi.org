@@ -3,6 +3,7 @@
 const
     proxyquire = require('proxyquire'),
     redux = require('redux'),
+    Immutable = require('immutable'),
     any = require('../../../helpers/any'),
     reducer = require('../../../../lib/shared/store/reducer');
 
@@ -31,7 +32,7 @@ suite('store creation for development', () => {
         const
             initialState = any.simpleObject(),
             store = any.simpleObject();
-        redux.createStore.withArgs(reducer, initialState, enhancer).returns(store);
+        redux.createStore.withArgs(reducer, Immutable.fromJS(initialState), enhancer).returns(store);
 
         assert.equals(configureStore(initialState), store);
     });
