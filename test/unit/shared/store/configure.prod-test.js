@@ -8,6 +8,9 @@ const
 
 suite('store creation for production', () => {
     let sandbox;
+    const
+        initialState = any.simpleObject(),
+        store = any.simpleObject();
 
     setup(() => {
         sandbox = sinon.sandbox.create();
@@ -16,13 +19,25 @@ suite('store creation for production', () => {
 
     teardown(() => {
         sandbox.restore();
+
+        if (window.devToolsExtension) {
+            delete window.devToolsExtension
+        }
     });
 
     test('that redux store is created from provided initial state', () => {
-        const
-            initialState = any.simpleObject(),
-            store = any.simpleObject();
         redux.createStore.withArgs(reducer, initialState).returns(store);
+
+        assert.equals(configureStore(initialState), store);
+    });
+
+    test('that devtools browser extension is initialized fi present', () => {
+        const
+            enhancer = any.simpleObject();
+        window.devToolsExtension = sinon.stub().returns(enhancer);
+        redux.createStore.withArgs(reducer, initialState, enhancer).returns(store);
+
+        configureStore(initialState);
 
         assert.equals(configureStore(initialState), store);
     });
