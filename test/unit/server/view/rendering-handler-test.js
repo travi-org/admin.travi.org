@@ -82,8 +82,7 @@ suite('rendering handler', () => {
             },
             primaryNavWithActiveLink = _.map(primaryNav, (item, index) => {
                 return _.extend({}, item, {active: 2 === index});
-            }),
-            data = _.extend({}, request.response.source);
+            });
         mediaType.returns('text/html');
         redux.createStore.withArgs(reducer, immutable.fromJS(request.response.source)).returns(store);
 
@@ -91,7 +90,7 @@ suite('rendering handler', () => {
 
         refute.called(reply.view);
 
-        assert.calledWith(routeRenderer.routeTo, request.url, data, store);
+        assert.calledWith(routeRenderer.routeTo, request.url, store);
         routeRenderer.routeTo.yield(null, renderedContent);
 
         assert.calledWith(store.dispatch, {

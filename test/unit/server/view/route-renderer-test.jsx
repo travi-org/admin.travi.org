@@ -6,7 +6,6 @@ const
     reactRouter = require('react-router'),
     Provider = require('react-redux').Provider,
     any = require('../../../helpers/any'),
-    _ = require('lodash'),
 
     renderer = require('../../../../lib/server/view/route-renderer'),
     routes = require('../../../../lib/shared/routes.jsx');
@@ -43,13 +42,12 @@ suite('route renderer', () => {
             renderProps = any.simpleObject(),
             context = any.simpleObject(),
             providerComponent = any.simpleObject(),
-            data = any.simpleObject(),
             store = any.simpleObject();
         React.createElement.withArgs(RouterContext, sinon.match(renderProps)).returns(context);
         React.createElement.withArgs(Provider, {store}, context).returns(providerComponent);
         ReactDOMServer.renderToString.withArgs(providerComponent).returns(renderedContent);
 
-        renderer.routeTo(url, data, store, callback);
+        renderer.routeTo(url, store, callback);
 
         refute.called(callback);
 
@@ -59,28 +57,11 @@ suite('route renderer', () => {
         assert.calledWith(callback, null, renderedContent);
     });
 
-    test('that default data is passed as props when element created by router', () => {
-        const
-            callback = sinon.spy(),
-            renderProps = any.simpleObject(),
-            props = any.simpleObject(),
-            data = any.simpleObject(),
-            dummyComponent = React.createClass({
-                render: () => <div>dummy component</div>
-            });
-        reactRouter.match.yields(null, null, renderProps);
-        React.createElement.withArgs(RouterContext).yieldsTo('createElement', dummyComponent, props);
-
-        renderer.routeTo(url, data, {}, callback);
-
-        assert.calledWith(React.createElement, dummyComponent, _.extend({}, props, data));
-    });
-
     test('that errors bubble', () => {
         const
             error = any.simpleObject(),
             callback = sinon.spy();
-        renderer.routeTo(url, any.simpleObject(), {}, callback);
+        renderer.routeTo(url, any.simpleObject(), callback);
 
         reactRouter.match.yield(error);
 
