@@ -1,9 +1,12 @@
-build:
-  - clean
-  - bower
+compile:
   - sass
   - webpack:build
   - uglify
+
+build:
+  - clean
+  - bower
+  - compile
 
 lint:
   - scsslint

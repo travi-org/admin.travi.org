@@ -12,7 +12,7 @@
     "test": "grunt",
     "start": "node lib/server/app.js",
     "postinstall": "grunt heroku:production",
-    "dev": "grunt build && nodemon lib/server/app.js"
+    "dev": "grunt compile && nodemon lib/server/app.js"
   },
   "engines": {
     "node": "5.1.x",
