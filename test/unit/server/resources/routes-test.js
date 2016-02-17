@@ -45,7 +45,8 @@ suite('server routes config', () => {
             path: '/{resourceType}'
         }));
         assert.calledWith(reply, {
-            resources: resourceList
+            [resourceType]: resourceList,
+            resourceType
         });
     });
 

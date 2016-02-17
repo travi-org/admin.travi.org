@@ -39,8 +39,10 @@ const
     });
 
 module.exports = connect((state) => {
+    const resourceType = state.get('resourceType');
+
     return {
-        resources: state.get('resources').toJS(),
-        resourceType: state.get('resourceType')
+        resources: state.get(resourceType).toJS(),
+        resourceType
     };
 })(ResourceList);
