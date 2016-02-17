@@ -224,7 +224,8 @@ module.exports = function () {
     });
 
     this.Then(/^list of "([^"]*)" resources is returned$/, function (resourceType, done) {
-        const list = JSON.parse(this.getResponseBody()).resources;
+        const list = JSON.parse(this.getResponseBody())[resourceType];
+        console.log(list);  //eslint-disable-line no-console
 
         if (any.resources.hasOwnProperty(getSingularForm(resourceType))) {
             assertFormatMappedToViewFor(resourceType, list);
