@@ -38,7 +38,7 @@
     "chai-immutable": "1.5.3",
     "cheerio": "0.20.0",
     "concat-map": "0.0.1",
-    "cucumber": "0.9.4",
+    "cucumber": "0.9.5",
     "eslint": "2.1.0",
     "eslint-config-defaults": "9.0.0",
     "eslint-plugin-cucumber": "0.1.0",
