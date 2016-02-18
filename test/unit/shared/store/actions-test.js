@@ -17,4 +17,21 @@ suite('reducer actions', () => {
             })
         );
     });
+
+    test('that resources are merged into the state', () => {
+        const
+            type = any.string(),
+            resources = any.listOf(any.simpleObject),
+            initialState = immutable.fromJS({
+                [any.string]: any.listOf(any.string)
+            });
+
+        assert.equal(
+            actions.setResources(initialState, type, resources),
+            initialState.merge({
+                resourceType: type,
+                [type]: immutable.fromJS(resources)
+            })
+        );
+    });
 });
