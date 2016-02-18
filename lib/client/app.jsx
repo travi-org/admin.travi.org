@@ -11,7 +11,7 @@ const
     configureStore = require('../shared/store/configure'),
     hydrater = require('./route-hydrater'),
 
-    routes = routesFactory(hydrater);
+    routes = routesFactory(hydrater.hydrate);
 
 dom.render(
     <Provider store={configureStore(JSON.parse(window.__INITIAL_STATE__))}>
