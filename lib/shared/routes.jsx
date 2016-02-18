@@ -13,11 +13,11 @@ const
 
     NotFound = require('./views/errors/not-found.jsx')(React);
 
-module.exports = (
+module.exports = (hydrate) => (
     <Route path="/" component={Wrap}>
         <IndexRoute component={Index} />
-        <Route path="/:type" component={ResourceList} />
-        <Route path="/:type/:id" component={Resource} />
+        <Route path="/:type" component={ResourceList} onEnter={hydrate} />
+        <Route path="/:type/:id" component={Resource} onEnter={hydrate} />
         <Route path="*" component={NotFound}/>
     </Route>
 );

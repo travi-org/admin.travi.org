@@ -7,8 +7,11 @@ const
     createBrowserHistory = require('history/lib/createBrowserHistory'),
     Router = require('react-router').Router,
     Provider = require('react-redux').Provider,
-    routes = require('../shared/routes.jsx'),
-    configureStore = require('../shared/store/configure');
+    routesFactory = require('../shared/routes.jsx'),
+    configureStore = require('../shared/store/configure'),
+    hydrater = require('./route-hydrater'),
+
+    routes = routesFactory(hydrater);
 
 dom.render(
     <Provider store={configureStore(JSON.parse(window.__INITIAL_STATE__))}>

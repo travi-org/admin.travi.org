@@ -6,16 +6,20 @@ const
     reactRouter = require('react-router'),
     Provider = require('react-redux').Provider,
     any = require('../../../helpers/any'),
-
-    renderer = require('../../../../lib/server/view/route-renderer'),
-    routes = require('../../../../lib/shared/routes.jsx');
+    proxyquire = require('proxyquire');
 
 suite('route renderer', () => {
-    const RouterContext = reactRouter.RouterContext;
+    const
+        RouterContext = reactRouter.RouterContext,
+        routesStub = sinon.stub(),
+        renderer = proxyquire('../../../../lib/server/view/route-renderer', {
+            './../../shared/routes.jsx': routesStub
+        });
     let sandbox,
         history,
         url,
-        location;
+        location,
+        routes;
 
     setup(() => {
         url = any.url();
@@ -29,10 +33,14 @@ suite('route renderer', () => {
         sandbox.stub(React, 'createElement');
         sandbox.stub(reactRouter, 'match');
         sandbox.stub(reactRouter, 'createMemoryHistory').returns(history);
+
+        routes = any.simpleObject();
+        routesStub.withArgs(sinon.match.func).returns(routes);
     });
 
     teardown(() => {
         sandbox.restore();
+        routesStub.reset();
     });
 
     test('that rendered html yielded for proper route', () => {

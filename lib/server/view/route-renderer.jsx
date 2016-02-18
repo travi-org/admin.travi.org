@@ -7,10 +7,12 @@ const
     Provider = require('react-redux').Provider,
     RouterContext = reactRouter.RouterContext,
 
-    routes = require('./../../shared/routes.jsx');
+    routesFactory = require('./../../shared/routes.jsx');
 
 function routeTo(url, store, callback) {
-    const history = reactRouter.createMemoryHistory();
+    const
+        history = reactRouter.createMemoryHistory(),
+        routes = routesFactory(() => {});
 
     reactRouter.match({routes, location: history.createLocation(url)}, (error, redirectLocation, renderProps) => {
         callback(error, ReactDOMServer.renderToString(

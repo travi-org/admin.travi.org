@@ -9,7 +9,7 @@ const
 suite('routes', () => {
     const
         Router = reactRouter.Router,
-        routes = proxyquire('../../../lib/shared/routes.jsx', {
+        routesFactory = proxyquire('../../../lib/shared/routes.jsx', {
             './views/theme/wrap.jsx': React.createClass({
                 render() {
                     return <div>wrapper { this.props.children }</div>;
@@ -24,13 +24,18 @@ suite('routes', () => {
                 render: () => <div>resource</div>
             })
         });
-    let node;
+    let node,
+        hydrater,
+        routes;
 
     beforeEach(() => {
+        hydrater = sinon.spy();
+        routes = routesFactory(hydrater);
         node = document.createElement('div');
     });
 
     afterEach(() => {
+        hydrater = null;
         dom.unmountComponentAtNode(node);
     });
 
@@ -50,6 +55,7 @@ suite('routes', () => {
                 { routes }
             </Router>, node, () => {
                 assert.equals(node.textContent, 'wrapper not-found');
+                refute.called(hydrater);
             }
         );
     });
@@ -60,6 +66,7 @@ suite('routes', () => {
                 { routes }
             </Router>, node, () => {
                 assert.equals(node.textContent, 'wrapper resources');
+                assert.calledOnce(hydrater);
             }
         );
     });
@@ -70,6 +77,7 @@ suite('routes', () => {
                 { routes }
             </Router>, node, () => {
                 assert.equals(node.textContent, 'wrapper resource');
+                assert.calledOnce(hydrater);
             }
         );
     });
@@ -80,6 +88,7 @@ suite('routes', () => {
                 { routes }
             </Router>, node, () => {
                 assert.equals(node.textContent, 'wrapper resources');
+                assert.calledOnce(hydrater);
             }
         );
     });
@@ -90,6 +99,7 @@ suite('routes', () => {
                 { routes }
             </Router>, node, () => {
                 assert.equals(node.textContent, 'wrapper resource');
+                assert.calledOnce(hydrater);
             }
         );
     });

@@ -9,10 +9,11 @@ const
     redux = require('redux'),
     proxyquire = require('proxyquire'),
     any = require('../../helpers/any'),
-    routes = require('../../../lib/shared/routes.jsx');
+    hydrater = require('../../../lib/client/route-hydrater');
 
 suite('client-side app', () => {
-    let sandbox;
+    let sandbox,
+        routes;
     const
         history = any.simpleObject(),
         initialState = any.simpleObject(),
@@ -21,7 +22,8 @@ suite('client-side app', () => {
     function simulatePageLoad() {
         proxyquire('../../../lib/client/app.jsx', {
             'history/lib/createBrowserHistory': sinon.stub().returns(history),
-            '../shared/store/configure': sinon.stub().withArgs(initialState).returns(store)
+            '../shared/store/configure': sinon.stub().withArgs(initialState).returns(store),
+            '../shared/routes.jsx': sinon.stub().withArgs(hydrater.hydrate).returns(routes)
         });
     }
 
@@ -31,11 +33,14 @@ suite('client-side app', () => {
         sandbox.stub(React, 'createElement');
         sandbox.stub(redux, 'createStore');
 
+        routes = any.simpleObject();
+
         window.__INITIAL_STATE__ = JSON.stringify(initialState);
     });
 
     teardown(() => {
         sandbox.restore();
+        routes = null;
         window.__INITIAL_STATE__ = null;
     });
 
