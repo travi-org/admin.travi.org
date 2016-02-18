@@ -13,6 +13,7 @@ suite('reducer', () => {
     setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(actions, 'setPrimaryNav');
+        sandbox.stub(actions, 'setResources');
     });
 
     teardown(() => {
@@ -30,15 +31,29 @@ suite('reducer', () => {
     });
 
     test('that the setPrimaryNav function is called for the SET_PRIMARY_NAV action', () => {
-        const updatedState = any.simpleObject();
-        actions.setPrimaryNav.returns(updatedState);
-
-        assert.equal(
-            reducer(immutable.Map(), {
+        const
+            initialState = immutable.Map(),
+            updatedState = any.simpleObject(),
+            action = {
                 type: 'SET_PRIMARY_NAV',
                 nav: any.simpleObject()
-            }),
-            updatedState
-        );
+            };
+        actions.setPrimaryNav.withArgs(initialState, action.nav).returns(updatedState);
+
+        assert.equal(reducer(initialState, action), updatedState);
+    });
+
+    test('that the setResources function is called for the SET_RESOURCES action', () => {
+        const
+            initialState = immutable.Map(),
+            updatedState = any.simpleObject(),
+            action = {
+                type: 'SET_RESOURCES',
+                resourceType: any.string(),
+                resources: any.listOf(any.simpleObject)
+            };
+        actions.setResources.withArgs(initialState, action.resourceType, action.resources).returns(updatedState);
+
+        assert.equal(reducer(initialState, action), updatedState);
     });
 });
