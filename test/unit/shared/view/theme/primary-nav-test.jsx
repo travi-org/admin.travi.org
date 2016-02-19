@@ -9,7 +9,7 @@ const
     assert = require('chai').assert,
 
     HistoryWrapper = require('../../../../helpers/history-wrapper'),
-    PrimaryNav = require('../../../../../lib/shared/views/theme/primary-nav.jsx');
+    PrimaryNav = require('../../../../../lib/shared/views/theme/primary-nav.jsx')(React);
 
 suite('primary navigation', () => {
     test('that the resource types are listed as links', () => {
