@@ -4,8 +4,9 @@
 const
     dom = require('react-dom'),
     React = require('react'),
-    createBrowserHistory = require('history/lib/createBrowserHistory'),
-    Router = require('react-router').Router,
+    reactRouter = require('react-router'),
+    Router = reactRouter.Router,
+    history = reactRouter.browserHistory,
     Provider = require('react-redux').Provider,
     routesFactory = require('../shared/routes.jsx'),
     configureStore = require('../shared/store/configure'),
@@ -16,7 +17,7 @@ const
 
 dom.render(
     <Provider store={store}>
-        <Router history={createBrowserHistory()} children={routes} />
+        <Router history={history} children={routes} />
     </Provider>,
     document.getElementById('wrap')
 );

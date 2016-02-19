@@ -3,7 +3,9 @@
 
 const
     React = require('react'),
-    Router = require('react-router').Router,
+    reactRouter = require('react-router'),
+    Router = reactRouter.Router,
+    history = reactRouter.browserHistory,
     Provider = require('react-redux').Provider,
     dom = require('react-dom'),
     redux = require('redux'),
@@ -15,7 +17,6 @@ suite('client-side app', () => {
     let sandbox,
         routes;
     const
-        history = any.simpleObject(),
         initialState = any.simpleObject(),
         store = any.simpleObject(),
         hydrator = {
@@ -24,7 +25,6 @@ suite('client-side app', () => {
 
     function simulatePageLoad() {
         proxyquire('../../../lib/client/app.jsx', {
-            'history/lib/createBrowserHistory': sinon.stub().returns(history),
             '../shared/store/configure': sinon.stub().withArgs(initialState).returns(store),
             './route-hydrator': sinon.stub().withArgs(store).returns(hydrator),
             '../shared/routes.jsx': sinon.stub().withArgs(hydrator.hydrate).returns(routes)
