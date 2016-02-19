@@ -8,7 +8,7 @@ const
     cheerio = require('cheerio'),
 
     HistoryWrapper = require('../../../../helpers/history-wrapper'),
-    ResourceList = require('../../../../../lib/shared/views/resource-list.jsx'),
+    ResourceList = require('../../../../../lib/shared/views/resource-list.jsx')(React),
     Provider = require('react-redux').Provider,
 
     any = require('../../../../helpers/any-for-admin'),
