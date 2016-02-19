@@ -8,7 +8,7 @@ const
     Immutable = require('immutable'),
 
     repository = require('../../../../../lib/client/repository'),
-    Resource = require('../../../../../lib/shared/views/resource.jsx'),
+    Resource = require('../../../../../lib/shared/views/resource.jsx')(React),
     Provider = require('react-redux').Provider,
 
     any = require('../../../../helpers/any-for-admin'),
