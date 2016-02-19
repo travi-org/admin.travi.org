@@ -6,10 +6,14 @@ const
     redux = require('redux'),
     cheerio = require('cheerio'),
     Immutable = require('immutable'),
-    any = require('../../../../helpers/any-for-admin'),
+
     repository = require('../../../../../lib/client/repository'),
     Resource = require('../../../../../lib/shared/views/resource.jsx'),
-    Provider = require('react-redux').Provider;
+    Provider = require('react-redux').Provider,
+
+    any = require('../../../../helpers/any-for-admin'),
+    assert = require('chai').assert,
+    sinon = require('sinon');
 
 suite('resource', () => {
     let sandbox;
@@ -31,6 +35,6 @@ suite('resource', () => {
                     <Resource />
                 </Provider>));
 
-        assert.equals($('h3').text(), data.resource.displayName);
+        assert.equal($('h3').text(), data.resource.displayName);
     });
 });

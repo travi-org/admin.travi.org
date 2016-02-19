@@ -6,7 +6,9 @@ const
     Immutable = require('immutable'),
     any = require('../../../helpers/any'),
     reducer = require('../../../../lib/shared/store/reducer'),
-    configureStore = require('../../../../lib/shared/store/configure.prod');
+    configureStore = require('../../../../lib/shared/store/configure.prod'),
+    sinon = require('sinon'),
+    assert = require('chai').assert;
 
 suite('store creation for production', () => {
     let sandbox;
@@ -30,7 +32,7 @@ suite('store creation for production', () => {
     test('that redux store is created from provided initial state', () => {
         redux.createStore.withArgs(reducer, Immutable.fromJS(initialState)).returns(store);
 
-        assert.equals(configureStore(initialState), store);
+        assert.equal(configureStore(initialState), store);
     });
 
     test('that devtools browser extension is initialized fi present', () => {
@@ -41,6 +43,6 @@ suite('store creation for production', () => {
 
         configureStore(initialState);
 
-        assert.equals(configureStore(initialState), store);
+        assert.equal(configureStore(initialState), store);
     });
 });

@@ -5,7 +5,9 @@ const
     redux = require('redux'),
     Immutable = require('immutable'),
     any = require('../../../helpers/any'),
-    reducer = require('../../../../lib/shared/store/reducer');
+    reducer = require('../../../../lib/shared/store/reducer'),
+    sinon = require('sinon'),
+    assert = require('chai').assert;
 
 suite('store creation for development', () => {
     let sandbox;
@@ -34,6 +36,6 @@ suite('store creation for development', () => {
             store = any.simpleObject();
         redux.createStore.withArgs(reducer, Immutable.fromJS(initialState), enhancer).returns(store);
 
-        assert.equals(configureStore(initialState), store);
+        assert.equal(configureStore(initialState), store);
     });
 });

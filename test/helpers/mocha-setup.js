@@ -3,7 +3,9 @@
 const
     jsdom = require('jsdom'),
     chai = require('chai'),
-    chaiImmutable = require('chai-immutable');
+    chaiImmutable = require('chai-immutable'),
+    sinon = require('sinon'),
+    referee = require('referee');
 
 function setupDom() {
     const baseMarkup = '<!DOCTYPE html>',
@@ -15,4 +17,10 @@ function setupDom() {
 }
 
 setupDom();
+
 chai.use(chaiImmutable);
+sinon.assert.expose(chai.assert, { prefix: '' });
+
+referee.format = require('formatio').configure({quoteStrings: false}).ascii;
+require('referee-sinon')(referee, sinon);
+global.fomatio = require('formatio');

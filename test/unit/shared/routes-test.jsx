@@ -4,7 +4,9 @@ const
     React = require('react'), //eslint-disable-line no-unused-vars
     dom = require('react-dom'),
     reactRouter = require('react-router'),
-    proxyquire = require('proxyquire');
+    proxyquire = require('proxyquire'),
+    sinon = require('sinon'),
+    assert = require('chai').assert;
 
 suite('routes', () => {
     const
@@ -44,7 +46,7 @@ suite('routes', () => {
             <Router history={reactRouter.createMemoryHistory('/')}>
                 { routes }
             </Router>, node, () => {
-                assert.equals(node.textContent, 'wrapper index');
+                assert.equal(node.textContent, 'wrapper index');
             }
         );
     });
@@ -54,8 +56,8 @@ suite('routes', () => {
             <Router history={reactRouter.createMemoryHistory('/foo/bar/baz')}>
                 { routes }
             </Router>, node, () => {
-                assert.equals(node.textContent, 'wrapper not-found');
-                refute.called(hydrater);
+                assert.equal(node.textContent, 'wrapper not-found');
+                assert.notCalled(hydrater);
             }
         );
     });
@@ -65,7 +67,7 @@ suite('routes', () => {
             <Router history={reactRouter.createMemoryHistory('/rides')}>
                 { routes }
             </Router>, node, () => {
-                assert.equals(node.textContent, 'wrapper resources');
+                assert.equal(node.textContent, 'wrapper resources');
                 assert.calledOnce(hydrater);
             }
         );
@@ -76,7 +78,7 @@ suite('routes', () => {
             <Router history={reactRouter.createMemoryHistory('/rides/8')}>
                 { routes }
             </Router>, node, () => {
-                assert.equals(node.textContent, 'wrapper resource');
+                assert.equal(node.textContent, 'wrapper resource');
                 assert.calledOnce(hydrater);
             }
         );
@@ -87,7 +89,7 @@ suite('routes', () => {
             <Router history={reactRouter.createMemoryHistory('/users')}>
                 { routes }
             </Router>, node, () => {
-                assert.equals(node.textContent, 'wrapper resources');
+                assert.equal(node.textContent, 'wrapper resources');
                 assert.calledOnce(hydrater);
             }
         );
@@ -98,7 +100,7 @@ suite('routes', () => {
             <Router history={reactRouter.createMemoryHistory('/users/4')}>
                 { routes }
             </Router>, node, () => {
-                assert.equals(node.textContent, 'wrapper resource');
+                assert.equal(node.textContent, 'wrapper resource');
                 assert.calledOnce(hydrater);
             }
         );

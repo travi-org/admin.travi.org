@@ -3,7 +3,10 @@
 const
     any = require('../../helpers/any'),
     hydraterFactory = require('../../../lib/client/route-hydrator'),
-    repository = require('../../../lib/client/repository');
+    repository = require('../../../lib/client/repository'),
+    sinon = require('sinon'),
+    assert = require('referee').assert,
+    refute = require('referee').refute;
 
 suite('route data hydration', () => {
     let sandbox;

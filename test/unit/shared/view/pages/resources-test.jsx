@@ -6,10 +6,13 @@ const
     redux = require('redux'),
     Immutable = require('immutable'),
     cheerio = require('cheerio'),
-    any = require('../../../../helpers/any-for-admin'),
+
     HistoryWrapper = require('../../../../helpers/history-wrapper'),
     ResourceList = require('../../../../../lib/shared/views/resource-list.jsx'),
-    Provider = require('react-redux').Provider;
+    Provider = require('react-redux').Provider,
+
+    any = require('../../../../helpers/any-for-admin'),
+    assert = require('chai').assert;
 
 suite('resource list', () => {
     test('that a message is given when no resources are available', () => {
@@ -27,8 +30,8 @@ suite('resource list', () => {
                 </Provider>));
 
         $message = $('p');
-        assert.equals(1, $message.length);
-        assert.equals($message.text(), `No ${data.resourceType} are available`);
+        assert.equal(1, $message.length);
+        assert.equal($message.text(), `No ${data.resourceType} are available`);
     });
 
     test('that resources are listed', () => {
@@ -49,20 +52,20 @@ suite('resource list', () => {
                     <ResourceList />
                 </Provider>));
 
-        assert.equals(1, $('ul').length);
+        assert.equal(1, $('ul').length);
 
         $items = $('li');
-        assert.equals($items.length, data[resourceType].length);
+        assert.equal($items.length, data[resourceType].length);
         $items.each((index, item) => {
             let key;
             const
                 resource = data[resourceType][index],
                 $item = $(item);
 
-            assert.equals($item.text(), resource.displayName);
+            assert.equal($item.text(), resource.displayName);
             key = $item.data('reactid');
-            assert.equals(key.substring(key.lastIndexOf('$') + 1), `${resource.id}`);
-            assert.equals($item.children('img').length, 0);
+            assert.equal(key.substring(key.lastIndexOf('$') + 1), `${resource.id}`);
+            assert.equal($item.children('img').length, 0);
         });
     });
 
@@ -81,7 +84,7 @@ suite('resource list', () => {
                     <ResourceList />
                 </Provider>));
 
-        assert.equals($('img').attr('src'), data[resourceType][0].thumbnail.src);
+        assert.equal($('img').attr('src'), data[resourceType][0].thumbnail.src);
     });
 
     test('that list item links to resource when link is provided', () => {
@@ -100,6 +103,6 @@ suite('resource list', () => {
                     <HistoryWrapper><ResourceList {...data}/></HistoryWrapper>
                 </Provider>));
 
-        assert.equals($('li > a').attr('href'), selfLink);
+        assert.equal($('li > a').attr('href'), selfLink);
     });
 });

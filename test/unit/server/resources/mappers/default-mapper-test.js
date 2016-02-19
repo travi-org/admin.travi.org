@@ -1,6 +1,8 @@
 'use strict';
 
-const mapper = require('../../../../../lib/server/resources/mappers/default-mapper');
+const
+    mapper = require('../../../../../lib/server/resources/mappers/default-mapper'),
+    assert = require('chai').assert;
 
 suite('default mapper', () => {
     test('that the expected methods are exposed', () => {
@@ -15,8 +17,8 @@ suite('default mapper', () => {
 
             view = viewList[0];
 
-        assert.equals(view.foo, 'bar');
-        assert.equals(view.links, {});
+        assert.equal(view.foo, 'bar');
+        assert.deepEqual(view.links, {});
     });
 
     test('that the original resource is returned untouched', () => {
@@ -25,7 +27,7 @@ suite('default mapper', () => {
 
             view = mapper.mapToView(resource);
 
-        assert.equals(view.foo, 'bar');
-        assert.equals(view.links, {});
+        assert.equal(view.foo, 'bar');
+        assert.deepEqual(view.links, {});
     });
 });

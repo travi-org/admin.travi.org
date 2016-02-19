@@ -4,19 +4,20 @@
 const
     React = require('react'),
     reactRouter = require('react-router'),
-    Router = reactRouter.Router,
-    history = reactRouter.browserHistory,
     Provider = require('react-redux').Provider,
     dom = require('react-dom'),
     redux = require('redux'),
     proxyquire = require('proxyquire'),
     any = require('../../helpers/any'),
+    assert = require('chai').assert,
     sinon = require('sinon');
 
 suite('client-side app', () => {
     let sandbox,
         routes;
     const
+        Router = reactRouter.Router,
+        history = reactRouter.browserHistory,
         initialState = any.simpleObject(),
         store = any.simpleObject(),
         hydrator = {

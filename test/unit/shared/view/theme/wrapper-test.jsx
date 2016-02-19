@@ -6,7 +6,10 @@ const
     redux = require('redux'),
     Immutable = require('immutable'),
     proxyquire = require('proxyquire'),
+
     any = require('../../../../helpers/any'),
+    assert = require('chai').assert,
+
     PrimaryNav = require('../../../../helpers/primary-nav-stub.jsx'),
     Provider = require('react-redux').Provider;
 
@@ -31,10 +34,10 @@ suite('wrapper view', () => {
             </Provider>,
             node,
             () => {
-                assert.equals(node.children[0].className, 'container');
-                assert.equals(1, node.querySelectorAll('section').length);
-                assert.equals(1, node.querySelectorAll('#primary-nav').length);
-                assert.equals(data.primaryNav.length, node.querySelectorAll('#nav-items li').length);
+                assert.equal(node.children[0].className, 'container');
+                assert.equal(1, node.querySelectorAll('section').length);
+                assert.equal(1, node.querySelectorAll('#primary-nav').length);
+                assert.equal(data.primaryNav.length, node.querySelectorAll('#nav-items li').length);
             }
         );
     });

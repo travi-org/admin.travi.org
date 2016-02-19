@@ -2,6 +2,8 @@
 
 const
     any = require('../../../helpers/any'),
+    sinon = require('sinon'),
+    assert = require('chai').assert,
     resources = require('../../../../lib/server/resources/routes'),
     resourcesController = require('../../../../lib/server/resources/controller');
 
@@ -19,7 +21,7 @@ suite('server routes config', () => {
     });
 
     test('that the plugin is defined', () => {
-        assert.equals(resources.register.attributes, {
+        assert.deepEqual(resources.register.attributes, {
             name: 'resources-routes'
         });
     });

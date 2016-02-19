@@ -5,7 +5,8 @@ const
     reducer = require('../../../../lib/shared/store/reducer'),
     actions = require('../../../../lib/shared/store/actions'),
     any = require('../../../helpers/any'),
-    assert = require('chai').assert;
+    assert = require('chai').assert,
+    sinon = require('sinon');
 
 suite('reducer', () => {
     let sandbox;

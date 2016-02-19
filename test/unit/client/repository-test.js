@@ -2,6 +2,7 @@
 
 const
     any = require('../../helpers/any'),
+    assert = require('chai').assert,
     sinon = require('sinon'),
     proxyquire = require('proxyquire');
 

@@ -1,10 +1,13 @@
 'use strict';
 
-const assets = require('../../../../lib/server/view/static-assets');
+const
+    assets = require('../../../../lib/server/view/static-assets'),
+    assert = require('chai').assert,
+    sinon = require('sinon');
 
 suite('static assets', () => {
     test('that the plugin is defined', () => {
-        assert.equals(assets.register.attributes, {
+        assert.deepEqual(assets.register.attributes, {
             name: 'static-assets'
         });
     });

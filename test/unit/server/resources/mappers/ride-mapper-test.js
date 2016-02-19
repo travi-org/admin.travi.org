@@ -2,13 +2,14 @@
 
 const
     mapper = require('../../../../../lib/server/resources/mappers/ride-mapper'),
-    any = require('../../../../helpers/any-for-admin');
+    any = require('../../../../helpers/any-for-admin'),
+    assert = require('assert');
 
 suite('ride mapper', () => {
     test('that ride resources mapped to view list', () => {
         const ride = any.resources.ride();
 
-        assert.equals(
+        assert.deepEqual(
             [{
                 id: ride.id,
                 displayName: ride.nickname,
@@ -21,7 +22,7 @@ suite('ride mapper', () => {
     test('that ride mapped to view', () => {
         const ride = any.resources.ride();
 
-        assert.equals(
+        assert.deepEqual(
             {
                 id: ride.id,
                 displayName: ride.nickname,
@@ -35,7 +36,7 @@ suite('ride mapper', () => {
         const ride = any.resources.ride();
         ride._links.self = any.url();
 
-        assert.equals(
+        assert.deepEqual(
             {
                 'self': {
                     href: `/rides/${ride.id}`

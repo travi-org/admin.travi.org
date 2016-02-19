@@ -2,7 +2,8 @@
 
 const
     prodConfigurator = require('../../../../lib/shared/store/configure.prod'),
-    devConfigurator = require('../../../../lib/shared/store/configure.dev');
+    devConfigurator = require('../../../../lib/shared/store/configure.dev'),
+    assert = require('chai').assert;
 
 suite('environment dependent store configurator loader', () => {
     teardown(() => {
@@ -11,12 +12,12 @@ suite('environment dependent store configurator loader', () => {
     });
 
     test('that dev configurator loads in non-production environment', () => {
-        assert.equals(require('../../../../lib/shared/store/configure'), devConfigurator);
+        assert.equal(require('../../../../lib/shared/store/configure'), devConfigurator);
     });
 
     test('that production configurator loads in production environment', () => {
         process.env.NODE_ENV = 'production';
 
-        assert.equals(require('../../../../lib/shared/store/configure'), prodConfigurator);
+        assert.equal(require('../../../../lib/shared/store/configure'), prodConfigurator);
     });
 });

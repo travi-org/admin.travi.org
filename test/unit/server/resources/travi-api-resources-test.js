@@ -3,9 +3,9 @@
 const
     traviApiResources = require('../../../../lib/server/resources/travi-api-resources.js'),
     traverson = require('traverson'),
-    any = require('../../../helpers/any-for-admin');
-
-require('setup-referee-sinon/globals');
+    any = require('../../../helpers/any-for-admin'),
+    sinon = require('sinon'),
+    assert = require('chai').assert;
 
 suite('travi-api resource interactions', () => {
     let stubForGet;

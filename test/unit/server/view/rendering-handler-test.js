@@ -9,7 +9,10 @@ const
     immutable = require('immutable'),
     history = require('history'),
     _ = require('lodash'),
-    any = require('../../../helpers/any');
+    any = require('../../../helpers/any'),
+    sinon = require('sinon'),
+    assert = require('referee').assert,
+    refute = require('referee').refute;
 
 suite('rendering handler', () => {
     const

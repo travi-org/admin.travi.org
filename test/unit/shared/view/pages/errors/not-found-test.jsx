@@ -4,10 +4,9 @@ const
     React = require('react'),
     cheerio = require('cheerio'),
     reactDom = require('react-dom/server'),
+    assert = require('chai').assert,
 
     createNotFound = require('../../../../../../lib/shared/views/errors/not-found.jsx');
-
-require('setup-referee-sinon/globals');
 
 suite('not found', () => {
     const NotFound = createNotFound(React);
@@ -15,7 +14,7 @@ suite('not found', () => {
     test('that the proper content is displayed', () => {
         const $ = cheerio.load(reactDom.renderToStaticMarkup(<NotFound />));
 
-        assert.equals($('h2').text(), '404');
-        assert.equals($('p').text(), 'Page Not Found');
+        assert.equal($('h2').text(), '404');
+        assert.equal($('p').text(), 'Page Not Found');
     });
 });

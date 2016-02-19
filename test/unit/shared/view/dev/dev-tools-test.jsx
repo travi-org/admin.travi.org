@@ -4,7 +4,9 @@ const
     any = require('../../../../helpers/any'),
     proxyquire = require('proxyquire'),
     React = require('react'),
-    LogMonitor = require('redux-devtools-log-monitor').default;
+    LogMonitor = require('redux-devtools-log-monitor').default,
+    sinon = require('sinon'),
+    assert = require('chai').assert;
 
 suite('redux dev-tools', () => {
     let sandbox;
@@ -29,6 +31,6 @@ suite('redux dev-tools', () => {
             });
         React.createElement.withArgs(LogMonitor, {theme: 'solarized'}).returns(MonitorComponent);
 
-        assert.equals(DevTools, Tools);
+        assert.equal(DevTools, Tools);
     });
 });

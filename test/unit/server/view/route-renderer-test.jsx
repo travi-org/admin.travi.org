@@ -6,7 +6,10 @@ const
     reactRouter = require('react-router'),
     Provider = require('react-redux').Provider,
     any = require('../../../helpers/any'),
-    proxyquire = require('proxyquire');
+    proxyquire = require('proxyquire'),
+    sinon = require('sinon'),
+    assert = require('referee').assert,
+    refute = require('referee').refute;
 
 suite('route renderer', () => {
     const

@@ -5,9 +5,9 @@ const
     traviApiResources = require('../../../../lib/server/resources/travi-api-resources.js'),
     resourceMapperFactory = require('../../../../lib/server/resources/mappers/resource-mapper-factory'),
 
-    any = require('../../../helpers/any-for-admin');
-
-require('setup-referee-sinon/globals');
+    any = require('../../../helpers/any-for-admin'),
+    sinon = require('sinon'),
+    assert = require('chai').assert;
 
 suite('resources controller', () => {
     setup(() => {

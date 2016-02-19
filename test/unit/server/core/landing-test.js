@@ -3,7 +3,9 @@
 const
     any = require('../../../helpers/any'),
     landing = require('../../../../lib/server/core/landing'),
-    resourcesController = require('../../../../lib/server/resources/controller');
+    resourcesController = require('../../../../lib/server/resources/controller'),
+    sinon = require('sinon'),
+    assert = require('chai').assert;
 
 suite('landing config', () => {
     let sandbox;
@@ -18,7 +20,7 @@ suite('landing config', () => {
     });
 
     test('that the plugin is defined', () => {
-        assert.equals(landing.register.attributes, {
+        assert.deepEqual(landing.register.attributes, {
             name: 'landing'
         });
     });
