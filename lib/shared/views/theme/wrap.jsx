@@ -1,19 +1,21 @@
 'use strict';
 
 const
-    React = require('react'),
+    react = require('react'),
     connect = require('react-redux').connect,
-    PrimaryNav = require('./primary-nav.jsx')(React),
+    PrimaryNav = require('./primary-nav.jsx')(react);
 
-    Wrap = (React) => (props) => (
+function wrap(React) {
+    return (props) => (
         <div className="container">
             <PrimaryNav primaryNav={props.primaryNav}/>
             { props.children }
         </div>
     );
+}
 
 module.exports = connect((state) => {
     return {
         primaryNav: state.get('primaryNav').toJS()
     };
-})(Wrap(React));
+})(wrap(react));

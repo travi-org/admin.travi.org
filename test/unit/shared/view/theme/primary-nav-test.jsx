@@ -3,7 +3,7 @@
 const
     any = require('../../../../helpers/any'),
 
-    React = require('react'),   //eslint-disable-line no-unused-vars
+    React = require('react'),
     dom = require('react-dom/server'),
     cheerio = require('cheerio'),
     assert = require('chai').assert,
