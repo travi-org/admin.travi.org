@@ -13,6 +13,7 @@ suite('reducer', () => {
     setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(actions, 'setPrimaryNav');
+        sandbox.stub(actions, 'setResource');
         sandbox.stub(actions, 'setResources');
     });
 
@@ -39,6 +40,19 @@ suite('reducer', () => {
                 nav: any.simpleObject()
             };
         actions.setPrimaryNav.withArgs(initialState, action.nav).returns(updatedState);
+
+        assert.equal(reducer(initialState, action), updatedState);
+    });
+
+    test('that the setResource function is called for the SET_RESOURCE action', () => {
+        const
+            initialState = immutable.Map(),
+            updatedState = any.simpleObject(),
+            action = {
+                type: 'SET_RESOURCE',
+                resource: any.simpleObject()
+            };
+        actions.setResource.withArgs(initialState, action.resource).returns(updatedState);
 
         assert.equal(reducer(initialState, action), updatedState);
     });

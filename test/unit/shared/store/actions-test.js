@@ -18,6 +18,17 @@ suite('reducer actions', () => {
         );
     });
 
+    test('that resource is set on the state', () => {
+        const resource = any.simpleObject();
+
+        assert.equal(
+            actions.setResource(immutable.Map(), resource),
+            immutable.Map({
+                resource: immutable.fromJS(resource)
+            })
+        );
+    });
+
     test('that resources are merged into the state', () => {
         const
             type = any.string(),

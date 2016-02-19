@@ -20,6 +20,7 @@ suite('route data hydration', () => {
 
     test('that the single resource is fetched from the repository when an id exists in the route', () => {
         const
+            resource = any.simpleObject(),
             resourceType = any.string(),
             resourceId = any.string(),
             callback = sinon.spy(),
@@ -37,10 +38,11 @@ suite('route data hydration', () => {
         assert.calledWith(repository.getResource, resourceType, resourceId);
         refute.called(callback);
 
-        repository.getResource.yield();
+        repository.getResource.yield(null, {resource});
 
         assert.calledWith(store.dispatch, {
-            type: 'SET_RESOURCE'
+            type: 'SET_RESOURCE',
+            resource
         });
         assert.calledOnce(callback);
         refute.called(repository.getResources);
