@@ -5,3 +5,6 @@
   ecmaFeatures:
     jsx: true
 
+  rules:
+    no-extra-parens: 0
+

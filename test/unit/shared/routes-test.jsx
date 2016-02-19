@@ -12,19 +12,13 @@ suite('routes', () => {
     const
         Router = reactRouter.Router,
         routesFactory = proxyquire('../../../lib/shared/routes.jsx', {
-            './views/theme/wrap.jsx': React.createClass({
-                render() {
-                    return <div>wrapper { this.props.children }</div>;
-                }
-            }),
-            './views/index.jsx': (React) => () => <div>index</div>,                     //eslint-disable-line no-shadow
-            './views/errors/not-found.jsx': (React) => () => <div>not-found</div>,      //eslint-disable-line no-shadow
-            './views/resource-list.jsx': React.createClass({
-                render: () => <div>resources</div>
-            }),
-            './views/resource.jsx': React.createClass({
-                render: () => <div>resource</div>
-            })
+            './views/theme/wrap.jsx': (React) => (props) => (                       //eslint-disable-line no-shadow
+                <div>wrapper { props.children }</div>
+            ),
+            './views/index.jsx': (React) => () => <div>index</div>,                 //eslint-disable-line no-shadow
+            './views/errors/not-found.jsx': (React) => () => <div>not-found</div>,  //eslint-disable-line no-shadow
+            './views/resource-list.jsx': () => <div>resources</div>,
+            './views/resource.jsx': () => <div>resource</div>
         });
     let node,
         hydrater,

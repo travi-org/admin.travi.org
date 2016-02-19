@@ -6,7 +6,7 @@ const
     Route = router.Route,
     IndexRoute = router.IndexRoute,
 
-    Wrap = require('./views/theme/wrap.jsx'),
+    Wrap = require('./views/theme/wrap.jsx')(React),
     Index = require('./views/index.jsx')(React),
     ResourceList = require('./views/resource-list.jsx'),
     Resource = require('./views/resource.jsx'),

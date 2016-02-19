@@ -14,7 +14,7 @@ const
     Provider = require('react-redux').Provider;
 
 suite('wrapper view', () => {
-    const Wrap = proxyquire('../../../../../lib/shared/views/theme/wrap.jsx', {'./primary-nav.jsx': PrimaryNav});
+    const Wrap = proxyquire('../../../../../lib/shared/views/theme/wrap.jsx', {'./primary-nav.jsx': PrimaryNav})(React);
     let node;
 
     setup(() => {
