@@ -7,6 +7,3 @@
 
   rules:
     react/jsx-uses-react: 2
-
-  globals:
-    document: false

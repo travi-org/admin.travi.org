@@ -2,7 +2,7 @@
 
 const
     any = require('../../helpers/any'),
-    hydrater = require('../../../lib/client/route-hydrater'),
+    hydraterFactory = require('../../../lib/client/route-hydrator'),
     repository = require('../../../lib/client/repository');
 
 suite('route data hydration', () => {
@@ -22,7 +22,11 @@ suite('route data hydration', () => {
         const
             resourceType = any.string(),
             resourceId = any.string(),
-            callback = sinon.spy();
+            callback = sinon.spy(),
+            store = {
+                dispatch: sinon.spy()
+            },
+            hydrater = hydraterFactory(store);
 
         hydrater.hydrate({
             location: {
@@ -35,14 +39,23 @@ suite('route data hydration', () => {
 
         repository.getResource.yield();
 
+        assert.calledWith(store.dispatch, {
+            type: 'SET_RESOURCE'
+        });
         assert.calledOnce(callback);
         refute.called(repository.getResources);
     });
 
     test('that resources are fetched from the repository when an id is not present in the route', () => {
         const
+            type = any.string(),
             resourceType = any.string(),
-            callback = sinon.spy();
+            resources = any.listOf(any.simpleObject),
+            callback = sinon.spy(),
+            store = {
+                dispatch: sinon.spy()
+            },
+            hydrater = hydraterFactory(store);
 
         hydrater.hydrate({
             location: {
@@ -53,8 +66,16 @@ suite('route data hydration', () => {
         assert.calledWith(repository.getResources, resourceType);
         refute.called(callback);
 
-        repository.getResources.yield();
+        repository.getResources.yield(null, {
+            resourceType: type,
+            [type]: resources
+        });
 
+        assert.calledWith(store.dispatch, {
+            type: 'SET_RESOURCES',
+            resourceType: type,
+            resources
+        });
         assert.calledOnce(callback);
         refute.called(repository.getResource);
     });

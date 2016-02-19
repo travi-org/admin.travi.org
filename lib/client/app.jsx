@@ -1,4 +1,4 @@
-/*global window */
+/*global window document */
 'use strict';
 
 const
@@ -9,12 +9,13 @@ const
     Provider = require('react-redux').Provider,
     routesFactory = require('../shared/routes.jsx'),
     configureStore = require('../shared/store/configure'),
-    hydrater = require('./route-hydrater'),
+    hydrator = require('./route-hydrator'),
 
-    routes = routesFactory(hydrater.hydrate);
+    store = configureStore(JSON.parse(window.__INITIAL_STATE__)),
+    routes = routesFactory(hydrator(store).hydrate);
 
 dom.render(
-    <Provider store={configureStore(JSON.parse(window.__INITIAL_STATE__))}>
+    <Provider store={store}>
         <Router history={createBrowserHistory()} children={routes} />
     </Provider>,
     document.getElementById('wrap')

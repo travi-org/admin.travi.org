@@ -9,7 +9,7 @@ const
     redux = require('redux'),
     proxyquire = require('proxyquire'),
     any = require('../../helpers/any'),
-    hydrater = require('../../../lib/client/route-hydrater');
+    sinon = require('sinon');
 
 suite('client-side app', () => {
     let sandbox,
@@ -17,13 +17,17 @@ suite('client-side app', () => {
     const
         history = any.simpleObject(),
         initialState = any.simpleObject(),
-        store = any.simpleObject();
+        store = any.simpleObject(),
+        hydrator = {
+            hydrate: sinon.spy()
+        };
 
     function simulatePageLoad() {
         proxyquire('../../../lib/client/app.jsx', {
             'history/lib/createBrowserHistory': sinon.stub().returns(history),
             '../shared/store/configure': sinon.stub().withArgs(initialState).returns(store),
-            '../shared/routes.jsx': sinon.stub().withArgs(hydrater.hydrate).returns(routes)
+            './route-hydrator': sinon.stub().withArgs(store).returns(hydrator),
+            '../shared/routes.jsx': sinon.stub().withArgs(hydrator.hydrate).returns(routes)
         });
     }
 
