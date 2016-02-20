@@ -12,7 +12,7 @@ suite('routes', () => {
     const
         Router = reactRouter.Router,
         routesFactory = proxyquire('../../../lib/shared/routes.jsx', {
-            './views/theme/wrap.jsx': (React) => (props) => (                       //eslint-disable-line no-shadow
+            './views/theme/connected-wrap.jsx': (React) => (props) => (             //eslint-disable-line no-shadow
                 <div>wrapper { props.children }</div>
             ),
             './views/index.jsx': (React) => () => <div>index</div>,                 //eslint-disable-line no-shadow

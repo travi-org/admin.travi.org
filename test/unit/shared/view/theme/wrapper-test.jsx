@@ -1,44 +1,36 @@
 'use strict';
 
 const
-    React = require('react'),   //eslint-disable-line no-unused-vars
-    dom = require('react-dom'),
-    redux = require('redux'),
-    Immutable = require('immutable'),
-    proxyquire = require('proxyquire'),
+    React = require('react'),
 
     any = require('../../../../helpers/any'),
     assert = require('chai').assert,
+    skinDeep = require('skin-deep'),
 
-    PrimaryNav = require('../../../../helpers/primary-nav-stub.jsx'),
-    Provider = require('react-redux').Provider;
+    Wrap = require('../../../../../lib/shared/views/theme/wrap.jsx')(React);
 
-suite('wrapper view', () => {
-    const Wrap = proxyquire('../../../../../lib/shared/views/theme/wrap.jsx', {'./primary-nav.jsx': PrimaryNav})(React);
-    let node;
-
-    setup(() => {
-        node = document.createElement('div');
-    });
-
-    teardown(() => {
-        dom.unmountComponentAtNode(node);
-    });
-
+suite('wrapper component', () => {
     test('that the layout markup is correct', () => {
-        const data = {primaryNav: any.listOf(any.string)};
 
-        dom.render(
-            <Provider store={redux.createStore((state) => state, Immutable.fromJS(data))}>
-                <Wrap><section id="content" /></Wrap>
-            </Provider>,
-            node,
-            () => {
-                assert.equal(node.children[0].className, 'container');
-                assert.equal(1, node.querySelectorAll('section').length);
-                assert.equal(1, node.querySelectorAll('#primary-nav').length);
-                assert.equal(data.primaryNav.length, node.querySelectorAll('#nav-items li').length);
-            }
-        );
+        //shallowRenderer.render(React.createElement(
+        //    <Provider store={redux.createStore((state) => state, Immutable.fromJS(data))}>
+        //        <Wrap>
+        //            <section id="content"/>
+        //        </Wrap>
+        //    </Provider>
+        //));
+
+        const
+            primaryNav = any.listOf(any.simpleObject),
+            children = 'foo',
+
+            tree = skinDeep.shallowRender(React.createElement(Wrap, {primaryNav}, children)),
+            result = tree.getRenderOutput();
+
+        assert.equal(result.type, 'div');
+        assert.equal(result.props.className, 'container');
+
+        assert.isObject(tree.subTree('PrimaryNav', {primaryNav}));
+        assert.equal(tree.props.children[1], children);
     });
 });
