@@ -11,15 +11,6 @@ const
 
 suite('wrapper component', () => {
     test('that the layout markup is correct', () => {
-
-        //shallowRenderer.render(React.createElement(
-        //    <Provider store={redux.createStore((state) => state, Immutable.fromJS(data))}>
-        //        <Wrap>
-        //            <section id="content"/>
-        //        </Wrap>
-        //    </Provider>
-        //));
-
         const
             primaryNav = any.listOf(any.simpleObject),
             children = 'foo',
