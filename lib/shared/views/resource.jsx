@@ -1,10 +1,8 @@
 'use strict';
 
-const connect = require('react-redux').connect;
-
-function resource(React) {
-    return (props) => <h3>{props.resource.displayName}</h3>;
-}
+const
+    connect = require('react-redux').connect,
+    resource = require('./resources/individual/resource');
 
 module.exports = (React) => connect((state) => {
     return {

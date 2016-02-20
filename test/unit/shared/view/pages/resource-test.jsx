@@ -7,26 +7,13 @@ const
     cheerio = require('cheerio'),
     Immutable = require('immutable'),
 
-    repository = require('../../../../../lib/client/repository'),
     Resource = require('../../../../../lib/shared/views/resource.jsx')(React),
     Provider = require('react-redux').Provider,
 
     any = require('../../../../helpers/any-for-admin'),
-    assert = require('chai').assert,
-    sinon = require('sinon');
+    assert = require('chai').assert;
 
 suite('resource', () => {
-    let sandbox;
-
-    setup(() => {
-        sandbox = sinon.sandbox.create();
-        sandbox.stub(repository, 'getResource');
-    });
-
-    teardown(() => {
-        sandbox.restore();
-    });
-
     test('that the resource is displayed', () => {
         const data = {resource: {id: any.string(), displayName: any.string()}},
 
