@@ -12,6 +12,10 @@ const
     PrimaryNav = require('../../../../../lib/shared/views/theme/primary-nav.jsx')(React);
 
 suite('primary navigation', () => {
+    test('that displayName is set', () => {
+        assert.equal(PrimaryNav.displayName, 'PrimaryNav');
+    });
+
     test('that the resource types are listed as links', () => {
         const
             primaryNav = any.listOf(() => {
