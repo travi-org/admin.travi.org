@@ -3,7 +3,6 @@
 const
     assert = require('referee').assert,
     _ = require('lodash');
-require('setup-referee-sinon/globals');
 
 module.exports = function () {
     this.World = require('../support/world.js').World;

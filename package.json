@@ -71,7 +71,6 @@
     "redux-devtools-log-monitor": "1.0.4",
     "referee": "1.2.0",
     "referee-sinon": "1.0.3",
-    "setup-referee-sinon": "0.3.0",
     "sinon": "1.17.3",
     "sinon-as-promised": "4.0.0",
     "skin-deep": "0.14.0",

@@ -8,7 +8,6 @@ const
 
     HOST = 'https://api.travi.org',
     HTTP_SUCCESS = 200;
-require('setup-referee-sinon/globals');
 
 let resources = {},
     existingResourceId;
