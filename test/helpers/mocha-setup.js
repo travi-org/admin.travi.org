@@ -23,4 +23,4 @@ sinon.assert.expose(chai.assert, { prefix: '' });
 
 referee.format = require('formatio').configure({quoteStrings: false}).ascii;
 require('referee-sinon')(referee, sinon);
-global.fomatio = require('formatio');
+global.formatio = require('formatio');
