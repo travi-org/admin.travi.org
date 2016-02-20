@@ -3,10 +3,15 @@
 module.exports = (React) => {
     const PrimaryNav = require('./primary-nav.jsx')(React);
 
-    return (props) => (
-        <div className="container">
-            <PrimaryNav primaryNav={props.primaryNav}/>
-            { props.children }
-        </div>
-    );
+    function Wrap(props) {
+        return (
+            <div className="container">
+                <PrimaryNav primaryNav={props.primaryNav}/>
+                { props.children }
+            </div>
+        );
+    }
+    Wrap.displayName = 'Wrap';
+
+    return Wrap;
 };

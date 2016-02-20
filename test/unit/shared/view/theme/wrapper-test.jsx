@@ -10,6 +10,10 @@ const
     Wrap = require('../../../../../lib/shared/views/theme/wrap.jsx')(React);
 
 suite('wrapper component', () => {
+    test('that displayName is set', () => {
+        assert.equal(Wrap.displayName, 'Wrap');
+    });
+
     test('that the layout markup is correct', () => {
         const
             primaryNav = any.listOf(any.simpleObject),

@@ -11,6 +11,10 @@ const
 suite('index', () => {
     const Index = createIndex(React);
 
+    test('that displayName is set', () => {
+        assert.equal(Index.displayName, 'Index');
+    });
+
     test('that the proper content is displayed', () => {
         const $ = cheerio.load(reactDom.renderToStaticMarkup(<Index />));
 
