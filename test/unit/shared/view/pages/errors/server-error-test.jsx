@@ -11,6 +11,10 @@ const
 suite('server error', () => {
     const ServerError = createNotFound(React);
 
+    test('that displayName is set', () => {
+        assert.equal(ServerError.displayName, 'ServerError');
+    });
+
     test('that the proper content is displayed', () => {
         const $ = cheerio.load(reactDom.renderToStaticMarkup(<ServerError />));
 

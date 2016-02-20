@@ -11,6 +11,10 @@ const
 suite('not found', () => {
     const NotFound = createNotFound(React);
 
+    test('that displayName is set', () => {
+        assert.equal(NotFound.displayName, 'NotFound');
+    });
+
     test('that the proper content is displayed', () => {
         const $ = cheerio.load(reactDom.renderToStaticMarkup(<NotFound />));
 
