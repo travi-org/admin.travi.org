@@ -8,13 +8,13 @@ const
     sinon = require('sinon'),
     assert = require('chai').assert,
     proxyquire = require('proxyquire'),
-    any = require('../../../../helpers/any');
+    any = require('../../../../../helpers/any');
 
 suite('connected wrapper component', () => {
     let sandbox;
     const
         Wrap = any.simpleObject(),
-        connectedWrap = proxyquire('../../../../../lib/shared/views/theme/connected-wrap.jsx', {
+        connectedWrap = proxyquire('../../../../../../lib/shared/views/theme/wrap/connected-wrap.jsx', {
             './wrap.jsx': sinon.stub().withArgs(React).returns(Wrap)
         });
 

@@ -3,11 +3,11 @@
 const
     React = require('react'),
 
-    any = require('../../../../helpers/any'),
+    any = require('../../../../../helpers/any'),
     assert = require('chai').assert,
     skinDeep = require('skin-deep'),
 
-    Wrap = require('../../../../../lib/shared/views/theme/wrap.jsx')(React);
+    Wrap = require('../../../../../../lib/shared/views/theme/wrap/wrap.jsx')(React);
 
 suite('wrapper component', () => {
     test('that displayName is set', () => {

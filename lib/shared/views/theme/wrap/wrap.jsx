@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (React) => {
-    const PrimaryNav = require('./primary-nav.jsx')(React);
+    const PrimaryNav = require('./../primary-nav.jsx')(React);
 
     function Wrap(props) {
         return (
