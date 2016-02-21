@@ -12,13 +12,15 @@ suite('routes', () => {
     const
         Router = reactRouter.Router,
         routesFactory = proxyquire('../../../lib/shared/routes.jsx', {
-            './views/theme/wrap/connected-wrap.jsx': (React) => (props) => (             //eslint-disable-line no-shadow
+            './views/theme/wrap/connected-wrap.jsx': (React) => (props) => (            //eslint-disable-line no-shadow
                 <div>wrapper { props.children }</div>
             ),
-            './views/index.jsx': (React) => () => <div>index</div>,                 //eslint-disable-line no-shadow
-            './views/errors/not-found.jsx': (React) => () => <div>not-found</div>,  //eslint-disable-line no-shadow
-            './views/resource-list.jsx': (React) => () => <div>resources</div>,     //eslint-disable-line no-shadow
-            './views/resource.jsx': (React) => () => <div>resource</div>            //eslint-disable-line no-shadow
+            './views/index.jsx': (React) => () => <div>index</div>,                     //eslint-disable-line no-shadow
+            './views/errors/not-found.jsx': (React) => () => <div>not-found</div>,      //eslint-disable-line no-shadow
+            './views/resource-list.jsx': (React) => () => <div>resources</div>,         //eslint-disable-line no-shadow
+            './views/resources/individual/connected-resource.jsx': (React) => () => (   //eslint-disable-line no-shadow
+                <div>resource</div>
+            )
         });
     let node,
         hydrater,
