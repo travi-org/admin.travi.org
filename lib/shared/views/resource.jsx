@@ -2,7 +2,7 @@
 
 const
     connect = require('react-redux').connect,
-    resource = require('./resources/individual/resource');
+    resource = require('./resources/individual/resource.jsx');
 
 module.exports = (React) => connect((state) => {
     return {
