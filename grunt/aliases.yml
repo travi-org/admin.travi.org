@@ -27,4 +27,6 @@ verify:
 
 heroku:production: build
 
-default: verify
+default:
+  - build
+  - verify
