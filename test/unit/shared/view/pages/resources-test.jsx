@@ -27,7 +27,8 @@ suite('resource list', () => {
             $ = cheerio.load(reactDom.renderToStaticMarkup(
                 <Provider store={redux.createStore((state) => state, Immutable.fromJS(data))}>
                     <ResourceList />
-                </Provider>));
+                </Provider>
+            ));
 
         $message = $('p');
         assert.equal(1, $message.length);
@@ -50,9 +51,10 @@ suite('resource list', () => {
             $ = cheerio.load(reactDom.renderToString(
                 <Provider store={redux.createStore((state) => state, Immutable.fromJS(data))}>
                     <ResourceList />
-                </Provider>));
+                </Provider>
+            ));
 
-        assert.equal(1, $('ul').length);
+        assert.equal($('ul').length, 1);
 
         $items = $('li');
         assert.equal($items.length, data[resourceType].length);
@@ -82,7 +84,8 @@ suite('resource list', () => {
             $ = cheerio.load(reactDom.renderToStaticMarkup(
                 <Provider store={redux.createStore((state) => state, Immutable.fromJS(data))}>
                     <ResourceList />
-                </Provider>));
+                </Provider>
+            ));
 
         assert.equal($('img').attr('src'), data[resourceType][0].thumbnail.src);
     });
@@ -101,7 +104,8 @@ suite('resource list', () => {
             $ = cheerio.load(reactDom.renderToStaticMarkup(
                 <Provider store={redux.createStore((state) => state, Immutable.fromJS(data))}>
                     <HistoryWrapper><ResourceList {...data}/></HistoryWrapper>
-                </Provider>));
+                </Provider>
+            ));
 
         assert.equal($('li > a').attr('href'), selfLink);
     });

@@ -1,34 +1,19 @@
 'use strict';
 
-const
-    connect = require('react-redux').connect,
-    Link = require('react-router').Link,
-    ListGroup = require('react-bootstrap').ListGroup,
-    ListGroupItem = require('react-bootstrap').ListGroupItem;
+const connect = require('react-redux').connect;
 
-function resourceList(React) {
-    function renderResourceAsListItem(resource) {
-        let thumbnail = '',
-            link;
-
-        if (resource.thumbnail) {
-            thumbnail = <img src={resource.thumbnail.src} className="thumbnail"/>;
-        }
-
-        if (resource.links.self) {
-            link = <Link to={resource.links.self.href}>{resource.displayName}</Link>;
-        } else {
-            link = resource.displayName;
-        }
-
-        return <ListGroupItem key={resource.id}>{thumbnail}{link}</ListGroupItem>;
-    }
+function maybeResourceList(React) {
+    const ResourceList = require('./resources/list/list.jsx')(React);
 
     return (props) => {
-        if (props.resources.length) {
-            return <ListGroup>{ props.resources.map(renderResourceAsListItem) }</ListGroup>;
+        const
+            resources = props.resources,
+            resourceType = props.resourceType;
+
+        if (resources.length) {
+            return <ResourceList resources={resources} />;
         } else {
-            return <p className="alert alert-info">No { props.resourceType } are available</p>;
+            return <p className="alert alert-info">No { resourceType } are available</p>;
         }
     };
 }
@@ -40,4 +25,4 @@ module.exports = (React) => connect((state) => {
         resources: state.get(resourceType).toJS(),
         resourceType
     };
-})(resourceList(React));
+})(maybeResourceList(React));
