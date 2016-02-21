@@ -26,7 +26,7 @@ suite('list item component', () => {
             listGroupItem = tree.findNode('ListGroupItem');
 
         assert.equal(listGroupItem.key, resource.id);
-        assert.equal(listGroupItem.props.children, resource.displayName);
+        assert.deepEqual(listGroupItem.props.children, ['', resource.displayName]);
     });
 
     test('that link renders when self link exists', () => {
@@ -50,6 +50,26 @@ suite('list item component', () => {
             onlyActiveOnIndex: false,
             className: '',
             style: {}
+        }));
+    });
+
+    test('that thumbnail renders when defined', () => {
+        const
+            resource = {
+                id: any.string(),
+                displayName: any.string(),
+                links: {},
+                thumbnail: {
+                    src: any.url()
+                }
+            },
+
+            tree = skinDeep.shallowRender(React.createElement(ListItem, {resource})),
+            listGroupItem = tree.subTree('ListGroupItem');
+
+        assert.isObject(listGroupItem.subTree('img', {
+            src: resource.thumbnail.src,
+            className: 'thumbnail'
         }));
     });
 });
