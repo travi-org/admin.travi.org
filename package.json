@@ -90,7 +90,7 @@
     "history": "2.0.0",
     "immutable": "3.7.6",
     "inert": "3.2.0",
-    "lodash": "4.5.0",
+    "lodash": "4.5.1",
     "negotiator": "0.6.0",
     "newrelic": "1.25.3",
     "react": "0.14.7",
