@@ -17,6 +17,3 @@
     max-nested-callbacks:
       - 2
       - 4
-    no-mixed-requires:
-      - 1
-      - false
