@@ -2,8 +2,8 @@
 
 
 module.exports = (React) => {
-    function Resource(props) {
-        return <h3>{props.resource.displayName}</h3>;
+    function Resource({resource}) {
+        return <h3>{resource.displayName}</h3>;
     }
     Resource.displayName = 'Resource';
 

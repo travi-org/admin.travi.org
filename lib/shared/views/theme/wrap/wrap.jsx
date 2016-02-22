@@ -3,11 +3,11 @@
 module.exports = (React) => {
     const PrimaryNav = require('./../primary-nav.jsx')(React);
 
-    function Wrap(props) {
+    function Wrap({primaryNav, children}) {
         return (
             <div className="container">
-                <PrimaryNav primaryNav={props.primaryNav}/>
-                { props.children }
+                <PrimaryNav primaryNav={primaryNav}/>
+                { children }
             </div>
         );
     }

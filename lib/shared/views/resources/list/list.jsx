@@ -6,9 +6,7 @@ const
     ListGroupItem = require('react-bootstrap').ListGroupItem;
 
 module.exports = (React) => {
-    function ResourceList(props) {
-        const resources = props.resources;
-
+    function ResourceList({resources}) {
         return (
             <ListGroup>{ resources.map((resource) => (
                 <ListGroupItem key={resource.id}>{(() => {

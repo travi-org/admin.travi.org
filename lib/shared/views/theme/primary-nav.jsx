@@ -10,7 +10,7 @@ const
     LinkContainer = require('react-router-bootstrap').LinkContainer;
 
 module.exports = (React) => {
-    function PrimaryNav(props) {
+    function PrimaryNav({primaryNav}) {
         return (
             <Navbar>
                 <Navbar.Header>
@@ -21,7 +21,7 @@ module.exports = (React) => {
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav>
-                        {props.primaryNav.map((resourceType) => (
+                        {primaryNav.map((resourceType) => (
                             <LinkContainer to={resourceType.path} key={resourceType.text}>
                                 <NavItem>
                                     {resourceType.text}

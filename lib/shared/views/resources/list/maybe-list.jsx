@@ -3,11 +3,7 @@
 module.exports = (React) => {
     const ResourceList = require('./list.jsx')(React);
 
-    function MaybeList(props) {
-        const
-            resources = props.resources,
-            resourceType = props.resourceType;
-
+    function MaybeList({resources, resourceType}) {
         if (resources.length) {
             return <ResourceList resources={resources}/>;
         } else {
