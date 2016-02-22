@@ -10,9 +10,9 @@
   },
   "scripts": {
     "test": "grunt",
-    "start": "node lib/server/app.js",
+    "start": "node dist/server/app.js",
     "postinstall": "grunt heroku:production",
-    "dev": "grunt compile && nodemon lib/server/app.js"
+    "dev": "grunt compileClient && nodemon lib/server/app.js"
   },
   "engines": {
     "node": "5.1.x",

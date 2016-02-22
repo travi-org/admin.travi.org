@@ -3,4 +3,12 @@ options:
 
 dist:
   files:
-    'dist/app.js': lib/server/app.js
+    - expand: true
+      cwd: lib/server
+      src: '**/*.js*'
+      dest: dist/server
+
+    - expand: true
+      cwd: lib/shared
+      src: '**/*.js*'
+      dest: dist/shared

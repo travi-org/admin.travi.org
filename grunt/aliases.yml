@@ -9,6 +9,7 @@ build:
   - clean
   - bower
   - compileClient
+  - compileServer
 
 lint:
   - scsslint

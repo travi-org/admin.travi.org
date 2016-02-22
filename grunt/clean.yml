@@ -1,5 +1,7 @@
 css: resources/css
-js: resources/js
+js:
+  - resources/js
+  - dist
 
 bower: bower_components
 
