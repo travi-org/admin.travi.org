@@ -7,4 +7,5 @@
 
   rules:
     no-extra-parens: 0
+    react/jsx-uses-vars: 2
 
