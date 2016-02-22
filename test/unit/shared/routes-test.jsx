@@ -17,7 +17,9 @@ suite('routes', () => {
             ),
             './views/index.jsx': (React) => () => <div>index</div>,                     //eslint-disable-line no-shadow
             './views/errors/not-found.jsx': (React) => () => <div>not-found</div>,      //eslint-disable-line no-shadow
-            './views/resource-list.jsx': (React) => () => <div>resources</div>,         //eslint-disable-line no-shadow
+            './views/resources/list/connected-list.jsx': (React) => () => (             //eslint-disable-line no-shadow
+                <div>resources</div>
+            ),
             './views/resources/individual/connected-resource.jsx': (React) => () => (   //eslint-disable-line no-shadow
                 <div>resource</div>
             )
