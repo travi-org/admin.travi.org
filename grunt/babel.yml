@@ -1,0 +1,6 @@
+options:
+  sourceMap: true
+
+dist:
+  files:
+    'dist/app.js': lib/server/app.js

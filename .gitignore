@@ -4,6 +4,7 @@ resources/css/
 resources/js/
 tmp/
 logs/
+dist/
 
 Rakefile
 newrelic_agent.log

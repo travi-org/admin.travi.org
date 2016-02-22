@@ -28,6 +28,7 @@
     }
   },
   "devDependencies": {
+    "babel-cli": "6.5.1",
     "babel-core": "6.5.2",
     "babel-eslint": "5.0.0",
     "babel-loader": "6.2.3",
@@ -46,6 +47,7 @@
     "extend-grunt-plugin": "0.1.0",
     "formatio": "1.2.0",
     "grunt": "0.4.5",
+    "grunt-babel": "6.0.0",
     "grunt-bower-task": "0.4.0",
     "grunt-cli": "0.1.13",
     "grunt-contrib-clean": "1.0.0",
@@ -88,7 +90,6 @@
     "history": "2.0.0",
     "immutable": "3.7.6",
     "inert": "3.2.0",
-    "jsx-require-extension": "0.2.0",
     "lodash": "4.5.0",
     "negotiator": "0.6.0",
     "newrelic": "1.25.3",

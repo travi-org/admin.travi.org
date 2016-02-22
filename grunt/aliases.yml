@@ -1,12 +1,14 @@
-compile:
+compileClient:
   - sass
   - webpack:build
   - uglify
 
+compileServer: babel
+
 build:
   - clean
   - bower
-  - compile
+  - compileClient
 
 lint:
   - scsslint
