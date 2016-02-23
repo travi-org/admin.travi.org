@@ -2,8 +2,9 @@
   plugins:
     - react
 
-  ecmaFeatures:
-    jsx: true
+  parserOptions:
+    ecmaFeatures:
+      jsx: true
 
   rules:
     react/jsx-uses-react: 2
