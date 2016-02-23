@@ -32,7 +32,9 @@ module.exports.World = function World() {
 
     this.getResponseBody = () => this.serverResponse.payload;
 
-    this.apiResponseShouldIncludeLinkFor = (link) => this.apiResponseLinks[link.rel] = link.path;
+    this.apiResponseShouldIncludeLinkFor = (link) => {
+        this.apiResponseLinks[link.rel] = link.path;
+    };
 
     function buildHalLink(href) {
         return {href};

@@ -78,7 +78,7 @@ suite('client repository', () => {
 
         repository.getResourceTypes(callback);
 
-        assert.calledWith(xhr, {url: `/`});
+        assert.calledWith(xhr, {url: '/'});
 
         xhr.yield(null, {
             body: JSON.stringify(data)
@@ -91,7 +91,7 @@ suite('client repository', () => {
         const
             error = any.simpleObject(),
             callback = sinon.spy();
-        xhr.withArgs({url: `/`}).yields(error);
+        xhr.withArgs({url: '/'}).yields(error);
 
         repository.getResourceTypes(callback);
 

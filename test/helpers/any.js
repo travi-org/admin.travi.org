@@ -28,12 +28,11 @@ function int(options) {
 function string(length) {
     const CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let randomString = '',
-        randomNumber,
         i;
 
     length = length || DEFAULT_STRING_LENGTH;
     for (i = 0; i < length; i += 1) {
-        randomNumber = int({max: CHARS.length});
+        const randomNumber = int({max: CHARS.length});
         randomString += CHARS.substring(randomNumber, randomNumber + 1);
     }
 

@@ -8,9 +8,6 @@
     refute: false
     document: false
 
-  ecmaFeatures:
-    modules: false
-
   rules:
     react/jsx-uses-react: 2
     no-mixed-requires: 2

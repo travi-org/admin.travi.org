@@ -2,8 +2,9 @@
   plugins:
     - react
 
-  ecmaFeatures:
-    jsx: true
+  parserOptions:
+    ecmaFeatures:
+      jsx: true
 
   rules:
     no-extra-parens: 0
