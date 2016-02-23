@@ -2,5 +2,6 @@
   plugins:
     - react
 
-  ecmaFeatures:
-    jsx: true
+  parserOptions:
+    ecmaFeatures:
+      jsx: true
