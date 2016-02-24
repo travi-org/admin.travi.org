@@ -92,7 +92,7 @@
     "inert": "3.2.0",
     "lodash": "4.5.1",
     "negotiator": "0.6.0",
-    "newrelic": "1.25.3",
+    "newrelic": "1.25.4",
     "react": "0.14.7",
     "react-bootstrap": "0.28.3",
     "react-dom": "0.14.7",
