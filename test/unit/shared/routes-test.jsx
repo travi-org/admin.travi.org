@@ -22,6 +22,9 @@ suite('routes', () => {
             ),
             './views/resources/individual/connected-resource.jsx': (React) => () => (   //eslint-disable-line no-shadow
                 <div>resource</div>
+            ),
+            './views/resources/individual/users/connected-user.jsx': (React) => () => ( //eslint-disable-line no-shadow
+                <div>user</div>
             )
         });
     let node,
@@ -98,7 +101,7 @@ suite('routes', () => {
             <Router history={reactRouter.createMemoryHistory('/users/4')}>
                 { routes }
             </Router>, node, () => {
-                assert.equal(node.textContent, 'wrapper resource');
+                assert.equal(node.textContent, 'wrapper user');
                 assert.calledOnce(hydrater);
             }
         );

@@ -1,6 +1,5 @@
 'use strict';
 
-
 module.exports = (React) => {
     function Resource({resource}) {
         return <h3>{resource.displayName}</h3>;
