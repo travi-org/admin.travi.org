@@ -10,7 +10,8 @@ const
     HTTP_SUCCESS = 200;
 
 let resources = {},
-    existingResourceId;
+    existingResourceId,
+    existingResource;
 
 function getSingularForm(resourceType) {
     return resourceType.substring(0, resourceType.length - 1);
@@ -33,8 +34,7 @@ function buildLinksIncluding(resourceType, resourceLink) {
 }
 
 function buildListOf(resource) {
-    let resourceList,
-        existingResource;
+    let resourceList;
 
     resourceList = any.listOf(resource, {min: 1});
 
@@ -114,7 +114,7 @@ function setupExpectedApiResponsesFor(resourceType) {
                     .get(resourcePath)
                     .reply(
                         HTTP_SUCCESS,
-                        {},
+                        existingResource,
                         headers
                     );
             }
