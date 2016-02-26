@@ -7,7 +7,7 @@ module.exports = (React) => {
         return (
             <div className="resource">
                 <h3>{user.displayName}</h3>
-                <img src={avatar.src} height={avatar.size} width={avatar.size}/>
+                <img src={avatar.src} height={avatar.size} width={avatar.size} className="img-rounded"/>
             </div>
         );
     }
