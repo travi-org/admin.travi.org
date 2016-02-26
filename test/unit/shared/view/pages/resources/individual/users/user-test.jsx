@@ -5,6 +5,7 @@ const
     reactDom = require('react-dom/server'),
 
     cheerio = require('cheerio'),
+    microformats = require('microformat-node'),
     any = require('../../../../../../../helpers/any'),
     assert = require('assert'),
 
@@ -37,5 +38,11 @@ suite('user component test', () => {
         assert.equal($avatar.attr('src'), data.user.avatar.src);
         assert.equal($avatar.attr('height'), data.user.avatar.size);
         assert.equal($avatar.attr('width'), data.user.avatar.size);
+
+        microformats.get({node: $}, (err, mformats) => {
+            const hCard = mformats.items[0];
+            assert.equal(hCard.properties.name, data.user.displayName);
+            assert.equal(hCard.properties.photo, data.user.avatar.src);
+        });
     });
 });
