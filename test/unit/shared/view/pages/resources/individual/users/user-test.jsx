@@ -21,6 +21,10 @@ suite('user component test', () => {
                 user: {
                     id: any.string(),
                     displayName: any.string(),
+                    name: {
+                        first: any.string(),
+                        last: any.string()
+                    },
                     avatar: {
                         src: any.url(),
                         size: any.int()
@@ -44,6 +48,8 @@ suite('user component test', () => {
             assert.equal(hCard.properties.name, data.user.displayName);
             assert.equal(hCard.properties.photo, data.user.avatar.src);
             assert.equal(hCard.properties.nickname, data.user.id);
+            assert.equal(hCard.properties['given-name'], data.user.name.first);
+            assert.equal(hCard.properties['family-name'], data.user.name.last);
         });
     });
 });

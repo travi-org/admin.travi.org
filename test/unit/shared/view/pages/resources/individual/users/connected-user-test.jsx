@@ -44,6 +44,10 @@ suite('connected wrapper component', () => {
             resource = {
                 id: any.string(),
                 displayName: any.string(),
+                name: {
+                    first: any.string(),
+                    last: any.string()
+                },
                 links: any.simpleObject(),
                 thumbnail: any.url()
             },
@@ -53,6 +57,7 @@ suite('connected wrapper component', () => {
 
         assert.equal(user.id, resource.id);
         assert.equal(user.displayName, resource.displayName);
+        assert.deepEqual(user.name, resource.name);
         assert.deepEqual(user.links, resource.links);
         assert.equal(user.avatar, resource.thumbnail);
     });

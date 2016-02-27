@@ -10,6 +10,7 @@ module.exports = (React) => reactRedux.connect((state) => {
         user: {
             id: user.id,
             displayName: user.displayName,
+            name: user.name,
             links: user.links,
             avatar: user.thumbnail
         }

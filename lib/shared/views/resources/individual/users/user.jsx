@@ -5,13 +5,21 @@ module.exports = (React) => {
         const avatar = user.avatar;
 
         return (
-            <div className="resource h-card">
-                <h3 className="p-name">{user.displayName}</h3>
-                <img src={avatar.src} height={avatar.size} width={avatar.size} className="img-rounded u-photo"/>
-                <dl>
-                    <dt>Username</dt>
+            <div className="resource h-card panel panel-default">
+                <h3 className="p-name panel-heading">{user.displayName}</h3>
+                <div className="container-fluid panel-body">
+                    <dl className="col-sm-6">
+                        <dt>First Name</dt>
+                        <dd className="p-given-name">{user.name.first}</dd>
+                        <dt>Last Name</dt>
+                        <dd className="p-family-name">{user.name.last}</dd>
+                        <dt>Username</dt>
                         <dd className="p-nickname">{user.id}</dd>
-                </dl>
+                    </dl>
+                    <figure class="col-sm-6">
+                        <img src={avatar.src} height={avatar.size} width={avatar.size} className="img-rounded u-photo"/>
+                    </figure>
+                </div>
             </div>
         );
     }

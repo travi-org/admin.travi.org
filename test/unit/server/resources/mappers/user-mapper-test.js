@@ -13,6 +13,10 @@ suite('user mapper', () => {
             [{
                 id: user.id,
                 displayName: `${user['first-name']} ${user['last-name']}`,
+                name: {
+                    first: user['first-name'],
+                    last: user['last-name']
+                },
                 thumbnail: user.avatar,
                 links: {}
             }],
@@ -27,6 +31,10 @@ suite('user mapper', () => {
             {
                 id: user.id,
                 displayName: `${user['first-name']} ${user['last-name']}`,
+                name: {
+                    first: user['first-name'],
+                    last: user['last-name']
+                },
                 thumbnail: user.avatar,
                 links: {}
             },
