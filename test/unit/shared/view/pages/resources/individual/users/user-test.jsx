@@ -36,10 +36,11 @@ suite('user component test', () => {
                 <User {...data} />
             )),
 
-            $avatar = $('div.resource > img');
+            $avatar = $('div.resource img');
 
         assert.equal($('div.resource > h3').text(), data.user.displayName);
         assert.equal($avatar.attr('src'), data.user.avatar.src);
+        assert.equal($avatar.attr('alt'), data.user.displayName);
         assert.equal($avatar.attr('height'), data.user.avatar.size);
         assert.equal($avatar.attr('width'), data.user.avatar.size);
 

@@ -10,14 +10,20 @@ module.exports = (React) => {
                 <div className="container-fluid panel-body">
                     <dl className="col-sm-6">
                         <dt>First Name</dt>
-                        <dd className="p-given-name">{user.name.first}</dd>
+                            <dd className="p-given-name">{user.name.first}</dd>
                         <dt>Last Name</dt>
-                        <dd className="p-family-name">{user.name.last}</dd>
+                            <dd className="p-family-name">{user.name.last}</dd>
                         <dt>Username</dt>
-                        <dd className="p-nickname">{user.id}</dd>
+                            <dd className="p-nickname">{user.id}</dd>
                     </dl>
-                    <figure class="col-sm-6">
-                        <img src={avatar.src} height={avatar.size} width={avatar.size} className="img-rounded u-photo"/>
+                    <figure className="col-sm-6">
+                        <img
+                            src={avatar.src}
+                            height={avatar.size}
+                            width={avatar.size}
+                            alt={user.displayName}
+                            className="img-rounded u-photo"
+                        />
                     </figure>
                 </div>
             </div>
