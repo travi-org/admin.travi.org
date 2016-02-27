@@ -1,0 +1,7 @@
+.h-card dl {
+  @extend %inline-dl;
+
+  dd {
+    margin: 20px;
+  }
+}

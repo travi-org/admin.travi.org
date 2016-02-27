@@ -1,5 +1,6 @@
 @import 'travi.org-theme/scss/colors';
 @import 'travi.org-theme/scss/typography/variables';
+@import 'travi.org-theme/scss/lists/placeholders';
 @import 'bootstrap-custom';
 
 @import 'bootstrap-sass-official/assets/stylesheets/bootstrap';
@@ -7,3 +8,4 @@
 
 @import 'navbar';
 @import 'resourceLists';
+@import 'h-card';

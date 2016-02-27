@@ -43,6 +43,7 @@ suite('user component test', () => {
             const hCard = mformats.items[0];
             assert.equal(hCard.properties.name, data.user.displayName);
             assert.equal(hCard.properties.photo, data.user.avatar.src);
+            assert.equal(hCard.properties.nickname, data.user.id);
         });
     });
 });
