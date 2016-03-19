@@ -100,17 +100,23 @@ suite('travi-api resource interactions', () => {
         const
             resourceType = any.string(),
             resourceId = any.int(),
-            resource = any.resource(),
+            fullResource = any.resource(),
             callback = sinon.spy();
         traverson.from.withArgs('https://api.travi.org/').returns({
             follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
-                getResource: stubForGet.yields(null, resource)
+                getResource: stubForGet.yields(null, any.resource(), {
+                    'continue': sinon.stub().returns({
+                        follow: sinon.stub().withArgs('self').returns({
+                            getResource: sinon.stub().yields(null, fullResource)
+                        })
+                    })
+                })
             })
         });
 
         traviApiResources.getResourceBy(resourceType, resourceId, callback);
 
-        assert.calledWith(callback, null, resource);
+        assert.calledWith(callback, null, fullResource);
     });
 
     test('that error bubbles from embedded resource request', () => {
@@ -122,6 +128,29 @@ suite('travi-api resource interactions', () => {
         traverson.from.withArgs('https://api.travi.org/').returns({
             follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
                 getResource: stubForGet.yields(error)
+            })
+        });
+
+        traviApiResources.getResourceBy(resourceType, resourceId, callback);
+
+        assert.calledWith(callback, error);
+    });
+
+    test('that error bubbles from full resource request', () => {
+        const
+            resourceType = any.string(),
+            resourceId = any.int(),
+            callback = sinon.spy(),
+            error = any.simpleObject();
+        traverson.from.withArgs('https://api.travi.org/').returns({
+            follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
+                getResource: stubForGet.yields(null, null, {
+                    'continue': sinon.stub().returns({
+                        follow: sinon.stub().withArgs('self').returns({
+                            getResource: sinon.stub().yields(error)
+                        })
+                    })
+                })
             })
         });
 
