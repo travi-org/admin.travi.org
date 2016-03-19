@@ -107,14 +107,16 @@ function setupExpectedApiResponsesFor(resourceType) {
                 const
                     link = resource._links.self.href,
                     linkHost = link.substring(0, link.lastIndexOf('/')),
-                    resourcePath = link.substring(linkHost.length);
+                    resourcePath = link.substring(linkHost.length),
+                    extendedExistingResource = _.cloneDeep(existingResource);
+                extendedExistingResource.extended = true;
 
                 nock(linkHost)
                     .log(console.log)   //eslint-disable-line no-console
                     .get(resourcePath)
                     .reply(
                         HTTP_SUCCESS,
-                        existingResource,
+                        extendedExistingResource,
                         headers
                     );
             }
@@ -236,9 +238,12 @@ module.exports = function () {
     });
 
     this.Then(/^the "([^"]*)" is returned$/, function (resourceType, done) {
-        const payload = JSON.parse(this.getResponseBody());
+        const
+            payload = JSON.parse(this.getResponseBody()),
+            resource = payload.resource;
 
-        assert.equals(payload.resource.id, existingResourceId);
+        assert.equals(resource.id, existingResourceId);
+        assert.isTrue(resource.extended);
 
         done();
     });
