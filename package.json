@@ -95,7 +95,7 @@
     "negotiator": "0.6.0",
     "newrelic": "1.26.0",
     "react": "0.14.7",
-    "react-bootstrap": "0.28.3",
+    "react-bootstrap": "0.28.4",
     "react-dom": "0.14.7",
     "react-redux": "4.4.1",
     "react-router": "2.0.1",
