@@ -39,6 +39,7 @@ module.exports = function (grunt) {
         const
             extendGruntPlugin = require('extend-grunt-plugin'),
             Pact = require('pact-consumer-js-dsl'),
+            assert = require('chai').assert,
 
             pactServicePort = 1234,
             mockService = Pact.mockService({
@@ -46,7 +47,7 @@ module.exports = function (grunt) {
                 provider: 'travi-api',
                 port: pactServicePort,
                 done(err) {
-                    refute.defined(err);
+                    assert.isUndefined(err);
                 }
             }),
             options = this.options({    //eslint-disable-line no-invalid-this
