@@ -1,4 +1,3 @@
-/*global refute */
 /*eslint filenames/filenames: 0 */
 
 'use strict';
