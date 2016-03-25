@@ -110,7 +110,9 @@ module.exports = function (grunt) {
             });
 
             mockService.run(() => {}, (runComplete) => {
-                require('./lib/server/resources/travi-api-resources').getLinksFor('', runComplete);
+                const apiResources = require('./lib/server/resources/travi-api-resources');
+                apiResources.setHost(`http://localhost:${options.pactServicePort}`);
+                apiResources.getLinksFor('', runComplete);
             });
 
             mockService.verifyAndWrite((error) => {
