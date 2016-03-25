@@ -86,7 +86,7 @@
     "glue": "3.2.0",
     "good": "6.6.0",
     "good-console": "5.3.1",
-    "hapi": "13.2.1",
+    "hapi": "13.2.2",
     "hapi-mustache": "0.0.1",
     "history": "2.0.1",
     "immutable": "3.7.6",
