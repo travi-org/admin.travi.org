@@ -34,6 +34,11 @@ module.exports = function (grunt) {
         process.exit(EXIT_CODE);
     });
 
+    function logError(err) {
+        console.log(err);   //eslint-disable-line no-console
+        console.trace();    //eslint-disable-line no-console
+    }
+
     grunt.registerTask('pact-consumer', 'consumer driven contract', function () {
         const
             extendGruntPlugin = require('extend-grunt-plugin'),
@@ -46,7 +51,9 @@ module.exports = function (grunt) {
                 provider: 'travi-api',
                 port: pactServicePort,
                 done(err) {
-                    assert.isUndefined(err);
+                    if (err) {
+                        logError(err);
+                    }
                 }
             }),
             options = this.options({    //eslint-disable-line no-invalid-this
@@ -57,6 +64,7 @@ module.exports = function (grunt) {
         extendGruntPlugin(grunt, require('grunt-shell-spawn/tasks/shell'), {
             'shell.pactServerStart': {
                 command: `bundle exec pact-mock-service start -p ${options.pactServicePort}`
+                    + ` --pact-specification-version 2.0.0`
                     + ` -l ${options.pactDir}/pact.log --pact-dir ${options.pactDir}/pacts`,
                 options: {
                     stdout: true,
@@ -88,42 +96,53 @@ module.exports = function (grunt) {
         });
 
         grunt.task.registerTask('pact-tests', 'pact tests', () => {
+            const expectedLinks = {
+                self: {
+                    href: 'https://api.travi.org/'
+                },
+                rides: {
+                    href: 'https://api.travi.org/rides'
+                },
+                users: {
+                    href: 'https://api.travi.org/users'
+                }
+            };
+
             mockService
                 .given('the root url')
                 .uponReceiving('a GET request for the api catalog')
                 .withRequest('get', '/')
                 .willRespondWith({
                     status: 200,
-                    body: [
-                        {id: 92834, text: 'random text here.'},
-                        {id: 23453, text: 'more text'}
-                    ]
+                    body: {
+                        _links: expectedLinks
+                    }
                 });
 
-            mockService.setup((error) => {
-                if (error) {
-                    console.warn(       //eslint-disable-line no-console
-                        `Pact wasn't able set up the interactions:
-                        ${error}`
-                    );
-                }
-            });
 
-            mockService.run(() => {}, (runComplete) => {
+            mockService.run(() => {
+                mockService.verifyAndWrite((error) => {
+                    if (error) {
+                        console.error(       //eslint-disable-line no-console
+                            `Pact wasn't able to verify the interactions:
+                        ${error}`
+                        );
+                    } else {
+                        console.log('Pact verified and written.');      //eslint-disable-line no-console
+                    }
+                });
+            }, (runComplete) => {
                 const apiResources = require('./lib/server/resources/travi-api-resources');
                 apiResources.setHost(`http://localhost:${options.pactServicePort}`);
-                apiResources.getLinksFor('', runComplete);
-            });
+                apiResources.getLinksFor('', (err, links) => {
+                    if (err) {
+                        logError(err);
+                    } else {
+                        assert.deepEqual(links, expectedLinks);
+                    }
 
-            mockService.verifyAndWrite((error) => {
-                if (error) {
-                    console.warn(       //eslint-disable-line no-console
-                        `Pact wasn't able to verify the interactions:
-                        ${error}`
-                    );
-                } else {
-                    console.log('Pact verified and written.');      //eslint-disable-line no-console
-                }
+                    runComplete();
+                });
             });
         });
 
