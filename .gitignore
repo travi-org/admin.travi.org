@@ -6,5 +6,6 @@ tmp/
 logs/
 dist/
 
+.env
 Rakefile
 newrelic_agent.log
