@@ -71,7 +71,7 @@
     "proxyquire": "1.7.4",
     "react-addons-test-utils": "0.14.8",
     "redux-devtools": "3.1.0",
-    "redux-devtools-log-monitor": "1.0.5",
+    "redux-devtools-log-monitor": "1.0.6",
     "referee": "1.2.0",
     "referee-sinon": "1.0.3",
     "sinon": "1.17.3",
