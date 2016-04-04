@@ -70,7 +70,7 @@
     "pact-consumer-js-dsl": "0.2.1",
     "proxyquire": "1.7.4",
     "react-addons-test-utils": "0.14.8",
-    "redux-devtools": "3.1.0",
+    "redux-devtools": "3.2.0",
     "redux-devtools-log-monitor": "1.0.9",
     "referee": "1.2.0",
     "referee-sinon": "1.0.3",
