@@ -7,4 +7,12 @@ const
     PrimaryNav = require('../theme/primary-nav.jsx')(React);
 
 storiesOf('Primary Nav', module)
-    .add('empty nav', () => <PrimaryNav primaryNav={[]}/> );
+    .add('empty nav', () => <PrimaryNav primaryNav={[]}/> )
+    .add('populated nav', () => <PrimaryNav primaryNav={[
+        {
+            text: 'rides'
+        },
+        {
+            text: 'users'
+        }
+    ]}/> );
