@@ -6,6 +6,8 @@ const
 
     PrimaryNav = require('../theme/primary-nav.jsx')(React);
 
+require('../../../../resources/scss/theme.scss');
+
 storiesOf('Primary Nav', module)
     .add('empty nav', () => <PrimaryNav primaryNav={[]}/>)
     .add('populated nav', () => <PrimaryNav primaryNav={[
