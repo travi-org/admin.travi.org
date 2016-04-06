@@ -4,7 +4,23 @@ GEM
     awesome_print (1.6.1)
     diff-lcs (1.2.5)
     find_a_port (1.0.1)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     json (1.8.3)
+    multi_xml (0.5.5)
+    pact (1.9.0)
+      awesome_print (~> 1.1)
+      find_a_port (~> 1.0.1)
+      json
+      pact-mock_service (~> 0.7)
+      pact-support (~> 0.5)
+      rack-test (~> 0.6.2)
+      randexp (~> 0.1.7)
+      rspec (>= 2.14)
+      term-ansicolor (~> 1.0)
+      thor
+      webrick
     pact-mock_service (0.8.1)
       find_a_port (~> 1.0.1)
       json
@@ -24,6 +40,10 @@ GEM
       rspec (>= 2.14)
       term-ansicolor (~> 1.0)
       thor
+    pact_broker-client (1.0.0)
+      httparty
+      json
+      pact
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -57,6 +77,7 @@ PLATFORMS
 
 DEPENDENCIES
   pact-mock_service
+  pact_broker-client
   scss-lint
 
 BUNDLED WITH

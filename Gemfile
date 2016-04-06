@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 ruby "2.2.4"
 
-gem 'pact-mock_service'
+group :pact do
+    gem 'pact-mock_service'
+    gem 'pact_broker-client'
+end
+
 gem 'scss-lint'
