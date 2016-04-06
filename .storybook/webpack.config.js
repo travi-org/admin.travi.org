@@ -5,12 +5,14 @@ module.exports = {
         loaders: [
             {
                 test: /\.scss?$/,
-                loaders: ["style", "css", "sass"],
-                include: [
-                    path.resolve(__dirname, '../bower_components'),
-                    path.resolve(__dirname, '../resources/sass')
-                ]
+                loaders: ["style", "css", "sass"]
             }
+        ]
+    },
+    sassLoader: {
+        includePaths: [
+            path.resolve(__dirname, '../bower_components/'),
+            path.resolve(__dirname, '../resources/sass/')
         ]
     }
 };
