@@ -9,6 +9,10 @@ module.exports = {
                     includePaths: [ path.resolve(__dirname, '../bower_components') ],
                     sourceMap : true
                 })
+            },
+            {
+                test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=d+\.d+\.d+)?$/,
+                loader: 'url'
             }
         ]
     }
