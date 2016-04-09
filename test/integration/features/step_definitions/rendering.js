@@ -1,8 +1,5 @@
-'use strict';
-
-const
-    cheerio = require('cheerio'),
-    assert = require('referee').assert;
+import cheerio from 'cheerio';
+import {assert} from 'referee';
 
 module.exports = function () {
     this.World = require('../support/world.js').World;

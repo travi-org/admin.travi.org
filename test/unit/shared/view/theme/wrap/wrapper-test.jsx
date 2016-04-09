@@ -1,13 +1,10 @@
-'use strict';
+import React from 'react';
 
-const
-    React = require('react'),
+import any from '../../../../../helpers/any';
+import {assert} from 'chai';
+import skinDeep from 'skin-deep';
 
-    any = require('../../../../../helpers/any'),
-    assert = require('chai').assert,
-    skinDeep = require('skin-deep'),
-
-    Wrap = require('../../../../../../lib/shared/views/theme/wrap/wrap.jsx')(React);
+const Wrap = require('../../../../../../lib/shared/views/theme/wrap/wrap.jsx')(React);
 
 suite('wrapper component', () => {
     test('that displayName is set', () => {

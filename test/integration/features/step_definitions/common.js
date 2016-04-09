@@ -1,6 +1,4 @@
-'use strict';
-
-const nock = require('nock');
+import nock from 'nock';
 
 module.exports = function () {
     this.World = require('../support/world.js').World;

@@ -1,15 +1,12 @@
-'use strict';
+import any from '../../../../helpers/any';
 
-const
-    any = require('../../../../helpers/any'),
+import React from 'react';
+import dom from 'react-dom/server';
+import cheerio from 'cheerio';
+import {assert} from 'chai';
 
-    React = require('react'),
-    dom = require('react-dom/server'),
-    cheerio = require('cheerio'),
-    assert = require('chai').assert,
-
-    HistoryWrapper = require('../../../../helpers/history-wrapper'),
-    PrimaryNav = require('../../../../../lib/shared/views/theme/primary-nav.jsx')(React);
+import HistoryWrapper from '../../../../helpers/history-wrapper';
+const PrimaryNav = require('../../../../../lib/shared/views/theme/primary-nav.jsx')(React);
 
 suite('primary navigation', () => {
     test('that displayName is set', () => {

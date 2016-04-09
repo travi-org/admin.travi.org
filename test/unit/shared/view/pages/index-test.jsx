@@ -1,12 +1,9 @@
-'use strict';
+import React from 'react';
+import cheerio from 'cheerio';
+import reactDom from 'react-dom/server';
+import {assert} from 'chai';
 
-const
-    React = require('react'),
-    cheerio = require('cheerio'),
-    reactDom = require('react-dom/server'),
-    assert = require('chai').assert,
-
-    createIndex = require('../../../../../lib/shared/views/index.jsx');
+import createIndex from '../../../../../lib/shared/views/index.jsx';
 
 suite('index', () => {
     const Index = createIndex(React);

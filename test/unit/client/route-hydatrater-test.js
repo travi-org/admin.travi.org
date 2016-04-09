@@ -1,12 +1,8 @@
-'use strict';
-
-const
-    any = require('../../helpers/any'),
-    hydraterFactory = require('../../../lib/client/route-hydrator'),
-    repository = require('../../../lib/client/repository'),
-    sinon = require('sinon'),
-    assert = require('referee').assert,
-    refute = require('referee').refute;
+import any from '../../helpers/any';
+import hydraterFactory from '../../../lib/client/route-hydrator';
+import repository from '../../../lib/client/repository';
+import sinon from 'sinon';
+import {assert, refute} from 'referee';
 
 suite('route data hydration', () => {
     let sandbox;

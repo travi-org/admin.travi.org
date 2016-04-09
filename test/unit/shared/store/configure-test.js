@@ -1,9 +1,6 @@
-'use strict';
-
-const
-    prodConfigurator = require('../../../../lib/shared/store/configure.prod'),
-    devConfigurator = require('../../../../lib/shared/store/configure.dev'),
-    assert = require('chai').assert;
+import prodConfigurator from '../../../../lib/shared/store/configure.prod';
+import devConfigurator from '../../../../lib/shared/store/configure.dev';
+import {assert} from 'chai';
 
 suite('environment dependent store configurator loader', () => {
     teardown(() => {

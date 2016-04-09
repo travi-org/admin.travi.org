@@ -1,13 +1,10 @@
-'use strict';
+import resourcesController from '../../../../lib/server/resources/controller';
+import traviApiResources from '../../../../lib/server/resources/travi-api-resources.js';
+import resourceMapperFactory from '../../../../lib/server/resources/mappers/resource-mapper-factory';
 
-const
-    resourcesController = require('../../../../lib/server/resources/controller'),
-    traviApiResources = require('../../../../lib/server/resources/travi-api-resources.js'),
-    resourceMapperFactory = require('../../../../lib/server/resources/mappers/resource-mapper-factory'),
-
-    any = require('../../../helpers/any-for-admin'),
-    sinon = require('sinon'),
-    assert = require('chai').assert;
+import any from '../../../helpers/any-for-admin';
+import sinon from 'sinon';
+import {assert} from 'chai';
 
 suite('resources controller', () => {
     setup(() => {

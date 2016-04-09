@@ -1,8 +1,5 @@
-'use strict';
-
-const
-    nock = require('nock'),
-    assert = require('referee').assert;
+import nock from 'nock';
+import {assert} from 'referee';
 
 module.exports = function () {
     this.World = require('../support/world.js').World;

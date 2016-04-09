@@ -1,9 +1,6 @@
-'use strict';
-
-const
-    mapper = require('../../../../../lib/server/resources/mappers/ride-mapper'),
-    any = require('../../../../helpers/any-for-admin'),
-    assert = require('assert');
+import mapper from '../../../../../lib/server/resources/mappers/ride-mapper';
+import any from '../../../../helpers/any-for-admin';
+import assert from 'assert';
 
 suite('ride mapper', () => {
     test('that ride resources mapped to view list', () => {

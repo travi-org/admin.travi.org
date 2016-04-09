@@ -1,13 +1,10 @@
-'use strict';
+import React from 'react';
 
-const
-    React = require('react'),
+import skinDeep from 'skin-deep';
+import {assert} from 'chai';
+import any from '../../../../../../helpers/any';
 
-    skinDeep = require('skin-deep'),
-    assert = require('chai').assert,
-    any = require('../../../../../../helpers/any'),
-
-    ResourceList = require('../../../../../../../lib/shared/views/resources/list/list.jsx')(React);
+const ResourceList = require('../../../../../../../lib/shared/views/resources/list/list.jsx')(React);
 
 function assertSimpleResourceRenders(listItem, resource) {
     assert.deepEqual(listItem.props.children, ['', resource.displayName]);

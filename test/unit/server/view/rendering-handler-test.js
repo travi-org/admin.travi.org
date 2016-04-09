@@ -1,18 +1,14 @@
-'use strict';
-
-const
-    proxyquire = require('proxyquire'),
-    routeRenderer = require('../../../../lib/server/view/route-renderer.jsx'),
-    resourcesController = require('../../../../lib/server/resources/controller'),
-    reducer = require('../../../../lib/shared/store/reducer'),
-    redux = require('redux'),
-    immutable = require('immutable'),
-    history = require('history'),
-    _ = require('lodash'),
-    any = require('../../../helpers/any'),
-    sinon = require('sinon'),
-    assert = require('referee').assert,
-    refute = require('referee').refute;
+import proxyquire from 'proxyquire';
+import routeRenderer from '../../../../lib/server/view/route-renderer.jsx';
+import resourcesController from '../../../../lib/server/resources/controller';
+import reducer from '../../../../lib/shared/store/reducer';
+import * as redux from 'redux';
+import immutable from 'immutable';
+import * as history from 'history';
+import _ from 'lodash';
+import any from '../../../helpers/any';
+import sinon from 'sinon';
+import {assert, refute} from 'referee';
 
 suite('rendering handler', () => {
     const

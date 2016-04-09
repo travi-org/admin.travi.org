@@ -1,12 +1,9 @@
-'use strict';
+import React from 'react';
+import cheerio from 'cheerio';
+import reactDom from 'react-dom/server';
+import {assert} from 'chai';
 
-const
-    React = require('react'),
-    cheerio = require('cheerio'),
-    reactDom = require('react-dom/server'),
-    assert = require('chai').assert,
-
-    createNotFound = require('../../../../../../lib/shared/views/errors/not-found.jsx');
+import createNotFound from '../../../../../../lib/shared/views/errors/not-found.jsx';
 
 suite('not found', () => {
     const NotFound = createNotFound(React);

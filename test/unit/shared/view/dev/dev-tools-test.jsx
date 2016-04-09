@@ -1,12 +1,9 @@
-'use strict';
-
-const
-    any = require('../../../../helpers/any'),
-    proxyquire = require('proxyquire'),
-    React = require('react'),
-    LogMonitor = require('redux-devtools-log-monitor').default,
-    sinon = require('sinon'),
-    assert = require('chai').assert;
+import any from '../../../../helpers/any';
+import proxyquire from 'proxyquire';
+import React from 'react';
+import LogMonitor from 'redux-devtools-log-monitor';
+import sinon from 'sinon';
+import {assert} from 'chai';
 
 suite('redux dev-tools', () => {
     let sandbox;

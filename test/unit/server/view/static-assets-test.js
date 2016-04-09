@@ -1,9 +1,6 @@
-'use strict';
-
-const
-    assets = require('../../../../lib/server/view/static-assets'),
-    assert = require('chai').assert,
-    sinon = require('sinon');
+import assets from '../../../../lib/server/view/static-assets';
+import {assert} from 'chai';
+import sinon from 'sinon';
 
 suite('static assets', () => {
     test('that the plugin is defined', () => {

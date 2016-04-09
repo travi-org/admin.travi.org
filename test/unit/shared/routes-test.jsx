@@ -1,16 +1,12 @@
-'use strict';
-
-const
-    React = require('react'), //eslint-disable-line no-unused-vars
-    dom = require('react-dom'),
-    reactRouter = require('react-router'),
-    proxyquire = require('proxyquire'),
-    sinon = require('sinon'),
-    assert = require('chai').assert;
+import React from 'react';
+import dom from 'react-dom';
+import {Router, createMemoryHistory} from 'react-router';
+import proxyquire from 'proxyquire';
+import sinon from 'sinon';
+import {assert} from 'chai';
 
 suite('routes', () => {
     const
-        Router = reactRouter.Router,
         routesFactory = proxyquire('../../../lib/shared/routes.jsx', {
             './views/theme/wrap/connected-wrap.jsx': (React) => (props) => (            //eslint-disable-line no-shadow
                 <div>wrapper { props.children }</div>
@@ -44,7 +40,7 @@ suite('routes', () => {
 
     test('that the root route is defined', () => {
         dom.render(
-            <Router history={reactRouter.createMemoryHistory('/')}>
+            <Router history={createMemoryHistory('/')}>
                 { routes }
             </Router>, node, () => {
                 assert.equal(node.textContent, 'wrapper index');
@@ -54,7 +50,7 @@ suite('routes', () => {
 
     test('that the not-found route is defined', () => {
         dom.render(
-            <Router history={reactRouter.createMemoryHistory('/foo/bar/baz')}>
+            <Router history={createMemoryHistory('/foo/bar/baz')}>
                 { routes }
             </Router>, node, () => {
                 assert.equal(node.textContent, 'wrapper not-found');
@@ -65,7 +61,7 @@ suite('routes', () => {
 
     test('that the rides route is defined', () => {
         dom.render(
-            <Router history={reactRouter.createMemoryHistory('/rides')}>
+            <Router history={createMemoryHistory('/rides')}>
                 { routes }
             </Router>, node, () => {
                 assert.equal(node.textContent, 'wrapper resources');
@@ -76,7 +72,7 @@ suite('routes', () => {
 
     test('that the ride route is defined', () => {
         dom.render(
-            <Router history={reactRouter.createMemoryHistory('/rides/8')}>
+            <Router history={createMemoryHistory('/rides/8')}>
                 { routes }
             </Router>, node, () => {
                 assert.equal(node.textContent, 'wrapper resource');
@@ -87,7 +83,7 @@ suite('routes', () => {
 
     test('that the users route is defined', () => {
         dom.render(
-            <Router history={reactRouter.createMemoryHistory('/users')}>
+            <Router history={createMemoryHistory('/users')}>
                 { routes }
             </Router>, node, () => {
                 assert.equal(node.textContent, 'wrapper resources');
@@ -98,7 +94,7 @@ suite('routes', () => {
 
     test('that the user route is defined', () => {
         dom.render(
-            <Router history={reactRouter.createMemoryHistory('/users/4')}>
+            <Router history={createMemoryHistory('/users/4')}>
                 { routes }
             </Router>, node, () => {
                 assert.equal(node.textContent, 'wrapper user');

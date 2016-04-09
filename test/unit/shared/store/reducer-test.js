@@ -1,12 +1,9 @@
-'use strict';
-
-const
-    immutable = require('immutable'),
-    reducer = require('../../../../lib/shared/store/reducer'),
-    actions = require('../../../../lib/shared/store/actions'),
-    any = require('../../../helpers/any'),
-    assert = require('chai').assert,
-    sinon = require('sinon');
+import immutable from 'immutable';
+import reducer from '../../../../lib/shared/store/reducer';
+import actions from '../../../../lib/shared/store/actions';
+import any from '../../../helpers/any';
+import {assert} from 'chai';
+import sinon from 'sinon';
 
 suite('reducer', () => {
     let sandbox;

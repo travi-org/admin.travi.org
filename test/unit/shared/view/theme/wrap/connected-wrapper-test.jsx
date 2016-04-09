@@ -1,14 +1,11 @@
-'use strict';
+import React from 'react';
+import * as reactRedux from 'react-redux';
+import Immutable from 'immutable';
 
-const
-    React = require('react'),
-    reactRedux = require('react-redux'),
-    Immutable = require('immutable'),
-
-    sinon = require('sinon'),
-    assert = require('chai').assert,
-    proxyquire = require('proxyquire'),
-    any = require('../../../../../helpers/any');
+import sinon from 'sinon';
+import {assert} from 'chai';
+import proxyquire from 'proxyquire';
+import any from '../../../../../helpers/any';
 
 suite('connected wrapper component', () => {
     let sandbox;

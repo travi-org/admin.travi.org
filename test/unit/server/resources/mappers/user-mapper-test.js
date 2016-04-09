@@ -1,9 +1,6 @@
-'use strict';
-
-const
-    mapper = require('../../../../../lib/server/resources/mappers/user-mapper'),
-    any = require('../../../../helpers/any-for-admin'),
-    assert = require('chai').assert;
+import mapper from '../../../../../lib/server/resources/mappers/user-mapper';
+import any from '../../../../helpers/any-for-admin';
+import {assert} from 'chai';
 
 suite('user mapper', () => {
     test('that user resources mapped to view list', () => {

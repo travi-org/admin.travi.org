@@ -1,8 +1,5 @@
-'use strict';
-
-const
-    mapperFactory = require('../../../../../lib/server/resources/mappers/resource-mapper-factory'),
-    assert = require('chai').assert;
+import mapperFactory from '../../../../../lib/server/resources/mappers/resource-mapper-factory';
+import {assert} from 'chai';
 
 suite('resource mapper factory', () => {
     test('that the default mapper is returned when a specific mapper is not available', () => {

@@ -1,11 +1,8 @@
-'use strict';
-
-const
-    traviApiResources = require('../../../../lib/server/resources/travi-api-resources.js'),
-    traverson = require('traverson'),
-    any = require('../../../helpers/any-for-admin'),
-    sinon = require('sinon'),
-    assert = require('chai').assert;
+import traviApiResources from '../../../../lib/server/resources/travi-api-resources.js';
+import traverson from 'traverson';
+import any from '../../../helpers/any-for-admin';
+import sinon from 'sinon';
+import {assert} from 'chai';
 
 suite('travi-api resource interactions', () => {
     let stubForGet;

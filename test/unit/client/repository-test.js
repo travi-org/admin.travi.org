@@ -1,10 +1,7 @@
-'use strict';
-
-const
-    any = require('../../helpers/any'),
-    assert = require('chai').assert,
-    sinon = require('sinon'),
-    proxyquire = require('proxyquire');
+import any from '../../helpers/any';
+import {assert} from 'chai';
+import sinon from 'sinon';
+import proxyquire from 'proxyquire';
 
 suite('client repository', () => {
     const

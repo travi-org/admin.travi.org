@@ -1,11 +1,8 @@
-'use strict';
-
-const
-    any = require('../../../helpers/any'),
-    sinon = require('sinon'),
-    assert = require('chai').assert,
-    resources = require('../../../../lib/server/resources/routes'),
-    resourcesController = require('../../../../lib/server/resources/controller');
+import any from '../../../helpers/any';
+import sinon from 'sinon';
+import {assert} from 'chai';
+import resources from '../../../../lib/server/resources/routes';
+import resourcesController from '../../../../lib/server/resources/controller';
 
 suite('server routes config', () => {
     let sandbox;

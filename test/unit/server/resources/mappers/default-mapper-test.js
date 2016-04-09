@@ -1,8 +1,5 @@
-'use strict';
-
-const
-    mapper = require('../../../../../lib/server/resources/mappers/default-mapper'),
-    assert = require('chai').assert;
+import mapper from '../../../../../lib/server/resources/mappers/default-mapper';
+import {assert} from 'chai';
 
 suite('default mapper', () => {
     test('that the expected methods are exposed', () => {

@@ -1,23 +1,18 @@
 /*global window */
-'use strict';
-
-const
-    React = require('react'),
-    reactRouter = require('react-router'),
-    Provider = require('react-redux').Provider,
-    dom = require('react-dom'),
-    redux = require('redux'),
-    proxyquire = require('proxyquire'),
-    any = require('../../helpers/any'),
-    assert = require('chai').assert,
-    sinon = require('sinon');
+import React from 'react';
+import {Router, browserHistory as history} from 'react-router';
+import {Provider} from 'react-redux';
+import dom from 'react-dom';
+import * as redux from 'redux';
+import proxyquire from 'proxyquire';
+import any from '../../helpers/any';
+import {assert} from 'chai';
+import sinon from 'sinon';
 
 suite('client-side app', () => {
     let sandbox,
         routes;
     const
-        Router = reactRouter.Router,
-        history = reactRouter.browserHistory,
         initialState = any.simpleObject(),
         store = any.simpleObject(),
         hydrator = {

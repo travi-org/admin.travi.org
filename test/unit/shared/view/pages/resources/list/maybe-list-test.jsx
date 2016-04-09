@@ -1,13 +1,10 @@
-'use strict';
+import React from 'react';
 
-const
-    React = require('react'),
+import skinDeep from 'skin-deep';
+import {assert} from 'chai';
+import any from '../../../../../../helpers/any';
 
-    skinDeep = require('skin-deep'),
-    assert = require('chai').assert,
-    any = require('../../../../../../helpers/any'),
-
-    MaybeList = require('../../../../../../../lib/shared/views/resources/list/maybe-list.jsx')(React);
+const MaybeList = require('../../../../../../../lib/shared/views/resources/list/maybe-list.jsx')(React);
 
 suite('maybe-list component', () => {
     test('that displayName is set', () => {

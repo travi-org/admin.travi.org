@@ -1,13 +1,10 @@
-'use strict';
-
-const
-    proxyquire = require('proxyquire'),
-    redux = require('redux'),
-    Immutable = require('immutable'),
-    any = require('../../../helpers/any'),
-    reducer = require('../../../../lib/shared/store/reducer'),
-    sinon = require('sinon'),
-    assert = require('chai').assert;
+import proxyquire from 'proxyquire';
+import * as redux from 'redux';
+import Immutable from 'immutable';
+import any from '../../../helpers/any';
+import reducer from '../../../../lib/shared/store/reducer';
+import sinon from 'sinon';
+import {assert} from 'chai';
 
 suite('store creation for development', () => {
     let sandbox;

@@ -1,6 +1,4 @@
-'use strict';
-
-const any = require('../../../helpers/any');
+import any from '../../../helpers/any';
 
 module.exports = function () {
     this.World = require('../support/world.js').World;

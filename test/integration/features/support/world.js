@@ -1,17 +1,14 @@
-'use strict';
-
 require('babel-register');
 
-const
-    path = require('path'),
-    nock = require('nock'),
-    any = require('../../../helpers/any'),
-    loadApi = require(path.join(__dirname, '../../../../lib/server/app.js')),
+import nock from 'nock';
+import any from '../../../helpers/any';
+import loadApi from '../../../../lib/server/app.js';
 
+const
     HOST = 'https://api.travi.org',
     HTTP_SUCCESS = 200;
 
-module.exports.World = function World() {
+export function World() {
     this.apiResponseLinks = {};
 
     this.makeRequestTo = (url, callback) => {
@@ -69,4 +66,4 @@ module.exports.World = function World() {
             {'Content-Type': 'application/hal+json'}
         );
     };
-};
+}

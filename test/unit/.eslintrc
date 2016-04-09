@@ -3,13 +3,7 @@
     mocha: true
 
   globals:
-    sinon: false
-    assert: false
-    refute: false
     document: false
-
-  ecmaFeatures:
-    modules: false
 
   rules:
     react/jsx-uses-react: 2

@@ -1,8 +1,4 @@
-'use strict';
-
-const
-    assert = require('referee').assert,
-    _ = require('lodash');
+import {assert} from 'referee';
 
 module.exports = function () {
     this.World = require('../support/world.js').World;
@@ -19,7 +15,7 @@ module.exports = function () {
 
     this.Then(/^top level resources are listed$/, function (done) {
         assert.equals(this.getResponseBody(), JSON.stringify({
-            primaryNav: _.map(this.availableResourceTypes, (type) => {
+            primaryNav: this.availableResourceTypes.map((type) => {
                 return {
                     text: type,
                     path: `/${type}`

@@ -1,11 +1,9 @@
-'use strict';
+import nock from 'nock';
+import {assert} from 'referee';
+import _ from 'lodash';
+import any from '../../../helpers/any-for-admin';
 
 const
-    nock = require('nock'),
-    assert = require('referee').assert,
-    _ = require('lodash'),
-    any = require('../../../helpers/any-for-admin'),
-
     HOST = 'https://api.travi.org',
     HTTP_SUCCESS = 200;
 

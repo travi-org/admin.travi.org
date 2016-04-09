@@ -1,15 +1,12 @@
-'use strict';
+import React from 'react';
+import reactDom from 'react-dom/server';
 
-const
-    React = require('react'),
-    reactDom = require('react-dom/server'),
+import cheerio from 'cheerio';
+import microformats from 'microformat-node';
+import any from '../../../../../../../helpers/any';
+import assert from 'assert';
 
-    cheerio = require('cheerio'),
-    microformats = require('microformat-node'),
-    any = require('../../../../../../../helpers/any'),
-    assert = require('assert'),
-
-    User = require('../../../../../../../../lib/shared/views/resources/individual/users/user')(React);
+const User = require('../../../../../../../../lib/shared/views/resources/individual/users/user')(React);
 
 suite('user component test', () => {
     test('that displayName is set', () => {

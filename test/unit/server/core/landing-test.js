@@ -1,11 +1,8 @@
-'use strict';
-
-const
-    any = require('../../../helpers/any'),
-    landing = require('../../../../lib/server/core/landing'),
-    resourcesController = require('../../../../lib/server/resources/controller'),
-    sinon = require('sinon'),
-    assert = require('chai').assert;
+import any from '../../../helpers/any';
+import landing from '../../../../lib/server/core/landing';
+import resourcesController from '../../../../lib/server/resources/controller';
+import sinon from 'sinon';
+import {assert} from 'chai';
 
 suite('landing config', () => {
     let sandbox;

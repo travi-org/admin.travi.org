@@ -1,15 +1,11 @@
-'use strict';
-
-const
-    React = require('react'),
-    ReactDOMServer = require('react-dom/server'),
-    reactRouter = require('react-router'),
-    Provider = require('react-redux').Provider,
-    any = require('../../../helpers/any'),
-    proxyquire = require('proxyquire'),
-    sinon = require('sinon'),
-    assert = require('referee').assert,
-    refute = require('referee').refute;
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import * as reactRouter from 'react-router';
+import {Provider} from 'react-redux';
+import any from '../../../helpers/any';
+import proxyquire from 'proxyquire';
+import sinon from 'sinon';
+import {assert, refute} from 'referee';
 
 suite('route renderer', () => {
     const

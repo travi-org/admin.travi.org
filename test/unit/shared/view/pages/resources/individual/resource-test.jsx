@@ -1,14 +1,11 @@
-'use strict';
+import React from 'react';
+import reactDom from 'react-dom/server';
 
-const
-    React = require('react'),
-    reactDom = require('react-dom/server'),
+import cheerio from 'cheerio';
+import any from '../../../../../../helpers/any';
+import {assert} from 'chai';
 
-    cheerio = require('cheerio'),
-    any = require('../../../../../../helpers/any'),
-    assert = require('assert'),
-
-    Resource = require('../../../../../../../lib/shared/views/resources/individual/resource')(React);
+const Resource = require('../../../../../../../lib/shared/views/resources/individual/resource')(React);
 
 suite('resource component test', () => {
     test('that displayName is set', () => {
