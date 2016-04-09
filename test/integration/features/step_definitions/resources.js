@@ -32,9 +32,7 @@ function buildLinksIncluding(resourceType, resourceLink) {
 }
 
 function buildListOf(resource) {
-    let resourceList;
-
-    resourceList = any.listOf(resource, {min: 1});
+    const resourceList = any.listOf(resource, {min: 1});
 
     if (existingResourceId) {
         existingResource = resource();

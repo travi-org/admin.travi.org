@@ -62,7 +62,7 @@ module.exports = function (grunt) {
         extendGruntPlugin(grunt, require('grunt-shell-spawn/tasks/shell'), {
             'shell.pactServerStart': {
                 command: `bundle exec pact-mock-service start -p ${options.pactServicePort}`
-                    + ` --pact-specification-version 2.0.0`
+                    + ' --pact-specification-version 2.0.0'
                     + ` -l ${options.pactDir}/pact.log --pact-dir ${options.pactDir}/pacts`,
                 options: {
                     stdout: true,
