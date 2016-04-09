@@ -1,5 +1,3 @@
-'use strict';
-
 const
     DEFAULT_STRING_LENGTH = 8,
     TLD_LENGTH = 3,
@@ -66,9 +64,8 @@ function simpleObject() {
 }
 
 function listOf(constructor, options) {
-    let i,
-        listSize = int();
     const list = [];
+    let i, listSize = int();
 
     if (options && options.min) {
         listSize += options.min;
@@ -81,7 +78,7 @@ function listOf(constructor, options) {
     return list;
 }
 
-module.exports = {
+export default {
     string,
     int,
     float,

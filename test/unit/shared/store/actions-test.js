@@ -1,14 +1,14 @@
 import {assert} from 'chai';
 import immutable from 'immutable';
 import any from '../../../helpers/any';
-import actions from '../../../../lib/shared/store/actions';
+import {setPrimaryNav, setResource, setResources} from '../../../../lib/shared/store/actions';
 
 suite('reducer actions', () => {
     test('that primary nav is added to the state', () => {
         const primaryNav = any.listOf(any.simpleObject);
 
         assert.equal(
-            actions.setPrimaryNav(immutable.Map(), primaryNav),
+            setPrimaryNav(immutable.Map(), primaryNav),
             immutable.Map({
                 primaryNav: immutable.fromJS(primaryNav)
             })
@@ -19,7 +19,7 @@ suite('reducer actions', () => {
         const resource = any.simpleObject();
 
         assert.equal(
-            actions.setResource(immutable.Map(), resource),
+            setResource(immutable.Map(), resource),
             immutable.Map({
                 resource: immutable.fromJS(resource)
             })
@@ -35,7 +35,7 @@ suite('reducer actions', () => {
             });
 
         assert.equal(
-            actions.setResources(initialState, type, resources),
+            setResources(initialState, type, resources),
             initialState.merge({
                 resourceType: type,
                 [type]: immutable.fromJS(resources)

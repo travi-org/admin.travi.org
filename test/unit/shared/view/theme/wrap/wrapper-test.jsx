@@ -4,9 +4,11 @@ import any from '../../../../../helpers/any';
 import {assert} from 'chai';
 import skinDeep from 'skin-deep';
 
-const Wrap = require('../../../../../../lib/shared/views/theme/wrap/wrap.jsx')(React);
+import createWrap from '../../../../../../lib/shared/views/theme/wrap/wrap.jsx';
 
 suite('wrapper component', () => {
+    const Wrap = createWrap(React);
+
     test('that displayName is set', () => {
         assert.equal(Wrap.displayName, 'Wrap');
     });

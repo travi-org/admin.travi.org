@@ -1,7 +1,5 @@
 /*eslint filenames/filenames: 0 */
 
-'use strict';
-
 module.exports = function (grunt) {
 
     const

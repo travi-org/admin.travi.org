@@ -1,6 +1,6 @@
-import resourcesController from '../../../../lib/server/resources/controller';
+import * as resourcesController from '../../../../lib/server/resources/controller';
 import traviApiResources from '../../../../lib/server/resources/travi-api-resources.js';
-import resourceMapperFactory from '../../../../lib/server/resources/mappers/resource-mapper-factory';
+import * as resourceMapperFactory from '../../../../lib/server/resources/mappers/resource-mapper-factory';
 
 import any from '../../../helpers/any-for-admin';
 import sinon from 'sinon';

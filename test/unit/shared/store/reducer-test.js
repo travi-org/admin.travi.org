@@ -1,6 +1,6 @@
 import immutable from 'immutable';
 import reducer from '../../../../lib/shared/store/reducer';
-import actions from '../../../../lib/shared/store/actions';
+import * as actions from '../../../../lib/shared/store/actions';
 import any from '../../../helpers/any';
 import {assert} from 'chai';
 import sinon from 'sinon';

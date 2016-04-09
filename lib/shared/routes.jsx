@@ -1,11 +1,7 @@
-'use strict';
+import React from 'react';
+import {Route, IndexRoute} from 'react-router';
 
 const
-    React = require('react'),
-    router = require('react-router'),
-    Route = router.Route,
-    IndexRoute = router.IndexRoute,
-
     Wrap = require('./views/theme/wrap/connected-wrap.jsx')(React),
     Index = require('./views/index.jsx')(React),
     ResourceList = require('./views/resources/list/connected-list.jsx')(React),

@@ -1,6 +1,6 @@
 import any from '../../../helpers/any';
 import landing from '../../../../lib/server/core/landing';
-import resourcesController from '../../../../lib/server/resources/controller';
+import * as resourcesController from '../../../../lib/server/resources/controller';
 import sinon from 'sinon';
 import {assert} from 'chai';
 

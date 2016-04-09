@@ -1,6 +1,6 @@
 import any from '../../helpers/any';
 import hydraterFactory from '../../../lib/client/route-hydrator';
-import repository from '../../../lib/client/repository';
+import * as repository from '../../../lib/client/repository';
 import sinon from 'sinon';
 import {assert, refute} from 'referee';
 

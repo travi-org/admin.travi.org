@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = (React) => (props) => (
+export default (React) => (props) => (
     <span id="primary-nav">
         <ul id="nav-items">
             {props.primaryNav.map((type) => {

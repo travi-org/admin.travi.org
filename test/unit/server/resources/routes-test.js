@@ -2,7 +2,7 @@ import any from '../../../helpers/any';
 import sinon from 'sinon';
 import {assert} from 'chai';
 import resources from '../../../../lib/server/resources/routes';
-import resourcesController from '../../../../lib/server/resources/controller';
+import * as resourcesController from '../../../../lib/server/resources/controller';
 
 suite('server routes config', () => {
     let sandbox;

@@ -1,6 +1,4 @@
-'use strict';
-
-const any = require('./any');
+import any from './any';
 
 any.resource = function () {
     return {
@@ -30,4 +28,4 @@ any.resources = {
     }
 };
 
-module.exports = any;
+export default any;

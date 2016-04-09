@@ -1,6 +1,6 @@
 /*global window */
 import * as redux from 'redux';
-import Immutable from 'immutable';
+import {fromJS} from 'immutable';
 import any from '../../../helpers/any';
 import reducer from '../../../../lib/shared/store/reducer';
 import configureStore from '../../../../lib/shared/store/configure.prod';
@@ -27,16 +27,16 @@ suite('store creation for production', () => {
     });
 
     test('that redux store is created from provided initial state', () => {
-        redux.createStore.withArgs(reducer, Immutable.fromJS(initialState)).returns(store);
+        redux.createStore.withArgs(reducer, fromJS(initialState)).returns(store);
 
         assert.equal(configureStore(initialState), store);
     });
 
-    test('that devtools browser extension is initialized fi present', () => {
+    test('that devtools browser extension is initialized if present', () => {
         const
             enhancer = any.simpleObject();
         window.devToolsExtension = sinon.stub().returns(enhancer);
-        redux.createStore.withArgs(reducer, Immutable.fromJS(initialState), enhancer).returns(store);
+        redux.createStore.withArgs(reducer, fromJS(initialState), enhancer).returns(store);
 
         configureStore(initialState);
 

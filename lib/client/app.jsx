@@ -1,17 +1,13 @@
 /*global window document */
-'use strict';
+import dom from 'react-dom';
+import React from 'react';
+import {Router, browserHistory as history} from 'react-router';
+import {Provider} from 'react-redux';
+import routesFactory from '../shared/routes.jsx';
+import configureStore from '../shared/store/configure';
+import hydrator from './route-hydrator';
 
 const
-    dom = require('react-dom'),
-    React = require('react'),
-    reactRouter = require('react-router'),
-    Router = reactRouter.Router,
-    history = reactRouter.browserHistory,
-    Provider = require('react-redux').Provider,
-    routesFactory = require('../shared/routes.jsx'),
-    configureStore = require('../shared/store/configure'),
-    hydrator = require('./route-hydrator'),
-
     store = configureStore(JSON.parse(window.__INITIAL_STATE__)),
     routes = routesFactory(hydrator(store).hydrate);
 

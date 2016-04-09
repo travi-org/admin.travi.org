@@ -1,6 +1,6 @@
 import proxyquire from 'proxyquire';
 import * as redux from 'redux';
-import Immutable from 'immutable';
+import {fromJS} from 'immutable';
 import any from '../../../helpers/any';
 import reducer from '../../../../lib/shared/store/reducer';
 import sinon from 'sinon';
@@ -31,7 +31,7 @@ suite('store creation for development', () => {
         const
             initialState = any.simpleObject(),
             store = any.simpleObject();
-        redux.createStore.withArgs(reducer, Immutable.fromJS(initialState), enhancer).returns(store);
+        redux.createStore.withArgs(reducer, fromJS(initialState), enhancer).returns(store);
 
         assert.equal(configureStore(initialState), store);
     });

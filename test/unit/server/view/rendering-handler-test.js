@@ -1,6 +1,6 @@
 import proxyquire from 'proxyquire';
 import routeRenderer from '../../../../lib/server/view/route-renderer.jsx';
-import resourcesController from '../../../../lib/server/resources/controller';
+import * as resourcesController from '../../../../lib/server/resources/controller';
 import reducer from '../../../../lib/shared/store/reducer';
 import * as redux from 'redux';
 import immutable from 'immutable';

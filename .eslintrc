@@ -4,7 +4,7 @@
 
 ---
   ecmaFeatures:
-    modules: false
+    modules: true
 
   env:
     node: true
@@ -44,4 +44,4 @@
     new-cap:
       - 2
       - capIsNewExceptions:
-        - immutable.Map
+        - Map

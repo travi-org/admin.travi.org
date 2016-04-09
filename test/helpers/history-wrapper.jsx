@@ -1,12 +1,9 @@
-'use strict';
-
-const
-    React = require('react'),
-    reactRouter = require('react-router');
+import React from 'react';
+import {createMemoryHistory} from 'react-router';
 
 class HistoryWrapper extends React.Component {
     getChildContext() {
-        const historyInstance = reactRouter.createMemoryHistory();
+        const historyInstance = createMemoryHistory();
         historyInstance.isActive = function () {};
 
         return {
