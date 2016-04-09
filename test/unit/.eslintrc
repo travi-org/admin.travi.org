@@ -7,10 +7,9 @@
 
   rules:
     react/jsx-uses-react: 2
-    no-mixed-requires: 2
     max-nested-callbacks:
       - 2
       - 4
     no-mixed-requires:
-      - 1
+      - 2
       - false
