@@ -16,8 +16,8 @@
     "storybook": "start-storybook -p 9001"
   },
   "engines": {
-    "node": "5.1.x",
-    "npm": "3.3.x"
+    "node": "5.10.x",
+    "npm": "3.8.x"
   },
   "config": {
     "blanket": {
