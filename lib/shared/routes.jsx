@@ -1,16 +1,23 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 
+import createNotFound from './views/errors/not-found.jsx';
+import createWrap from './views/theme/wrap/connected-wrap.jsx';
+import createResourceList from './views/resources/list/connected-list.jsx';
+import createUser from './views/resources/individual/users/connected-user.jsx';
+import createResource from './views/resources/individual/connected-resource.jsx';
+import createIndex from './views/index.jsx';
+
 const
-    Wrap = require('./views/theme/wrap/connected-wrap.jsx')(React),
-    Index = require('./views/index.jsx')(React),
-    ResourceList = require('./views/resources/list/connected-list.jsx')(React),
-    Resource = require('./views/resources/individual/connected-resource.jsx')(React),
-    User = require('./views/resources/individual/users/connected-user.jsx')(React),
+    Wrap = createWrap(React),
+    Index = createIndex(React),
+    ResourceList = createResourceList(React),
+    Resource = createResource(React),
+    User = createUser(React),
 
-    NotFound = require('./views/errors/not-found.jsx')(React);
+    NotFound = createNotFound(React);
 
-module.exports = (hydrate) => (
+export default (hydrate) => (
     <Route path="/" component={Wrap}>
         <IndexRoute component={Index} />
         <Route path="/:type" component={ResourceList} onEnter={hydrate} />

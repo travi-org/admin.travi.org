@@ -1,10 +1,7 @@
-'use strict';
+import {connect} from 'react-redux';
+import maybeResourceList from './maybe-list.jsx';
 
-const
-    reactRedux = require('react-redux'),
-    maybeResourceList = require('./maybe-list.jsx');
-
-module.exports = (React) => reactRedux.connect((state) => {
+export default (React) => connect((state) => {
     const resourceType = state.get('resourceType');
 
     return {

@@ -4,7 +4,8 @@ import skinDeep from 'skin-deep';
 import {assert} from 'chai';
 import any from '../../../../../../helpers/any';
 
-const MaybeList = require('../../../../../../../lib/shared/views/resources/list/maybe-list.jsx')(React);
+import createMaybeList from '../../../../../../../lib/shared/views/resources/list/maybe-list.jsx';
+const MaybeList = createMaybeList(React);
 
 suite('maybe-list component', () => {
     test('that displayName is set', () => {

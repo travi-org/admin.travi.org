@@ -25,7 +25,7 @@ suite('redux dev-tools', () => {
                 'redux-devtools': {
                     createDevTools: sinon.stub().withArgs(MonitorComponent).returns(Tools)
                 }
-            });
+            }).default;
         React.createElement.withArgs(LogMonitor, {theme: 'solarized'}).returns(MonitorComponent);
 
         assert.equal(DevTools, Tools);

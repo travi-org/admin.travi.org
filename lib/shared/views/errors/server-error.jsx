@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = (React) => {
+export default (React) => {
     function ServerError() {
         return (
             <div className="jumbotron">

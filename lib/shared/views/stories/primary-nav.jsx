@@ -1,10 +1,8 @@
-'use strict';
+import React from 'react';
+import {storiesOf} from '@kadira/storybook';
+import createPrimaryNav from '../theme/primary-nav.jsx';
 
-const
-    React = require('react'),
-    storiesOf = require('@kadira/storybook').storiesOf,
-
-    PrimaryNav = require('../theme/primary-nav.jsx')(React);
+const PrimaryNav = createPrimaryNav(React);
 
 require('../../../../resources/scss/theme.scss');
 

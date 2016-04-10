@@ -6,7 +6,9 @@ import cheerio from 'cheerio';
 import {assert} from 'chai';
 
 import HistoryWrapper from '../../../../helpers/history-wrapper';
-const PrimaryNav = require('../../../../../lib/shared/views/theme/primary-nav.jsx')(React);
+import createPrimaryNav from '../../../../../lib/shared/views/theme/primary-nav.jsx';
+
+const PrimaryNav = createPrimaryNav(React);
 
 suite('primary navigation', () => {
     test('that displayName is set', () => {

@@ -20,4 +20,4 @@ HistoryWrapper.childContextTypes = {
     router: React.PropTypes.object
 };
 
-module.exports = HistoryWrapper;
+export default HistoryWrapper;

@@ -12,8 +12,8 @@ suite('connected wrapper component', () => {
     const
         ResourceList = any.simpleObject(),
         connectedList = proxyquire('../../../../../../../lib/shared/views/resources/list/connected-list.jsx', {
-            './maybe-list.jsx': sinon.stub().withArgs(React).returns(ResourceList)
-        });
+            './maybe-list.jsx': {default: sinon.stub().withArgs(React).returns(ResourceList)}
+        }).default;
 
     setup(() => {
         sandbox = sinon.sandbox.create();

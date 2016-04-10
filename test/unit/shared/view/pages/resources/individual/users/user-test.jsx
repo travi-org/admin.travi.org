@@ -6,7 +6,8 @@ import microformats from 'microformat-node';
 import any from '../../../../../../../helpers/any';
 import assert from 'assert';
 
-const User = require('../../../../../../../../lib/shared/views/resources/individual/users/user')(React);
+import createUser from '../../../../../../../../lib/shared/views/resources/individual/users/user';
+const User = createUser(React);
 
 suite('user component test', () => {
     test('that displayName is set', () => {

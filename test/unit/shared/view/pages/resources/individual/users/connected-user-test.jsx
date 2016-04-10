@@ -13,8 +13,8 @@ suite('connected wrapper component', () => {
         Resource = any.simpleObject(),
         connectedResource = proxyquire(
             '../../../../../../../../lib/shared/views/resources/individual/users/connected-user.jsx',
-            {'./user.jsx': sinon.stub().withArgs(React).returns(Resource)}
-        );
+            {'./user.jsx': {default: sinon.stub().withArgs(React).returns(Resource)}}
+        ).default;
 
     setup(() => {
         sandbox = sinon.sandbox.create();

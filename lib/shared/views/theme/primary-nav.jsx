@@ -1,15 +1,8 @@
-'use strict';
+import {IndexLink} from 'react-router';
+import {Navbar, NavItem, Nav} from 'react-bootstrap';
+import {LinkContainer} from 'react-router-bootstrap';
 
-const
-    router = require('react-router'),
-    IndexLink = router.IndexLink,
-
-    Navbar = require('react-bootstrap').Navbar,
-    NavItem = require('react-bootstrap').NavItem,
-    Nav = require('react-bootstrap').Nav,
-    LinkContainer = require('react-router-bootstrap').LinkContainer;
-
-module.exports = (React) => {
+export default (React) => {
     function PrimaryNav({primaryNav}) {
         return (
             <Navbar>

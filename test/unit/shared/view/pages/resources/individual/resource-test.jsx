@@ -5,7 +5,8 @@ import cheerio from 'cheerio';
 import any from '../../../../../../helpers/any';
 import {assert} from 'chai';
 
-const Resource = require('../../../../../../../lib/shared/views/resources/individual/resource')(React);
+import createResource from '../../../../../../../lib/shared/views/resources/individual/resource';
+const Resource = createResource(React);
 
 suite('resource component test', () => {
     test('that displayName is set', () => {

@@ -6,26 +6,25 @@ import sinon from 'sinon';
 import {assert} from 'chai';
 
 suite('routes', () => {
-    const
-        routesFactory = proxyquire('../../../lib/shared/routes.jsx', {
-            './views/theme/wrap/connected-wrap.jsx': (React) => (props) => (            //eslint-disable-line no-shadow
-                <div>wrapper { props.children }</div>
-            ),
-            './views/index.jsx': (React) => () => <div>index</div>,                     //eslint-disable-line no-shadow
-            './views/errors/not-found.jsx': (React) => () => <div>not-found</div>,      //eslint-disable-line no-shadow
-            './views/resources/list/connected-list.jsx': (React) => () => (             //eslint-disable-line no-shadow
-                <div>resources</div>
-            ),
-            './views/resources/individual/connected-resource.jsx': (React) => () => (   //eslint-disable-line no-shadow
-                <div>resource</div>
-            ),
-            './views/resources/individual/users/connected-user.jsx': (React) => () => ( //eslint-disable-line no-shadow
-                <div>user</div>
-            )
-        });
-    let node,
-        hydrater,
-        routes;
+    const routesFactory = proxyquire('../../../lib/shared/routes.jsx', {
+        './views/theme/wrap/connected-wrap.jsx': {
+            default: (React) => (props) => <div>wrapper { props.children }</div>    //eslint-disable-line no-shadow
+        },
+        './views/index.jsx': {default: (React) => () => <div>index</div>},           //eslint-disable-line no-shadow
+        './views/errors/not-found.jsx': {
+            default: (React) => () => <div>not-found</div>                          //eslint-disable-line no-shadow
+        },
+        './views/resources/list/connected-list.jsx': {
+            default: (React) => () => <div>resources</div>                          //eslint-disable-line no-shadow
+        },
+        './views/resources/individual/connected-resource.jsx': {
+            default: (React) => () => <div>resource</div>                           //eslint-disable-line no-shadow
+        },
+        './views/resources/individual/users/connected-user.jsx': {
+            default: (React) => () => <div>user</div>                               //eslint-disable-line no-shadow
+        }
+    }).default;
+    let node, hydrater, routes;
 
     beforeEach(() => {
         hydrater = sinon.spy();

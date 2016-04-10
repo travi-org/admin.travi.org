@@ -12,8 +12,8 @@ suite('connected wrapper component', () => {
     const
         Wrap = any.simpleObject(),
         connectedWrap = proxyquire('../../../../../../lib/shared/views/theme/wrap/connected-wrap.jsx', {
-            './wrap.jsx': sinon.stub().withArgs(React).returns(Wrap)
-        });
+            './wrap.jsx': {default: sinon.stub().withArgs(React).returns(Wrap)}
+        }).default;
 
     setup(() => {
         sandbox = sinon.sandbox.create();

@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = (React) => {
+export default (React) => {
     function Resource({resource}) {
         return <h3>{resource.displayName}</h3>;
     }

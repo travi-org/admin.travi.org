@@ -1,7 +1,7 @@
-'use strict';
+import createResourceList from './list.jsx';
 
-module.exports = (React) => {
-    const ResourceList = require('./list.jsx')(React);
+export default (React) => {
+    const ResourceList = createResourceList(React);
 
     function MaybeList({resources, resourceType}) {
         if (resources.length) {

@@ -1,11 +1,9 @@
-'use strict';
+import {connect} from 'react-redux';
+import resource from './user.jsx';
 
-const
-    reactRedux = require('react-redux'),
-    resource = require('./user.jsx');
-
-module.exports = (React) => reactRedux.connect((state) => {
+export default (React) => connect((state) => {
     const user = state.get('resource').toJS();
+
     return {
         user: {
             id: user.id,

@@ -1,10 +1,7 @@
-'use strict';
+import React from 'react';
+import {createDevTools} from 'redux-devtools';
+import LogMonitor from 'redux-devtools-log-monitor';
 
-const
-    React = require('react'),
-    reduxDevTools = require('redux-devtools'),
-    LogMonitor = require('redux-devtools-log-monitor').default;
-
-module.exports = reduxDevTools.createDevTools(
+export default createDevTools(
     <LogMonitor theme="solarized" />
 );

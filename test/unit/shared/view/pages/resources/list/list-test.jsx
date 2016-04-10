@@ -4,7 +4,8 @@ import skinDeep from 'skin-deep';
 import {assert} from 'chai';
 import any from '../../../../../../helpers/any';
 
-const ResourceList = require('../../../../../../../lib/shared/views/resources/list/list.jsx')(React);
+import createResourceList from '../../../../../../../lib/shared/views/resources/list/list.jsx';
+const ResourceList = createResourceList(React);
 
 function assertSimpleResourceRenders(listItem, resource) {
     assert.deepEqual(listItem.props.children, ['', resource.displayName]);

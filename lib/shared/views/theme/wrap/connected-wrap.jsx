@@ -1,10 +1,7 @@
-'use strict';
+import {connect} from 'react-redux';
+import wrap from './wrap.jsx';
 
-const
-    reactRedux = require('react-redux'),
-    wrap = require('./wrap.jsx');
-
-module.exports = (React) => reactRedux.connect((state) => {
+export default (React) => connect((state) => {
     return {
         primaryNav: state.get('primaryNav').toJS()
     };

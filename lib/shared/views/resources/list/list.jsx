@@ -1,11 +1,7 @@
-'use strict';
+import {Link} from 'react-router';
+import {ListGroup, ListGroupItem} from 'react-bootstrap';
 
-const
-    Link = require('react-router').Link,
-    ListGroup = require('react-bootstrap').ListGroup,
-    ListGroupItem = require('react-bootstrap').ListGroupItem;
-
-module.exports = (React) => {
+export default (React) => {
     function ResourceList({resources}) {
         return (
             <ListGroup>{ resources.map((resource) => (

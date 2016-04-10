@@ -1,7 +1,7 @@
-'use strict';
+import createPrimaryNav from './../primary-nav.jsx';
 
-module.exports = (React) => {
-    const PrimaryNav = require('./../primary-nav.jsx')(React);
+export default (React) => {
+    const PrimaryNav = createPrimaryNav(React);
 
     function Wrap({primaryNav, children}) {
         return (
