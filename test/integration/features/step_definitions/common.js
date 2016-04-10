@@ -5,11 +5,13 @@ module.exports = function () {
 
     this.Before(() => {
         nock.disableNetConnect();
+        this.mime = 'application/json';
     });
 
     this.After(function () {
         nock.enableNetConnect();
         nock.cleanAll();
+        this.mime = null;
         this.serverResponse = null;
     });
 };

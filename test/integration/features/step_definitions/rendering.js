@@ -4,14 +4,6 @@ import {assert} from 'referee';
 module.exports = function () {
     this.World = require('../support/world.js').World;
 
-    this.Before(function () {
-        this.mime = 'application/json';
-    });
-
-    this.After(function () {
-        this.mine = null;
-    });
-
     this.Given(/^html is requested$/, function (callback) {
         this.mime = 'text/html';
 
