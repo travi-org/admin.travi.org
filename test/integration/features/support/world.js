@@ -1,5 +1,3 @@
-require('babel-register');
-
 import nock from 'nock';
 import any from '../../../helpers/any';
 import loadApi from '../../../../lib/server/app.js';
