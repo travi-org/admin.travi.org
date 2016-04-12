@@ -1,0 +1,11 @@
+options:
+  port: 9000
+  host: localhost
+  dir: tmp/pacts
+  log: log.txt
+  spec: 2
+  consumer: travi.org-admin
+  provider: travi-api
+
+default:
+  src: test/service-contracts/**/*.pact.js
