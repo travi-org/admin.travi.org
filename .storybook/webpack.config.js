@@ -6,7 +6,7 @@ module.exports = {
             {
                 test: /\.scss?$/,
                 loader: 'style!css!sass?' + JSON.stringify({
-                    includePaths: [ path.resolve(__dirname, '../bower_components') ],
+                    includePaths: [ path.resolve(__dirname, '../node_modules/@travi') ],
                     sourceMap : true
                 })
             },
