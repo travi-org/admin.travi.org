@@ -5,10 +5,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.scss?$/,
-                loader: 'style!css!sass?' + JSON.stringify({
-                    includePaths: [ path.resolve(__dirname, '../node_modules/@travi') ],
-                    sourceMap : true
-                })
+                loaders: ['style', 'css', 'sass']
             },
             {
                 test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=d+\.d+\.d+)?$/,
