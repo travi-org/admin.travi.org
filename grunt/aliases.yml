@@ -15,10 +15,14 @@ lint:
   - scsslint
   - eslint
 
-unit: mochacov:unit
+unit:
+  - env:node
+  - mochacov:unit
 
-integration: cucumberjs:integration
 wip: cucumberjs:wip
+integration:
+  - env:node
+  - cucumberjs:integration
 
 test:
   - unit

@@ -2,6 +2,8 @@ import {IndexLink} from 'react-router';
 import {Navbar, NavItem, Nav} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 
+import '../../../../resources/scss/_navbar.scss';
+
 export default (React) => {
     function PrimaryNav({primaryNav}) {
         return (

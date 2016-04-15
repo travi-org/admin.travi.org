@@ -6,6 +6,16 @@
     "env": {
         "development": {
             "retainLines": true
+        },
+        "node": {
+            "plugins": [
+                [
+                    "babel-plugin-transform-require-ignore",
+                    {
+                        "extensions": [".scss", ".sass"]
+                    }
+                ]
+            ]
         }
     }
 }

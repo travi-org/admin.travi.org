@@ -6,11 +6,17 @@ module.exports = {
     devtool: 'source-map',
     entry: ['./lib/client/app.jsx'],
     module: {
-        loaders: [{
-            test: /\.jsx?$/,
-            include: /lib\/(client|shared)/,
-            loader: 'babel'
-        }]
+        loaders: [
+            {
+                test: /\.jsx?$/,
+                include: /lib\/(client|shared)/,
+                loader: 'babel'
+            },
+            {
+                test: /\.scss?$/,
+                loaders: ['style', 'css', 'sass']
+            }
+        ]
     },
     plugins: [
         new webpack.DefinePlugin({

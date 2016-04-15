@@ -10,14 +10,14 @@ dependencies:
 
 test:
   post:
-    - grunt mochacov:junit
+    - BABEL_ENV=node grunt mochacov:junit
     - mkdir -p $CIRCLE_TEST_REPORTS/junit
     - find . -type f -regex ".*/logs/unit/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
 
 #    - grunt mochacov:coverage
 
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
-    - cucumber.js --format=json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --tags=~@wip test/integration/features/ --compiler=js*:babel-register
+    - BABEL_ENV=node cucumber.js --format=json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --tags=~@wip test/integration/features/ --compiler=js*:babel-register
 
 deployment:
   staging:

@@ -4,8 +4,6 @@ import createPrimaryNav from '../theme/primary-nav.jsx';
 
 const PrimaryNav = createPrimaryNav(React);
 
-require('./theme-for-webpack.scss');
-
 storiesOf('Primary Nav', module)
     .add('empty nav', () => <PrimaryNav primaryNav={[]}/>)
     .add('populated nav', () => <PrimaryNav primaryNav={[
