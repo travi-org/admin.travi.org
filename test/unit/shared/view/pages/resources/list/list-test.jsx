@@ -16,7 +16,6 @@ function assertLinkRendersWhenSelfLinkIsDefined(listItem, resource) {
         to: resource.links.self.href,
         children: resource.displayName,
         onlyActiveOnIndex: false,
-        className: '',
         style: {}
     }));
 }
