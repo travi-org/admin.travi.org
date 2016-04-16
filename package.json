@@ -49,6 +49,7 @@
     "eslint-plugin-filenames": "0.2.0",
     "eslint-plugin-react": "4.3.0",
     "extend-grunt-plugin": "0.1.0",
+    "extract-text-webpack-plugin": "1.0.1",
     "formatio": "1.2.0",
     "grunt": "1.0.1",
     "grunt-babel": "6.0.0",

@@ -1,11 +1,10 @@
-@import 'travi.org-theme/scss/colors';
-@import 'travi.org-theme/scss/typography/variables';
-@import 'travi.org-theme/scss/lists/placeholders';
+@import '~@travi/travi.org-theme/scss/colors';
+@import '~@travi/travi.org-theme/scss/typography/variables';
+@import '~@travi/travi.org-theme/scss/lists/placeholders';
 @import 'bootstrap-custom';
 
-@import 'bootstrap-sass-official/assets/stylesheets/bootstrap';
-@import 'travi.org-theme/scss/headings';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap';
+@import '~@travi/travi.org-theme/scss/headings';
 
-@import 'navbar';
 @import 'resourceLists';
 @import 'h-card';

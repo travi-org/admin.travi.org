@@ -4,8 +4,6 @@ import createResourceList from '../resources/list/maybe-list.jsx';
 
 const ResourceList = createResourceList(React);
 
-require('./theme-for-webpack.scss');
-
 storiesOf('Resource List', module)
     .add('empty list', () => <ResourceList resourceType="foo" resources={[]}/>)
     .add('rides list', () => <ResourceList resourceType="rides" resources={[

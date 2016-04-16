@@ -1,7 +1,8 @@
 {
     "ext": "js jsx",
     "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "BABEL_ENV": "node"
     },
     "execMap": {
         "js": "babel-node"

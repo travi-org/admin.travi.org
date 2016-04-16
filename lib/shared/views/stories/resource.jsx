@@ -3,8 +3,6 @@ import {storiesOf} from '@kadira/storybook';
 import createResource from '../resources/individual/resource.jsx';
 import createUser from '../resources/individual/users/user.jsx';
 
-require('./theme-for-webpack.scss');
-
 const
     Resource = createResource(React),
     User = createUser(React),

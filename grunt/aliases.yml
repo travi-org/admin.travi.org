@@ -1,9 +1,10 @@
 compileClient:
-  - sass
   - webpack:build
   - uglify
 
-compileServer: babel
+compileServer:
+  - env:node
+  - babel
 
 build:
   - clean

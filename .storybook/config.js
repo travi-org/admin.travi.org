@@ -1,6 +1,6 @@
 import { configure } from '@kadira/storybook';
 
-import '../lib/shared/views/stories/theme-for-webpack.scss';
+import '../resources/scss/theme.scss';
 
 function loadStories() {
     require('../lib/shared/views/stories/primary-nav.jsx');

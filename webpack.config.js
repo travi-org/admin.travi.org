@@ -1,6 +1,7 @@
 const
     path = require('path'),
-    webpack = require('webpack');
+    webpack = require('webpack'),
+    ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     devtool: 'source-map',
@@ -14,7 +15,17 @@ module.exports = {
             },
             {
                 test: /\.scss?$/,
-                loaders: ['style', 'css', 'sass']
+                loader: ExtractTextPlugin.extract(
+                    'style',
+                    [
+                        'css?sourceMap',
+                        'sass?outputStyle=compressed&sourceMap=true&sourceMapContents=true'
+                    ]
+                )
+            },
+            {
+                test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=d+\.d+\.d+)?$/,
+                loader: 'url'
             }
         ]
     },
@@ -30,7 +41,8 @@ module.exports = {
             }
         }),
         new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.OccurenceOrderPlugin()
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new ExtractTextPlugin('styles.css')
     ],
     output: {
         path: path.join(__dirname, 'resources/js'),
