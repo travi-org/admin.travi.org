@@ -97,7 +97,7 @@
     "hapi": "13.3.0",
     "hapi-mustache": "0.0.1",
     "history": "2.0.2",
-    "immutable": "3.7.6",
+    "immutable": "3.8.0",
     "inert": "3.2.0",
     "lodash": "4.11.1",
     "negotiator": "0.6.0",
