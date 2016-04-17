@@ -5,7 +5,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.scss?$/,
-                loaders: ['style', 'css', 'sass']
+                loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
             },
             {
                 test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=d+\.d+\.d+)?$/,
