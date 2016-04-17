@@ -1,7 +1,0 @@
-common:
-  sourceMap: true
-  sourceMapIncludeSources: true
-  files:
-    'resources/js/common.js':
-      - bower_components/jquery/dist/jquery.js
-      - bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js

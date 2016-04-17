@@ -3,6 +3,4 @@ js:
   - resources/js
   - dist
 
-bower: bower_components
-
 pact: tmp

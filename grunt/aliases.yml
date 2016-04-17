@@ -1,6 +1,4 @@
-compileClient:
-  - webpack:build
-  - uglify
+compileClient: webpack:build
 
 compileServer:
   - env:node
@@ -8,7 +6,6 @@ compileServer:
 
 build:
   - clean
-  - bower
   - compileClient
   - compileServer
 
