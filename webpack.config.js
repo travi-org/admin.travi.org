@@ -14,7 +14,7 @@ module.exports = {
                 loader: 'babel'
             },
             {
-                test: /\.scss?$/,
+                test: /\.scss$/,
                 loader: ExtractTextPlugin.extract(
                     'style',
                     [
