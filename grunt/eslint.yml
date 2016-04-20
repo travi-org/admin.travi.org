@@ -1,6 +1,10 @@
+options:
+  ignore: false
+
 target:
   - "*.js"
   - "!newrelic.js"
   - grunt/**/*.js
   - lib/**/*.js*
   - test/**/*.js*
+  - .storybook/**/*.js
