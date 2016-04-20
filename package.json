@@ -13,7 +13,8 @@
     "start": "node dist/server/app.js",
     "postinstall": "grunt heroku:production",
     "dev": "grunt compileClient && nodemon lib/server/app.js",
-    "storybook": "start-storybook -p 9001"
+    "storybook": "start-storybook -p 9001",
+    "build-storybook": "build-storybook -o dist/storybook"
   },
   "engines": {
     "node": "5.10.x",
