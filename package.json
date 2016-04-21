@@ -14,7 +14,8 @@
     "postinstall": "grunt heroku:production",
     "dev": "grunt compileClient && nodemon lib/server/app.js",
     "storybook": "start-storybook -p 9001",
-    "build-storybook": "build-storybook -o dist/storybook"
+    "build-storybook": "build-storybook -o dist/storybook",
+    "gh-pages": "github-pages -r travi/travi.org-admin ./dist/storybook"
   },
   "engines": {
     "node": "5.10.x",
@@ -52,6 +53,7 @@
     "extend-grunt-plugin": "0.1.0",
     "extract-text-webpack-plugin": "1.0.1",
     "formatio": "1.2.0",
+    "github-pages": "3.0.2",
     "grunt": "1.0.1",
     "grunt-babel": "6.0.0",
     "grunt-bower-task": "0.4.0",
