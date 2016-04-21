@@ -30,4 +30,5 @@ an acceptable way to piece together `hapi` and `react` to support the following:
 - [x] [Traverson](https://github.com/basti1302/traverson) with the [HAL adapter](https://github.com/basti1302/traverson-hal)
 - [x] [React](https://facebook.github.io/react/)
 - [x] [React-router](https://github.com/rackt/react-router)
-- [ ] [Redux](http://rackt.org/redux/)
+- [x] [Redux](http://rackt.org/redux/)
+- [x] [React Storybook](https://github.com/kadirahq/react-storybook) ([View the demo](https://travi.github.io/travi.org-admin) site of the components)

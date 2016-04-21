@@ -1,0 +1,8 @@
+options:
+  base: dist/storybook
+  repo: 'https://<%= ghToken %>@github.com/travi/travi.org-admin.git'
+  user:
+    name: Matt Travi
+    email: programmer@travi.org
+
+src: '**/*'
