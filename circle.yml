@@ -24,10 +24,13 @@ test:
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
     - BABEL_ENV=node cucumber.js --format=json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --tags=~@wip test/integration/features/ --compiler=js*:babel-register
 
-    - npm run build-storybook && npm run gh-pages
-
 deployment:
-  staging:
+  production:
     branch: master
     heroku:
       appname: travi-org-admin
+  gh-pages:
+    branch: master
+    commands:
+      - npm run build-storybook
+      - npm run gh-pages
