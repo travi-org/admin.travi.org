@@ -5,4 +5,6 @@ options:
     name: Matt Travi
     email: programmer@travi.org
 
-src: '**/*'
+src:
+  - '**/*'
+  - circle.yml
