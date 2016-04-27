@@ -6,4 +6,4 @@ group :pact do
     gem 'pact_broker-client'
 end
 
-gem 'scss-lint'
+gem 'scss_lint'
