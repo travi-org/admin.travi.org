@@ -102,7 +102,7 @@
     "good-console": "5.3.2",
     "hapi": "13.3.0",
     "hapi-mustache": "0.0.1",
-    "history": "2.1.0",
+    "history": "2.1.1",
     "immutable": "3.8.1",
     "inert": "3.2.0",
     "lodash": "4.11.1",
