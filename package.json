@@ -106,7 +106,7 @@
     "immutable": "3.8.1",
     "inert": "3.2.0",
     "lodash": "4.11.2",
-    "negotiator": "0.6.0",
+    "negotiator": "0.6.1",
     "newrelic": "1.26.2",
     "react": "15.0.2",
     "react-bootstrap": "0.29.3",
