@@ -32,3 +32,5 @@ an acceptable way to piece together `hapi` and `react` to support the following:
 - [x] [React-router](https://github.com/rackt/react-router)
 - [x] [Redux](http://rackt.org/redux/)
 - [x] [React Storybook](https://github.com/kadirahq/react-storybook) ([View the demo](https://travi.github.io/travi.org-admin) site of the components)
+- [ ] [Webpack](https://webpack.github.io/)
+- [ ] [Pact Consumer](https://github.com/pact-foundation/grunt-pact)
