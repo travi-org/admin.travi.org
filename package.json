@@ -66,7 +66,7 @@
     "grunt-http": "2.0.1",
     "grunt-mocha-cov": "0.4.0",
     "grunt-perfbudget": "0.1.8",
-    "grunt-sass": "1.1.0",
+    "grunt-sass": "1.2.0",
     "grunt-scss-lint": "0.3.8",
     "grunt-shell-spawn": "0.3.10",
     "grunt-wait": "0.1.0",
