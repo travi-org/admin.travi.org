@@ -1,0 +1,4 @@
+pact:
+  options:
+    create:
+      - tmp/pacts

@@ -21,9 +21,14 @@ integration:
   - env:node
   - cucumberjs:integration
 
+service-contracts:
+  - mkdir:pact
+  - pact:default
+
 test:
   - unit
   - integration
+  - service-contracts
 
 verify:
   - lint
