@@ -18,7 +18,7 @@
     "gh-pages": "grunt gh-pages"
   },
   "engines": {
-    "node": "6.0.x",
+    "node": "6.1.x",
     "npm": "3.8.x"
   },
   "config": {
