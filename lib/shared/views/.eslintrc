@@ -1,4 +1,0 @@
----
-  rules:
-    react/display-name: 2
-    react/prefer-stateless-function: 2

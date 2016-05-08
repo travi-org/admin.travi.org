@@ -1,0 +1,5 @@
+rules:
+  react/jsx-uses-vars: error
+  no-extra-parens:
+    - error
+    - functions
