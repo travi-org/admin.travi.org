@@ -1,4 +1,4 @@
-import any from '../../helpers/any';
+import any from '@travi/any';
 import {assert} from 'chai';
 import sinon from 'sinon';
 import proxyquire from 'proxyquire';
@@ -12,7 +12,7 @@ suite('client repository', () => {
         const
             data = [any.simpleObject()],
             type = any.string(),
-            id = any.int(),
+            id = any.integer(),
             callback = sinon.spy();
 
         repository.getResource(type, id, callback);
@@ -31,7 +31,7 @@ suite('client repository', () => {
             error = any.simpleObject(),
             callback = sinon.spy(),
             type = any.string(),
-            id = any.int();
+            id = any.integer();
         xhr.withArgs({url: `/${type}/${id}`}).yields(error);
 
         repository.getResource(type, id, callback);

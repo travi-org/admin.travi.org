@@ -1,4 +1,4 @@
-import any from '../../../helpers/any';
+import any from '@travi/any';
 import sinon from 'sinon';
 import {assert} from 'chai';
 import resources from '../../../../lib/server/resources/routes';

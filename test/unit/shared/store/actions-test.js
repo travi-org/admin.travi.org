@@ -1,6 +1,6 @@
 import {assert} from 'chai';
 import immutable from 'immutable';
-import any from '../../../helpers/any';
+import any from '@travi/any';
 import {setPrimaryNav, setResource, setResources} from '../../../../lib/shared/store/actions';
 
 suite('reducer actions', () => {

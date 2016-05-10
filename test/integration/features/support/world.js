@@ -1,5 +1,5 @@
 import nock from 'nock';
-import any from '../../../helpers/any';
+import any from '@travi/any';
 import loadApi from '../../../../lib/server/app.js';
 
 const

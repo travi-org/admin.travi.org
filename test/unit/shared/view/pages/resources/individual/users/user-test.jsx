@@ -3,7 +3,7 @@ import reactDom from 'react-dom/server';
 
 import cheerio from 'cheerio';
 import microformats from 'microformat-node';
-import any from '../../../../../../../helpers/any';
+import any from '@travi/any';
 import assert from 'assert';
 
 import createUser from '../../../../../../../../lib/shared/views/resources/individual/users/user';
@@ -25,7 +25,7 @@ suite('user component test', () => {
                     },
                     avatar: {
                         src: any.url(),
-                        size: any.int()
+                        size: any.integer()
                     }
                 }
             },

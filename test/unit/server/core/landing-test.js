@@ -1,4 +1,4 @@
-import any from '../../../helpers/any';
+import any from '@travi/any';
 import landing from '../../../../lib/server/core/landing';
 import * as resourcesController from '../../../../lib/server/resources/controller';
 import sinon from 'sinon';

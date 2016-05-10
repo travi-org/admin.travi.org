@@ -1,4 +1,4 @@
-import any from '../../../../helpers/any';
+import any from '@travi/any';
 import proxyquire from 'proxyquire';
 import React from 'react';
 import LogMonitor from 'redux-devtools-log-monitor';

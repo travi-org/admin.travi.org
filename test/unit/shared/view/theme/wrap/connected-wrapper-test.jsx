@@ -5,7 +5,7 @@ import Immutable from 'immutable';
 import sinon from 'sinon';
 import {assert} from 'chai';
 import proxyquire from 'proxyquire';
-import any from '../../../../../helpers/any';
+import any from '@travi/any';
 
 suite('connected wrapper component', () => {
     let sandbox;

@@ -6,7 +6,7 @@ import * as redux from 'redux';
 import immutable from 'immutable';
 import * as history from 'history';
 import _ from 'lodash';
-import any from '../../../helpers/any';
+import any from '@travi/any';
 import sinon from 'sinon';
 import {assert, refute} from 'referee';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import any from '../../../../../helpers/any';
+import any from '@travi/any';
 import {assert} from 'chai';
 import skinDeep from 'skin-deep';
 

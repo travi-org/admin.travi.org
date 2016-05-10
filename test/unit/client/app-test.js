@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import dom from 'react-dom';
 import * as redux from 'redux';
 import proxyquire from 'proxyquire';
-import any from '../../helpers/any';
+import any from '@travi/any';
 import {assert} from 'chai';
 import sinon from 'sinon';
 

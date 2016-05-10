@@ -1,4 +1,4 @@
-import any from '../../../../helpers/any';
+import any from '@travi/any';
 
 import React from 'react';
 import dom from 'react-dom/server';

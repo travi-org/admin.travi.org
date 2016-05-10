@@ -1,7 +1,7 @@
 /*global window */
 import * as redux from 'redux';
 import {fromJS} from 'immutable';
-import any from '../../../helpers/any';
+import any from '@travi/any';
 import reducer from '../../../../lib/shared/store/reducer';
 import configureStore from '../../../../lib/shared/store/configure.prod';
 import sinon from 'sinon';

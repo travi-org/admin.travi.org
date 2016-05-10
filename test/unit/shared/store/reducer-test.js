@@ -1,7 +1,7 @@
 import immutable from 'immutable';
 import reducer from '../../../../lib/shared/store/reducer';
 import * as actions from '../../../../lib/shared/store/actions';
-import any from '../../../helpers/any';
+import any from '@travi/any';
 import {assert} from 'chai';
 import sinon from 'sinon';
 

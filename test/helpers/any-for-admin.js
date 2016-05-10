@@ -1,15 +1,15 @@
-import any from './any';
+import any from '@travi/any';
 
 any.resource = function () {
     return {
-        id: any.int()
+        id: any.integer()
     };
 };
 
 any.resources = {
     ride() {
         return {
-            id: any.int(),
+            id: any.integer(),
             nickname: any.string(),
             _links: {}
         };
@@ -21,7 +21,7 @@ any.resources = {
             'last-name': any.string(),
             avatar: {
                 src: any.url(),
-                size: any.int()
+                size: any.integer()
             },
             _links: {}
         };

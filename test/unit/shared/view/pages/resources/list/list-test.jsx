@@ -2,7 +2,7 @@ import React from 'react';
 
 import skinDeep from 'skin-deep';
 import {assert} from 'chai';
-import any from '../../../../../../helpers/any';
+import any from '@travi/any';
 
 import createResourceList from '../../../../../../../lib/shared/views/resources/list/list.jsx';
 const ResourceList = createResourceList(React);

@@ -2,7 +2,7 @@ import React from 'react';
 import reactDom from 'react-dom/server';
 
 import cheerio from 'cheerio';
-import any from '../../../../../../helpers/any';
+import any from '@travi/any';
 import {assert} from 'chai';
 
 import createResource from '../../../../../../../lib/shared/views/resources/individual/resource';

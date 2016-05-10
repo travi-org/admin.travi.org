@@ -96,7 +96,7 @@ suite('travi-api resource interactions', () => {
     test('that specific resource requested by following links', () => {
         const
             resourceType = any.string(),
-            resourceId = any.int(),
+            resourceId = any.integer(),
             resource = any.resource(),
             callback = sinon.spy();
         traverson.from.withArgs('https://api.travi.org/').returns({
@@ -113,7 +113,7 @@ suite('travi-api resource interactions', () => {
     test('that error bubbles from embedded resource request', () => {
         const
             resourceType = any.string(),
-            resourceId = any.int(),
+            resourceId = any.integer(),
             callback = sinon.spy(),
             error = any.simpleObject();
         traverson.from.withArgs('https://api.travi.org/').returns({

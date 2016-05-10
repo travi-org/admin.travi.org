@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import * as reactRouter from 'react-router';
 import {Provider} from 'react-redux';
-import any from '../../../helpers/any';
+import any from '@travi/any';
 import proxyquire from 'proxyquire';
 import sinon from 'sinon';
 import {assert, refute} from 'referee';

@@ -1,4 +1,4 @@
-import any from '../../../helpers/any';
+import any from '@travi/any';
 
 module.exports = function () {
     this.World = require('../support/world.js').World;

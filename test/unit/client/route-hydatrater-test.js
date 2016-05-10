@@ -1,4 +1,4 @@
-import any from '../../helpers/any';
+import any from '@travi/any';
 import hydraterFactory from '../../../lib/client/route-hydrator';
 import * as repository from '../../../lib/client/repository';
 import sinon from 'sinon';
