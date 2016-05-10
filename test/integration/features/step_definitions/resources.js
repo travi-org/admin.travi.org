@@ -21,7 +21,7 @@ function buildHalLink(href) {
 
 function buildLinksIncluding(resourceType, resourceLink) {
     const links = {
-        'self': buildHalLink(any.url(HOST))
+        'self': buildHalLink(any.url({host: HOST}))
     };
 
     if (resourceLink) {
@@ -206,7 +206,7 @@ module.exports = function () {
     });
 
     this.Given(/^a "([^"]*)" exists in the api$/, function (resourceType, callback) {
-        existingResourceId = any.int({min: 1});
+        existingResourceId = any.integer({min: 1});
         setupExpectedApiResponsesFor.call(this, resourceType);
 
         callback();

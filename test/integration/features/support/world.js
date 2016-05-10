@@ -37,7 +37,7 @@ export function World() {
 
     function buildApiResponseLinks() {
         const links = {
-            'self': buildHalLink(any.url(HOST))
+            'self': buildHalLink(any.url({host: HOST}))
         };
 
         let rel;
