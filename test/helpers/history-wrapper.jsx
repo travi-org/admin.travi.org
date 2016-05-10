@@ -4,7 +4,9 @@ import {createMemoryHistory} from 'react-router';
 class HistoryWrapper extends React.Component {
     getChildContext() {
         const historyInstance = createMemoryHistory();
+
         historyInstance.isActive = function () {};
+        historyInstance.setRouteLeaveHook = function () {};
 
         return {
             router: historyInstance
