@@ -3,7 +3,7 @@ import any from '@travi/any';
 import loadApi from '../../../../lib/server/app.js';
 
 const
-    HOST = 'https://api.travi.org',
+    DOMAIN = 'api.travi.org',
     HTTP_SUCCESS = 200;
 
 export function World() {
@@ -37,7 +37,7 @@ export function World() {
 
     function buildApiResponseLinks() {
         const links = {
-            'self': buildHalLink(any.url({host: HOST}))
+            'self': buildHalLink(any.url({domain: DOMAIN}))
         };
 
         let rel;

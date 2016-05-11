@@ -14,7 +14,7 @@ module.exports = function () {
     });
 
     this.Given(/^user has api privileges$/, function (callback) {
-        this.availableResourceTypes = any.listOf(any.string, {
+        this.availableResourceTypes = any.listOf(any.word, {
             min: 1
         });
 

@@ -4,7 +4,8 @@ import _ from 'lodash';
 import any from '../../../helpers/any-for-admin';
 
 const
-    HOST = 'https://api.travi.org',
+    DOMAIN = 'api.travi.org',
+    HOST = `https://${DOMAIN}`,
     HTTP_SUCCESS = 200;
 
 let resources = {},
@@ -21,7 +22,7 @@ function buildHalLink(href) {
 
 function buildLinksIncluding(resourceType, resourceLink) {
     const links = {
-        'self': buildHalLink(any.url({host: HOST}))
+        'self': buildHalLink(any.url({domain: DOMAIN}))
     };
 
     if (resourceLink) {

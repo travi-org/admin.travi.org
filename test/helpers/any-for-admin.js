@@ -16,7 +16,7 @@ any.resources = {
     },
     user() {
         return {
-            id: any.string(),
+            id: any.word(),
             'first-name': any.string(),
             'last-name': any.string(),
             avatar: {
