@@ -16,6 +16,8 @@ function setupDom() {
 
 setupDom();
 
+require.extensions['.scss'] = () => undefined;
+
 chai.use(chaiImmutable);
 sinon.assert.expose(chai.assert, { prefix: '' });
 
