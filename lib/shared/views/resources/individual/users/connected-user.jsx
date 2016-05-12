@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import resource from './user.jsx';
+import resource from '@travi/admin.travi.org-components/lib/resources/individual/users/user';
 
 export default (React) => connect((state) => {
     const user = state.get('resource').toJS();

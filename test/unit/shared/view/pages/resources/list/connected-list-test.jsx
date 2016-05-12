@@ -12,7 +12,9 @@ suite('connected wrapper component', () => {
     const
         ResourceList = any.simpleObject(),
         connectedList = proxyquire('../../../../../../../lib/shared/views/resources/list/connected-list.jsx', {
-            './maybe-list.jsx': {default: sinon.stub().withArgs(React).returns(ResourceList)}
+            '@travi/admin.travi.org-components/lib/resources/list/maybe-list': {
+                default: sinon.stub().withArgs(React).returns(ResourceList)
+            }
         }).default;
 
     setup(() => {

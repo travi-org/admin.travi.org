@@ -1,12 +1,12 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 
-import createNotFound from './views/errors/not-found.jsx';
+import createNotFound from '@travi/admin.travi.org-components/lib/errors/not-found';
 import createWrap from './views/theme/wrap/connected-wrap.jsx';
 import createResourceList from './views/resources/list/connected-list.jsx';
 import createUser from './views/resources/individual/users/connected-user.jsx';
 import createResource from './views/resources/individual/connected-resource.jsx';
-import createIndex from './views/index.jsx';
+import createIndex from '@travi/admin.travi.org-components/lib/index';
 
 const
     Wrap = createWrap(React),

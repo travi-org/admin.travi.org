@@ -13,7 +13,11 @@ suite('connected wrapper component', () => {
         Resource = any.simpleObject(),
         connectedResource = proxyquire(
             '../../../../../../../lib/shared/views/resources/individual/connected-resource.jsx',
-            {'./resource.jsx': {default: sinon.stub().withArgs(React).returns(Resource)}}
+            {
+                '@travi/admin.travi.org-components/lib/resources/individual/resource': {
+                    default: sinon.stub().withArgs(React).returns(Resource)
+                }
+            }
         ).default;
 
     setup(() => {
