@@ -15,6 +15,7 @@ an acceptable way to piece together `hapi` and `react` to support the following:
 
 - [x] Universal Rendering
 - [x] Progressive Enhancement
+- [x] Package management of React components to share components with npm
 - [ ] Intelligent management of client-side dependencies
     - [ ] Cut the Mustard
     - [ ] Progressive Enhancement based on browser capabilities
