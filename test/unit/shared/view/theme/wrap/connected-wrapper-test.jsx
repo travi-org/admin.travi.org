@@ -12,7 +12,9 @@ suite('connected wrapper component', () => {
     const
         Wrap = any.simpleObject(),
         connectedWrap = proxyquire('../../../../../../lib/shared/views/theme/wrap/connected-wrap.jsx', {
-            './wrap.jsx': {default: sinon.stub().withArgs(React).returns(Wrap)}
+            '@travi/admin.travi.org-components/lib/theme/wrap/wrap': {
+                default: sinon.stub().withArgs(React).returns(Wrap)
+            }
         }).default;
 
     setup(() => {

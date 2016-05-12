@@ -96,7 +96,7 @@
     "webpack-dev-server": "1.14.1"
   },
   "dependencies": {
-    "@travi/travi.org-theme": "git://github.com/travi/travi.org-theme.git",
+    "@travi/admin.travi.org-components": "0.1.1",
     "async": "1.5.2",
     "bootstrap-sass": "3.3.6",
     "glue": "3.2.0",
