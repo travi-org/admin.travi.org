@@ -33,7 +33,7 @@
   "devDependencies": {
     "@kadira/storybook": "1.12.0",
     "@travi/any": "0.1.1",
-    "@travi/eslint-config-travi": "travi/eslint-config-travi#master",
+    "@travi/eslint-config-travi": "0.1.0",
     "babel-cli": "6.8.0",
     "babel-core": "6.8.0",
     "babel-eslint": "6.0.4",
@@ -48,7 +48,6 @@
     "concat-map": "0.0.1",
     "css-loader": "0.23.1",
     "cucumber": "0.10.2",
-    "eslint-config-defaults": "travi/eslint-config-defaults#arrow-condition",
     "eslint-plugin-cucumber": "0.1.0",
     "eslint-plugin-filenames": "0.2.0",
     "eslint-plugin-react": "5.1.1",
