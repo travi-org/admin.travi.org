@@ -94,7 +94,7 @@
     "webpack-dev-server": "1.14.1"
   },
   "dependencies": {
-    "@travi/admin.travi.org-components": "0.2.0",
+    "@travi/admin.travi.org-components": "0.3.0",
     "async": "1.5.2",
     "glue": "3.2.0",
     "good": "7.0.0",
