@@ -1,5 +1,0 @@
-allFiles:
-  - 'resources/scss/**/*.scss'
-options:
-  reporterOutput: 'logs/scss-lint.xml'
-  colorizeOutput: true

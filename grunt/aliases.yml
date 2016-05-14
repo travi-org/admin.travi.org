@@ -9,9 +9,7 @@ build:
   - compileClient
   - compileServer
 
-lint:
-  - scsslint
-  - eslint
+lint: eslint
 
 unit:
   - env:node
