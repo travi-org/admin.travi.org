@@ -70,7 +70,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  pact-mock_service
   pact_broker-client
 
 BUNDLED WITH
