@@ -5,5 +5,3 @@ group :pact do
     gem 'pact-mock_service'
     gem 'pact_broker-client'
 end
-
-gem 'scss_lint'

@@ -22,8 +22,7 @@ module.exports = function (grunt) {
             staticMappings: {
                 mochacov: 'grunt-mocha-cov',
                 cucumberjs: 'grunt-cucumber',
-                bower: 'grunt-bower-task',
-                scsslint: 'grunt-scss-lint'
+                bower: 'grunt-bower-task'
             }
         }
     });
