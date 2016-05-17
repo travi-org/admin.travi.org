@@ -22,7 +22,6 @@ integration:
   - cucumberjs:integration
 
 service-contracts:
-  - env:pact
   - mkdir:pact
   - pact:default
 
