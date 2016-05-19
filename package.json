@@ -46,7 +46,7 @@
     "cheerio": "0.20.0",
     "concat-map": "0.0.1",
     "css-loader": "0.23.1",
-    "cucumber": "0.10.2",
+    "cucumber": "0.10.3",
     "extend-grunt-plugin": "0.1.0",
     "extract-text-webpack-plugin": "1.0.1",
     "formatio": "1.2.0",
