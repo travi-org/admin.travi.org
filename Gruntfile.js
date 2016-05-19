@@ -1,4 +1,4 @@
-/*eslint filenames/filenames: 0 */
+/*eslint filenames/match-regex: 0 */
 
 module.exports = function (grunt) {
 
