@@ -1,6 +1,7 @@
 import proxyquire from 'proxyquire';
 import helmet from 'react-helmet';
 import routeRenderer from '../../../../lib/server/view/route-renderer.jsx';
+import * as assetManager from '../../../../lib/server/view/asset-manager';
 import * as resourcesController from '../../../../lib/server/resources/controller';
 import reducer from '../../../../lib/shared/store/reducer';
 import * as redux from 'redux';
@@ -37,6 +38,7 @@ suite('rendering handler', () => {
         sandbox.stub(history, 'createLocation');
         sandbox.stub(resourcesController, 'listResourceTypes').yields(null, primaryNav);
         sandbox.stub(helmet, 'rewind');
+        sandbox.stub(assetManager, 'getAssets');
 
         request = any.simpleObject();
         request.url = any.url();
@@ -78,6 +80,7 @@ suite('rendering handler', () => {
             renderedContent = any.string(),
             title = any.string(),
             reduxState = any.simpleObject(),
+            resources = any.simpleObject(),
             store = {
                 getState: sinon.stub().returns(reduxState),
                 dispatch: sinon.spy()
@@ -87,6 +90,7 @@ suite('rendering handler', () => {
             });
         mediaType.returns('text/html');
         redux.createStore.withArgs(reducer, immutable.fromJS(request.response.source)).returns(store);
+        assetManager.getAssets.returns(resources);
         helmet.rewind.returns({title: {toString: () => title}});
 
         handler.register({ext: extension}, null, sinon.spy());
@@ -103,7 +107,8 @@ suite('rendering handler', () => {
         assert.calledWith(reply.view, 'layout/layout', {
             renderedContent,
             initialState: JSON.stringify(reduxState),
-            title
+            title,
+            resources
         });
     });
 

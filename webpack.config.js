@@ -1,7 +1,12 @@
 const
     path = require('path'),
     webpack = require('webpack'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin');
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    CleanPlugin = require('clean-webpack-plugin'),
+    AssetsPlugin = require('assets-webpack-plugin'),
+    assetsPluginInstance = new AssetsPlugin(),
+    projectRootPath = __dirname,
+    assetsPath = path.join(__dirname, 'resources/js');
 
 module.exports = {
     devtool: 'source-map',
@@ -30,6 +35,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new CleanPlugin([assetsPath], { root: projectRootPath }),
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('production')
@@ -42,10 +48,13 @@ module.exports = {
         }),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
-        new ExtractTextPlugin('styles.css')
+        new ExtractTextPlugin('[name]-[chunkhash].css'),
+        assetsPluginInstance
     ],
     output: {
-        path: path.join(__dirname, 'resources/js'),
-        filename: 'bundle.js'
+        path: assetsPath,
+        filename: '[name]-[chunkhash].js',
+        chunkFilename: '[name]-[chunkhash].js',
+        publicPath: '/resources/js/'
     }
 };
