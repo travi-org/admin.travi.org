@@ -19,11 +19,19 @@ module.exports = {
                 loader: 'babel'
             },
             {
+                test: /bootstrap-custom\.scss$/,
+                loader: ExtractTextPlugin.extract(
+                    'style',
+                    ['css?sourceMap', 'sass?sourceMap']
+                )
+            },
+            {
                 test: /\.scss$/,
+                exclude: /bootstrap-custom\.scss$/,
                 loader: ExtractTextPlugin.extract(
                     'style',
                     [
-                        'css?sourceMap',
+                        'css?modules&sourceMap',
                         'sass?outputStyle=compressed&sourceMap=true&sourceMapContents=true'
                     ]
                 )

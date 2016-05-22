@@ -1,3 +1,4 @@
+assets: webpack-assets.json
 css: resources/css
 js:
   - resources/js
