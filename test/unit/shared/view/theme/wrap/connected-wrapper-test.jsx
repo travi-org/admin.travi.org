@@ -1,25 +1,21 @@
 import React from 'react';
 import * as reactRedux from 'react-redux';
 import Immutable from 'immutable';
+import * as components from '@travi/admin.travi.org-components';
+import connectedWrap from '../../../../../../lib/shared/views/theme/wrap/connected-wrap.jsx';
 
 import sinon from 'sinon';
 import {assert} from 'chai';
-import proxyquire from 'proxyquire';
 import any from '@travi/any';
 
 suite('connected wrapper component', () => {
     let sandbox;
-    const
-        Wrap = any.simpleObject(),
-        connectedWrap = proxyquire('../../../../../../lib/shared/views/theme/wrap/connected-wrap.jsx', {
-            '@travi/admin.travi.org-components/lib/theme/wrap/wrap': {
-                default: sinon.stub().withArgs(React).returns(Wrap)
-            }
-        }).default;
+    const Wrap = any.simpleObject();
 
     setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(reactRedux, 'connect');
+        sandbox.stub(components, 'createWrap').withArgs(React).returns(Wrap);
     });
 
     teardown(() => {

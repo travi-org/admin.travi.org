@@ -1,28 +1,21 @@
 import React from 'react';
 import * as reactRedux from 'react-redux';
 import Immutable from 'immutable';
+import * as components from '@travi/admin.travi.org-components';
+import connectedUser from '../../../../../../../../lib/shared/views/resources/individual/users/connected-user.jsx';
 
 import sinon from 'sinon';
 import {assert} from 'chai';
-import proxyquire from 'proxyquire';
 import any from '@travi/any';
 
-suite('connected wrapper component', () => {
+suite('connected user component', () => {
     let sandbox;
-    const
-        Resource = any.simpleObject(),
-        connectedResource = proxyquire(
-            '../../../../../../../../lib/shared/views/resources/individual/users/connected-user.jsx',
-            {
-                '@travi/admin.travi.org-components/lib/resources/individual/users/user': {
-                    default: sinon.stub().withArgs(React).returns(Resource)
-                }
-            }
-        ).default;
+    const User = any.simpleObject();
 
     setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(reactRedux, 'connect');
+        sandbox.stub(components, 'createUser').withArgs(React).returns(User);
     });
 
     teardown(() => {
@@ -33,14 +26,14 @@ suite('connected wrapper component', () => {
         const connectToComponent = sinon.stub();
         reactRedux.connect.returns(connectToComponent);
 
-        connectedResource(React);
+        connectedUser(React);
 
-        assert.calledWith(connectToComponent, Resource);
+        assert.calledWith(connectToComponent, User);
     });
 
     test('that redux state is mapped to props', () => {
         reactRedux.connect.returns(sinon.stub());
-        connectedResource(React);
+        connectedUser(React);
         const
             resource = {
                 id: any.string(),

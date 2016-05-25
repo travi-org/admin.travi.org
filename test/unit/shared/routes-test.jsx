@@ -10,11 +10,9 @@ suite('routes', () => {
         './views/theme/wrap/connected-wrap.jsx': {
             default: (React) => (props) => <div>wrapper { props.children }</div>    //eslint-disable-line no-shadow
         },
-        '@travi/admin.travi.org-components/lib/index': {
-            default: (React) => () => <div>index</div>                              //eslint-disable-line no-shadow
-        },
-        '@travi/admin.travi.org-components/lib/errors/not-found': {
-            default: (React) => () => <div>not-found</div>                          //eslint-disable-line no-shadow
+        '@travi/admin.travi.org-components': {
+            createIndex: (React) => () => <div>index</div>,                         //eslint-disable-line no-shadow
+            createNotFound: (React) => () => <div>not-found</div>                   //eslint-disable-line no-shadow
         },
         './views/resources/list/connected-list.jsx': {
             default: (React) => () => <div>resources</div>                          //eslint-disable-line no-shadow

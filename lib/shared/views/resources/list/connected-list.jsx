@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import maybeResourceList from '@travi/admin.travi.org-components/lib/resources/list/maybe-list';
+import {createMaybeList} from '@travi/admin.travi.org-components';
 
 export default (React) => connect((state) => {
     const resourceType = state.get('resourceType');
@@ -8,4 +8,4 @@ export default (React) => connect((state) => {
         resources: state.get(resourceType).toJS(),
         resourceType
     };
-})(maybeResourceList(React));
+})(createMaybeList(React));

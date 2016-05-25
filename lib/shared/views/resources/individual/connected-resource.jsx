@@ -1,8 +1,8 @@
 import {connect} from 'react-redux';
-import resource from '@travi/admin.travi.org-components/lib/resources/individual/resource';
+import {createResource} from '@travi/admin.travi.org-components';
 
 export default (React) => connect((state) => {
     return {
         resource: state.get('resource').toJS()
     };
-})(resource(React));
+})(createResource(React));

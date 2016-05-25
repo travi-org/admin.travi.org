@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import resource from '@travi/admin.travi.org-components/lib/resources/individual/users/user';
+import {createUser} from '@travi/admin.travi.org-components';
 
 export default (React) => connect((state) => {
     const user = state.get('resource').toJS();
@@ -13,4 +13,4 @@ export default (React) => connect((state) => {
             avatar: user.thumbnail
         }
     };
-})(resource(React));
+})(createUser(React));

@@ -1,28 +1,21 @@
 import React from 'react';
 import * as reactRedux from 'react-redux';
 import Immutable from 'immutable';
+import * as components from '@travi/admin.travi.org-components';
+import connectedResource from '../../../../../../../lib/shared/views/resources/individual/connected-resource.jsx';
 
 import sinon from 'sinon';
 import {assert} from 'chai';
-import proxyquire from 'proxyquire';
 import any from '@travi/any';
 
-suite('connected wrapper component', () => {
+suite('connected resource component', () => {
     let sandbox;
-    const
-        Resource = any.simpleObject(),
-        connectedResource = proxyquire(
-            '../../../../../../../lib/shared/views/resources/individual/connected-resource.jsx',
-            {
-                '@travi/admin.travi.org-components/lib/resources/individual/resource': {
-                    default: sinon.stub().withArgs(React).returns(Resource)
-                }
-            }
-        ).default;
+    const Resource = any.simpleObject();
 
     setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(reactRedux, 'connect');
+        sandbox.stub(components, 'createResource').withArgs(React).returns(Resource);
     });
 
     teardown(() => {

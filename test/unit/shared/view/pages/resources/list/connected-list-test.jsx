@@ -1,25 +1,21 @@
 import React from 'react';
 import * as reactRedux from 'react-redux';
 import Immutable from 'immutable';
+import * as components from '@travi/admin.travi.org-components';
+import connectedList from '../../../../../../../lib/shared/views/resources/list/connected-list.jsx';
 
 import sinon from 'sinon';
 import {assert} from 'chai';
-import proxyquire from 'proxyquire';
 import any from '@travi/any';
 
 suite('connected wrapper component', () => {
     let sandbox;
-    const
-        ResourceList = any.simpleObject(),
-        connectedList = proxyquire('../../../../../../../lib/shared/views/resources/list/connected-list.jsx', {
-            '@travi/admin.travi.org-components/lib/resources/list/maybe-list': {
-                default: sinon.stub().withArgs(React).returns(ResourceList)
-            }
-        }).default;
+    const ResourceList = any.simpleObject();
 
     setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(reactRedux, 'connect');
+        sandbox.stub(components, 'createMaybeList').withArgs(React).returns(ResourceList);
     });
 
     teardown(() => {
