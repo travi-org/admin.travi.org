@@ -1,4 +1,5 @@
 import any from '@travi/any';
+import _ from 'lodash';
 
 module.exports = function () {
     this.World = require('../support/world.js').World;
@@ -14,9 +15,9 @@ module.exports = function () {
     });
 
     this.Given(/^user has api privileges$/, function (callback) {
-        this.availableResourceTypes = any.listOf(any.word, {
+        this.availableResourceTypes = _.uniq(any.listOf(any.word, {
             min: 1
-        });
+        }));
 
         this.stubApiCatalogCall();
 
