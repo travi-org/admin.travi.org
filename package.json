@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@kadira/storybook": "1.12.0",
-    "@travi/any": "0.1.1",
+    "@travi/any": "0.2.0",
     "@travi/eslint-config-travi": "0.1.3",
     "assets-webpack-plugin": "3.4.0",
     "babel-cli": "6.9.0",
