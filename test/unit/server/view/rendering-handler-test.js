@@ -6,7 +6,6 @@ import * as resourcesController from '../../../../lib/server/resources/controlle
 import reducer from '../../../../lib/shared/store/reducer';
 import * as redux from 'redux';
 import immutable from 'immutable';
-import * as history from 'history';
 import _ from 'lodash';
 import any from '@travi/any';
 import sinon from 'sinon';
@@ -35,7 +34,6 @@ suite('rendering handler', () => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(redux, 'createStore');
         sandbox.stub(routeRenderer, 'routeTo');
-        sandbox.stub(history, 'createLocation');
         sandbox.stub(resourcesController, 'listResourceTypes').yields(null, primaryNav);
         sandbox.stub(helmet, 'rewind');
         sandbox.stub(assetManager, 'getAssets');
