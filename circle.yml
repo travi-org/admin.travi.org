@@ -1,8 +1,3 @@
-general:
-  branches:
-    ignore:
-      - gh-pages
-
 machine:
   node:
     version: v6.1
@@ -15,12 +10,6 @@ dependencies:
 
 test:
   post:
-    - BABEL_ENV=node grunt mochacov:junit
-    - mkdir -p $CIRCLE_TEST_REPORTS/junit
-    - find . -type f -regex ".*/logs/unit/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
-
-#    - grunt mochacov:coverage
-
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
     - BABEL_ENV=node cucumber.js --format=json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --tags=~@wip test/integration/features/ --compiler=js*:babel-register
 
@@ -29,8 +18,3 @@ deployment:
     branch: master
     heroku:
       appname: travi-org-admin
-  gh-pages:
-    branch: master
-    commands:
-      - npm run build-storybook
-      - npm run gh-pages

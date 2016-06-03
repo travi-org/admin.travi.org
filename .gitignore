@@ -9,6 +9,5 @@ coverage/
 
 .grunt
 .env
-Rakefile
 newrelic_agent.log
 webpack-assets.json
