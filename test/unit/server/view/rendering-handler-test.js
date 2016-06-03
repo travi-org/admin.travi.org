@@ -1,6 +1,6 @@
 import proxyquire from 'proxyquire';
 import helmet from 'react-helmet';
-import routeRenderer from '../../../../lib/server/view/route-renderer.jsx';
+import routeRenderer from '../../../../lib/server/view/route-renderer';
 import * as assetManager from '../../../../lib/server/view/asset-manager';
 import * as resourcesController from '../../../../lib/server/resources/controller';
 import reducer from '../../../../lib/shared/store/reducer';

@@ -2,7 +2,7 @@ import React from 'react';
 import * as reactRedux from 'react-redux';
 import Immutable from 'immutable';
 import * as components from '@travi/admin.travi.org-components';
-import connectedWrap from '../../../../../../lib/shared/views/theme/wrap/connected-wrap.jsx';
+import connectedWrap from '../../../../../../lib/shared/views/theme/wrap/connected-wrap';
 
 import sinon from 'sinon';
 import {assert} from 'chai';

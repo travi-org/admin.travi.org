@@ -10,7 +10,7 @@ const
 
 module.exports = {
     devtool: 'source-map',
-    entry: ['./lib/client/app.jsx'],
+    entry: ['./lib/client/app.js'],
     progress: false,
     module: {
         loaders: [

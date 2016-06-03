@@ -2,7 +2,7 @@ import React from 'react';
 import * as reactRedux from 'react-redux';
 import Immutable from 'immutable';
 import * as components from '@travi/admin.travi.org-components';
-import connectedList from '../../../../../../../lib/shared/views/resources/list/connected-list.jsx';
+import connectedList from '../../../../../../../lib/shared/views/resources/list/connected-list';
 
 import sinon from 'sinon';
 import {assert} from 'chai';

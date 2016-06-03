@@ -14,7 +14,7 @@ suite('store creation for development', () => {
             instrument() {}
         },
         configureStore = proxyquire('../../../../lib/shared/store/configure.dev', {
-            '../views/dev/dev-tools.jsx': DevTools
+            '../views/dev/dev-tools': DevTools
         });
 
     setup(() => {

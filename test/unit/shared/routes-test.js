@@ -6,21 +6,21 @@ import sinon from 'sinon';
 import {assert} from 'chai';
 
 suite('routes', () => {
-    const routesFactory = proxyquire('../../../lib/shared/routes.jsx', {
-        './views/theme/wrap/connected-wrap.jsx': {
+    const routesFactory = proxyquire('../../../lib/shared/routes', {
+        './views/theme/wrap/connected-wrap': {
             default: (React) => (props) => <div>wrapper { props.children }</div>    //eslint-disable-line no-shadow
         },
         '@travi/admin.travi.org-components': {
             createIndex: (React) => () => <div>index</div>,                         //eslint-disable-line no-shadow
             createNotFound: (React) => () => <div>not-found</div>                   //eslint-disable-line no-shadow
         },
-        './views/resources/list/connected-list.jsx': {
+        './views/resources/list/connected-list': {
             default: (React) => () => <div>resources</div>                          //eslint-disable-line no-shadow
         },
-        './views/resources/individual/connected-resource.jsx': {
+        './views/resources/individual/connected-resource': {
             default: (React) => () => <div>resource</div>                           //eslint-disable-line no-shadow
         },
-        './views/resources/individual/users/connected-user.jsx': {
+        './views/resources/individual/users/connected-user': {
             default: (React) => () => <div>user</div>                               //eslint-disable-line no-shadow
         }
     }).default;

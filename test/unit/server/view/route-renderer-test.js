@@ -12,7 +12,7 @@ suite('route renderer', () => {
         RouterContext = reactRouter.RouterContext,
         routesStub = sinon.stub(),
         renderer = proxyquire('../../../../lib/server/view/route-renderer', {
-            './../../shared/routes.jsx': {default: routesStub}
+            './../../shared/routes': {default: routesStub}
         });
     let sandbox,
         history,
