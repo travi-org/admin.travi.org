@@ -5,6 +5,7 @@ resources/js/
 tmp/
 logs/
 dist/
+coverage/
 
 .grunt
 .env

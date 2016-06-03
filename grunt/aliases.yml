@@ -13,7 +13,7 @@ lint: eslint
 
 unit:
   - env:node
-  - mochacov:unit
+  - mocha_istanbul:unit
 
 wip: cucumberjs:wip
 integration:

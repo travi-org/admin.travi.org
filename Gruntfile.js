@@ -20,11 +20,18 @@ module.exports = function (grunt) {
         config,
         jitGrunt: {
             staticMappings: {
-                mochacov: 'grunt-mocha-cov',
-                cucumberjs: 'grunt-cucumber',
-                bower: 'grunt-bower-task'
+                cucumberjs: 'grunt-cucumber'
             }
         }
+    });
+
+    grunt.event.on('coverage', (lcov, done) => {
+        require('coveralls').handleInput(lcov, (err) => {
+            if (err) {
+                return done(err);
+            }
+            return done();
+        });
     });
 
 
