@@ -1,5 +1,0 @@
-instrumentation:
-  root: lib
-  extensions:
-    - .js
-    - .jsx
