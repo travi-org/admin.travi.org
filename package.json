@@ -21,15 +21,6 @@
     "node": "6.1.x",
     "npm": "3.8.x"
   },
-  "config": {
-    "blanket": {
-      "pattern": "///[\\w-]+\\.js$/",
-      "data-cover-ecmaVersion": 6,
-      "data-cover-only": [
-        "lib/"
-      ]
-    }
-  },
   "devDependencies": {
     "@kadira/storybook": "1.12.0",
     "@travi/any": "0.3.0",
