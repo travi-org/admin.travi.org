@@ -2,7 +2,6 @@ unit:
   src: test/unit/**/*-test.js
   options:
     reporter: spec
-    nodeExec: './node_modules/.bin/babel-node'
     coverage: true
     reportFormats:
       - lcovonly
