@@ -21,7 +21,7 @@
     "npm": "3.10.x"
   },
   "devDependencies": {
-    "@pact-foundation/grunt-pact": "3.1.0",
+    "@pact-foundation/grunt-pact": "4.3.0",
     "@travi/any": "0.6.1",
     "@travi/eslint-config-travi": "0.3.0",
     "assets-webpack-plugin": "3.4.0",
@@ -70,7 +70,6 @@
     "nock": "8.0.0",
     "node-sass": "3.9.3",
     "npm-run-all": "3.1.0",
-    "pact-consumer-js-dsl": "0.2.2",
     "proxyquire": "1.7.10",
     "react-addons-test-utils": "15.3.2",
     "redux-devtools": "3.3.1",
