@@ -1,4 +1,4 @@
-import any from '@travi/any';
+import {simpleObject, string, listOf} from '@travi/any';
 import hydraterFactory from '../../../lib/client/route-hydrator';
 import * as repository from '../../../lib/client/repository';
 import sinon from 'sinon';
@@ -19,9 +19,9 @@ suite('route data hydration', () => {
 
     test('that the single resource is fetched from the repository when an id exists in the route', () => {
         const
-            resource = any.simpleObject(),
-            resourceType = any.string(),
-            resourceId = any.string(),
+            resource = simpleObject(),
+            resourceType = string(),
+            resourceId = string(),
             callback = sinon.spy(),
             store = {
                 dispatch: sinon.spy()
@@ -49,9 +49,9 @@ suite('route data hydration', () => {
 
     test('that resources are fetched from the repository when an id is not present in the route', () => {
         const
-            type = any.string(),
-            resourceType = any.string(),
-            resources = any.listOf(any.simpleObject),
+            type = string(),
+            resourceType = string(),
+            resources = listOf(simpleObject),
             callback = sinon.spy(),
             store = {
                 dispatch: sinon.spy()

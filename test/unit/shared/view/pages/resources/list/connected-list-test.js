@@ -6,11 +6,11 @@ import connectedList from '../../../../../../../lib/shared/views/resources/list/
 
 import sinon from 'sinon';
 import {assert} from 'chai';
-import any from '@travi/any';
+import {simpleObject, string} from '@travi/any';
 
 suite('connected wrapper component', () => {
     let sandbox;
-    const ResourceList = any.simpleObject();
+    const ResourceList = simpleObject();
 
     setup(() => {
         sandbox = sinon.sandbox.create();
@@ -35,8 +35,8 @@ suite('connected wrapper component', () => {
         reactRedux.connect.returns(sinon.stub());
         connectedList(React);
         const
-            resources = any.simpleObject(),
-            resourceType = any.string(),
+            resources = simpleObject(),
+            resourceType = string(),
             mapStateToProps = reactRedux.connect.getCall(0).args[0],
 
             props = mapStateToProps(Immutable.fromJS({

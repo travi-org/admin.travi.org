@@ -6,11 +6,11 @@ import connectedUser from '../../../../../../../../lib/shared/views/resources/in
 
 import sinon from 'sinon';
 import {assert} from 'chai';
-import any from '@travi/any';
+import {string, url, simpleObject} from '@travi/any';
 
 suite('connected user component', () => {
     let sandbox;
-    const User = any.simpleObject();
+    const User = simpleObject();
 
     setup(() => {
         sandbox = sinon.sandbox.create();
@@ -36,14 +36,14 @@ suite('connected user component', () => {
         connectedUser(React);
         const
             resource = {
-                id: any.string(),
-                displayName: any.string(),
+                id: string(),
+                displayName: string(),
                 name: {
-                    first: any.string(),
-                    last: any.string()
+                    first: string(),
+                    last: string()
                 },
-                links: any.simpleObject(),
-                thumbnail: any.url()
+                links: simpleObject(),
+                thumbnail: url()
             },
             mapStateToProps = reactRedux.connect.getCall(0).args[0],
 

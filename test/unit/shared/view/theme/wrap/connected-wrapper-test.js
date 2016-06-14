@@ -6,11 +6,11 @@ import connectedWrap from '../../../../../../lib/shared/views/theme/wrap/connect
 
 import sinon from 'sinon';
 import {assert} from 'chai';
-import any from '@travi/any';
+import {listOf, simpleObject} from '@travi/any';
 
 suite('connected wrapper component', () => {
     let sandbox;
-    const Wrap = any.simpleObject();
+    const Wrap = simpleObject();
 
     setup(() => {
         sandbox = sinon.sandbox.create();
@@ -35,7 +35,7 @@ suite('connected wrapper component', () => {
         reactRedux.connect.returns(sinon.stub());
         connectedWrap(React);
         const
-            primaryNav = any.listOf(any.simpleObject),
+            primaryNav = listOf(simpleObject),
             mapStateToProps = reactRedux.connect.getCall(0).args[0],
 
             props = mapStateToProps(Immutable.fromJS({primaryNav}));

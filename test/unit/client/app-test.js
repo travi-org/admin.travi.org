@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import dom from 'react-dom';
 import * as redux from 'redux';
 import proxyquire from 'proxyquire';
-import any from '@travi/any';
+import {simpleObject} from '@travi/any';
 import {assert} from 'chai';
 import sinon from 'sinon';
 
@@ -13,8 +13,8 @@ suite('client-side app', () => {
     let sandbox,
         routes;
     const
-        initialState = any.simpleObject(),
-        store = any.simpleObject(),
+        initialState = simpleObject(),
+        store = simpleObject(),
         hydrator = {
             hydrate: sinon.spy()
         };
@@ -33,7 +33,7 @@ suite('client-side app', () => {
         sandbox.stub(React, 'createElement');
         sandbox.stub(redux, 'createStore');
 
-        routes = any.simpleObject();
+        routes = simpleObject();
 
         window.__INITIAL_STATE__ = JSON.stringify(initialState);
     });
@@ -46,8 +46,8 @@ suite('client-side app', () => {
 
     test('that the app renders', () => {
         const
-            routerComponent = any.simpleObject(),
-            providerComponent = any.simpleObject();
+            routerComponent = simpleObject(),
+            providerComponent = simpleObject();
         React.createElement.withArgs(Router, {
             history,
             children: routes

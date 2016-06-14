@@ -1,4 +1,4 @@
-import any from '@travi/any';
+import {simpleObject, string, integer} from '@travi/any';
 import {assert} from 'chai';
 import sinon from 'sinon';
 import proxyquire from 'proxyquire';
@@ -10,9 +10,9 @@ suite('client repository', () => {
 
     test('that resource is requested from server by id', () => {
         const
-            data = [any.simpleObject()],
-            type = any.string(),
-            id = any.integer(),
+            data = [simpleObject()],
+            type = string(),
+            id = integer(),
             callback = sinon.spy();
 
         repository.getResource(type, id, callback);
@@ -28,10 +28,10 @@ suite('client repository', () => {
 
     test('that error bubbles when getting a resource by id', () => {
         const
-            error = any.simpleObject(),
+            error = simpleObject(),
             callback = sinon.spy(),
-            type = any.string(),
-            id = any.integer();
+            type = string(),
+            id = integer();
         xhr.withArgs({url: `/${type}/${id}`}).yields(error);
 
         repository.getResource(type, id, callback);
@@ -41,8 +41,8 @@ suite('client repository', () => {
 
     test('that a list of resources is requested from server', () => {
         const
-            data = [any.simpleObject()],
-            type = any.string(),
+            data = [simpleObject()],
+            type = string(),
             callback = sinon.spy();
 
         repository.getResources(type, callback);
@@ -58,9 +58,9 @@ suite('client repository', () => {
 
     test('that error bubbles when getting a resource list', () => {
         const
-            error = any.simpleObject(),
+            error = simpleObject(),
             callback = sinon.spy(),
-            type = any.string();
+            type = string();
         xhr.withArgs({url: `/${type}`}).yields(error);
 
         repository.getResources(type, callback);
@@ -70,7 +70,7 @@ suite('client repository', () => {
 
     test('that the list of resource types is requested from server', () => {
         const
-            data = [any.simpleObject()],
+            data = [simpleObject()],
             callback = sinon.spy();
 
         repository.getResourceTypes(callback);
@@ -86,7 +86,7 @@ suite('client repository', () => {
 
     test('that error bubbles when getting a resource list', () => {
         const
-            error = any.simpleObject(),
+            error = simpleObject(),
             callback = sinon.spy();
         xhr.withArgs({url: '/'}).yields(error);
 

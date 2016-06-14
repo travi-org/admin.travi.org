@@ -1,10 +1,10 @@
 import mapper from '../../../../../lib/server/resources/mappers/user-mapper';
-import any from '../../../../helpers/any-for-admin';
+import {resources, url} from '../../../../helpers/any-for-admin';
 import {assert} from 'chai';
 
 suite('user mapper', () => {
     test('that user resources mapped to view list', () => {
-        const user = any.resources.user();
+        const user = resources.user();
 
         assert.deepEqual(
             [{
@@ -22,7 +22,7 @@ suite('user mapper', () => {
     });
 
     test('that user mapped to view', () => {
-        const user = any.resources.user();
+        const user = resources.user();
 
         assert.deepEqual(
             {
@@ -40,8 +40,8 @@ suite('user mapper', () => {
     });
 
     test('that self link defined when defined in api', () => {
-        const user = any.resources.user();
-        user._links.self = any.url();
+        const user = resources.user();
+        user._links.self = url();
 
         assert.deepEqual(
             {

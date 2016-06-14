@@ -1,11 +1,11 @@
 import {assert} from 'chai';
 import immutable from 'immutable';
-import any from '@travi/any';
+import {listOf, string, simpleObject} from '@travi/any';
 import {setPrimaryNav, setResource, setResources} from '../../../../lib/shared/store/actions';
 
 suite('reducer actions', () => {
     test('that primary nav is added to the state', () => {
-        const primaryNav = any.listOf(any.simpleObject);
+        const primaryNav = listOf(simpleObject);
 
         assert.equal(
             setPrimaryNav(immutable.Map(), primaryNav),
@@ -16,7 +16,7 @@ suite('reducer actions', () => {
     });
 
     test('that resource is set on the state', () => {
-        const resource = any.simpleObject();
+        const resource = simpleObject();
 
         assert.equal(
             setResource(immutable.Map(), resource),
@@ -28,10 +28,10 @@ suite('reducer actions', () => {
 
     test('that resources are merged into the state', () => {
         const
-            type = any.string(),
-            resources = any.listOf(any.simpleObject),
+            type = string(),
+            resources = listOf(simpleObject),
             initialState = immutable.fromJS({
-                [any.string]: any.listOf(any.string)
+                [string]: listOf(string)
             });
 
         assert.equal(

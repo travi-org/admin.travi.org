@@ -2,7 +2,7 @@ import * as resourcesController from '../../../../lib/server/resources/controlle
 import traviApiResources from '../../../../lib/server/resources/travi-api-resources.js';
 import * as resourceMapperFactory from '../../../../lib/server/resources/mappers/resource-mapper-factory';
 
-import any from '../../../helpers/any-for-admin';
+import {string, url, simpleObject, listOf, resource} from '../../../helpers/any-for-admin';
 import sinon from 'sinon';
 import {assert} from 'chai';
 
@@ -36,9 +36,9 @@ suite('resources controller', () => {
     test('that link rels are listed when links are present', () => {
         const
             callback = sinon.spy(),
-            linkName = any.string(),
-            links = { 'self': {'href': any.url()}};
-        links[linkName] = {'href': any.url()};
+            linkName = string(),
+            links = { 'self': {'href': url()}};
+        links[linkName] = {'href': url()};
         traviApiResources.getLinksFor.withArgs('catalog').yields(null, links);
 
         resourcesController.listResourceTypes(callback);
@@ -52,7 +52,7 @@ suite('resources controller', () => {
     test('that error bubbles for api request for recource-types', () => {
         const
             callback = sinon.spy(),
-            error = any.simpleObject();
+            error = simpleObject();
         traviApiResources.getLinksFor.withArgs('catalog').yields(error);
 
         resourcesController.listResourceTypes(callback);
@@ -63,8 +63,8 @@ suite('resources controller', () => {
     test('that resources are requested from the api by type', () => {
         const
             callback = sinon.spy(),
-            resourceType = any.string(),
-            resourceList = any.listOf(any.resource),
+            resourceType = string(),
+            resourceList = listOf(resource),
             mappedList = [
                 'foo',
                 'bar'
@@ -82,8 +82,8 @@ suite('resources controller', () => {
     test('that error bubbles for api request for resources', () => {
         const
             callback = sinon.spy(),
-            resourceType = any.string(),
-            error = any.simpleObject();
+            resourceType = string(),
+            error = simpleObject();
         traviApiResources.getListOf.withArgs(resourceType).yields(error);
 
         resourcesController.getListOf(resourceType, callback);
@@ -93,14 +93,14 @@ suite('resources controller', () => {
 
     test('that resource is requested from the api', () => {
         const
-            resourceType = any.string(),
-            resourceId = any.string(),
+            resourceType = string(),
+            resourceId = string(),
             callback = sinon.spy(),
-            resource = any.resource(),
+            resourceInstance = resource(),
             mappedResource = {foo: 'bar'};
         traviApiResources.getResourceBy.withArgs(resourceType, resourceId).yields(null, resource);
         resourceMapperFactory.getMapperFor.withArgs(resourceType).returns({
-            mapToView: sinon.stub().withArgs(resource).returns(mappedResource)
+            mapToView: sinon.stub().withArgs(resourceInstance).returns(mappedResource)
         });
 
         resourcesController.getResource(resourceType, resourceId, callback);
@@ -110,10 +110,10 @@ suite('resources controller', () => {
 
     test('that error bubbles for api request for resource', () => {
         const
-            resourceType = any.string(),
-            resourceId = any.string(),
+            resourceType = string(),
+            resourceId = string(),
             callback = sinon.spy(),
-            error = any.simpleObject();
+            error = simpleObject();
         traviApiResources.getResourceBy.withArgs(resourceType, resourceId).yields(error);
 
         resourcesController.getResource(resourceType, resourceId, callback);
