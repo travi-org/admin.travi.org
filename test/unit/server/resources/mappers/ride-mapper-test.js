@@ -1,10 +1,10 @@
 import mapper from '../../../../../lib/server/resources/mappers/ride-mapper';
-import any from '../../../../helpers/any-for-admin';
+import {resources, url} from '../../../../helpers/any-for-admin';
 import assert from 'assert';
 
 suite('ride mapper', () => {
     test('that ride resources mapped to view list', () => {
-        const ride = any.resources.ride();
+        const ride = resources.ride();
 
         assert.deepEqual(
             [{
@@ -17,7 +17,7 @@ suite('ride mapper', () => {
     });
 
     test('that ride mapped to view', () => {
-        const ride = any.resources.ride();
+        const ride = resources.ride();
 
         assert.deepEqual(
             {
@@ -30,8 +30,8 @@ suite('ride mapper', () => {
     });
 
     test('that self link defined when defined in api', () => {
-        const ride = any.resources.ride();
-        ride._links.self = any.url();
+        const ride = resources.ride();
+        ride._links.self = url();
 
         assert.deepEqual(
             {

@@ -1,7 +1,7 @@
 import proxyquire from 'proxyquire';
 import * as redux from 'redux';
 import {fromJS} from 'immutable';
-import any from '@travi/any';
+import {simpleObject} from '@travi/any';
 import reducer from '../../../../lib/shared/store/reducer';
 import sinon from 'sinon';
 import {assert} from 'chai';
@@ -9,7 +9,7 @@ import {assert} from 'chai';
 suite('store creation for development', () => {
     let sandbox;
     const
-        enhancer = any.simpleObject(),
+        enhancer = simpleObject(),
         DevTools = {
             instrument() {}
         },
@@ -29,8 +29,8 @@ suite('store creation for development', () => {
 
     test('that redux store is created from provided initial state', () => {
         const
-            initialState = any.simpleObject(),
-            store = any.simpleObject();
+            initialState = simpleObject(),
+            store = simpleObject();
         redux.createStore.withArgs(reducer, fromJS(initialState), enhancer).returns(store);
 
         assert.equal(configureStore(initialState), store);

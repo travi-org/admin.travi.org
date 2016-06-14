@@ -1,15 +1,14 @@
 import nock from 'nock';
 import {assert} from 'referee';
 import _ from 'lodash';
-import any from '../../../helpers/any-for-admin';
+import {url, listOf, resource, resources, integer} from '../../../helpers/any-for-admin';
 
 const
     DOMAIN = 'api.travi.org',
     HOST = `https://${DOMAIN}`,
     HTTP_SUCCESS = 200;
 
-let resources = {},
-    existingResourceId,
+let existingResourceId,
     existingResource;
 
 function getSingularForm(resourceType) {
@@ -22,7 +21,7 @@ function buildHalLink(href) {
 
 function buildLinksIncluding(resourceType, resourceLink) {
     const links = {
-        'self': buildHalLink(any.url({domain: DOMAIN}))
+        'self': buildHalLink(url({domain: DOMAIN}))
     };
 
     if (resourceLink) {
@@ -32,11 +31,11 @@ function buildLinksIncluding(resourceType, resourceLink) {
     return links;
 }
 
-function buildListOf(resource) {
-    const resourceList = any.listOf(resource, {min: 1});
+function buildListOf(factory) {
+    const resourceList = listOf(factory, {min: 1});
 
     if (existingResourceId) {
-        existingResource = resource();
+        existingResource = factory();
 
         existingResource.id = existingResourceId;
 
@@ -51,18 +50,18 @@ function buildListOf(resource) {
 function prepareListForResponse(resourceType) {
     let resourceList;
 
-    if (any.resources.hasOwnProperty(getSingularForm(resourceType))) {
-        resourceList = buildListOf.call(this, any.resources[getSingularForm(resourceType)]);
+    if (resources.hasOwnProperty(getSingularForm(resourceType))) {
+        resourceList = buildListOf.call(this, resources[getSingularForm(resourceType)]);
     } else {
-        resourceList = buildListOf.call(this, any.resource);
+        resourceList = buildListOf.call(this, resource);
     }
 
-    _.map(resourceList, (resource) => {
-        if (_.isObject(resource)) {
-            resource._links = buildLinksIncluding();
+    _.map(resourceList, (instance) => {
+        if (_.isObject(instance)) {
+            instance._links = buildLinksIncluding();
         }
 
-        return resource;
+        return instance;
     });
 
     resources[resourceType] = resourceList;
@@ -99,10 +98,10 @@ function setupExpectedApiResponsesFor(resourceType) {
         );
 
     if (existingResourceId) {
-        _.each(document._embedded[resourceType], (resource) => {
-            if (resource.id === existingResourceId) {
+        _.each(document._embedded[resourceType], (instance) => {
+            if (instance.id === existingResourceId) {
                 const
-                    link = resource._links.self.href,
+                    link = instance._links.self.href,
                     linkHost = link.substring(0, link.lastIndexOf('/')),
                     resourcePath = link.substring(linkHost.length),
                     extendedExistingResource = _.cloneDeep(existingResource);
@@ -129,18 +128,18 @@ function assertFormatIsUntouchedFor(resourceType, list) {
 function assertFormatMappedToViewFor(resourceType, list) {
     let mappedResource;
 
-    _.each(resources[resourceType], (resource, index) => {
+    _.each(resources[resourceType], (instance, index) => {
 
         if ('users' === resourceType) {
             mappedResource = {
-                id: resource.id,
-                displayName: `${resource['first-name']} ${resource['last-name']}`,
-                thumbnail: resource.avatar
+                id: instance.id,
+                displayName: `${instance['first-name']} ${instance['last-name']}`,
+                thumbnail: instance.avatar
             };
         } else if ('rides' === resourceType) {
             mappedResource = {
-                id: resource.id,
-                displayName: resource.nickname
+                id: instance.id,
+                displayName: instance.nickname
             };
         }
 
@@ -159,7 +158,6 @@ module.exports = function () {
     this.After(() => {
         nock.enableNetConnect();
         nock.cleanAll();
-        resources = {};
         existingResourceId = null;
         this.serverResponse = null;
         this.apiResponseLinks = {};
@@ -188,10 +186,10 @@ module.exports = function () {
                 headers
             );
 
-        if (any.resources.hasOwnProperty(getSingularForm(resourceType))) {
-            embedded[resourceType] = any.resources[getSingularForm(resourceType)]();
+        if (resources.hasOwnProperty(getSingularForm(resourceType))) {
+            embedded[resourceType] = resources[getSingularForm(resourceType)]();
         } else {
-            embedded[resourceType] = any.resource();
+            embedded[resourceType] = resource();
         }
         resources[resourceType] = [embedded[resourceType]];
 
@@ -207,7 +205,7 @@ module.exports = function () {
     });
 
     this.Given(/^a "([^"]*)" exists in the api$/, function (resourceType, callback) {
-        existingResourceId = any.integer({min: 1});
+        existingResourceId = integer({min: 1});
         setupExpectedApiResponsesFor.call(this, resourceType);
 
         callback();
@@ -223,9 +221,8 @@ module.exports = function () {
 
     this.Then(/^list of "([^"]*)" resources is returned$/, function (resourceType, done) {
         const list = JSON.parse(this.getResponseBody())[resourceType];
-        console.log(list);  //eslint-disable-line no-console
 
-        if (any.resources.hasOwnProperty(getSingularForm(resourceType))) {
+        if (resources.hasOwnProperty(getSingularForm(resourceType))) {
             assertFormatMappedToViewFor(resourceType, list);
         } else {
             assertFormatIsUntouchedFor(resourceType, list);
@@ -237,10 +234,10 @@ module.exports = function () {
     this.Then(/^the "([^"]*)" is returned$/, function (resourceType, done) {
         const
             payload = JSON.parse(this.getResponseBody()),
-            resource = payload.resource;
+            resourceInstance = payload.resource;
 
-        assert.equals(resource.id, existingResourceId);
-        assert.isTrue(resource.extended);
+        assert.equals(resourceInstance.id, existingResourceId);
+        assert.isTrue(resourceInstance.extended);
 
         done();
     });

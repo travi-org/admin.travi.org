@@ -1,4 +1,4 @@
-import any from '@travi/any';
+import {listOf, word} from '@travi/any';
 import _ from 'lodash';
 
 module.exports = function () {
@@ -15,7 +15,7 @@ module.exports = function () {
     });
 
     this.Given(/^user has api privileges$/, function (callback) {
-        this.availableResourceTypes = _.uniq(any.listOf(any.word, {
+        this.availableResourceTypes = _.uniq(listOf(word, {
             min: 1
         }));
 

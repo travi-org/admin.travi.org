@@ -1,12 +1,13 @@
-import any from '@travi/any';
+import * as any from '@travi/any';
+export * from '@travi/any';
 
-any.resource = function () {
+function resource() {
     return {
         id: any.integer()
     };
-};
+}
 
-any.resources = {
+const resources = {
     ride() {
         return {
             id: any.integer(),
@@ -28,4 +29,7 @@ any.resources = {
     }
 };
 
-export default any;
+export {
+    resource,
+    resources
+};

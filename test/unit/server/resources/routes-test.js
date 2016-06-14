@@ -1,4 +1,4 @@
-import any from '@travi/any';
+import {listOf, simpleObject, string} from '@travi/any';
 import sinon from 'sinon';
 import {assert} from 'chai';
 import resources from '../../../../lib/server/resources/routes';
@@ -27,13 +27,13 @@ suite('server routes config', () => {
         const
             reply = sinon.spy(),
             next = sinon.spy(),
-            resourceType = any.string(),
+            resourceType = string(),
             server = {
                 route: sinon.stub().yieldsTo('handler', {
                     params: {resourceType}
                 }, reply)
             },
-            resourceList = any.listOf(any.simpleObject);
+            resourceList = listOf(simpleObject);
         resourcesController.getListOf.yields(null, resourceList);
 
         resources.register(server, null, next);
@@ -53,13 +53,13 @@ suite('server routes config', () => {
         const
             reply = sinon.spy(),
             next = sinon.spy(),
-            resourceType = any.string(),
+            resourceType = string(),
             server = {
                 route: sinon.stub().yieldsTo('handler', {
                     params: {resourceType}
                 }, reply)
             },
-            error = any.simpleObject();
+            error = simpleObject();
         resourcesController.getListOf.yields(error);
 
         resources.register(server, null, next);
@@ -71,13 +71,13 @@ suite('server routes config', () => {
         const
             reply = sinon.spy(),
             next = sinon.spy(),
-            resourceType = any.string(),
+            resourceType = string(),
             server = {
                 route: sinon.stub().yieldsTo('handler', {
                     params: {resourceType}
                 }, reply)
             },
-            resource = any.simpleObject();
+            resource = simpleObject();
         resourcesController.getResource.yields(null, resource);
 
         resources.register(server, null, next);
@@ -94,13 +94,13 @@ suite('server routes config', () => {
         const
             reply = sinon.spy(),
             next = sinon.spy(),
-            resourceType = any.string(),
+            resourceType = string(),
             server = {
                 route: sinon.stub().yieldsTo('handler', {
                     params: {resourceType}
                 }, reply)
             },
-            error = any.simpleObject();
+            error = simpleObject();
         resourcesController.getResource.yields(error);
 
         resources.register(server, null, next);

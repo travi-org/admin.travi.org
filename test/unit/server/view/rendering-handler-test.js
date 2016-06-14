@@ -7,7 +7,7 @@ import reducer from '../../../../lib/shared/store/reducer';
 import * as redux from 'redux';
 import immutable from 'immutable';
 import _ from 'lodash';
-import any from '@travi/any';
+import {string, simpleObject, listOf, url} from '@travi/any';
 import sinon from 'sinon';
 import {assert, refute} from 'referee';
 
@@ -17,10 +17,10 @@ suite('rendering handler', () => {
         handler = proxyquire('../../../../lib/server/view/rendering-handler', {
             'negotiator': Negotiator
         }),
-        primaryNav = any.listOf(
+        primaryNav = listOf(
             () => {
                 return {
-                    text: any.string()
+                    text: string()
                 };
             },
             {min: 5}
@@ -38,8 +38,8 @@ suite('rendering handler', () => {
         sandbox.stub(helmet, 'rewind');
         sandbox.stub(assetManager, 'getAssets');
 
-        request = any.simpleObject();
-        request.url = any.url();
+        request = simpleObject();
+        request.url = url();
         mediaType = sinon.stub();
         Negotiator.withArgs(request).returns({mediaType});
     });
@@ -71,14 +71,14 @@ suite('rendering handler', () => {
 
     test('that an html request returns a rendered view', () => {
         request.params = {resourceType: primaryNav[2].text};
-        request.response = {source: any.simpleObject()};
+        request.response = {source: simpleObject()};
         const
             reply = { view: sinon.spy() },
             extension = sinon.stub().withArgs('onPreResponse').yields(request, reply),
-            renderedContent = any.string(),
-            title = any.string(),
-            reduxState = any.simpleObject(),
-            resources = any.simpleObject(),
+            renderedContent = string(),
+            title = string(),
+            reduxState = simpleObject(),
+            resources = simpleObject(),
             store = {
                 getState: sinon.stub().returns(reduxState),
                 dispatch: sinon.spy()
@@ -114,7 +114,7 @@ suite('rendering handler', () => {
         request.response = {};
         const
             reply = sinon.spy(),
-            error = any.simpleObject(),
+            error = simpleObject(),
             extension = sinon.stub().withArgs('onPreResponse').yields(request, reply);
         mediaType.returns('text/html');
         resourcesController.listResourceTypes.yields(error);

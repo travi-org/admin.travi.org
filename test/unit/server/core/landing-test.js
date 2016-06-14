@@ -1,4 +1,4 @@
-import any from '@travi/any';
+import {listOf, simpleObject} from '@travi/any';
 import landing from '../../../../lib/server/core/landing';
 import * as resourcesController from '../../../../lib/server/resources/controller';
 import sinon from 'sinon';
@@ -29,7 +29,7 @@ suite('landing config', () => {
             server = {
                 route: sinon.stub().yieldsTo('handler', null, reply)
             },
-            types = any.listOf(any.simpleObject);
+            types = listOf(simpleObject);
         resourcesController.listResourceTypes.yields(null, types);
 
         landing.register(server, null, next);
@@ -48,7 +48,7 @@ suite('landing config', () => {
         const
             reply = sinon.spy(),
             next = sinon.spy(),
-            error = any.simpleObject(),
+            error = simpleObject(),
             server = {
                 route: sinon.stub().yieldsTo('handler', null, reply)
             };

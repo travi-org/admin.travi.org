@@ -1,9 +1,9 @@
 import proxyquire from 'proxyquire';
 import {assert} from 'chai';
-import any from '@travi/any';
+import {simpleObject} from '@travi/any';
 
 const
-    assets = any.simpleObject(),
+    assets = simpleObject(),
     assetManager = proxyquire('../../../../lib/server/view/asset-manager', {
         '../../../webpack-assets.json': assets
     });

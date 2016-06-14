@@ -1,4 +1,4 @@
-import any from '@travi/any';
+import {simpleObject} from '@travi/any';
 import proxyquire from 'proxyquire';
 import React from 'react';
 import LogMonitor from 'redux-devtools-log-monitor';
@@ -19,8 +19,8 @@ suite('redux dev-tools', () => {
 
     test('that constructed dev-tools are exported', () => {
         const
-            Tools = any.simpleObject(),
-            MonitorComponent = any.simpleObject(),
+            Tools = simpleObject(),
+            MonitorComponent = simpleObject(),
             DevTools = proxyquire('../../../../../lib/shared/views/dev/dev-tools', {
                 'redux-devtools': {
                     createDevTools: sinon.stub().withArgs(MonitorComponent).returns(Tools)

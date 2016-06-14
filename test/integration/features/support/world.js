@@ -1,5 +1,5 @@
 import nock from 'nock';
-import any from '@travi/any';
+import {url} from '@travi/any';
 import loadApi from '../../../../lib/server/app.js';
 
 const
@@ -9,11 +9,11 @@ const
 export function World() {
     this.apiResponseLinks = {};
 
-    this.makeRequestTo = (url, callback) => {
+    this.makeRequestTo = (address, callback) => {
         loadApi.then((server) => {
             server.inject({
                 method: 'GET',
-                url,
+                url: address,
                 headers: {
                     'Accept': this.mime
                 }
@@ -22,7 +22,7 @@ export function World() {
 
                 callback();
             });
-        });
+        }).catch(callback);
     };
 
     this.getResponseBody = () => this.serverResponse.payload;
@@ -37,7 +37,7 @@ export function World() {
 
     function buildApiResponseLinks() {
         const links = {
-            'self': buildHalLink(any.url({domain: DOMAIN}))
+            'self': buildHalLink(url({domain: DOMAIN}))
         };
 
         let rel;
@@ -49,7 +49,7 @@ export function World() {
         }
 
         this.availableResourceTypes.forEach((type) => {
-            links[type] = buildHalLink(any.url());
+            links[type] = buildHalLink(url());
         });
 
         return links;
@@ -61,9 +61,9 @@ export function World() {
             .get('/')
             .times(2)
             .reply(
-            HTTP_SUCCESS,
-            {_links: buildApiResponseLinks.call(this)},
-            {'Content-Type': 'application/hal+json'}
-        );
+                HTTP_SUCCESS,
+                {_links: buildApiResponseLinks.call(this)},
+                {'Content-Type': 'application/hal+json'}
+            );
     };
 }

@@ -1,6 +1,6 @@
 import traviApiResources from '../../../../lib/server/resources/travi-api-resources.js';
 import traverson from 'traverson';
-import any from '../../../helpers/any-for-admin';
+import {url, string, integer, resource, listOf, simpleObject} from '../../../helpers/any-for-admin';
 import sinon from 'sinon';
 import {assert} from 'chai';
 
@@ -20,8 +20,8 @@ suite('travi-api resource interactions', () => {
         const
             callback = sinon.spy(),
             links = {
-                'self': any.url(),
-                'foo': any.url()
+                'self': url(),
+                'foo': url()
             };
         traverson.from.withArgs('https://api.travi.org/').returns({
             getResource: stubForGet
@@ -35,8 +35,8 @@ suite('travi-api resource interactions', () => {
 
     test('that list of resources requested by following link from api catalog', () => {
         const
-            resourceType = any.string(),
-            resources = any.listOf(any.resource),
+            resourceType = string(),
+            resources = listOf(resource),
             responseFromApi = {
                 _embedded: {}
             },
@@ -57,8 +57,8 @@ suite('travi-api resource interactions', () => {
 
     test('that error bubbles from resources request', () => {
         const
-            resourceType = any.string(),
-            error = any.simpleObject(),
+            resourceType = string(),
+            error = simpleObject(),
             callback = sinon.spy();
         traverson.from.withArgs('https://api.travi.org/').returns({
             follow: sinon.stub().withArgs(resourceType).returns({
@@ -73,14 +73,14 @@ suite('travi-api resource interactions', () => {
 
     test('that a single resource is mapped to a list', () => {
         const
-            resourceType = any.string(),
+            resourceType = string(),
             responseFromApi = {
                 _embedded: {}
             },
-            resource = any.resource(),
+            resourceInstance = resource(),
             callback = sinon.spy();
         /*eslint-disable no-underscore-dangle */
-        responseFromApi._embedded[resourceType] = resource;
+        responseFromApi._embedded[resourceType] = resourceInstance;
         /*eslint-enable no-underscore-dangle */
         traverson.from.withArgs('https://api.travi.org/').returns({
             follow: sinon.stub().withArgs(resourceType).returns({
@@ -90,32 +90,32 @@ suite('travi-api resource interactions', () => {
 
         traviApiResources.getListOf(resourceType, callback);
 
-        assert.calledWith(callback, null, [resource]);
+        assert.calledWith(callback, null, [resourceInstance]);
     });
 
     test('that specific resource requested by following links', () => {
         const
-            resourceType = any.string(),
-            resourceId = any.integer(),
-            resource = any.resource(),
+            resourceType = string(),
+            resourceId = integer(),
+            resourceInstance = resource(),
             callback = sinon.spy();
         traverson.from.withArgs('https://api.travi.org/').returns({
             follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
-                getResource: stubForGet.yields(null, resource)
+                getResource: stubForGet.yields(null, resourceInstance)
             })
         });
 
         traviApiResources.getResourceBy(resourceType, resourceId, callback);
 
-        assert.calledWith(callback, null, resource);
+        assert.calledWith(callback, null, resourceInstance);
     });
 
     test('that error bubbles from embedded resource request', () => {
         const
-            resourceType = any.string(),
-            resourceId = any.integer(),
+            resourceType = string(),
+            resourceId = integer(),
             callback = sinon.spy(),
-            error = any.simpleObject();
+            error = simpleObject();
         traverson.from.withArgs('https://api.travi.org/').returns({
             follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
                 getResource: stubForGet.yields(error)

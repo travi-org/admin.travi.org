@@ -1,7 +1,7 @@
 /*global window */
 import * as redux from 'redux';
 import {fromJS} from 'immutable';
-import any from '@travi/any';
+import {simpleObject} from '@travi/any';
 import reducer from '../../../../lib/shared/store/reducer';
 import configureStore from '../../../../lib/shared/store/configure.prod';
 import sinon from 'sinon';
@@ -10,8 +10,8 @@ import {assert} from 'chai';
 suite('store creation for production', () => {
     let sandbox;
     const
-        initialState = any.simpleObject(),
-        store = any.simpleObject();
+        initialState = simpleObject(),
+        store = simpleObject();
 
     setup(() => {
         sandbox = sinon.sandbox.create();
@@ -34,7 +34,7 @@ suite('store creation for production', () => {
 
     test('that devtools browser extension is initialized if present', () => {
         const
-            enhancer = any.simpleObject();
+            enhancer = simpleObject();
         window.devToolsExtension = sinon.stub().returns(enhancer);
         redux.createStore.withArgs(reducer, fromJS(initialState), enhancer).returns(store);
 

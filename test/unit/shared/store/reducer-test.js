@@ -1,7 +1,7 @@
 import immutable from 'immutable';
 import reducer from '../../../../lib/shared/store/reducer';
 import * as actions from '../../../../lib/shared/store/actions';
-import any from '@travi/any';
+import {simpleObject, string, listOf} from '@travi/any';
 import {assert} from 'chai';
 import sinon from 'sinon';
 
@@ -20,7 +20,7 @@ suite('reducer', () => {
     });
 
     test('that state is returned directly without known action', () => {
-        const initialState = any.simpleObject();
+        const initialState = simpleObject();
 
         assert.equal(reducer(initialState, {}), initialState);
     });
@@ -32,10 +32,10 @@ suite('reducer', () => {
     test('that the setPrimaryNav function is called for the SET_PRIMARY_NAV action', () => {
         const
             initialState = immutable.Map(),
-            updatedState = any.simpleObject(),
+            updatedState = simpleObject(),
             action = {
                 type: 'SET_PRIMARY_NAV',
-                nav: any.simpleObject()
+                nav: simpleObject()
             };
         actions.setPrimaryNav.withArgs(initialState, action.nav).returns(updatedState);
 
@@ -45,10 +45,10 @@ suite('reducer', () => {
     test('that the setResource function is called for the SET_RESOURCE action', () => {
         const
             initialState = immutable.Map(),
-            updatedState = any.simpleObject(),
+            updatedState = simpleObject(),
             action = {
                 type: 'SET_RESOURCE',
-                resource: any.simpleObject()
+                resource: simpleObject()
             };
         actions.setResource.withArgs(initialState, action.resource).returns(updatedState);
 
@@ -58,11 +58,11 @@ suite('reducer', () => {
     test('that the setResources function is called for the SET_RESOURCES action', () => {
         const
             initialState = immutable.Map(),
-            updatedState = any.simpleObject(),
+            updatedState = simpleObject(),
             action = {
                 type: 'SET_RESOURCES',
-                resourceType: any.string(),
-                resources: any.listOf(any.simpleObject)
+                resourceType: string(),
+                resources: listOf(simpleObject)
             };
         actions.setResources.withArgs(initialState, action.resourceType, action.resources).returns(updatedState);
 

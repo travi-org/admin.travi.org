@@ -6,11 +6,11 @@ import connectedResource from '../../../../../../../lib/shared/views/resources/i
 
 import sinon from 'sinon';
 import {assert} from 'chai';
-import any from '@travi/any';
+import {simpleObject} from '@travi/any';
 
 suite('connected resource component', () => {
     let sandbox;
-    const Resource = any.simpleObject();
+    const Resource = simpleObject();
 
     setup(() => {
         sandbox = sinon.sandbox.create();
@@ -35,7 +35,7 @@ suite('connected resource component', () => {
         reactRedux.connect.returns(sinon.stub());
         connectedResource(React);
         const
-            resource = any.simpleObject(),
+            resource = simpleObject(),
             mapStateToProps = reactRedux.connect.getCall(0).args[0],
 
             props = mapStateToProps(Immutable.fromJS({resource}));
