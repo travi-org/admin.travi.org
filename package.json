@@ -40,7 +40,7 @@
     "concat-map": "0.0.1",
     "coveralls": "2.11.9",
     "css-loader": "0.23.1",
-    "cucumber": "1.1.0",
+    "cucumber": "1.2.0",
     "extend-grunt-plugin": "0.1.0",
     "extract-text-webpack-plugin": "1.0.1",
     "formatio": "1.2.0",
