@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 const
     path = require('path'),
     webpack = require('webpack'),
