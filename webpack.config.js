@@ -6,9 +6,10 @@ const
     AssetsPlugin = require('assets-webpack-plugin'),
     assetsPluginInstance = new AssetsPlugin(),
     projectRootPath = __dirname,
-    assetsPath = path.join(__dirname, 'resources/js');
+    assetsPath = path.join(__dirname, 'resources/js'),
+    validate = require('webpack-validator');
 
-module.exports = {
+module.exports = validate({
     devtool: 'source-map',
     entry: ['./lib/client/app.js'],
     progress: false,
@@ -52,6 +53,7 @@ module.exports = {
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
+                screw_ie8: true,
                 warnings: false
             }
         }),
@@ -66,4 +68,4 @@ module.exports = {
         chunkFilename: '[name]-[chunkhash].js',
         publicPath: '/resources/js/'
     }
-};
+});
