@@ -82,7 +82,7 @@
     "url-loader": "0.5.7",
     "webpack": "1.13.1",
     "webpack-dev-server": "1.14.1",
-    "webpack-validator": "2.2.1"
+    "webpack-validator": "2.2.2"
   },
   "dependencies": {
     "@travi/admin.travi.org-components": "0.6.2",
