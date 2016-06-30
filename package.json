@@ -35,7 +35,7 @@
     "balanced-match": "0.4.1",
     "chai": "3.5.0",
     "chai-immutable": "1.6.0",
-    "cheerio": "0.20.0",
+    "cheerio": "0.21.0",
     "clean-webpack-plugin": "0.1.9",
     "concat-map": "0.0.1",
     "coveralls": "2.11.9",
