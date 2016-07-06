@@ -95,7 +95,7 @@
     "hapi-mustache": "0.0.1",
     "history": "3.0.0",
     "immutable": "3.8.1",
-    "inert": "4.0.0",
+    "inert": "4.0.1",
     "lodash": "4.13.1",
     "negotiator": "0.6.1",
     "newrelic": "1.28.1",
