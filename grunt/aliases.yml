@@ -30,6 +30,4 @@ verify:
 
 heroku:production: build
 
-default:
-  - build
-  - verify
+default: verify
