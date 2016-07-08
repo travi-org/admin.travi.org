@@ -12,6 +12,8 @@
     "test": "grunt",
     "start": "node dist/server/app.js",
     "postinstall": "grunt heroku:production",
+    "serve:dev": "nodemon lib/server/app.js",
+    "serve:webpack": "babel-node ./webpack-dev-server.js",
     "dev": "grunt compileClient && nodemon lib/server/app.js",
     "storybook": "start-storybook -p 9001",
     "build-storybook": "build-storybook -o dist/storybook",
