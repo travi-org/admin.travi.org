@@ -31,7 +31,7 @@ suite('static assets', () => {
             path: '/favicon.ico',
             handler: {
                 file: {
-                    path: 'bower_components/travi.org-theme/img/favicon.ico'
+                    path: 'node_modules/@travi/travi.org-theme/img/favicon.ico'
                 }
             }
         });
