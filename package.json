@@ -69,6 +69,7 @@
     "mocha-junit-reporter": "1.11.1",
     "nock": "8.0.0",
     "node-sass": "3.8.0",
+    "npm-run-all": "2.3.0",
     "pact-consumer-js-dsl": "0.2.2",
     "proxyquire": "1.7.10",
     "react-addons-test-utils": "15.2.1",
