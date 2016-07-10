@@ -15,8 +15,6 @@
     "serve:dev": "grunt compileClient && nodemon lib/server/app.js",
     "serve:webpack": "babel-node ./webpack-dev-server.js",
     "dev": "NODE_ENV=development npm-run-all -p serve:webpack serve:dev",
-    "storybook": "start-storybook -p 9001",
-    "build-storybook": "build-storybook -o dist/storybook",
     "gh-pages": "grunt gh-pages"
   },
   "engines": {
@@ -24,7 +22,6 @@
     "npm": "3.8.x"
   },
   "devDependencies": {
-    "@kadira/storybook": "1.12.0",
     "@travi/any": "0.6.0",
     "@travi/eslint-config-travi": "0.2.0",
     "assets-webpack-plugin": "3.4.0",
