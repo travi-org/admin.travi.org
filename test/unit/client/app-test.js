@@ -1,9 +1,8 @@
 /*global window */
 import React from 'react';
-import {Router, browserHistory as history} from 'react-router';
-import {Provider} from 'react-redux';
 import dom from 'react-dom';
 import * as redux from 'redux';
+import Root from '../../../lib/client/root/root';
 import proxyquire from 'proxyquire';
 import {simpleObject} from '@travi/any';
 import {assert} from 'chai';
@@ -45,17 +44,11 @@ suite('client-side app', () => {
     });
 
     test('that the app renders', () => {
-        const
-            routerComponent = simpleObject(),
-            providerComponent = simpleObject();
-        React.createElement.withArgs(Router, {
-            history,
-            children: routes
-        }).returns(routerComponent);
-        React.createElement.withArgs(Provider, {store}, routerComponent).returns(providerComponent);
+        const rootComponent = simpleObject();
+        React.createElement.withArgs(Root, {store, routes}).returns(rootComponent);
 
         simulatePageLoad();
 
-        assert.calledWith(dom.render, providerComponent, document.getElementById('wrap'));
+        assert.calledWith(dom.render, rootComponent, document.getElementById('wrap'));
     });
 });

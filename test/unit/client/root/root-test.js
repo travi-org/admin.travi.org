@@ -3,6 +3,10 @@ import prodRoot from '../../../../lib/client/root/root.prod.js';
 import {assert} from 'chai';
 
 suite('environment dependent root component', () => {
+    setup(() => {
+        delete require.cache[require.resolve('../../../../lib/client/root/root')];
+    });
+
     teardown(() => {
         process.env.NODE_ENV = null;
         delete require.cache[require.resolve('../../../../lib/client/root/root')];
