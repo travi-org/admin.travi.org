@@ -1,21 +1,15 @@
-import proxyquire from 'proxyquire';
 import * as redux from 'redux';
 import {fromJS} from 'immutable';
 import {simpleObject} from '@travi/any';
+import configureStore from '../../../../lib/shared/store/configure.dev';
 import reducer from '../../../../lib/shared/store/reducer';
+import DevTools from '../../../../lib/shared/views/dev/dev-tools';
 import sinon from 'sinon';
 import {assert} from 'chai';
 
 suite('store creation for development', () => {
     let sandbox;
-    const
-        enhancer = simpleObject(),
-        DevTools = {
-            instrument() {}
-        },
-        configureStore = proxyquire('../../../../lib/shared/store/configure.dev', {
-            '../views/dev/dev-tools': DevTools
-        });
+    const enhancer = simpleObject();
 
     setup(() => {
         sandbox = sinon.sandbox.create();
