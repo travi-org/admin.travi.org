@@ -15,6 +15,6 @@ suite('environment dependent root component', () => {
     });
 
     test('that the production component loads in non-dev environment', () => {
-        assert.equal(require('../../../../lib/client/root/root'), prodRoot);
+        assert.equal(require('../../../../lib/client/root/root').default, prodRoot);
     });
 });
