@@ -37,7 +37,7 @@
     "cheerio": "0.20.0",
     "clean-webpack-plugin": "0.1.9",
     "concat-map": "0.0.1",
-    "coveralls": "2.11.9",
+    "coveralls": "2.11.10",
     "css-loader": "0.23.1",
     "cucumber": "1.2.1",
     "enzyme": "2.4.1",
