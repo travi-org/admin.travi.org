@@ -17,14 +17,7 @@ suite('rendering handler', () => {
         handler = proxyquire('../../../../lib/server/view/rendering-handler', {
             'negotiator': Negotiator
         }),
-        primaryNav = listOf(
-            () => {
-                return {
-                    text: string()
-                };
-            },
-            {min: 5}
-        );
+        primaryNav = listOf(() => ({text: string()}), {min: 5});
 
     let sandbox,
         mediaType,
@@ -88,7 +81,7 @@ suite('rendering handler', () => {
             });
         mediaType.returns('text/html');
         redux.createStore.withArgs(reducer, immutable.fromJS(request.response.source)).returns(store);
-        assetManager.getAssets.returns(resources);
+        assetManager.getAssets.yields(null, resources);
         helmet.rewind.returns({title: {toString: () => title}});
 
         handler.register({ext: extension}, null, sinon.spy());
