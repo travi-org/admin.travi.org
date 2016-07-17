@@ -3,7 +3,6 @@ import helmet from 'react-helmet';
 import * as routeRenderer from '../../../../lib/server/view/route-renderer';
 import * as assetManager from '../../../../lib/server/view/asset-manager';
 import * as resourcesController from '../../../../lib/server/resources/controller';
-import reducer from '../../../../lib/shared/store/reducer';
 import * as redux from 'redux';
 import immutable from 'immutable';
 import _ from 'lodash';
@@ -14,8 +13,10 @@ import {assert, refute} from 'referee';
 suite('rendering handler', () => {
     const
         Negotiator = sinon.stub(),
+        configureStore = sinon.stub(),
         handler = proxyquire('../../../../lib/server/view/rendering-handler', {
-            'negotiator': Negotiator
+            'negotiator': Negotiator,
+            '../../shared/store/configure': configureStore
         }),
         primaryNav = listOf(() => ({text: string()}), {min: 5});
 
@@ -80,7 +81,7 @@ suite('rendering handler', () => {
                 return _.extend({}, item, {active: 2 === index});
             });
         mediaType.returns('text/html');
-        redux.createStore.withArgs(reducer, immutable.fromJS(request.response.source)).returns(store);
+        configureStore.withArgs(immutable.fromJS(request.response.source)).returns(store);
         assetManager.getAssets.yields(null, resources);
         helmet.rewind.returns({title: {toString: () => title}});
 
