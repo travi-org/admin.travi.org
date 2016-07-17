@@ -1,5 +1,6 @@
 /*global window */
 import React from 'react';
+import {Router, browserHistory} from 'react-router';
 import dom from 'react-dom';
 import * as redux from 'redux';
 import Root from '../../../lib/client/root/root';
@@ -44,8 +45,12 @@ suite('client-side app', () => {
     });
 
     test('that the app renders', () => {
-        const rootComponent = simpleObject();
-        React.createElement.withArgs(Root, {store, routes}).returns(rootComponent);
+        const
+            rootComponent = simpleObject(),
+            routerComponent = simpleObject();
+
+        React.createElement.withArgs(Router, {history: browserHistory, children: routes}).returns(routerComponent);
+        React.createElement.withArgs(Root, {store}, routerComponent).returns(rootComponent);
 
         simulatePageLoad();
 
