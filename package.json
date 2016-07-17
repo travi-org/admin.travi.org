@@ -63,7 +63,7 @@
     "h2o2": "5.1.0",
     "istanbul": "1.0.0-alpha.2",
     "jsdom": "9.4.1",
-    "load-grunt-config": "0.19.1",
+    "load-grunt-config": "0.19.2",
     "mocha-junit-reporter": "1.11.1",
     "nock": "8.0.0",
     "node-sass": "3.8.0",

@@ -96,34 +96,37 @@ function buildEntryPointList(environment, devServerHost, devServerPort) {
     return entryPoints;
 }
 
-console.log(process.env.NODE_ENV);
+function buildConfig(environment) {
+    const
+        assetsPath = path.join(__dirname, 'resources/js'),
+        devServerPort = '3000',
+        devServerHost = 'http://0.0.0.0',
+        config = {
+            devtool: 'source-map',
+            entry: buildEntryPointList(environment, devServerHost, devServerPort),
+            progress: false,
+            module: {loaders: buildLoadersList(environment)},
+            plugins: buildPluginsList(assetsPath, environment),
+            output: {
+                path: assetsPath,
+                filename: '[name]-[hash].js',
+                chunkFilename: '[name]-[hash].js',
+                publicPath: '/resources/js/'
+            }
+        };
 
-const
-    assetsPath = path.join(__dirname, 'resources/js'),
-    environment = process.env.NODE_ENV,
-    devServerPort = '3000',
-    devServerHost = 'http://0.0.0.0',
-    config = {
-        devtool: 'source-map',
-        entry: buildEntryPointList(environment, devServerHost, devServerPort),
-        progress: false,
-        module: {loaders: buildLoadersList(environment)},
-        plugins: buildPluginsList(assetsPath, environment),
-        output: {
-            path: assetsPath,
-            filename: '[name]-[hash].js',
-            chunkFilename: '[name]-[hash].js',
-            publicPath: '/resources/js/'
-        }
-    };
+    if ('development' === environment) {
+        config.devServer = {
+            inline: true,
+            contentBase: assetsPath,
+            port: devServerPort
+        };
+        config.output.publicPath = `${devServerHost}:${devServerPort}/resources/js/`;
+    }
 
-if ('development' === environment) {
-    config.devServer = {
-        inline: true,
-        contentBase: assetsPath,
-        port: devServerPort
-    };
-    config.output.publicPath = `${devServerHost}:${devServerPort}/resources/js/`;
+    return config;
 }
 
-module.exports = validate(config);
+module.exports = function (environment = 'production') {
+    return validate(buildConfig(environment));
+};

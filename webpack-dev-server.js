@@ -1,6 +1,6 @@
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import config from './webpack.config';
+import getConfigFor from './webpack.config';
 
 if ('development' !== process.env.NODE_ENV) {
     throw new Error('ERROR: Webpack dev server only works in dev environment');
@@ -8,7 +8,8 @@ if ('development' !== process.env.NODE_ENV) {
 
 const
     port = 3000,
-    host = '0.0.0.0';
+    host = '0.0.0.0',
+    config = getConfigFor('development');
 
 new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
