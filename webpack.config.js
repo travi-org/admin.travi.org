@@ -96,10 +96,11 @@ function buildEntryPointList(environment, devServerHost, devServerPort) {
     return entryPoints;
 }
 
+console.log(process.env.NODE_ENV);
 
 const
     assetsPath = path.join(__dirname, 'resources/js'),
-    environment = process.env.NODE_ENV || 'production',
+    environment = process.env.NODE_ENV,
     devServerPort = '3000',
     devServerHost = 'http://0.0.0.0',
     config = {
