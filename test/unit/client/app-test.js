@@ -3,7 +3,7 @@ import React from 'react';
 import {Router, browserHistory} from 'react-router';
 import dom from 'react-dom';
 import * as redux from 'redux';
-import Root from '../../../lib/client/root/root';
+import Root from '../../../lib/shared/views/root/root';
 import proxyquire from 'proxyquire';
 import {simpleObject} from '@travi/any';
 import {assert} from 'chai';

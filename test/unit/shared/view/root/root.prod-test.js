@@ -1,12 +1,11 @@
 import React from 'react';
-import Root from '../../../../lib/client/root/root.dev';
-import DevTools from '../../../../lib/shared/views/dev/dev-tools';
+import Root from '../../../../../lib/shared/views/root/root.prod';
 import {assert} from 'chai';
 import {shallow} from 'enzyme';
 import any from '@travi/any';
 
-suite('development root module', () => {
-    test('that the app renders with dev-tools', () => {
+suite('production root module', () => {
+    test('that the app renders without dev-tools', () => {
         const
             routes = <div/>,
             store = Object.assign({}, any.simpleObject(), {
@@ -25,6 +24,5 @@ suite('development root module', () => {
 
         assert.equal(provider.props().store, store);
         assert.isTrue(provider.contains(children));
-        assert.isTrue(provider.contains(<DevTools />));
     });
 });
