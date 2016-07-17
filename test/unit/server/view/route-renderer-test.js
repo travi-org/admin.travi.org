@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import * as reactRouter from 'react-router';
-import {Provider} from 'react-redux';
+import Root from '../../../../lib/shared/views/root/root';
 import {url as anyUrl, simpleObject, string} from '@travi/any';
 import proxyquire from 'proxyquire';
 import sinon from 'sinon';
@@ -51,7 +51,7 @@ suite('route renderer', () => {
             providerComponent = simpleObject(),
             store = simpleObject();
         React.createElement.withArgs(RouterContext, sinon.match(renderProps)).returns(context);
-        React.createElement.withArgs(Provider, {store}, context).returns(providerComponent);
+        React.createElement.withArgs(Root, {store}, context).returns(providerComponent);
         ReactDOMServer.renderToString.withArgs(providerComponent).returns(renderedContent);
 
         renderer.routeTo(url, store, callback);
