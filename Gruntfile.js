@@ -1,4 +1,5 @@
 /*eslint filenames/match-regex: 0 */
+require('babel-register');
 
 module.exports = function (grunt) {
 

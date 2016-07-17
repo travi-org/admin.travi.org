@@ -5,6 +5,7 @@ compileServer:
   - babel
 
 build:
+  - env:production
   - clean
   - compileClient
   - compileServer
