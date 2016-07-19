@@ -49,7 +49,7 @@
     "grunt-bower-task": "0.4.0",
     "grunt-cli": "1.2.0",
     "grunt-contrib-clean": "1.0.0",
-    "grunt-contrib-uglify": "1.0.1",
+    "grunt-contrib-uglify": "2.0.0",
     "grunt-cucumberjs": "0.10.3",
     "grunt-env": "0.4.4",
     "grunt-eslint": "19.0.0",
