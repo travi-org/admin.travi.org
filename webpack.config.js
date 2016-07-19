@@ -18,8 +18,8 @@ module.exports = function (environment = 'production') {
     return validate({
         devtool: 'source-map',
         entry: removeEmpty([
-            ifProduction(`webpack-dev-server/client?${devServerHost}:${devServerPort}`),
-            ifProduction('webpack/hot/only-dev-server'),
+            ifDevelopment(`webpack-dev-server/client?${devServerHost}:${devServerPort}`),
+            ifDevelopment('webpack/hot/only-dev-server'),
             './lib/client/app.js'
         ]),
         progress: false,
