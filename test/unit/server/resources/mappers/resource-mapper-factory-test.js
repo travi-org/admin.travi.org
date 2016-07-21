@@ -9,17 +9,10 @@ suite('resource mapper factory', () => {
         );
     });
 
-    test('that the user mapper is returned for users', () => {
-        assert.equal(
-            getMapperFor('users'),
-            require('../../../../../lib/server/resources/mappers/user-mapper')
-        );
-    });
-
     test('that the user mapper is returned for persons', () => {
         assert.equal(
             getMapperFor('persons'),
-            require('../../../../../lib/server/resources/mappers/user-mapper')
+            require('../../../../../lib/server/resources/mappers/person-mapper')
         );
     });
 

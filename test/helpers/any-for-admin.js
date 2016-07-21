@@ -15,7 +15,7 @@ const resources = {
             _links: {}
         };
     },
-    user() {
+    person() {
         return {
             id: any.word(),
             'first-name': any.string(),

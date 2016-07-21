@@ -2,7 +2,7 @@ import React from 'react';
 import * as reactRedux from 'react-redux';
 import Immutable from 'immutable';
 import * as components from '@travi/admin.travi.org-components';
-import connectedUser from '../../../../../../../../lib/shared/views/resources/individual/users/connected-user';
+import connectedUser from '../../../../../../../../lib/shared/views/resources/individual/persons/connected-person';
 
 import sinon from 'sinon';
 import {assert} from 'chai';

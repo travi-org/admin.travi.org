@@ -19,11 +19,11 @@ Feature: resources
         When list of "rides" resources is requested
         Then list of "rides" resources is returned
 
-    Scenario: existing list of users requested
-        Given list of "users" resources exists in the api
+    Scenario: existing list of persons requested
+        Given list of "persons" resources exists in the api
         And user has api privileges
-        When list of "users" resources is requested
-        Then list of "users" resources is returned
+        When list of "persons" resources is requested
+        Then list of "persons" resources is returned
 
     @wip
     Scenario: non-existing list of resources requested

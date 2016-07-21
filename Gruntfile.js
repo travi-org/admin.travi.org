@@ -109,8 +109,8 @@ module.exports = function (grunt) {
                 rides: {
                     href: 'https://api.travi.org/rides'
                 },
-                users: {
-                    href: 'https://api.travi.org/users'
+                persons: {
+                    href: 'https://api.travi.org/persons'
                 }
             };
 

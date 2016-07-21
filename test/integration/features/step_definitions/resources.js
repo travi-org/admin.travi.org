@@ -130,7 +130,7 @@ function assertFormatMappedToViewFor(resourceType, list) {
 
     _.each(resources[resourceType], (instance, index) => {
 
-        if ('users' === resourceType) {
+        if ('persons' === resourceType) {
             mappedResource = {
                 id: instance.id,
                 displayName: `${instance['first-name']} ${instance['last-name']}`,

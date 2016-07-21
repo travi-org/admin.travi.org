@@ -20,8 +20,8 @@ suite('routes', () => {
         './views/resources/individual/connected-resource': {
             default: (React) => () => <div>resource</div>                           //eslint-disable-line no-shadow
         },
-        './views/resources/individual/users/connected-user': {
-            default: (React) => () => <div>user</div>                               //eslint-disable-line no-shadow
+        './views/resources/individual/persons/connected-person': {
+            default: (React) => () => <div>person</div>                             //eslint-disable-line no-shadow
         }
     }).default;
     let node, hydrater, routes;
@@ -93,10 +93,10 @@ suite('routes', () => {
 
     test('that the user route is defined', () => {
         dom.render(
-            <Router history={createMemoryHistory('/users/4')}>
+            <Router history={createMemoryHistory('/persons/4')}>
                 { routes }
             </Router>, node, () => {
-                assert.equal(node.textContent, 'wrapper user');
+                assert.equal(node.textContent, 'wrapper person');
                 assert.calledOnce(hydrater);
             }
         );

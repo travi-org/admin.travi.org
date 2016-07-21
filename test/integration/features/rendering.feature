@@ -10,18 +10,18 @@ Feature: HTML Rendering
 
     Scenario: html requested for list page
         Given html is requested
-        And list of "users" resources exists in the api
+        And list of "persons" resources exists in the api
         And user has api privileges
-        When list of "users" resources is requested
+        When list of "persons" resources is requested
         Then a "200" status code should be returned
         And the primary nav is rendered
         And the resource-list route is rendered
 
     Scenario: html requested for single resource
         Given html is requested
-        And a "users" exists in the api
+        And a "persons" exists in the api
         And user has api privileges
-        When the "users" is requested by id
+        When the "persons" is requested by id
         Then a "200" status code should be returned
         And the primary nav is rendered
         And the resource route is rendered
