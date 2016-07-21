@@ -16,6 +16,13 @@ suite('resource mapper factory', () => {
         );
     });
 
+    test('that the user mapper is returned for persons', () => {
+        assert.equal(
+            getMapperFor('persons'),
+            require('../../../../../lib/server/resources/mappers/user-mapper')
+        );
+    });
+
     test('that the ride mapper is returned for users', () => {
         assert.equal(
             getMapperFor('rides'),
