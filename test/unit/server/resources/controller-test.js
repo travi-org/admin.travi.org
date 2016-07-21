@@ -37,16 +37,19 @@ suite('resources controller', () => {
         const
             callback = sinon.spy(),
             linkName = string(),
-            links = { 'self': {'href': url()}};
-        links[linkName] = {'href': url()};
+            links = {
+                'self': {'href': url()},
+                [linkName]: {'href': url()},
+                'persons': {'href': url()}
+            };
         traviApiResources.getLinksFor.withArgs('catalog').yields(null, links);
 
         resourcesController.listResourceTypes(callback);
 
-        assert.calledWith(callback, null, [{
-            text: linkName,
-            path: `/${linkName}`
-        }]);
+        assert.calledWith(callback, null, [
+            {text: linkName, path: `/${linkName}`},
+            {text: 'people', path: '/persons'}
+        ]);
     });
 
     test('that error bubbles for api request for recource-types', () => {
