@@ -32,7 +32,7 @@ function buildLinksIncluding(resourceType, resourceLink) {
 }
 
 function buildListOf(factory) {
-    const resourceList = listOf(factory, {min: 1});
+    const resourceList = listOf(factory, {min: 1, uniqueOn: 'id'});
 
     if (existingResourceId) {
         existingResource = factory();
