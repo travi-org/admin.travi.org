@@ -47,12 +47,12 @@ suite('connected user component', () => {
             },
             mapStateToProps = reactRedux.connect.getCall(0).args[0],
 
-            {user} = mapStateToProps(Immutable.fromJS({resource}));
+            {person} = mapStateToProps(Immutable.fromJS({resource}));
 
-        assert.equal(user.id, resource.id);
-        assert.equal(user.displayName, resource.displayName);
-        assert.deepEqual(user.name, resource.name);
-        assert.deepEqual(user.links, resource.links);
-        assert.equal(user.avatar, resource.thumbnail);
+        assert.equal(person.id, resource.id);
+        assert.equal(person.displayName, resource.displayName);
+        assert.deepEqual(person.name, resource.name);
+        assert.deepEqual(person.links, resource.links);
+        assert.equal(person.avatar, resource.thumbnail);
     });
 });
