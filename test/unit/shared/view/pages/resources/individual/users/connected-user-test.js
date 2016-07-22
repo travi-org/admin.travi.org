@@ -10,12 +10,12 @@ import {string, url, simpleObject} from '@travi/any';
 
 suite('connected user component', () => {
     let sandbox;
-    const User = simpleObject();
+    const Person = simpleObject();
 
     setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(reactRedux, 'connect');
-        sandbox.stub(components, 'createUser').withArgs(React).returns(User);
+        sandbox.stub(components, 'createPerson').withArgs(React).returns(Person);
     });
 
     teardown(() => {
@@ -28,7 +28,7 @@ suite('connected user component', () => {
 
         connectedUser(React);
 
-        assert.calledWith(connectToComponent, User);
+        assert.calledWith(connectToComponent, Person);
     });
 
     test('that redux state is mapped to props', () => {
