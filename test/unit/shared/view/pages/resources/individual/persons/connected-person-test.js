@@ -33,7 +33,7 @@ suite('connected person component', () => {
         assert.equal(person.avatar, resource.thumbnail);
     });
 
-    test('that a `fetch` hook is defined', () => {
-        assert.isFunction(ConnectedPerson['@@redial-hooks'].fetch);
+    test('that the `fetch` hook returns a promise', () => {
+        assert.instanceOf(ConnectedPerson['@@redial-hooks'].fetch(), Promise);
     });
 });

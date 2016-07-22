@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import redial from 'redial';
 import * as reactRouter from 'react-router';
 import Root from '../../../../lib/shared/views/root/root';
 import {url as anyUrl, simpleObject, string} from '@travi/any';
@@ -32,6 +33,7 @@ suite('route renderer', () => {
         sandbox.stub(React, 'createElement');
         sandbox.stub(reactRouter, 'match');
         sandbox.stub(reactRouter, 'createMemoryHistory').returns(history);
+        sandbox.stub(redial, 'trigger');
 
         routes = simpleObject();
         routesStub.withArgs(sinon.match.func).returns(routes);
@@ -46,13 +48,16 @@ suite('route renderer', () => {
         const
             renderedContent = string(),
             callback = sinon.spy(),
-            renderProps = simpleObject(),
+            components = simpleObject(),
+            renderProps = Object.assign({components}, simpleObject()),
             context = simpleObject(),
             providerComponent = simpleObject(),
-            store = simpleObject();
+            store = simpleObject(),
+            fetchComplete = sinon.stub();
         React.createElement.withArgs(RouterContext, sinon.match(renderProps)).returns(context);
         React.createElement.withArgs(Root, {store}, context).returns(providerComponent);
         ReactDOMServer.renderToString.withArgs(providerComponent).returns(renderedContent);
+        redial.trigger.withArgs('fetch', components).returns({then: fetchComplete});
 
         renderer.routeTo(url, store, callback);
 
@@ -60,6 +65,10 @@ suite('route renderer', () => {
 
         assert.calledWith(reactRouter.match, {routes, location});
         reactRouter.match.yield(null, null, renderProps);
+
+        refute.called(callback);
+
+        fetchComplete.yield();
 
         assert.calledWith(callback, null, renderedContent);
     });
