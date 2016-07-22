@@ -88,7 +88,7 @@
     "webpack-validator": "2.2.3"
   },
   "dependencies": {
-    "@travi/admin.travi.org-components": "0.7.0",
+    "@travi/admin.travi.org-components": "0.8.0",
     "async": "2.0.0",
     "glue": "3.3.0",
     "good": "7.0.1",
