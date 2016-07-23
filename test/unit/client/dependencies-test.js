@@ -1,4 +1,5 @@
 import {define} from '../../../lib/client/dependencies';
+import * as fetcher from '../../../lib/client/fetcher';
 import * as container from '../../../lib/shared/ioc/container';
 import {assert} from 'chai';
 import sinon from 'sinon';
@@ -18,6 +19,6 @@ suite('client dependencies', () => {
     test('that the dependencies are loaded into the container', () => {
         define();
 
-        assert.calledWith(container.define, 'fetcher');
+        assert.calledWith(container.define, 'fetcher', fetcher);
     });
 });
