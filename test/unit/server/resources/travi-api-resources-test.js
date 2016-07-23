@@ -1,6 +1,6 @@
 import traviApiResources from '../../../../lib/server/resources/travi-api-resources.js';
 import traverson from 'traverson';
-import {url, string, integer, resource, listOf, simpleObject} from '../../../helpers/any-for-admin';
+import {url, string, word, integer, resource, listOf, simpleObject} from '../../../helpers/any-for-admin';
 import sinon from 'sinon';
 import {assert} from 'chai';
 
@@ -33,97 +33,126 @@ suite('travi-api resource interactions', () => {
         assert.calledWith(callback, null, links);
     });
 
-    test('that list of resources requested by following link from api catalog', () => {
-        const
-            resourceType = string(),
-            resources = listOf(resource),
-            responseFromApi = {
-                _embedded: {}
-            },
-            callback = sinon.spy();
-        /*eslint-disable no-underscore-dangle */
-        responseFromApi._embedded[resourceType] = resources;
-        /*eslint-enable no-underscore-dangle */
-        traverson.from.withArgs('https://api.travi.org/').returns({
-            follow: sinon.stub().withArgs(resourceType).returns({
-                getResource: stubForGet.yields(null, responseFromApi)
-            })
+    suite('list', () => {
+        test('that list of resources requested by following link from api catalog', () => {
+            const
+                resourceType = string(),
+                resources = listOf(resource),
+                responseFromApi = {
+                    _embedded: {}
+                },
+                callback = sinon.spy();
+            /*eslint-disable no-underscore-dangle */
+            responseFromApi._embedded[resourceType] = resources;
+            /*eslint-enable no-underscore-dangle */
+            traverson.from.withArgs('https://api.travi.org/').returns({
+                follow: sinon.stub().withArgs(resourceType).returns({
+                    getResource: stubForGet.yields(null, responseFromApi)
+                })
+            });
+
+            traviApiResources.getListOf(resourceType, callback);
+
+            assert.calledWith(callback, null, resources);
         });
 
-        traviApiResources.getListOf(resourceType, callback);
+        test('that error bubbles from resources request', () => {
+            const
+                resourceType = string(),
+                error = simpleObject(),
+                callback = sinon.spy();
+            traverson.from.withArgs('https://api.travi.org/').returns({
+                follow: sinon.stub().withArgs(resourceType).returns({
+                    getResource: stubForGet.yields(error)
+                })
+            });
 
-        assert.calledWith(callback, null, resources);
-    });
+            traviApiResources.getListOf(resourceType, callback);
 
-    test('that error bubbles from resources request', () => {
-        const
-            resourceType = string(),
-            error = simpleObject(),
-            callback = sinon.spy();
-        traverson.from.withArgs('https://api.travi.org/').returns({
-            follow: sinon.stub().withArgs(resourceType).returns({
-                getResource: stubForGet.yields(error)
-            })
+            assert.calledWith(callback, error);
         });
 
-        traviApiResources.getListOf(resourceType, callback);
+        test('that a single resource is mapped to a list', () => {
+            const
+                resourceType = string(),
+                responseFromApi = {
+                    _embedded: {}
+                },
+                resourceInstance = resource(),
+                callback = sinon.spy();
+            /*eslint-disable no-underscore-dangle */
+            responseFromApi._embedded[resourceType] = resourceInstance;
+            /*eslint-enable no-underscore-dangle */
+            traverson.from.withArgs('https://api.travi.org/').returns({
+                follow: sinon.stub().withArgs(resourceType).returns({
+                    getResource: stubForGet.yields(null, responseFromApi)
+                })
+            });
 
-        assert.calledWith(callback, error);
-    });
+            traviApiResources.getListOf(resourceType, callback);
 
-    test('that a single resource is mapped to a list', () => {
-        const
-            resourceType = string(),
-            responseFromApi = {
-                _embedded: {}
-            },
-            resourceInstance = resource(),
-            callback = sinon.spy();
-        /*eslint-disable no-underscore-dangle */
-        responseFromApi._embedded[resourceType] = resourceInstance;
-        /*eslint-enable no-underscore-dangle */
-        traverson.from.withArgs('https://api.travi.org/').returns({
-            follow: sinon.stub().withArgs(resourceType).returns({
-                getResource: stubForGet.yields(null, responseFromApi)
-            })
+            assert.calledWith(callback, null, [resourceInstance]);
         });
-
-        traviApiResources.getListOf(resourceType, callback);
-
-        assert.calledWith(callback, null, [resourceInstance]);
     });
 
-    test('that specific resource requested by following links', () => {
+    suite('single resource', () => {
         const
             resourceType = string(),
             resourceId = integer(),
             resourceInstance = resource(),
-            callback = sinon.spy();
-        traverson.from.withArgs('https://api.travi.org/').returns({
-            follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
-                getResource: stubForGet.yields(null, resourceInstance)
-            })
+            error = word();
+
+        test('that specific resource requested by following links', () => {
+            const
+                callback = sinon.spy();
+            traverson.from.withArgs('https://api.travi.org/').returns({
+                follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
+                    getResource: stubForGet.yields(null, resourceInstance)
+                })
+            });
+
+            traviApiResources.getResourceBy(resourceType, resourceId, callback);
+
+            assert.calledWith(callback, null, resourceInstance);
         });
 
-        traviApiResources.getResourceBy(resourceType, resourceId, callback);
+        test('that error bubbles from embedded resource request', () => {
+            const callback = sinon.spy();
+            traverson.from.withArgs('https://api.travi.org/').returns({
+                follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
+                    getResource: stubForGet.yields(error)
+                })
+            });
 
-        assert.calledWith(callback, null, resourceInstance);
-    });
+            traviApiResources.getResourceBy(resourceType, resourceId, callback);
 
-    test('that error bubbles from embedded resource request', () => {
-        const
-            resourceType = string(),
-            resourceId = integer(),
-            callback = sinon.spy(),
-            error = simpleObject();
-        traverson.from.withArgs('https://api.travi.org/').returns({
-            follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
-                getResource: stubForGet.yields(error)
-            })
+            assert.calledWith(callback, error);
         });
 
-        traviApiResources.getResourceBy(resourceType, resourceId, callback);
+        test('that promise is returned when requesting a single resource', () => {
+            traverson.from.withArgs('https://api.travi.org/').returns({
+                follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
+                    getResource: stubForGet.yields(null, resourceInstance)
+                })
+            });
 
-        assert.calledWith(callback, error);
+            const promise = traviApiResources.getResourceBy(resourceType, resourceId);
+
+            assert.instanceOf(promise, Promise);
+            return assert.becomes(promise, resourceInstance);
+        });
+
+        test('that promise is rejected for an error when requesting a single resource', () => {
+            traverson.from.withArgs('https://api.travi.org/').returns({
+                follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
+                    getResource: stubForGet.yields(error)
+                })
+            });
+
+            const promise = traviApiResources.getResourceBy(resourceType, resourceId);
+
+            assert.instanceOf(promise, Promise);
+            return assert.isRejected(promise, new RegExp(error));
+        });
     });
 });

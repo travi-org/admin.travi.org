@@ -34,6 +34,9 @@ suite('connected person component', () => {
     });
 
     test('that the `fetch` hook returns a promise', () => {
-        assert.instanceOf(ConnectedPerson['@@redial-hooks'].fetch(), Promise);
+        const promise = ConnectedPerson['@@redial-hooks'].fetch();
+
+        assert.instanceOf(promise, Promise);
+        return assert.isFulfilled(promise);
     });
 });
