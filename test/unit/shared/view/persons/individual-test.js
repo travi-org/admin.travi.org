@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStore} from 'redux';
 import {fromJS} from 'immutable';
-import connectedPerson from '../../../../../../../../lib/shared/views/resources/persons/single';
+import connectedPerson from '../../../../../lib/shared/views/resources/persons/single';
 
 import {assert} from 'chai';
 import {shallow} from 'enzyme';
