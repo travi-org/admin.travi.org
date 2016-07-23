@@ -19,10 +19,11 @@ suite('server-side data fetcher', () => {
     test('that it gets data from the repository', () => {
         const
             type = any.string(),
-            id = any.integer();
+            id = any.integer(),
+            promise = any.simpleObject();
+        resources.getResourceBy.withArgs(type, id).returns(promise);
 
-        getResource(type, id);
+        assert.equal(getResource(type, id), promise);
 
-        assert.calledWith(resources.getResourceBy, type, id);
     });
 });
