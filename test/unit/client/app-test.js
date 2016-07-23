@@ -4,6 +4,7 @@ import {Router, browserHistory} from 'react-router';
 import dom from 'react-dom';
 import * as redux from 'redux';
 import Root from '../../../lib/shared/views/root/root';
+import * as dependencies from '../../../lib/client/dependencies';
 import proxyquire from 'proxyquire';
 import {simpleObject} from '@travi/any';
 import {assert} from 'chai';
@@ -32,6 +33,7 @@ suite('client-side app', () => {
         sandbox.stub(dom, 'render');
         sandbox.stub(React, 'createElement');
         sandbox.stub(redux, 'createStore');
+        sandbox.stub(dependencies, 'define');
 
         routes = simpleObject();
 
@@ -54,6 +56,7 @@ suite('client-side app', () => {
 
         simulatePageLoad();
 
+        assert.calledOnce(dependencies.define);
         assert.calledWith(dom.render, rootComponent, document.getElementById('wrap'));
     });
 });
