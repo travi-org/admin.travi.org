@@ -33,7 +33,7 @@ suite('client-side app', () => {
         sandbox.stub(dom, 'render');
         sandbox.stub(React, 'createElement');
         sandbox.stub(redux, 'createStore');
-        sandbox.stub(dependencies, 'define');
+        sandbox.stub(dependencies, 'configure');
 
         routes = simpleObject();
 
@@ -56,7 +56,7 @@ suite('client-side app', () => {
 
         simulatePageLoad();
 
-        assert.calledOnce(dependencies.define);
+        assert.calledOnce(dependencies.configure);
         assert.calledWith(dom.render, rootComponent, document.getElementById('wrap'));
     });
 });

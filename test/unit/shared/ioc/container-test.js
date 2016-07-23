@@ -1,4 +1,4 @@
-import {define, use} from '../../../../lib/shared/ioc/container';
+import {add, use} from '../../../../lib/shared/ioc/container';
 import {assert} from 'chai';
 import any from '@travi/any';
 
@@ -8,7 +8,7 @@ suite('ioc container', () => {
             dependency = any.simpleObject(),
             name = any.string();
 
-        define(name, dependency);
+        add(name, dependency);
 
         assert.equal(use(name), dependency);
     });
