@@ -20,7 +20,7 @@ suite('routes', () => {
         './views/resources/individual/connected-resource': {
             default: (React) => () => <div>resource</div>                           //eslint-disable-line no-shadow
         },
-        './views/resources/individual/persons/connected-person': {
+        './views/resources/persons/single': {
             default: (React) => () => <div>person</div>                             //eslint-disable-line no-shadow
         }
     }).default;
