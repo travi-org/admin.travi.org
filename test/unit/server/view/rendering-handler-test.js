@@ -16,7 +16,7 @@ suite('rendering handler', () => {
         configureStore = sinon.stub(),
         handler = proxyquire('../../../../lib/server/view/rendering-handler', {
             'negotiator': Negotiator,
-            '../../shared/store/configure': configureStore
+            '../../shared/store/create': configureStore
         }),
         primaryNav = listOf(() => ({text: string()}), {min: 5});
 

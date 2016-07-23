@@ -3,7 +3,7 @@ import * as redux from 'redux';
 import {fromJS} from 'immutable';
 import {simpleObject} from '@travi/any';
 import reducer from '../../../../lib/shared/store/reducer';
-import configureStore from '../../../../lib/shared/store/configure.prod';
+import configureStore from '../../../../lib/shared/store/create';
 import sinon from 'sinon';
 import {assert} from 'chai';
 
