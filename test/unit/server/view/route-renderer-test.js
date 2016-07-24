@@ -53,7 +53,9 @@ suite('route renderer', () => {
             context = simpleObject(),
             providerComponent = simpleObject(),
             store = simpleObject(),
-            fetchComplete = sinon.stub();
+            error = simpleObject(),
+            thenCatch = sinon.stub(),
+            fetchComplete = sinon.stub().returns({catch: thenCatch});
         React.createElement.withArgs(RouterContext, sinon.match(renderProps)).returns(context);
         React.createElement.withArgs(Root, {store}, context).returns(providerComponent);
         ReactDOMServer.renderToString.withArgs(providerComponent).returns(renderedContent);
@@ -71,6 +73,10 @@ suite('route renderer', () => {
         fetchComplete.yield();
 
         assert.calledWith(callback, null, renderedContent);
+
+        thenCatch.yield(error);
+
+        assert.calledWith(callback, error);
     });
 
     test('that errors bubble', () => {

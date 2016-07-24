@@ -4,7 +4,6 @@ import * as routeRenderer from '../../../../lib/server/view/route-renderer';
 import * as assetManager from '../../../../lib/server/view/asset-manager';
 import * as resourcesController from '../../../../lib/server/resources/controller';
 import * as redux from 'redux';
-import immutable from 'immutable';
 import _ from 'lodash';
 import {string, simpleObject, listOf, url} from '@travi/any';
 import sinon from 'sinon';
@@ -81,7 +80,7 @@ suite('rendering handler', () => {
                 return _.extend({}, item, {active: 2 === index});
             });
         mediaType.returns('text/html');
-        configureStore.withArgs(immutable.fromJS(request.response.source)).returns(store);
+        configureStore.withArgs({legacy: request.response.source}).returns(store);
         assetManager.getAssets.yields(null, resources);
         helmet.rewind.returns({title: {toString: () => title}});
 
@@ -104,7 +103,7 @@ suite('rendering handler', () => {
         });
     });
 
-    test('that error bubbles', () => {
+    test('that error bubbles from requesting resource-types', () => {
         request.response = {};
         const
             reply = sinon.spy(),
@@ -114,6 +113,28 @@ suite('rendering handler', () => {
         resourcesController.listResourceTypes.yields(error);
 
         handler.register({ext: extension}, null, sinon.spy());
+
+        assert.calledWith(reply, error);
+    });
+
+    test('that error bubbles from routing to a view', () => {
+        request.params = {resourceType: primaryNav[2].text};
+        request.response = {};
+        const
+            reply = sinon.spy(),
+            error = simpleObject(),
+            reduxState = simpleObject(),
+            store = {
+                getState: sinon.stub().returns(reduxState),
+                dispatch: sinon.spy()
+            },
+            extension = sinon.stub().withArgs('onPreResponse').yields(request, reply);
+        mediaType.returns('text/html');
+        configureStore.returns(store);
+
+        handler.register({ext: extension}, null, sinon.spy());
+
+        routeRenderer.routeTo.yield(error);
 
         assert.calledWith(reply, error);
     });

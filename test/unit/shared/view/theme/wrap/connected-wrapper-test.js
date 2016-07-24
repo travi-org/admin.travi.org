@@ -38,7 +38,7 @@ suite('connected wrapper component', () => {
             primaryNav = listOf(simpleObject),
             mapStateToProps = reactRedux.connect.getCall(0).args[0],
 
-            props = mapStateToProps(Immutable.fromJS({primaryNav}));
+            props = mapStateToProps(Immutable.fromJS({legacy: {primaryNav}}));
 
         assert.deepEqual(props.primaryNav, primaryNav);
     });

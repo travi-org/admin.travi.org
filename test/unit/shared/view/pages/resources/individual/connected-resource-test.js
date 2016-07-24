@@ -38,7 +38,7 @@ suite('connected resource component', () => {
             resource = simpleObject(),
             mapStateToProps = reactRedux.connect.getCall(0).args[0],
 
-            props = mapStateToProps(Immutable.fromJS({resource}));
+            props = mapStateToProps(Immutable.fromJS({legacy: {resource}}));
 
         assert.deepEqual(props.resource, resource);
     });

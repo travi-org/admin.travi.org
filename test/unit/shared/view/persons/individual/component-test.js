@@ -23,7 +23,7 @@ suite('connected person component', () => {
                 thumbnail: url()
             },
 
-            wrapper = shallow(<ConnectedPerson store={createStore(() => fromJS({resource}))}/>),
+            wrapper = shallow(<ConnectedPerson store={createStore(() => fromJS({legacy: {resource}}))}/>),
             person = wrapper.prop('person');
 
         assert.equal(person.id, resource.id);

@@ -8,7 +8,7 @@ import sinon from 'sinon';
 import {assert} from 'chai';
 import {simpleObject, string} from '@travi/any';
 
-suite('connected wrapper component', () => {
+suite('connected list component', () => {
     let sandbox;
     const ResourceList = simpleObject();
 
@@ -39,10 +39,10 @@ suite('connected wrapper component', () => {
             resourceType = string(),
             mapStateToProps = reactRedux.connect.getCall(0).args[0],
 
-            props = mapStateToProps(Immutable.fromJS({
+            props = mapStateToProps(Immutable.fromJS({legacy: {
                 [resourceType]: resources,
                 resourceType
-            }));
+            }}));
 
         assert.equal(props.resourceType, resourceType);
         assert.deepEqual(props.resources, resources);
