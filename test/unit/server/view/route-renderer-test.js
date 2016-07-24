@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import redial from 'redial';
 import * as reactRouter from 'react-router';
-import Root from '../../../../lib/shared/views/root/root';
+import Root from '../../../../lib/shared/views/root/root.prod';
 import {url as anyUrl, simpleObject, string} from '@travi/any';
 import proxyquire from 'proxyquire';
 import sinon from 'sinon';
