@@ -1,5 +1,5 @@
 import React from 'react';
-import Root from '../../../../../lib/shared/views/root/root.prod';
+import Root from '../../../../../lib/shared/views/root/root';
 import {assert} from 'chai';
 import {shallow} from 'enzyme';
 import any from '@travi/any';
