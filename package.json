@@ -85,7 +85,7 @@
     "webpack": "2.1.0-beta.15",
     "webpack-config-utils": "2.0.0",
     "webpack-dev-server": "1.14.1",
-    "webpack-validator": "2.2.3"
+    "webpack-validator": "2.2.4"
   },
   "dependencies": {
     "@travi/admin.travi.org-components": "0.8.1",
