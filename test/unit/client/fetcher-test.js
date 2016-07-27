@@ -20,10 +20,21 @@ suite('client-side data fetcher', () => {
         const
             type = any.string(),
             id = any.integer(),
-            promise = any.simpleObject();
+            response = any.simpleObject();
 
-        xhr.get.withArgs(`/${type}/${id}`).returns(promise);
+        xhr.get.withArgs(`/${type}/${id}`).yields(null, response);
 
-        assert.equal(getResource({type, id}), promise);
+        return assert.becomes(getResource({type, id}), response);
+    });
+
+    test('that a fetch error results in a rejected promise', () => {
+        const
+            type = any.string(),
+            id = any.integer(),
+            error = any.word();
+
+        xhr.get.yields(error);
+
+        return assert.isRejected(getResource({type, id}), new RegExp(error));
     });
 });
