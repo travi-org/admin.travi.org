@@ -6,6 +6,7 @@ import * as redux from 'redux';
 import Root from '../../../lib/shared/views/root/root';
 import * as storeCreator from '../../../lib/shared/store/create';
 import * as dependencies from '../../../lib/client/dependencies';
+import * as historyListener from '../../../lib/client/history-listener';
 import proxyquire from 'proxyquire';
 import {simpleObject} from '@travi/any';
 import {assert} from 'chai';
@@ -16,7 +17,7 @@ suite('client-side app', () => {
         routes;
     const
         initialState = simpleObject(),
-        store = simpleObject(),
+        store = {...simpleObject(), dispatch: () => undefined},
         hydrator = {
             hydrate: sinon.spy()
         };
@@ -35,6 +36,7 @@ suite('client-side app', () => {
         sandbox.stub(redux, 'createStore');
         sandbox.stub(dependencies, 'configure');
         sandbox.stub(storeCreator, 'configureStore').withArgs(initialState).returns(store);
+        sandbox.stub(historyListener, 'addHistoryListener');
 
         routes = simpleObject();
 
@@ -58,6 +60,7 @@ suite('client-side app', () => {
         simulatePageLoad();
 
         assert.calledOnce(dependencies.configure);
+        assert.calledWith(historyListener.addHistoryListener, routes, store.dispatch);
         assert.calledWith(dom.render, rootComponent, document.getElementById('wrap'));
     });
 });
