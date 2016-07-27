@@ -4,6 +4,7 @@ import chaiImmutable from 'chai-immutable';
 import chaiAsPromised from 'chai-as-promised';
 import sinon from 'sinon';
 import referee from 'referee';
+import 'sinon-as-promised';
 
 function setupDom() {
     const
