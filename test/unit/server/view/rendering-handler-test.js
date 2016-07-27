@@ -3,6 +3,7 @@ import helmet from 'react-helmet';
 import * as routeRenderer from '../../../../lib/server/view/route-renderer';
 import * as assetManager from '../../../../lib/server/view/asset-manager';
 import * as resourcesController from '../../../../lib/server/resources/controller';
+import * as storeCreator from '../../../../lib/shared/store/create';
 import * as redux from 'redux';
 import _ from 'lodash';
 import {string, simpleObject, listOf, url} from '@travi/any';
@@ -12,10 +13,8 @@ import {assert, refute} from 'referee';
 suite('rendering handler', () => {
     const
         Negotiator = sinon.stub(),
-        configureStore = sinon.stub(),
         handler = proxyquire('../../../../lib/server/view/rendering-handler', {
-            'negotiator': Negotiator,
-            '../../shared/store/create': configureStore
+            'negotiator': Negotiator
         }),
         primaryNav = listOf(() => ({text: string()}), {min: 5});
 
@@ -30,6 +29,7 @@ suite('rendering handler', () => {
         sandbox.stub(resourcesController, 'listResourceTypes').yields(null, primaryNav);
         sandbox.stub(helmet, 'rewind');
         sandbox.stub(assetManager, 'getAssets');
+        sandbox.stub(storeCreator, 'configureStore');
 
         request = simpleObject();
         request.url = url();
@@ -80,7 +80,7 @@ suite('rendering handler', () => {
                 return _.extend({}, item, {active: 2 === index});
             });
         mediaType.returns('text/html');
-        configureStore.withArgs({legacy: request.response.source}).returns(store);
+        storeCreator.configureStore.withArgs({legacy: request.response.source}).returns(store);
         assetManager.getAssets.yields(null, resources);
         helmet.rewind.returns({title: {toString: () => title}});
 
@@ -130,7 +130,7 @@ suite('rendering handler', () => {
             },
             extension = sinon.stub().withArgs('onPreResponse').yields(request, reply);
         mediaType.returns('text/html');
-        configureStore.returns(store);
+        storeCreator.configureStore.returns(store);
 
         handler.register({ext: extension}, null, sinon.spy());
 

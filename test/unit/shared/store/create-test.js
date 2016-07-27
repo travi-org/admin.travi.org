@@ -4,7 +4,7 @@ import {fromJS} from 'immutable';
 import {simpleObject} from '@travi/any';
 import reducer from '../../../../lib/shared/store/reducer';
 import person from '../../../../lib/shared/views/resources/persons/individual/duck';
-import configureStore from '../../../../lib/shared/store/create';
+import {configureStore} from '../../../../lib/shared/store/create';
 import * as reduxImmutable from 'redux-immutable';
 import sinon from 'sinon';
 import {assert} from 'chai';

@@ -4,6 +4,7 @@ import {Router, browserHistory} from 'react-router';
 import dom from 'react-dom';
 import * as redux from 'redux';
 import Root from '../../../lib/shared/views/root/root';
+import * as storeCreator from '../../../lib/shared/store/create';
 import * as dependencies from '../../../lib/client/dependencies';
 import proxyquire from 'proxyquire';
 import {simpleObject} from '@travi/any';
@@ -22,7 +23,6 @@ suite('client-side app', () => {
 
     function simulatePageLoad() {
         proxyquire('../../../lib/client/app', {
-            '../shared/store/create': sinon.stub().withArgs(initialState).returns(store),
             './route-hydrator': sinon.stub().withArgs(store).returns(hydrator),
             '../shared/routes': {default: sinon.stub().withArgs(hydrator.hydrate).returns(routes)}
         });
@@ -34,6 +34,7 @@ suite('client-side app', () => {
         sandbox.stub(React, 'createElement');
         sandbox.stub(redux, 'createStore');
         sandbox.stub(dependencies, 'configure');
+        sandbox.stub(storeCreator, 'configureStore').withArgs(initialState).returns(store);
 
         routes = simpleObject();
 
