@@ -49,17 +49,19 @@ suite('route renderer', () => {
             renderedContent = string(),
             callback = sinon.spy(),
             components = simpleObject(),
-            renderProps = Object.assign({components}, simpleObject()),
+            params = simpleObject(),
+            renderProps = {...simpleObject(), components, params},
             context = simpleObject(),
             providerComponent = simpleObject(),
-            store = simpleObject(),
+            dispatch = simpleObject(),
+            store = {...simpleObject(), dispatch},
             error = simpleObject(),
             thenCatch = sinon.stub(),
             fetchComplete = sinon.stub().returns({catch: thenCatch});
         React.createElement.withArgs(RouterContext, sinon.match(renderProps)).returns(context);
         React.createElement.withArgs(Root, {store}, context).returns(providerComponent);
         ReactDOMServer.renderToString.withArgs(providerComponent).returns(renderedContent);
-        redial.trigger.withArgs('fetch', components).returns({then: fetchComplete});
+        redial.trigger.withArgs('fetch', components, {params, dispatch}).returns({then: fetchComplete});
 
         renderer.routeTo(url, store, callback);
 
