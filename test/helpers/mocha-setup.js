@@ -21,10 +21,10 @@ setupDom();
 
 require.extensions['.scss'] = () => undefined;
 
+sinon.assert.expose(chai.assert, { prefix: '' });
 chai.use(chaiImmutable);
 chai.use(chaiAsPromised);
 chai.use(chaiSubset);
-sinon.assert.expose(chai.assert, { prefix: '' });
 
 referee.format = require('formatio').configure({quoteStrings: false}).ascii;
 require('referee-sinon')(referee, sinon);
