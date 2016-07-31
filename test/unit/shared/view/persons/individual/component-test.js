@@ -1,8 +1,8 @@
 import React from 'react';
 import {createStore} from 'redux';
 import {fromJS} from 'immutable';
-import connectedPerson from '../../../../../../lib/shared/views/resources/persons/individual/component';
-import * as duck from '../../../../../../lib/shared/views/resources/persons/individual/duck';
+import connectedPerson from '../../../../../../lib/shared/views/persons/individual/component';
+import * as duck from '../../../../../../lib/shared/views/persons/individual/duck';
 
 import {assert} from 'chai';
 import {shallow} from 'enzyme';

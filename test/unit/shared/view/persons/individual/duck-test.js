@@ -4,7 +4,7 @@ import reducer, {
     LOAD_PERSON,
     PERSON_LOAD_FAILED,
     PERSON_LOADED
-} from '../../../../../../lib/shared/views/resources/persons/individual/duck';
+} from '../../../../../../lib/shared/views/persons/individual/duck';
 import {assert} from 'chai';
 import any from '@travi/any';
 import sinon from 'sinon';

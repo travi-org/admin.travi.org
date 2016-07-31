@@ -3,7 +3,7 @@ import * as redux from 'redux';
 import {fromJS} from 'immutable';
 import {simpleObject} from '@travi/any';
 import reducer from '../../../../lib/shared/store/reducer';
-import person from '../../../../lib/shared/views/resources/persons/individual/duck';
+import person from '../../../../lib/shared/views/persons/individual/duck';
 import resource from '../../../../lib/shared/views/resources/individual/duck';
 import {configureStore} from '../../../../lib/shared/store/create';
 import fetchMiddleware from '../../../../lib/shared/store/fetch-middleware';
