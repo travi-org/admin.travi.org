@@ -26,7 +26,7 @@ suite('connected resource component', () => {
         const
             resource = simpleObject(),
 
-            wrapper = shallow(<ConnectedResource store={createStore(() => fromJS({legacy: {resource}}))}/>),
+            wrapper = shallow(<ConnectedResource store={createStore(() => fromJS({resource: {resource}}))}/>),
             personProp = wrapper.prop('resource');
 
         assert.deepEqual(personProp, resource);
