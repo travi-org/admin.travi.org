@@ -1,0 +1,65 @@
+import {Map, fromJS} from 'immutable';
+import reducer, {
+    loadResource,
+    LOAD_RESOURCES,
+    RESOURCES_LOAD_FAILED,
+    RESOURCES_LOADED
+} from '../../../../../../lib/shared/views/resources/list/duck';
+import {assert} from 'chai';
+import any from '@travi/any';
+import sinon from 'sinon';
+
+suite('resource duck', () => {
+    suite('reducer', () => {
+        test('that state is returned directly without known action', () => {
+            const initialState = any.simpleObject();
+
+            assert.equal(reducer(initialState, {}), initialState);
+        });
+
+        test('that a default initial state is provided', () => {
+            assert.equal(reducer(undefined, {}), fromJS({list: {}}));
+        });
+
+        test('that LOAD_RESOURCES marks as loading and clears a previous resource', () => {
+            assert.equal(reducer(Map(), {type: LOAD_RESOURCES}), fromJS({loading: true, loaded: false, list: {}}));
+        });
+
+        test('that RESOURCES_LOADED marks as loaded', () => {
+            const resource = any.simpleObject();
+            assert.equal(reducer(Map(), {type: RESOURCES_LOADED, resource}), fromJS({
+                loading: false,
+                loaded: true,
+                list: resource
+            }));
+        });
+
+        test('that RESOURCES_LOAD_FAILED marks as loaded', () => {
+            const error = any.simpleObject();
+            assert.equal(reducer(Map(), {type: RESOURCES_LOAD_FAILED, error}), fromJS({
+                loading: false,
+                error
+            }));
+        });
+    });
+
+    suite('action creators', () => {
+        test('that loadPerson defines handlers for fetching data for a resource', () => {
+            const
+                id = any.integer(),
+                resource = any.simpleObject(),
+                getResource = sinon.stub(),
+                fetcher = {getResource},
+                type = any.string();
+            getResource.withArgs(type, id).returns(resource);
+
+            assert.containSubset(loadResource(type, id), {
+                initiate: LOAD_RESOURCES,
+                success: RESOURCES_LOADED,
+                failure: RESOURCES_LOAD_FAILED
+            });
+
+            assert.equal(loadResource(type, id).fetch(fetcher), resource);
+        });
+    });
+});
