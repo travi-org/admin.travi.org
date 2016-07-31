@@ -1,8 +1,6 @@
 import React from 'react';
 import {createStore} from 'redux';
-import * as reactRedux from 'react-redux';
 import {fromJS} from 'immutable';
-import * as components from '@travi/admin.travi.org-components';
 import connectedResource from '../../../../../../../lib/shared/views/resources/individual/connected-resource';
 import * as duck from '../../../../../../../lib/shared/views/resources/individual/duck';
 

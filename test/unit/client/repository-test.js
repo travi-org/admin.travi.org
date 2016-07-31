@@ -1,4 +1,4 @@
-import {simpleObject, string, integer} from '@travi/any';
+import {simpleObject, string} from '@travi/any';
 import {assert} from 'chai';
 import sinon from 'sinon';
 import proxyquire from 'proxyquire';
