@@ -1,4 +1,4 @@
-import {getResource} from '../../../../lib/server/resources/fetcher';
+import {getResource, getResources} from '../../../../lib/server/resources/fetcher';
 import * as controller from '../../../../lib/server/resources/controller';
 import sinon from 'sinon';
 import {assert} from 'chai';
@@ -10,13 +10,14 @@ suite('server-side data fetcher', () => {
     setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(controller, 'getResource');
+        sandbox.stub(controller, 'getListOf');
     });
 
     teardown(() => {
         sandbox.restore();
     });
 
-    test('that it gets data from the repository', () => {
+    test('that it gets a single resource', () => {
         const
             type = any.string(),
             id = any.integer(),
@@ -24,6 +25,14 @@ suite('server-side data fetcher', () => {
         controller.getResource.withArgs(type, id).returns(promise);
 
         assert.equal(getResource(type, id), promise);
+    });
 
+    test('that it gets a list of resources', () => {
+        const
+            type = any.string(),
+            promise = any.simpleObject();
+        controller.getListOf.withArgs(type).returns(promise);
+
+        assert.equal(getResources(type), promise);
     });
 });
