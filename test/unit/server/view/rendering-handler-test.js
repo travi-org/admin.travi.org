@@ -31,8 +31,7 @@ suite('rendering handler', () => {
         sandbox.stub(assetManager, 'getAssets');
         sandbox.stub(storeCreator, 'configureStore');
 
-        request = simpleObject();
-        request.url = url();
+        request = {...simpleObject(), url: url()};
         mediaType = sinon.stub();
         Negotiator.withArgs(request).returns({mediaType});
     });

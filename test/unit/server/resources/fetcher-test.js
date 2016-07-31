@@ -1,5 +1,5 @@
 import {getResource} from '../../../../lib/server/resources/fetcher';
-import resources from '../../../../lib/server/resources/travi-api-resources';
+import * as controller from '../../../../lib/server/resources/controller';
 import sinon from 'sinon';
 import {assert} from 'chai';
 import any from '@travi/any';
@@ -9,7 +9,7 @@ suite('server-side data fetcher', () => {
 
     setup(() => {
         sandbox = sinon.sandbox.create();
-        sandbox.stub(resources, 'getResourceBy');
+        sandbox.stub(controller, 'getResource');
     });
 
     teardown(() => {
@@ -21,7 +21,7 @@ suite('server-side data fetcher', () => {
             type = any.string(),
             id = any.integer(),
             promise = any.simpleObject();
-        resources.getResourceBy.withArgs(type, id).returns(promise);
+        controller.getResource.withArgs(type, id).returns(promise);
 
         assert.equal(getResource(type, id), promise);
 

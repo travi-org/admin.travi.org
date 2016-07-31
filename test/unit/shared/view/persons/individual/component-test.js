@@ -24,7 +24,7 @@ suite('connected person component', () => {
 
     test('that redux state is mapped to props', () => {
         const
-            resource = {
+            person = {
                 id: string(),
                 displayName: string(),
                 name: {
@@ -35,14 +35,14 @@ suite('connected person component', () => {
                 thumbnail: url()
             },
 
-            wrapper = shallow(<ConnectedPerson store={createStore(() => fromJS({legacy: {resource}}))}/>),
-            person = wrapper.prop('person');
+            wrapper = shallow(<ConnectedPerson store={createStore(() => fromJS({person: {person}}))}/>),
+            personProp = wrapper.prop('person');
 
-        assert.equal(person.id, resource.id);
-        assert.equal(person.displayName, resource.displayName);
-        assert.deepEqual(person.name, resource.name);
-        assert.deepEqual(person.links, resource.links);
-        assert.equal(person.avatar, resource.thumbnail);
+        assert.equal(personProp.id, person.id);
+        assert.equal(personProp.displayName, person.displayName);
+        assert.deepEqual(personProp.name, person.name);
+        assert.deepEqual(personProp.links, person.links);
+        assert.equal(personProp.avatar, person.thumbnail);
     });
 
     test('that the `fetch` hook returns a promise', () => {

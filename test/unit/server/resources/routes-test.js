@@ -1,8 +1,9 @@
 import {listOf, simpleObject, string} from '@travi/any';
 import sinon from 'sinon';
 import {assert} from 'chai';
-import resources from '../../../../lib/server/resources/routes';
+import routes from '../../../../lib/server/resources/routes';
 import * as resourcesController from '../../../../lib/server/resources/controller';
+import {getResourceHandler} from '../../../../lib/server/resources/route-handlers';
 
 suite('server routes config', () => {
     let sandbox;
@@ -18,7 +19,7 @@ suite('server routes config', () => {
     });
 
     test('that the plugin is defined', () => {
-        assert.deepEqual(resources.register.attributes, {
+        assert.deepEqual(routes.register.attributes, {
             name: 'resources-routes'
         });
     });
@@ -28,21 +29,16 @@ suite('server routes config', () => {
             reply = sinon.spy(),
             next = sinon.spy(),
             resourceType = string(),
-            server = {
-                route: sinon.stub().yieldsTo('handler', {
-                    params: {resourceType}
-                }, reply)
-            },
+            server = {route: sinon.stub()},
             resourceList = listOf(simpleObject);
+        server.route.withArgs(sinon.match({path: '/{resourceType}'})).yieldsTo('handler', {
+            params: {resourceType}
+        }, reply);
         resourcesController.getListOf.yields(null, resourceList);
 
-        resources.register(server, null, next);
+        routes.register(server, null, next);
 
         assert.calledOnce(next);
-        assert.calledWith(server.route, sinon.match({
-            method: 'GET',
-            path: '/{resourceType}'
-        }));
         assert.calledWith(reply, {
             [resourceType]: resourceList,
             resourceType
@@ -54,57 +50,31 @@ suite('server routes config', () => {
             reply = sinon.spy(),
             next = sinon.spy(),
             resourceType = string(),
-            server = {
-                route: sinon.stub().yieldsTo('handler', {
-                    params: {resourceType}
-                }, reply)
-            },
+            server = {route: sinon.stub()},
             error = simpleObject();
+        server.route.withArgs(sinon.match({path: '/{resourceType}'})).yieldsTo('handler', {
+            params: {resourceType}
+        }, reply);
         resourcesController.getListOf.yields(error);
 
-        resources.register(server, null, next);
+        routes.register(server, null, next);
 
         assert.calledWith(reply, error);
     });
+
 
     test('that the single resource route is configured', () => {
         const
-            reply = sinon.spy(),
             next = sinon.spy(),
-            resourceType = string(),
-            server = {
-                route: sinon.stub().yieldsTo('handler', {
-                    params: {resourceType}
-                }, reply)
-            },
-            resource = simpleObject();
-        resourcesController.getResource.yields(null, resource);
+            server = {route: sinon.stub()};
 
-        resources.register(server, null, next);
+        routes.register(server, null, next);
 
         assert.calledOnce(next);
-        assert.calledWith(server.route, sinon.match({
+        assert.calledWith(server.route, {
             method: 'GET',
-            path: '/{resourceType}/{id}'
-        }));
-        assert.calledWith(reply, {resource});
-    });
-
-    test('that error bubbles for resource route', () => {
-        const
-            reply = sinon.spy(),
-            next = sinon.spy(),
-            resourceType = string(),
-            server = {
-                route: sinon.stub().yieldsTo('handler', {
-                    params: {resourceType}
-                }, reply)
-            },
-            error = simpleObject();
-        resourcesController.getResource.yields(error);
-
-        resources.register(server, null, next);
-
-        assert.calledWith(reply, error);
+            path: '/{resourceType}/{id}',
+            handler: getResourceHandler
+        });
     });
 });
