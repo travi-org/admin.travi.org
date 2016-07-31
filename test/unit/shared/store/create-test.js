@@ -5,6 +5,7 @@ import {simpleObject} from '@travi/any';
 import reducer from '../../../../lib/shared/store/reducer';
 import person from '../../../../lib/shared/views/persons/individual/duck';
 import resource from '../../../../lib/shared/views/resources/individual/duck';
+import resources from '../../../../lib/shared/views/resources/list/duck';
 import {configureStore} from '../../../../lib/shared/store/create';
 import fetchMiddleware from '../../../../lib/shared/store/fetch-middleware';
 import * as reduxImmutable from 'redux-immutable';
@@ -26,7 +27,8 @@ suite('store creation for production', () => {
         sandbox.stub(reduxImmutable, 'combineReducers').withArgs({
             legacy: reducer,
             person,
-            resource
+            resource,
+            resources
         }).returns(combinedReducer);
         sandbox.stub(redux, 'createStore').withArgs(combinedReducer, fromJS(initialState), composed).returns(store);
         sandbox.stub(redux, 'compose');

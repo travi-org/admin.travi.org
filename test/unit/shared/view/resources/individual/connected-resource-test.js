@@ -32,7 +32,6 @@ suite('connected resource component', () => {
         assert.deepEqual(personProp, resource);
     });
 
-
     test('that the `fetch` hook returns a promise', () => {
         const
             type = string(),

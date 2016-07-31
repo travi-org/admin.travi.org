@@ -1,6 +1,6 @@
 import {Map, fromJS} from 'immutable';
 import reducer, {
-    loadResource,
+    loadResources,
     LOAD_RESOURCES,
     RESOURCES_LOAD_FAILED,
     RESOURCES_LOADED
@@ -46,20 +46,19 @@ suite('resource duck', () => {
     suite('action creators', () => {
         test('that loadPerson defines handlers for fetching data for a resource', () => {
             const
-                id = any.integer(),
                 resource = any.simpleObject(),
-                getResource = sinon.stub(),
-                fetcher = {getResource},
+                getResources = sinon.stub(),
+                fetcher = {getResources},
                 type = any.string();
-            getResource.withArgs(type, id).returns(resource);
+            getResources.withArgs(type).returns(resource);
 
-            assert.containSubset(loadResource(type, id), {
+            assert.containSubset(loadResources(type), {
                 initiate: LOAD_RESOURCES,
                 success: RESOURCES_LOADED,
                 failure: RESOURCES_LOAD_FAILED
             });
 
-            assert.equal(loadResource(type, id).fetch(fetcher), resource);
+            assert.equal(loadResources(type).fetch(fetcher), resource);
         });
     });
 });
