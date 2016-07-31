@@ -9,42 +9,11 @@ suite('route data hydration', () => {
 
     setup(() => {
         sandbox = sinon.sandbox.create();
-        sandbox.stub(repository, 'getResource');
         sandbox.stub(repository, 'getResources');
     });
 
     teardown(() => {
         sandbox.restore();
-    });
-
-    test('that the single resource is fetched from the repository when an id exists in the route', () => {
-        const
-            resource = simpleObject(),
-            resourceType = string(),
-            resourceId = string(),
-            callback = sinon.spy(),
-            store = {
-                dispatch: sinon.spy()
-            },
-            hydrater = hydraterFactory(store);
-
-        hydrater.hydrate({
-            location: {
-                pathname: `/${resourceType}/${resourceId}`
-            }
-        }, null, callback);
-
-        assert.calledWith(repository.getResource, resourceType, resourceId);
-        refute.called(callback);
-
-        repository.getResource.yield(null, {resource});
-
-        assert.calledWith(store.dispatch, {
-            type: 'SET_RESOURCE',
-            resource
-        });
-        assert.calledOnce(callback);
-        refute.called(repository.getResources);
     });
 
     test('that resources are fetched from the repository when an id is not present in the route', () => {
@@ -78,6 +47,5 @@ suite('route data hydration', () => {
             resources
         });
         assert.calledOnce(callback);
-        refute.called(repository.getResource);
     });
 });

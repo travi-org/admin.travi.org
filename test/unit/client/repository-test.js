@@ -8,37 +8,6 @@ suite('client repository', () => {
         xhr = sinon.stub(),
         repository = proxyquire('../../../lib/client/repository', {xhr});
 
-    test('that resource is requested from server by id', () => {
-        const
-            data = [simpleObject()],
-            type = string(),
-            id = integer(),
-            callback = sinon.spy();
-
-        repository.getResource(type, id, callback);
-
-        assert.calledWith(xhr, {url: `/${type}/${id}`});
-
-        xhr.yield(null, {
-            body: JSON.stringify(data)
-        });
-
-        assert.calledWith(callback, null, data);
-    });
-
-    test('that error bubbles when getting a resource by id', () => {
-        const
-            error = simpleObject(),
-            callback = sinon.spy(),
-            type = string(),
-            id = integer();
-        xhr.withArgs({url: `/${type}/${id}`}).yields(error);
-
-        repository.getResource(type, id, callback);
-
-        assert.calledWith(callback, error);
-    });
-
     test('that a list of resources is requested from server', () => {
         const
             data = [simpleObject()],

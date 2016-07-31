@@ -4,6 +4,7 @@ import {fromJS} from 'immutable';
 import {simpleObject} from '@travi/any';
 import reducer from '../../../../lib/shared/store/reducer';
 import person from '../../../../lib/shared/views/resources/persons/individual/duck';
+import resource from '../../../../lib/shared/views/resources/individual/duck';
 import {configureStore} from '../../../../lib/shared/store/create';
 import fetchMiddleware from '../../../../lib/shared/store/fetch-middleware';
 import * as reduxImmutable from 'redux-immutable';
@@ -22,7 +23,11 @@ suite('store creation for production', () => {
 
     setup(() => {
         sandbox = sinon.sandbox.create();
-        sandbox.stub(reduxImmutable, 'combineReducers').withArgs({legacy: reducer, person}).returns(combinedReducer);
+        sandbox.stub(reduxImmutable, 'combineReducers').withArgs({
+            legacy: reducer,
+            person,
+            resource
+        }).returns(combinedReducer);
         sandbox.stub(redux, 'createStore').withArgs(combinedReducer, fromJS(initialState), composed).returns(store);
         sandbox.stub(redux, 'compose');
         sandbox.stub(redux, 'applyMiddleware').withArgs(fetchMiddleware).returns(appliedFetch);
