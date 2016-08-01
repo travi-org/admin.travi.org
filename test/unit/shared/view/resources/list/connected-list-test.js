@@ -1,50 +1,47 @@
 import React from 'react';
-import * as reactRedux from 'react-redux';
-import Immutable from 'immutable';
-import * as components from '@travi/admin.travi.org-components';
+import {createStore} from 'redux';
+import {fromJS} from 'immutable';
 import connectedList from '../../../../../../lib/shared/views/resources/list/connected-list';
+import * as duck from '../../../../../../lib/shared/views/resources/list/duck';
 
 import sinon from 'sinon';
 import {assert} from 'chai';
-import {simpleObject, string} from '@travi/any';
+import {shallow} from 'enzyme';
+import {simpleObject, string, listOf} from '@travi/any';
 
 suite('connected list component', () => {
     let sandbox;
-    const ResourceList = simpleObject();
+    const ConnectedList = connectedList(React);
 
     setup(() => {
         sandbox = sinon.sandbox.create();
-        sandbox.stub(reactRedux, 'connect');
-        sandbox.stub(components, 'createMaybeList').withArgs(React).returns(ResourceList);
+        sandbox.stub(duck, 'loadResources');
     });
 
     teardown(() => {
         sandbox.restore();
     });
 
-    test('that the Resource component is connected to the redux store', () => {
-        const connectToComponent = sinon.stub();
-        reactRedux.connect.returns(connectToComponent);
-
-        connectedList(React);
-
-        assert.calledWith(connectToComponent, ResourceList);
-    });
-
     test('that redux state is mapped to props', () => {
-        reactRedux.connect.returns(sinon.stub());
-        connectedList(React);
         const
-            resources = simpleObject(),
-            resourceType = string(),
-            mapStateToProps = reactRedux.connect.getCall(0).args[0],
+            list = listOf(simpleObject),
 
-            props = mapStateToProps(Immutable.fromJS({legacy: {
-                [resourceType]: resources,
-                resourceType
-            }}));
+            wrapper = shallow(<ConnectedList store={createStore(() => fromJS({resources: {list}}))}/>),
+            personProp = wrapper.prop('resources');
 
-        assert.equal(props.resourceType, resourceType);
-        assert.deepEqual(props.resources, resources);
+        assert.deepEqual(personProp, list);
     });
+
+    test('that the `fetch` hook returns a promise', () => {
+        const
+            type = string(),
+            person = simpleObject(),
+            dispatch = sinon.stub(),
+            promise = simpleObject();
+        duck.loadResources.withArgs(type).returns(person);
+        dispatch.withArgs(person).returns(promise);
+
+        assert.equal(ConnectedList['@@redial-hooks'].fetch({params: {type}, dispatch}), promise);
+    });
+
 });
