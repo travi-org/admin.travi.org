@@ -22,7 +22,13 @@ suite('resource duck', () => {
         });
 
         test('that LOAD_RESOURCES marks as loading and clears a previous resource', () => {
-            assert.equal(reducer(Map(), {type: LOAD_RESOURCES}), fromJS({loading: true, loaded: false, list: {}}));
+            const resourceType = any.string();
+            assert.equal(reducer(Map(), {type: LOAD_RESOURCES, resourceType}), fromJS({
+                loading: true,
+                loaded: false,
+                list: {},
+                type: resourceType
+            }));
         });
 
         test('that RESOURCES_LOADED marks as loaded', () => {
@@ -53,6 +59,7 @@ suite('resource duck', () => {
             getResources.withArgs(type).returns(resource);
 
             assert.containSubset(loadResources(type), {
+                data: {resourceType: type},
                 initiate: LOAD_RESOURCES,
                 success: RESOURCES_LOADED,
                 failure: RESOURCES_LOAD_FAILED

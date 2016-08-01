@@ -29,11 +29,13 @@ suite('fetch middleware', () => {
     });
 
     test('that dispatch is called with the `initiate` topic', () => {
-        const dispatch = sinon.stub();
+        const
+            data = any.simpleObject(),
+            dispatch = sinon.stub();
 
-        middleware({dispatch})()({...action, fetch: () => ({then: () => undefined}), initiate});
+        middleware({dispatch})()({...action, data, fetch: () => ({then: () => undefined}), initiate});
 
-        assert.calledWith(dispatch, {type: initiate});
+        assert.calledWith(dispatch, {type: initiate, ...data});
     });
 
     test('that the `success` topic is dispatched upon a successful fetch', () => {
