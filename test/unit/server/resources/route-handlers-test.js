@@ -9,15 +9,12 @@ suite('route handlers', () => {
         Negotiator = sinon.stub(),
         handlers = proxyquire('../../../../lib/server/resources/route-handlers', {
             'negotiator': Negotiator
-        }),
-        params = {resourceType: any.string(), id: any.integer()};
+        });
     let sandbox, mediaType;
 
     setup(() => {
         sandbox = sinon.sandbox.create();
-        sandbox.stub(resourcesController, 'getResource');
         mediaType = sinon.stub();
-        Negotiator.withArgs({params}).returns({mediaType});
     });
 
     teardown(() => {
@@ -25,40 +22,95 @@ suite('route handlers', () => {
         Negotiator.reset();
     });
 
-    test('that the single resource route handler eventually returns the resource', () => {
-        const
-            resource = any.simpleObject(),
-            reply = sinon.spy();
-        resourcesController.getResource.withArgs(params.resourceType, params.id).resolves(resource);
-        mediaType.returns('text/foo');
+    suite('single resource', () => {
+        const params = {resourceType: any.string(), id: any.integer()};
 
-        return handlers.getResourceHandler({params}, reply).then(() => {
-            assert.calledWith(reply, {resource});
+        setup(() => {
+            sandbox.stub(resourcesController, 'getResource');
+            Negotiator.withArgs({params}).returns({mediaType});
+        });
+
+        test('that the resource is eventually returned', () => {
+            const
+                resource = any.simpleObject(),
+                reply = sinon.spy();
+            resourcesController.getResource.withArgs(params.resourceType, params.id).resolves(resource);
+            mediaType.returns('text/foo');
+
+            return handlers.getResourceHandler({params}, reply).then(() => {
+                assert.calledWith(reply, {resource});
+            });
+        });
+
+        test('that errors are eventually handled', () => {
+            const
+                error = any.simpleObject(),
+                reply = sinon.spy();
+            resourcesController.getResource.rejects(error);
+            mediaType.returns('text/foo');
+
+            return handlers.getResourceHandler({params}, reply).then(assert.fail).catch(() => {
+                assert.calledWith(reply, error);
+            });
+        });
+
+        test('that a request for html does not fetch data', () => {
+            mediaType.returns('text/html');
+            const
+                reply = sinon.spy(),
+
+                promise = handlers.getResourceHandler({params}, reply);
+
+            assert.notCalled(resourcesController.getResource);
+            assert.calledWith(reply, {});
+
+            return assert.isFulfilled(promise);
         });
     });
 
-    test('that the single resource route handler eventually handles errors', () => {
-        const
-            error = any.simpleObject(),
-            reply = sinon.spy();
-        resourcesController.getResource.rejects(error);
-        mediaType.returns('text/foo');
+    suite('list', () => {
+        const params = {resourceType: any.string()};
 
-        return handlers.getResourceHandler({params}, reply).then(assert.fail).catch(() => {
-            assert.calledWith(reply, error);
+        setup(() => {
+            sandbox.stub(resourcesController, 'getListOf');
+            Negotiator.withArgs({params}).returns({mediaType});
         });
-    });
 
-    test('that a request for html does not fetch data', () => {
-        mediaType.returns('text/html');
-        const
-            reply = sinon.spy(),
+        test('that the resource is eventually returned', () => {
+            const
+                resources = any.listOf(any.simpleObject),
+                reply = sinon.spy();
+            resourcesController.getListOf.withArgs(params.resourceType).resolves(resources);
+            mediaType.returns('text/foo');
 
-            promise = handlers.getResourceHandler({params}, reply);
+            return handlers.getResourcesHandler({params}, reply).then(() => {
+                assert.calledWith(reply, {[params.resourceType]: resources, resourceType: params.resourceType});
+            });
+        });
 
-        assert.notCalled(resourcesController.getResource);
-        assert.calledWith(reply, {});
+        test('that errors are eventually handled', () => {
+            const
+                error = any.simpleObject(),
+                reply = sinon.spy();
+            resourcesController.getListOf.rejects(error);
+            mediaType.returns('text/foo');
 
-        return assert.isFulfilled(promise);
+            return handlers.getResourcesHandler({params}, reply).then(assert.fail).catch(() => {
+                assert.calledWith(reply, error);
+            });
+        });
+
+        test('that a request for html does not fetch data', () => {
+            mediaType.returns('text/html');
+            const
+                reply = sinon.spy(),
+
+                promise = handlers.getResourcesHandler({params}, reply);
+
+            assert.notCalled(resourcesController.getListOf);
+            assert.calledWith(reply, {});
+
+            return assert.isFulfilled(promise);
+        });
     });
 });

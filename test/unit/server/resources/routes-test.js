@@ -1,9 +1,8 @@
-import {listOf, simpleObject, string} from '@travi/any';
 import sinon from 'sinon';
 import {assert} from 'chai';
 import routes from '../../../../lib/server/resources/routes';
 import * as resourcesController from '../../../../lib/server/resources/controller';
-import {getResourceHandler} from '../../../../lib/server/resources/route-handlers';
+import {getResourceHandler, getResourcesHandler} from '../../../../lib/server/resources/route-handlers';
 
 suite('server routes config', () => {
     let sandbox;
@@ -26,40 +25,17 @@ suite('server routes config', () => {
 
     test('that the list route is configured', () => {
         const
-            reply = sinon.spy(),
             next = sinon.spy(),
-            resourceType = string(),
-            server = {route: sinon.stub()},
-            resourceList = listOf(simpleObject);
-        server.route.withArgs(sinon.match({path: '/{resourceType}'})).yieldsTo('handler', {
-            params: {resourceType}
-        }, reply);
-        resourcesController.getListOf.yields(null, resourceList);
+            server = {route: sinon.stub()};
 
         routes.register(server, null, next);
 
         assert.calledOnce(next);
-        assert.calledWith(reply, {
-            [resourceType]: resourceList,
-            resourceType
+        assert.calledWith(server.route, {
+            method: 'GET',
+            path: '/{resourceType}',
+            handler: getResourcesHandler
         });
-    });
-
-    test('that error bubbles for list route', () => {
-        const
-            reply = sinon.spy(),
-            next = sinon.spy(),
-            resourceType = string(),
-            server = {route: sinon.stub()},
-            error = simpleObject();
-        server.route.withArgs(sinon.match({path: '/{resourceType}'})).yieldsTo('handler', {
-            params: {resourceType}
-        }, reply);
-        resourcesController.getListOf.yields(error);
-
-        routes.register(server, null, next);
-
-        assert.calledWith(reply, error);
     });
 
 

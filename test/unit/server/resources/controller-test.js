@@ -52,7 +52,7 @@ suite('resources controller', () => {
         ]);
     });
 
-    test('that error bubbles for api request for recource-types', () => {
+    test('that error bubbles for api request for resource-types', () => {
         const
             callback = sinon.spy(),
             error = simpleObject();
@@ -65,7 +65,6 @@ suite('resources controller', () => {
 
     test('that resources are requested from the api by type', () => {
         const
-            callback = sinon.spy(),
             resourceType = string(),
             resourceList = listOf(resource),
             mappedList = [
@@ -77,21 +76,16 @@ suite('resources controller', () => {
             mapToViewList: sinon.stub().withArgs(resourceList).returns(mappedList)
         });
 
-        resourcesController.getListOf(resourceType, callback);
-
-        assert.calledWith(callback, null, mappedList);
+        assert.becomes(resourcesController.getListOf(resourceType), mappedList);
     });
 
     test('that error bubbles for api request for resources', () => {
         const
-            callback = sinon.spy(),
             resourceType = string(),
-            error = simpleObject();
+            error = word();
         traviApiResources.getListOf.withArgs(resourceType).yields(error);
 
-        resourcesController.getListOf(resourceType, callback);
-
-        assert.calledWith(callback, error);
+        return assert.isRejected(resourcesController.getListOf(resourceType), new RegExp(error));
     });
 
     test('that resource is requested from the api', () => {
