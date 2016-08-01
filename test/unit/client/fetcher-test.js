@@ -21,11 +21,11 @@ suite('client-side data fetcher', () => {
             const
                 type = any.string(),
                 id = any.integer(),
-                response = any.simpleObject();
+                resource = any.simpleObject();
 
-            xhr.get.withArgs(`/${type}/${id}`).yields(null, response);
+            xhr.get.withArgs(`/${type}/${id}`).yields(null, {body: JSON.stringify({resource})});
 
-            return assert.becomes(getResource(type, id), response);
+            return assert.becomes(getResource(type, id), resource);
         });
 
         test('that a fetch error results in a rejected promise', () => {
@@ -44,11 +44,11 @@ suite('client-side data fetcher', () => {
         test('that a GET request is made for an individual resource', () => {
             const
                 type = any.string(),
-                response = any.simpleObject();
+                resources = any.listOf(any.simpleObject);
 
-            xhr.get.withArgs(`/${type}`).yields(null, response);
+            xhr.get.withArgs(`/${type}`).yields(null, {body: JSON.stringify({[type]: resources})});
 
-            return assert.becomes(getResources(type), response);
+            return assert.becomes(getResources(type), resources);
         });
 
         test('that a fetch error results in a rejected promise', () => {
