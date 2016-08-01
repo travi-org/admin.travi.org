@@ -1,7 +1,7 @@
 import immutable from 'immutable';
 import reducer from '../../../../lib/shared/store/reducer';
 import * as actions from '../../../../lib/shared/store/actions';
-import {simpleObject, string, listOf} from '@travi/any';
+import {simpleObject} from '@travi/any';
 import {assert} from 'chai';
 import sinon from 'sinon';
 
@@ -37,20 +37,6 @@ suite('reducer', () => {
                 nav: simpleObject()
             };
         actions.setPrimaryNav.withArgs(initialState, action.nav).returns(updatedState);
-
-        assert.equal(reducer(initialState, action), updatedState);
-    });
-
-    test('that the setResources function is called for the SET_RESOURCES action', () => {
-        const
-            initialState = immutable.Map(),
-            updatedState = simpleObject(),
-            action = {
-                type: 'SET_RESOURCES',
-                resourceType: string(),
-                resources: listOf(simpleObject)
-            };
-        actions.setResources.withArgs(initialState, action.resourceType, action.resources).returns(updatedState);
 
         assert.equal(reducer(initialState, action), updatedState);
     });
