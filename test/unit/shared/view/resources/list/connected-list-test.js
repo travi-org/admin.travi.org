@@ -25,11 +25,12 @@ suite('connected list component', () => {
     test('that redux state is mapped to props', () => {
         const
             list = listOf(simpleObject),
+            type = string(),
 
-            wrapper = shallow(<ConnectedList store={createStore(() => fromJS({resources: {list}}))}/>),
-            personProp = wrapper.prop('resources');
+            wrapper = shallow(<ConnectedList store={createStore(() => fromJS({resources: {list, type}}))}/>);
 
-        assert.deepEqual(personProp, list);
+        assert.deepEqual(wrapper.prop('resources'), list);
+        assert.equal(wrapper.prop('resourceType'), type);
     });
 
     test('that the `fetch` hook returns a promise', () => {
