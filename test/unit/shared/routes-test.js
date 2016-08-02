@@ -2,11 +2,10 @@ import React from 'react';
 import dom from 'react-dom';
 import {Router, createMemoryHistory} from 'react-router';
 import proxyquire from 'proxyquire';
-import sinon from 'sinon';
 import {assert} from 'chai';
 
 suite('routes', () => {
-    const routesFactory = proxyquire('../../../lib/shared/routes', {
+    const routes = proxyquire('../../../lib/shared/routes', {
         './views/theme/wrap/connected-wrap': {
             default: (React) => (props) => <div>wrapper { props.children }</div>    //eslint-disable-line no-shadow
         },
@@ -24,16 +23,13 @@ suite('routes', () => {
             default: (React) => () => <div>person</div>                             //eslint-disable-line no-shadow
         }
     }).default;
-    let node, hydrater, routes;
+    let node;
 
     beforeEach(() => {
-        hydrater = sinon.spy();
-        routes = routesFactory(hydrater);
         node = document.createElement('div');
     });
 
     afterEach(() => {
-        hydrater = null;
         dom.unmountComponentAtNode(node);
     });
 
@@ -53,7 +49,6 @@ suite('routes', () => {
                 { routes }
             </Router>, node, () => {
                 assert.equal(node.textContent, 'wrapper not-found');
-                assert.notCalled(hydrater);
             }
         );
     });
@@ -64,7 +59,6 @@ suite('routes', () => {
                 { routes }
             </Router>, node, () => {
                 assert.equal(node.textContent, 'wrapper resources');
-                assert.calledOnce(hydrater);
             }
         );
     });
@@ -75,7 +69,6 @@ suite('routes', () => {
                 { routes }
             </Router>, node, () => {
                 assert.equal(node.textContent, 'wrapper resource');
-                assert.calledOnce(hydrater);
             }
         );
     });
@@ -86,7 +79,6 @@ suite('routes', () => {
                 { routes }
             </Router>, node, () => {
                 assert.equal(node.textContent, 'wrapper resources');
-                assert.calledOnce(hydrater);
             }
         );
     });
@@ -97,7 +89,6 @@ suite('routes', () => {
                 { routes }
             </Router>, node, () => {
                 assert.equal(node.textContent, 'wrapper person');
-                assert.calledOnce(hydrater);
             }
         );
     });

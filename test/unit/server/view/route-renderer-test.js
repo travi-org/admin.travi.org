@@ -10,16 +10,12 @@ import {assert, refute} from 'referee';
 
 suite('route renderer', () => {
     const
+        routes = simpleObject(),
         RouterContext = reactRouter.RouterContext,
-        routesStub = sinon.stub(),
         renderer = proxyquire('../../../../lib/server/view/route-renderer', {
-            './../../shared/routes': {default: routesStub}
+            './../../shared/routes': {default: routes}
         });
-    let sandbox,
-        history,
-        url,
-        location,
-        routes;
+    let sandbox, history, url, location;
 
     setup(() => {
         url = anyUrl();
@@ -35,13 +31,10 @@ suite('route renderer', () => {
         sandbox.stub(reactRouter, 'createMemoryHistory').returns(history);
         sandbox.stub(redial, 'trigger');
 
-        routes = simpleObject();
-        routesStub.withArgs(sinon.match.func).returns(routes);
     });
 
     teardown(() => {
         sandbox.restore();
-        routesStub.reset();
     });
 
     test('that rendered html yielded for proper route', () => {

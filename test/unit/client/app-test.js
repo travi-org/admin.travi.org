@@ -25,7 +25,7 @@ suite('client-side app', () => {
     function simulatePageLoad() {
         proxyquire('../../../lib/client/app', {
             './route-hydrator': sinon.stub().withArgs(store).returns(hydrator),
-            '../shared/routes': {default: sinon.stub().withArgs(hydrator.hydrate).returns(routes)}
+            '../shared/routes': {default: routes}
         });
     }
 
