@@ -38,6 +38,14 @@ suite('fetch middleware', () => {
         assert.calledWith(dispatch, {type: initiate, ...data});
     });
 
+    test('that error is not thrown if supplemental data is not provided', () => {
+        const dispatch = sinon.stub();
+
+        middleware({dispatch})()({...action, fetch: () => ({then: () => undefined}), initiate});
+
+        assert.calledWith(dispatch, {type: initiate});
+    });
+
     test('that the `success` topic is dispatched upon a successful fetch', () => {
         const
             fetcher = any.simpleObject(),
