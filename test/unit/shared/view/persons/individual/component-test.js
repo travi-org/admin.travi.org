@@ -6,7 +6,7 @@ import * as duck from '../../../../../../lib/shared/views/persons/individual/duc
 
 import {assert} from 'chai';
 import {shallow} from 'enzyme';
-import {string, url, simpleObject, integer} from '@travi/any';
+import {string, url, simpleObject, integer, boolean} from '@travi/any';
 import sinon from 'sinon';
 
 suite('connected person component', () => {
@@ -34,8 +34,9 @@ suite('connected person component', () => {
                 links: simpleObject(),
                 thumbnail: url()
             },
+            loading = boolean(),
 
-            wrapper = shallow(<ConnectedPerson store={createStore(() => fromJS({person: {person}}))}/>),
+            wrapper = shallow(<ConnectedPerson store={createStore(() => fromJS({person: {person, loading}}))}/>),
             personProp = wrapper.prop('person');
 
         assert.equal(personProp.id, person.id);
@@ -43,6 +44,7 @@ suite('connected person component', () => {
         assert.deepEqual(personProp.name, person.name);
         assert.deepEqual(personProp.links, person.links);
         assert.equal(personProp.avatar, person.thumbnail);
+        assert.equal(wrapper.prop('loading'), loading);
     });
 
     test('that the `fetch` hook returns a promise', () => {

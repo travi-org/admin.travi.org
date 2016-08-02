@@ -7,7 +7,7 @@ import * as duck from '../../../../../../lib/shared/views/resources/individual/d
 import sinon from 'sinon';
 import {assert} from 'chai';
 import {shallow} from 'enzyme';
-import {simpleObject, integer, string} from '@travi/any';
+import {simpleObject, integer, string, boolean} from '@travi/any';
 
 suite('connected resource component', () => {
     const ConnectedResource = connectedResource(React);
@@ -25,11 +25,12 @@ suite('connected resource component', () => {
     test('that redux state is mapped to props', () => {
         const
             resource = simpleObject(),
+            loading = boolean(),
 
-            wrapper = shallow(<ConnectedResource store={createStore(() => fromJS({resource: {resource}}))}/>),
-            personProp = wrapper.prop('resource');
+            wrapper = shallow(<ConnectedResource store={createStore(() => fromJS({resource: {resource, loading}}))}/>);
 
-        assert.deepEqual(personProp, resource);
+        assert.deepEqual(wrapper.prop('resource'), resource);
+        assert.equal(wrapper.prop('loading'), loading);
     });
 
     test('that the `fetch` hook returns a promise', () => {
