@@ -23,6 +23,6 @@ suite('production root module', () => {
             provider = wrapper.find('Provider');
 
         assert.equal(provider.props().store, store);
-        assert.isTrue(provider.contains(children));
+        assert.isTrue(provider.find('MuiThemeProvider').contains(children));
     });
 });
