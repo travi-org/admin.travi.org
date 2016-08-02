@@ -7,7 +7,7 @@ import * as duck from '../../../../../../lib/shared/views/resources/list/duck';
 import sinon from 'sinon';
 import {assert} from 'chai';
 import {shallow} from 'enzyme';
-import {simpleObject, string, listOf} from '@travi/any';
+import {simpleObject, string, listOf, boolean} from '@travi/any';
 
 suite('connected list component', () => {
     let sandbox;
@@ -26,11 +26,13 @@ suite('connected list component', () => {
         const
             list = listOf(simpleObject),
             type = string(),
+            loading = boolean(),
 
-            wrapper = shallow(<ConnectedList store={createStore(() => fromJS({resources: {list, type}}))}/>);
+            wrapper = shallow(<ConnectedList store={createStore(() => fromJS({resources: {list, type, loading}}))}/>);
 
         assert.deepEqual(wrapper.prop('resources'), list);
         assert.equal(wrapper.prop('resourceType'), type);
+        assert.equal(wrapper.prop('loading'), loading);
     });
 
     test('that the `fetch` hook returns a promise', () => {
