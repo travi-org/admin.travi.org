@@ -18,7 +18,7 @@ suite('resource duck', () => {
         });
 
         test('that a default initial state is provided', () => {
-            assert.equal(reducer(undefined, {}), fromJS({list: {}}));
+            assert.equal(reducer(undefined, {}), fromJS({list: []}));
         });
 
         test('that LOAD_RESOURCES marks as loading and clears a previous resource', () => {
