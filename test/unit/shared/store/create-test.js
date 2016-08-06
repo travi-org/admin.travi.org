@@ -1,17 +1,12 @@
 /*global window */
 import * as redux from 'redux';
 import {fromJS} from 'immutable';
-import {simpleObject} from '@travi/any';
-import reducer from '../../../../lib/shared/store/reducer';
-import person from '../../../../lib/shared/views/persons/individual/duck';
-import resource from '../../../../lib/shared/views/resources/individual/duck';
-import resources from '../../../../lib/shared/views/resources/list/duck';
+import any, {simpleObject} from '@travi/any';
 import {configureStore} from '../../../../lib/shared/store/create';
 import fetchMiddleware from '../../../../lib/shared/store/fetch-middleware';
-import * as reduxImmutable from 'redux-immutable';
+import * as reducers from '../../../../lib/shared/store/reducers';
 import sinon from 'sinon';
 import {assert} from 'chai';
-import any from '@travi/any';
 
 suite('store creation for production', () => {
     let sandbox;
@@ -24,12 +19,7 @@ suite('store creation for production', () => {
 
     setup(() => {
         sandbox = sinon.sandbox.create();
-        sandbox.stub(reduxImmutable, 'combineReducers').withArgs({
-            legacy: reducer,
-            person,
-            resource,
-            resources
-        }).returns(combinedReducer);
+        sandbox.stub(reducers, 'getCombined').returns(combinedReducer);
         sandbox.stub(redux, 'createStore').withArgs(combinedReducer, fromJS(initialState), composed).returns(store);
         sandbox.stub(redux, 'compose');
         sandbox.stub(redux, 'applyMiddleware').withArgs(fetchMiddleware).returns(appliedFetch);
