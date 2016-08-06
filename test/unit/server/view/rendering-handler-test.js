@@ -79,7 +79,7 @@ suite('rendering handler', () => {
                 return _.extend({}, item, {active: 2 === index});
             });
         mediaType.returns('text/html');
-        storeCreator.configureStore.withArgs({legacy: request.response.source}).returns(store);
+        storeCreator.configureStore.returns(store);
         assetManager.getAssets.yields(null, resources);
         helmet.rewind.returns({title: {toString: () => title}});
 
