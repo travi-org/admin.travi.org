@@ -42,7 +42,7 @@
     "concat-map": "0.0.1",
     "coveralls": "2.11.12",
     "css-loader": "0.23.1",
-    "cucumber": "1.2.1",
+    "cucumber": "1.2.2",
     "enzyme": "2.4.1",
     "extend-grunt-plugin": "0.1.0",
     "extract-text-webpack-plugin": "1.0.1",
