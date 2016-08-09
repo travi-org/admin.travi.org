@@ -17,7 +17,7 @@ export function World() {
                 headers: {
                     'Accept': this.mime
                 }
-            }, (response) => {
+            }).then((response) => {
                 this.serverResponse = response;
 
                 callback();
