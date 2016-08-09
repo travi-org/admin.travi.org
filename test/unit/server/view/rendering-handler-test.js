@@ -18,9 +18,7 @@ suite('rendering handler', () => {
         }),
         primaryNav = listOf(() => ({text: string()}), {min: 5});
 
-    let sandbox,
-        mediaType,
-        request;
+    let sandbox, mediaType, request;
 
     setup(() => {
         sandbox = sinon.sandbox.create();
