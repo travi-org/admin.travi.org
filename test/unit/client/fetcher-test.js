@@ -1,4 +1,4 @@
-import {getResource, getResources} from '../../../lib/client/fetcher';
+import {getResource, getResources, getNav} from '../../../lib/client/fetcher';
 import sinon from 'sinon';
 import xhr from 'xhr';
 import {assert} from 'chai';
@@ -60,6 +60,23 @@ suite('client-side data fetcher', () => {
 
             return assert.isRejected(getResources(type), new RegExp(error));
         });
+    });
 
+    suite('nav', () => {
+        test('that a GET request is made for the primary-nav', () => {
+            const primaryNav = any.listOf(any.simpleObject);
+
+            xhr.get.withArgs('/').yields(null, {body: JSON.stringify({primaryNav})});
+
+            return assert.becomes(getNav(), primaryNav);
+        });
+
+        test('that a fetch error results in a rejected promise', () => {
+            const error = any.word();
+
+            xhr.get.yields(error);
+
+            return assert.isRejected(getNav(), new RegExp(error));
+        });
     });
 });
