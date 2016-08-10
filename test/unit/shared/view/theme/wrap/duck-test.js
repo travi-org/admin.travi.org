@@ -1,11 +1,13 @@
 import reducer, {
     LOAD_NAV,
     NAV_LOADED,
-    NAV_LOAD_FAILED
+    NAV_LOAD_FAILED,
+    loadNav
 } from '../../../../../../lib/shared/views/theme/wrap/duck';
 import {fromJS, Map} from 'immutable';
 import {assert} from 'chai';
 import any from '@travi/any';
+import sinon from 'sinon';
 
 suite('site-level duck', () => {
     suite('reducer', () => {
@@ -35,6 +37,24 @@ suite('site-level duck', () => {
         test('that NAV_LOAD_FAILED marks as loaded', () => {
             const error = any.simpleObject();
             assert.equal(reducer(Map(), {type: NAV_LOAD_FAILED, error}), fromJS({loading: false, error}));
+        });
+    });
+
+    suite('action creators', () => {
+        test('that loadNav defines handlers for fetching the primary-nav', () => {
+            const
+                resource = any.simpleObject(),
+                getNav = sinon.stub(),
+                fetcher = {getNav};
+            getNav.withArgs().returns(resource);
+
+            assert.containSubset(loadNav(), {
+                initiate: LOAD_NAV,
+                success: NAV_LOADED,
+                failure: NAV_LOAD_FAILED
+            });
+
+            assert.equal(loadNav().fetch(fetcher), resource);
         });
     });
 });
