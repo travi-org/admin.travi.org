@@ -22,20 +22,15 @@ suite('resources controller', () => {
     });
 
     test('that an empty list of resource types is returned when none are available', () => {
-        const callback = sinon.spy();
-
         traviApiResources.getLinksFor.withArgs('catalog').yields(null, {
             'self': {'href': 'https://api.travi.org/'}
         });
 
-        resourcesController.listResourceTypes(callback);
-
-        assert.calledWith(callback, null, []);
+        return assert.becomes(resourcesController.listResourceTypes(), []);
     });
 
     test('that link rels are listed when links are present', () => {
         const
-            callback = sinon.spy(),
             linkName = string(),
             links = {
                 'self': {'href': url()},
@@ -44,23 +39,17 @@ suite('resources controller', () => {
             };
         traviApiResources.getLinksFor.withArgs('catalog').yields(null, links);
 
-        resourcesController.listResourceTypes(callback);
-
-        assert.calledWith(callback, null, [
+        return assert.becomes(resourcesController.listResourceTypes(), [
             {text: linkName, path: `/${linkName}`},
             {text: 'people', path: '/persons'}
         ]);
     });
 
     test('that error bubbles for api request for resource-types', () => {
-        const
-            callback = sinon.spy(),
-            error = simpleObject();
+        const error = simpleObject();
         traviApiResources.getLinksFor.withArgs('catalog').yields(error);
 
-        resourcesController.listResourceTypes(callback);
-
-        assert.calledWith(callback, error);
+        return assert.isRejected(resourcesController.listResourceTypes(), error);
     });
 
     test('that resources are requested from the api by type', () => {
@@ -76,7 +65,7 @@ suite('resources controller', () => {
             mapToViewList: sinon.stub().withArgs(resourceList).returns(mappedList)
         });
 
-        assert.becomes(resourcesController.getListOf(resourceType), mappedList);
+        return assert.becomes(resourcesController.getListOf(resourceType), mappedList);
     });
 
     test('that error bubbles for api request for resources', () => {
