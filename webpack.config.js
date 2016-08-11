@@ -73,6 +73,10 @@ module.exports = function (environment = 'production') {
             new webpack.optimize.OccurrenceOrderPlugin(),
             new AssetsPlugin(),
             ifDevelopment(new webpack.HotModuleReplacementPlugin()),
+            ifProduction(new webpack.LoaderOptionsPlugin({
+                minimize: true,
+                debug: false
+            })),
             ifProduction(new webpack.optimize.UglifyJsPlugin({
                 compress: {
                     screw_ie8: true,
