@@ -26,7 +26,7 @@ suite('resource duck', () => {
             assert.equal(reducer(Map(), {type: LOAD_RESOURCES, resourceType}), fromJS({
                 loading: true,
                 loaded: false,
-                list: {},
+                list: [],
                 type: resourceType
             }));
         });

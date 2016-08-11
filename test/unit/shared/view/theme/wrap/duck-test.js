@@ -18,11 +18,11 @@ suite('site-level duck', () => {
         });
 
         test('that a default initial state is provided', () => {
-            assert.equal(reducer(undefined, {}), fromJS({nav: {}}));
+            assert.equal(reducer(undefined, {}), fromJS({nav: []}));
         });
 
         test('that LOAD_NAV marks as loading and clears a previous person', () => {
-            assert.equal(reducer(Map(), {type: LOAD_NAV}), fromJS({loading: true, loaded: false, nav: {}}));
+            assert.equal(reducer(Map(), {type: LOAD_NAV}), fromJS({loading: true, loaded: false, nav: []}));
         });
 
         test('that NAV_LOADED marks as loaded', () => {

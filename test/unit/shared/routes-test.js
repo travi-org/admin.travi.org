@@ -6,7 +6,7 @@ import {assert} from 'chai';
 
 suite('routes', () => {
     const routes = proxyquire('../../../lib/shared/routes', {
-        './views/theme/wrap/connected-wrap': {
+        './views/theme/wrap/component': {
             default: (React) => (props) => <div>wrapper { props.children }</div>    //eslint-disable-line no-shadow
         },
         '@travi/admin.travi.org-components': {
