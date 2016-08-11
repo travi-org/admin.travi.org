@@ -1,4 +1,4 @@
-import {getResource, getResources} from '../../../../lib/server/resources/fetcher';
+import {getResource, getResources, getNav} from '../../../../lib/server/resources/fetcher';
 import * as controller from '../../../../lib/server/resources/controller';
 import sinon from 'sinon';
 import {assert} from 'chai';
@@ -11,6 +11,7 @@ suite('server-side data fetcher', () => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(controller, 'getResource');
         sandbox.stub(controller, 'getListOf');
+        sandbox.stub(controller, 'listResourceTypes');
     });
 
     teardown(() => {
@@ -34,5 +35,12 @@ suite('server-side data fetcher', () => {
         controller.getListOf.withArgs(type).returns(promise);
 
         assert.equal(getResources(type), promise);
+    });
+
+    test('that it gets the primary-nav', () => {
+        const promise = any.simpleObject();
+        controller.listResourceTypes.returns(promise);
+
+        assert.equal(getNav(), promise);
     });
 });
