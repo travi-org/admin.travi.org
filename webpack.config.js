@@ -28,7 +28,7 @@ module.exports = function (environment = 'production') {
                 {
                     test: /\.jsx?$/,
                     include: /lib\/(client|shared)/,
-                    loader: 'babel'
+                    loader: 'babel?cacheDirectory'
                 },
                 {
                     test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=d+\.d+\.d+)?$/,
