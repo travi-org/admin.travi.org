@@ -5,14 +5,18 @@ import sinon from 'sinon';
 import {assert} from 'chai';
 
 suite('fetch middleware', () => {
-    let sandbox;
+    let sandbox, fetch;
     const
         action = any.simpleObject(),
-        initiate = any.string();
+        initiate = any.string(),
+        fetcher = any.simpleObject(),
+        error = any.word();
 
     setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(iocContainer, 'use');
+
+        fetch = sinon.stub();
     });
 
     teardown(() => {
@@ -32,25 +36,25 @@ suite('fetch middleware', () => {
         const
             data = any.simpleObject(),
             dispatch = sinon.stub();
+        fetch.resolves();
 
-        middleware({dispatch})()({...action, data, fetch: () => ({then: () => undefined}), initiate});
-
-        assert.calledWith(dispatch, {type: initiate, ...data});
+        return middleware({dispatch})()({...action, data, fetch, initiate}).then(() => {
+            assert.calledWith(dispatch, {type: initiate, ...data});
+        });
     });
 
     test('that error is not thrown if supplemental data is not provided', () => {
         const dispatch = sinon.stub();
+        fetch.rejects();
 
-        middleware({dispatch})()({...action, fetch: () => ({then: () => undefined}), initiate});
-
-        assert.calledWith(dispatch, {type: initiate});
+        return middleware({dispatch})()({...action, fetch, initiate}).catch(() => {
+            assert.calledWith(dispatch, {type: initiate});
+        });
     });
 
     test('that the `success` topic is dispatched upon a successful fetch', () => {
         const
-            fetcher = any.simpleObject(),
             dispatch = sinon.stub(),
-            fetch = sinon.stub(),
             success = any.string(),
             response = any.simpleObject();
         iocContainer.use.withArgs('fetcher').returns(fetcher);
@@ -62,17 +66,19 @@ suite('fetch middleware', () => {
     });
 
     test('that the `failure` topic is dispatched upon a failed fetch', () => {
-        const
-            fetcher = any.simpleObject(),
-            dispatch = sinon.stub(),
-            fetch = sinon.stub(),
-            failure = any.string(),
-            error = any.simpleObject();
         iocContainer.use.withArgs('fetcher').returns(fetcher);
         fetch.withArgs(fetcher).rejects(error);
+        const
+            dispatch = sinon.stub(),
+            failure = any.string(),
 
-        return middleware({dispatch})()({...action, fetch, initiate, failure}).then(() => {
-            assert.calledWith(dispatch, {type: failure, error});
-        });
+            promise = middleware({dispatch})()({...action, fetch, initiate, failure});
+
+        return Promise.all([
+            assert.isRejected(promise, new RegExp(error)),
+            promise.catch(() => {
+                assert.calledWith(dispatch, {type: failure, error: new Error(error)});
+            })
+        ]);
     });
 });
