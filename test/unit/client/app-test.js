@@ -60,7 +60,7 @@ suite('client-side app', () => {
         simulatePageLoad();
 
         assert.calledOnce(dependencies.configure);
-        assert.calledWith(historyListener.addHistoryListener, routes, store.dispatch);
+        assert.calledWith(historyListener.addHistoryListener, routes, store);
         assert.calledWith(dom.render, rootComponent, document.getElementById('wrap'));
     });
 });

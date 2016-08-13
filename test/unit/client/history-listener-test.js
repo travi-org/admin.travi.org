@@ -28,18 +28,19 @@ suite('history listener', () => {
     });
 
     test('that fetch is triggered for redial when the route changes', () => {
-        const dispatch = any.simpleObject();
+        const
+            dispatch = any.simpleObject(),
+            getState = any.simpleObject();
 
-        addHistoryListener(routes, dispatch);
+        addHistoryListener(routes, {dispatch, getState});
 
-        assert.calledWith(redial.trigger, 'fetch', components, {dispatch, params});
+        assert.calledWith(redial.trigger, 'fetch', components, {dispatch, params, getState});
     });
 
     test('that fetch is not triggered on the initial page load', () => {
         window.__INITIAL_STATE__ = any.simpleObject();
-        const dispatch = any.simpleObject();
 
-        addHistoryListener(routes, dispatch);
+        addHistoryListener(routes, {});
 
         assert.notCalled(redial.trigger);
         assert.isNull(window.__INITIAL_STATE__);
