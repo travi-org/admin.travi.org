@@ -58,6 +58,6 @@ suite('route transformer', () => {
 
         assert.calledOnce(next);
         assert.calledOnce(reply.continue);
-        assert.calledWith(request.setUrl, `/html${request.url.path}`);
+        assert.calledWith(request.setUrl, `/html/mime/type/hack${request.url.path}`);
     });
 });
