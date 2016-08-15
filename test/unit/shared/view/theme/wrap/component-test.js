@@ -6,7 +6,7 @@ import * as duck from '../../../../../../lib/shared/views/theme/wrap/duck';
 import sinon from 'sinon';
 import {shallow} from 'enzyme';
 import {assert} from 'chai';
-import {listOf, simpleObject, integer} from '@travi/any';
+import {listOf, simpleObject} from '@travi/any';
 
 suite('connected wrapper component', () => {
     const ConnectedWrap = connectedWrap(React);
@@ -33,13 +33,13 @@ suite('connected wrapper component', () => {
 
     test('that the `fetch` hook returns a promise', () => {
         const
-            id = integer(),
             nav = listOf(simpleObject),
+            state = simpleObject(),
             dispatch = sinon.stub(),
             promise = simpleObject();
-        duck.loadNav.returns(nav);
+        duck.loadNav.withArgs(state).returns(nav);
         dispatch.withArgs(nav).returns(promise);
 
-        assert.equal(ConnectedWrap['@@redial-hooks'].fetch({params: {id}, dispatch}), promise);
+        assert.equal(ConnectedWrap['@@redial-hooks'].fetch({params: {}, dispatch, state}), promise);
     });
 });
