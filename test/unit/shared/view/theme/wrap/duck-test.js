@@ -41,20 +41,32 @@ suite('site-level duck', () => {
     });
 
     suite('action creators', () => {
+        const resource = any.simpleObject();
+        let getNav;
+
+        setup(() => {
+            getNav = sinon.stub().returns(resource);
+        });
+
         test('that loadNav defines handlers for fetching the primary-nav', () => {
             const
-                resource = any.simpleObject(),
-                getNav = sinon.stub(),
-                fetcher = {getNav};
-            getNav.withArgs().returns(resource);
+                fetcher = {getNav},
 
-            assert.containSubset(loadNav(), {
+                action = loadNav(fromJS({wrap: {loaded: false}}));
+
+            assert.containSubset(action, {
                 initiate: LOAD_NAV,
                 success: NAV_LOADED,
                 failure: NAV_LOAD_FAILED
             });
 
-            assert.equal(loadNav().fetch(fetcher), resource);
+            assert.equal(action.fetch(fetcher), resource);
+        });
+
+        test('that a no-op action is returned if the nav is already loaded', () => {
+            const action = loadNav(fromJS({wrap: {loaded: true}}));
+
+            assert.equal(action.type, 'NO_OP');
         });
     });
 });
