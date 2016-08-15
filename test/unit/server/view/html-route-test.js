@@ -65,7 +65,7 @@ suite('html route', () => {
 
             handler(request, reply);
 
-            assert.calledWith(reply.view, 'layout/layout', {
+            assert.calledWith(reply.view, 'layout', {
                 renderedContent,
                 resources,
                 title,
@@ -83,7 +83,7 @@ suite('html route', () => {
 
             handler(request, reply);
 
-            assert.calledWith(reply.view, 'layout/layout');
+            assert.calledWith(reply.view, 'layout');
         });
 
         test('that the error bubbles from the renderer', () => {
