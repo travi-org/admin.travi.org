@@ -1,14 +1,17 @@
 {
     "presets": [
         "react",
-        "es2015",
         "stage-2"
     ],
     "env": {
         "development": {
             "retainLines": true
         },
+        "browser": {
+            "presets": ["es2015-native-modules"]
+        },
         "node": {
+            "presets": ["es2015-node"],
             "plugins": [
                 [
                     "babel-plugin-transform-require-ignore",

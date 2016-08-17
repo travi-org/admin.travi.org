@@ -9,13 +9,12 @@
     "url": "git://github.com/travi/travi.org-admin"
   },
   "scripts": {
-    "test": "grunt",
+    "test": "BABEL_ENV=node grunt",
     "start": "node dist/server/app.js",
-    "postinstall": "grunt heroku:production",
+    "postinstall": "BABEL_ENV=node grunt heroku:production",
     "serve:dev": "nodemon lib/server/app.js",
-    "serve:webpack": "babel-node ./webpack-dev-server.js",
-    "dev": "NODE_ENV=development npm-run-all -p serve:webpack serve:dev",
-    "gh-pages": "grunt gh-pages"
+    "serve:webpack": "BABEL_ENV=node babel-node ./webpack-dev-server.js",
+    "dev": "NODE_ENV=development npm-run-all -p serve:webpack serve:dev"
   },
   "engines": {
     "node": "6.1.x",
@@ -29,7 +28,8 @@
     "babel-core": "6.13.2",
     "babel-loader": "6.2.4",
     "babel-plugin-transform-require-ignore": "0.0.2",
-    "babel-preset-es2015": "6.13.2",
+    "babel-preset-es2015-native-modules": "6.9.3",
+    "babel-preset-es2015-node": "6.1.0",
     "babel-preset-react": "6.11.1",
     "babel-preset-stage-2": "6.13.0",
     "balanced-match": "0.4.2",

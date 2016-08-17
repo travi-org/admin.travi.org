@@ -15,6 +15,8 @@ module.exports = function (environment = 'production') {
         devServerHost = 'http://0.0.0.0',
         {ifProduction, ifDevelopment} = getIfUtils(environment);
 
+    process.env.BABEL_ENV = 'browser';
+
     return validate({
         devtool: 'source-map',
         entry: removeEmpty([
