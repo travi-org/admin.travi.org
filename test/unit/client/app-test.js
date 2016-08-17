@@ -1,23 +1,27 @@
 /*global window */
+import {parse} from 'url';
 import React from 'react';
 import {Router, browserHistory} from 'react-router';
 import dom from 'react-dom';
 import * as redux from 'redux';
+import ga from 'react-ga';
 import Root from '../../../lib/shared/views/root/root';
 import * as storeCreator from '../../../lib/shared/store/create';
 import * as dependencies from '../../../lib/client/dependencies';
 import * as historyListener from '../../../lib/client/history-listener';
 import proxyquire from 'proxyquire';
-import {simpleObject} from '@travi/any';
+import * as any from '@travi/any';
 import {assert} from 'chai';
 import sinon from 'sinon';
+import jsdom from 'jsdom';
 
 suite('client-side app', () => {
     let sandbox,
         routes;
     const
-        initialState = simpleObject(),
-        store = {...simpleObject(), dispatch: () => undefined},
+        initialState = any.simpleObject(),
+        store = {...any.simpleObject(), dispatch: () => undefined},
+        url = any.url(),
         hydrator = {
             hydrate: sinon.spy()
         };
@@ -37,10 +41,13 @@ suite('client-side app', () => {
         sandbox.stub(dependencies, 'configure');
         sandbox.stub(storeCreator, 'configureStore').withArgs(initialState).returns(store);
         sandbox.stub(historyListener, 'addHistoryListener');
+        sandbox.stub(ga, 'pageview');
+        sandbox.stub(ga, 'initialize');
 
-        routes = simpleObject();
+        routes = any.simpleObject();
 
         window.__INITIAL_STATE__ = JSON.stringify(initialState);
+        jsdom.changeURL(window, url);
     });
 
     teardown(() => {
@@ -51,10 +58,13 @@ suite('client-side app', () => {
 
     test('that the app renders', () => {
         const
-            rootComponent = simpleObject(),
-            routerComponent = simpleObject();
+            rootComponent = any.simpleObject(),
+            routerComponent = any.simpleObject();
 
-        React.createElement.withArgs(Router, {history: browserHistory, children: routes}).returns(routerComponent);
+        React.createElement.withArgs(
+            Router,
+            sinon.match({history: browserHistory, children: routes})
+        ).returns(routerComponent);
         React.createElement.withArgs(Root, {store}, routerComponent).returns(rootComponent);
 
         simulatePageLoad();
@@ -62,5 +72,12 @@ suite('client-side app', () => {
         assert.calledOnce(dependencies.configure);
         assert.calledWith(historyListener.addHistoryListener, routes, store);
         assert.calledWith(dom.render, rootComponent, document.getElementById('wrap'));
+
+        assert.calledWith(ga.initialize, 'UA-2890413-9');
+        assert.notCalled(ga.pageview);
+
+        React.createElement.getCall(0).args[1].onUpdate();
+
+        assert.calledWith(ga.pageview, parse(url).pathname);
     });
 });
