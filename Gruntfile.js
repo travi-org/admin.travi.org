@@ -1,4 +1,5 @@
 /*eslint filenames/match-regex: 0 */
+process.env.BABEL_ENV = 'node';
 require('babel-register');
 
 module.exports = function (grunt) {

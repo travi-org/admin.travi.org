@@ -9,9 +9,9 @@
     "url": "git://github.com/travi/travi.org-admin"
   },
   "scripts": {
-    "test": "BABEL_ENV=node grunt",
+    "test": "grunt",
     "start": "node dist/server/app.js",
-    "postinstall": "BABEL_ENV=node grunt heroku:production",
+    "postinstall": "grunt heroku:production",
     "serve:dev": "nodemon lib/server/app.js",
     "serve:webpack": "BABEL_ENV=node babel-node ./webpack-dev-server.js",
     "dev": "NODE_ENV=development npm-run-all -p serve:webpack serve:dev"
