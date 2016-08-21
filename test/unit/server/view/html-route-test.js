@@ -104,13 +104,15 @@ suite('html route', () => {
         test('that the error bubbles from the asset manager', () => {
             const
                 error = any.word(),
+                wrappedError = any.word(),
                 reply = sinon.spy();
             routeRenderer.routeTo.yields(null, any.string());
             assetManager.getAssets.yields(error);
+            Boom.wrap.withArgs(error).returns(wrappedError);
 
             handler({params: any.simpleObject()}, reply);
 
-            assert.calledWith(reply, error);
+            assert.calledWith(reply, wrappedError);
         });
     });
 });
