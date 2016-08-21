@@ -2,7 +2,7 @@ import Boom from 'boom';
 import {register, handler} from '../../../../lib/server/view/html-route';
 import * as routeRenderer from '../../../../lib/server/view/route-renderer';
 import * as htmlRenderer from '../../../../lib/server/view/html-renderer';
-import * as storeCreactor from '../../../../lib/shared/store/create';
+import * as storeCreator from '../../../../lib/shared/store/create';
 import {assert} from 'chai';
 import sinon from 'sinon';
 import any from '@travi/any';
@@ -42,7 +42,7 @@ suite('html route', () => {
 
             sandbox = sinon.sandbox.create();
             sandbox.stub(routeRenderer, 'routeTo');
-            sandbox.stub(storeCreactor, 'configureStore').returns(store);
+            sandbox.stub(storeCreator, 'configureStore').returns(store);
             sandbox.stub(htmlRenderer, 'respond');
             sandbox.stub(Boom, 'wrap');
         });
