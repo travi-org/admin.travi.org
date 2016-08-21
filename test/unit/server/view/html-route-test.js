@@ -1,4 +1,5 @@
 import helmet from 'react-helmet';
+import Boom from 'boom';
 import {register, handler} from '../../../../lib/server/view/html-route';
 import * as routeRenderer from '../../../../lib/server/view/route-renderer';
 import * as assetManager from '../../../../lib/server/view/asset-manager';
@@ -46,6 +47,7 @@ suite('html route', () => {
             sandbox.stub(storeCreactor, 'configureStore').returns(store);
             sandbox.stub(assetManager, 'getAssets');
             sandbox.stub(helmet, 'rewind').returns({title: {toString}});
+            sandbox.stub(Boom, 'wrap');
         });
 
         teardown(() => {
@@ -89,12 +91,14 @@ suite('html route', () => {
         test('that the error bubbles from the renderer', () => {
             const
                 error = any.word(),
+                wrappedError = any.word(),
                 reply = sinon.spy();
             routeRenderer.routeTo.yields(error);
+            Boom.wrap.withArgs(error).returns(wrappedError);
 
             handler({params: any.simpleObject()}, reply);
 
-            assert.calledWith(reply, error);
+            assert.calledWith(reply, wrappedError);
         });
 
         test('that the error bubbles from the asset manager', () => {
