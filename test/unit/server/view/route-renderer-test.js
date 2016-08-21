@@ -2,19 +2,17 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import redial from 'redial';
 import * as reactRouter from 'react-router';
+import * as renderer from '../../../../lib/server/view/route-renderer';
+import * as routes from '../../../../lib/shared/routes';
 import Root from '../../../../lib/shared/views/root/root';
 import {url as anyUrl, simpleObject, string} from '@travi/any';
-import proxyquire from 'proxyquire';
 import sinon from 'sinon';
 import {assert, refute} from 'referee';
 
 suite('route renderer', () => {
     const
-        routes = simpleObject(),
-        RouterContext = reactRouter.RouterContext,
-        renderer = proxyquire('../../../../lib/server/view/route-renderer', {
-            './../../shared/routes': {default: routes}
-        });
+        routesConfig = simpleObject(),
+        RouterContext = reactRouter.RouterContext;
     let sandbox, history, url, location;
 
     setup(() => {
@@ -30,6 +28,7 @@ suite('route renderer', () => {
         sandbox.stub(reactRouter, 'match');
         sandbox.stub(reactRouter, 'createMemoryHistory').returns(history);
         sandbox.stub(redial, 'trigger');
+        sandbox.stub(routes, 'getRoutes').returns(routesConfig);
 
     });
 
@@ -65,7 +64,7 @@ suite('route renderer', () => {
 
         refute.called(callback);
 
-        assert.calledWith(reactRouter.match, {routes, location});
+        assert.calledWith(reactRouter.match, {routes: routesConfig, location});
         reactRouter.match.yield(null, null, renderProps);
 
         refute.called(callback);

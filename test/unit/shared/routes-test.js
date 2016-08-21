@@ -22,7 +22,7 @@ suite('routes', () => {
         './views/persons/individual/component': {
             default: (React) => () => <div>person</div>                             //eslint-disable-line no-shadow
         }
-    }).default;
+    }).getRoutes();
     let node;
 
     beforeEach(() => {
