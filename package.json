@@ -52,7 +52,7 @@
     "grunt-bower-task": "0.4.0",
     "grunt-cli": "1.2.0",
     "grunt-contrib-clean": "1.0.0",
-    "grunt-cucumberjs": "0.10.6",
+    "grunt-cucumberjs": "0.10.7",
     "grunt-env": "0.4.4",
     "grunt-eslint": "19.0.0",
     "grunt-gh-pages": "2.0.0",
