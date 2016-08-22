@@ -102,33 +102,6 @@ suite('travi-api resource interactions', () => {
             resourceInstance = resource(),
             error = word();
 
-        test('that specific resource requested by following links', () => {
-            const
-                callback = sinon.spy();
-            traverson.from.withArgs('https://api.travi.org/').returns({
-                follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
-                    getResource: stubForGet.yields(null, resourceInstance)
-                })
-            });
-
-            traviApiResources.getResourceBy(resourceType, resourceId, callback);
-
-            assert.calledWith(callback, null, resourceInstance);
-        });
-
-        test('that error bubbles from embedded resource request', () => {
-            const callback = sinon.spy();
-            traverson.from.withArgs('https://api.travi.org/').returns({
-                follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
-                    getResource: stubForGet.yields(error)
-                })
-            });
-
-            traviApiResources.getResourceBy(resourceType, resourceId, callback);
-
-            assert.calledWith(callback, error);
-        });
-
         test('that promise is returned when requesting a single resource', () => {
             traverson.from.withArgs('https://api.travi.org/').returns({
                 follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
