@@ -60,9 +60,11 @@ suite('client-side renderer', () => {
     });
 
     test('that the error page is mounted when response was a Boom', () => {
-        const errorPageComponent = any.simpleObject();
-        window.__BOOM__ = JSON.stringify(any.simpleObject());
-        React.createElement.withArgs(ErrorPage).returns(errorPageComponent);
+        const
+            errorPageComponent = any.simpleObject(),
+            statusCode = any.integer();
+        window.__BOOM__ = {...any.simpleObject(), statusCode};
+        React.createElement.withArgs(ErrorPage, {statusCode}).returns(errorPageComponent);
         React.createElement.withArgs(Root, {store}, errorPageComponent).returns(rootComponent);
 
         remountContent(store);
