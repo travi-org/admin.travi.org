@@ -119,7 +119,8 @@ suite('travi-api resource interactions', () => {
             resourceType = string(),
             resourceId = integer(),
             resourceInstance = resource(),
-            error = word();
+            error = new Error(word()),
+            originalError = new Error(`Could not find a matching link nor an embedded document for ${string}`);
 
         test('that promise is returned when requesting a single resource', () => {
             traverson.from.withArgs('https://api.travi.org/').returns({
@@ -144,7 +145,21 @@ suite('travi-api resource interactions', () => {
             const promise = traviApiResources.getResourceBy(resourceType, resourceId);
 
             assert.instanceOf(promise, Promise);
-            return assert.isRejected(promise, new RegExp(error));
+            return assert.isRejected(promise, error);
+        });
+
+        test('that promise is rejected as notFound when following chain to non-existent link', () => {
+            traverson.from.withArgs('https://api.travi.org/').returns({
+                follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
+                    getResource: stubForGet.yields(originalError)
+                })
+            });
+            Boom.notFound.withArgs(originalError).returns(error);
+
+            const promise = traviApiResources.getResourceBy(resourceType, resourceId);
+
+            assert.instanceOf(promise, Promise);
+            return assert.isRejected(promise, error);
         });
     });
 });

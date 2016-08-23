@@ -209,6 +209,10 @@ module.exports = function () {
         callback();
     });
 
+    this.Given(/^a "([^"]*)" does not exist in the api$/, (resourceType, callback) => {
+        callback();
+    });
+
     this.When(/^list of "([^"]*)" resources is requested$/, function (resourceType, callback) {
         this.makeRequestTo(`/${resourceType}`, callback);
     });
