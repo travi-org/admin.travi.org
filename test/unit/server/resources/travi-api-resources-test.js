@@ -1,19 +1,22 @@
 import traviApiResources from '../../../../lib/server/resources/travi-api-resources.js';
 import traverson from 'traverson';
+import Boom from 'boom';
 import {url, string, word, integer, resource, listOf, simpleObject} from '../../../helpers/any-for-admin';
 import sinon from 'sinon';
 import {assert} from 'chai';
 
 suite('travi-api resource interactions', () => {
-    let stubForGet;
+    let stubForGet, sandbox;
 
     setup(() => {
+        sandbox = sinon.sandbox.create();
+        sandbox.stub(traverson, 'from');
+        sandbox.stub(Boom, 'notFound');
         stubForGet = sinon.stub();
-        sinon.stub(traverson, 'from');
     });
 
     teardown(() => {
-        traverson.from.restore();
+        sandbox.restore();
     });
 
     test('that links are requested from the api catalog', () => {
@@ -59,7 +62,7 @@ suite('travi-api resource interactions', () => {
         test('that error bubbles from resources request', () => {
             const
                 resourceType = string(),
-                error = simpleObject(),
+                error = new Error(string()),
                 callback = sinon.spy();
             traverson.from.withArgs('https://api.travi.org/').returns({
                 follow: sinon.stub().withArgs(resourceType).returns({
@@ -72,12 +75,28 @@ suite('travi-api resource interactions', () => {
             assert.calledWith(callback, error);
         });
 
+        test('that error bubbles as notFound when following chain to non-existent link', () => {
+            const
+                resourceType = string(),
+                error = new Error(`Could not find a matching link nor an embedded document for ${string}`),
+                wrappedError = simpleObject(),
+                callback = sinon.spy();
+            Boom.notFound.withArgs(error).returns(wrappedError);
+            traverson.from.withArgs('https://api.travi.org/').returns({
+                follow: sinon.stub().withArgs(resourceType).returns({
+                    getResource: stubForGet.yields(error)
+                })
+            });
+
+            traviApiResources.getListOf(resourceType, callback);
+
+            assert.calledWith(callback, wrappedError);
+        });
+
         test('that a single resource is mapped to a list', () => {
             const
                 resourceType = string(),
-                responseFromApi = {
-                    _embedded: {}
-                },
+                responseFromApi = {_embedded: {}},
                 resourceInstance = resource(),
                 callback = sinon.spy();
             /*eslint-disable no-underscore-dangle */

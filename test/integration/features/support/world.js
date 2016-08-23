@@ -59,7 +59,7 @@ export function World() {
         nock('https://api.travi.org')
             .log(console.log)   //eslint-disable-line no-console
             .get('/')
-            .times(2)
+            .times(3)
             .reply(
                 HTTP_SUCCESS,
                 {_links: buildApiResponseLinks.call(this)},

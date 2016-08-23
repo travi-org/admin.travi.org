@@ -151,13 +151,7 @@ function assertFormatMappedToViewFor(resourceType, list) {
 module.exports = function () {
     this.World = require('../support/world.js').World;
 
-    this.Before(() => {
-        nock.disableNetConnect();
-    });
-
     this.After(() => {
-        nock.enableNetConnect();
-        nock.cleanAll();
         existingResourceId = null;
         this.serverResponse = null;
         this.apiResponseLinks = {};
@@ -166,6 +160,10 @@ module.exports = function () {
     this.Given(/^list of "([^"]*)" resources exists in the api$/, function (resourceType, callback) {
         setupExpectedApiResponsesFor.call(this, resourceType);
 
+        callback();
+    });
+
+    this.Given(/^list of "([^"]*)" resources does not exist in the api$/, (resourceType, callback) => {
         callback();
     });
 

@@ -12,4 +12,13 @@ suite('error page', () => {
 
         assert.equal(error.name(), 'ServerError');
     });
+
+    test('that the 404 error component shown for a 404 statue', () => {
+        const
+            wrapper = shallow(<ErrorPage statusCode={404} />),
+            wrapComponent = wrapper.find('Connect(Wrap)'),
+            error = wrapComponent.find('NotFound');
+
+        assert.equal(error.name(), 'NotFound');
+    });
 });

@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import redial from 'redial';
+import Boom from 'boom';
 import * as reactRouter from 'react-router';
 import * as renderer from '../../../../lib/server/view/route-renderer';
 import * as routes from '../../../../lib/shared/routes';
 import Root from '../../../../lib/shared/views/root/root';
-import {url as anyUrl, simpleObject, string} from '@travi/any';
+import {url as anyUrl, simpleObject, string, listOf} from '@travi/any';
 import sinon from 'sinon';
 import {assert, refute} from 'referee';
 
@@ -29,7 +30,7 @@ suite('route renderer', () => {
         sandbox.stub(reactRouter, 'createMemoryHistory').returns(history);
         sandbox.stub(redial, 'trigger');
         sandbox.stub(routes, 'getRoutes').returns(routesConfig);
-
+        sandbox.stub(Boom, 'notFound');
     });
 
     teardown(() => {
@@ -40,7 +41,7 @@ suite('route renderer', () => {
         const
             renderedContent = string(),
             callback = sinon.spy(),
-            components = simpleObject(),
+            components = listOf(simpleObject),
             params = simpleObject(),
             renderProps = {...simpleObject(), components, params},
             context = simpleObject(),
@@ -85,6 +86,19 @@ suite('route renderer', () => {
         renderer.routeTo(url, simpleObject(), callback);
 
         reactRouter.match.yield(error);
+
+        assert.calledWith(callback, error);
+    });
+
+    test('that error bubbles as notFound when react-router mounts the NotFound component', () => {
+        const
+            error = simpleObject(),
+            callback = sinon.spy(),
+            components = [{displayName: string()}, {displayName: 'NotFound'}, {displayName: string()}];
+        Boom.notFound.withArgs('Invalid react-router route').returns(error);
+        renderer.routeTo(url, simpleObject(), callback);
+
+        reactRouter.match.yield(null, null, {components});
 
         assert.calledWith(callback, error);
     });

@@ -24,7 +24,7 @@ suite('error renderer', () => {
             });
         });
 
-        test('that the 500 error page when the status is 500', () => {
+        test('that the handler is bound to to onPreResponse', () => {
             const
                 next = sinon.spy(),
                 ext = sinon.spy();
@@ -41,7 +41,7 @@ suite('error renderer', () => {
         const
             store = any.simpleObject(),
             state = any.simpleObject(),
-            statusCode = 500;
+            statusCode = any.integer();
 
         setup(() => {
             sandbox = sinon.sandbox.create();

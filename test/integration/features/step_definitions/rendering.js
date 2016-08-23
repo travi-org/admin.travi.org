@@ -13,13 +13,12 @@ module.exports = function () {
     this.Then(/^the primary nav is rendered$/, function (done) {
         const
             $ = cheerio.load(this.getResponseBody()),
-            $primaryNav = $('#wrap').find('ul.navbar-nav');
+            $primaryNav = $('#wrap').find('ul.navbar-nav'),
+            expectedLinkCount = this.availableResourceTypes.length + Object.keys(this.apiResponseLinks).length;
 
         assert.equals($primaryNav.length, 1);
-        assert.equals(
-            this.availableResourceTypes.length + Object.keys(this.apiResponseLinks).length,
-            $primaryNav.find('> li').length
-        );
+        assert.greater(expectedLinkCount, 0);
+        assert.equals(expectedLinkCount, $primaryNav.find('> li').length);
 
         done();
     });

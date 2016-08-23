@@ -21,3 +21,30 @@ Feature: errors
         Given the api is down
         When the "foo" is requested by id
         Then a "500" status code should be returned
+
+    Scenario: html requested for missing list route
+        Given html is requested
+        And user has api privileges
+        And list of "foo" resources does not exist in the api
+        When list of "foo" resources is requested
+        Then a "404" status code should be returned
+        And the "404" page should be displayed
+        And the primary nav is rendered
+
+    @wip
+    Scenario: html requested for missing single resource route
+        Given html is requested
+        And user has api privileges
+        And a "foo" does not exists in the api
+        When list of "foo" resources is requested
+        Then the "404" page should be displayed
+        And a "404" status code should be returned
+        And the primary nav is rendered
+
+    Scenario: html requested for existing server route with missing page
+        Given html is requested
+        And user has api privileges
+        When a request is made to "/foo/42/bar"
+        Then a "404" status code should be returned
+        And the "404" page should be displayed
+        And the primary nav is rendered
