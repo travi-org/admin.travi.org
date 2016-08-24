@@ -9,9 +9,11 @@ travi.org-admin
 ## Project Goals
 
 As I continue to learn about the node and react ecosystems, my intent with this project is for it to be both a playground
-for exploration as well as a reference implementation of the things that I have settled on as best practices. Some things
-are likely out of date from what I consider to be the best practice, but is at least at one of the stages in my learning
-process.
+for exploration as well as a reference implementation of the things that I have settled on as best practices.
+
+Since this is a side-project, some areas may be behind my progression of preferring a certain approach. Some things may
+also seem to go a bit far for such a small project, but please keep in mind that this is intended to be a reference
+implementation.
 
 ### Core Concepts
 
