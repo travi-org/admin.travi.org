@@ -37,7 +37,7 @@ suite('error renderer', () => {
     });
 
     suite('handler', () => {
-        let sandbox, request, erroringRequest, mediaType;
+        let sandbox, request, erroringRequest, requestLog, mediaType;
         const
             store = any.simpleObject(),
             state = any.simpleObject(),
@@ -54,7 +54,8 @@ suite('error renderer', () => {
             store.dispatch = sinon.stub();
             store.getState = sinon.stub().returns(state);
             mediaType = sinon.stub();
-            request = {...any.simpleObject(), url: {path: any.url()}, setUrl: sinon.spy(), response: {}};
+            requestLog = sinon.spy();
+            request = {url: {path: any.url()}, setUrl: sinon.spy(), response: {}, log: requestLog};
             erroringRequest = {...request, response: {isBoom: true, output: {statusCode}}};
             Negotiator.withArgs(erroringRequest).returns({mediaType});
         });
@@ -63,7 +64,6 @@ suite('error renderer', () => {
             sandbox.restore();
             Negotiator.reset();
         });
-
 
         test('that a normal response is not modified', () => {
             const replyContinue = sinon.spy();
@@ -98,6 +98,7 @@ suite('error renderer', () => {
             store.dispatch.withArgs(loadNavPromise).resolves();
 
             return errorRenderer.handler(erroringRequest, reply).then(() => {
+                assert.calledWith(requestLog, ['error', statusCode], erroringRequest.response);
                 assert.calledWith(htmlRenderer.respond, reply, {renderedContent, store, boomDetails: {statusCode}});
             });
         });
@@ -108,7 +109,7 @@ suite('error renderer', () => {
                 rootComponent = any.simpleObject(),
                 renderedContent = any.string(),
                 reply = any.simpleObject(),
-                error = any.word();
+                error = new Error(any.word());
             mediaType.returns('text/html');
             React.createElement.withArgs(ErrorPage).returns(errorPageComponent);
             React.createElement.withArgs(Root, {store}, errorPageComponent).returns(rootComponent);
@@ -116,8 +117,10 @@ suite('error renderer', () => {
             store.dispatch = sinon.stub().rejects(error);
 
             return Promise.all([
-                assert.isRejected(errorRenderer.handler(erroringRequest, reply), new RegExp(error)),
+                assert.isRejected(errorRenderer.handler(erroringRequest, reply), error),
                 errorRenderer.handler(erroringRequest, reply).catch(() => {
+                    assert.calledWith(requestLog, ['error', statusCode], erroringRequest.response);
+                    assert.calledWith(requestLog, ['error', 500], error);
                     assert.calledWith(
                         htmlRenderer.respond,
                         reply,
