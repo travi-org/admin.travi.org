@@ -94,7 +94,7 @@ suite('route renderer', () => {
         const
             error = simpleObject(),
             callback = sinon.spy(),
-            components = [{displayName: string()}, {displayName: 'NotFound'}, {displayName: string()}];
+            components = [{displayName: string()}, {name: 'NotFound'}, {displayName: string()}];
         Boom.notFound.withArgs('Invalid react-router route').returns(error);
         renderer.routeTo(url, simpleObject(), callback);
 

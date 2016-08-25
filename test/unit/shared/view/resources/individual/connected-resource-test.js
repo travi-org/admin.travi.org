@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStore} from 'redux';
 import {fromJS} from 'immutable';
-import connectedResource from '../../../../../../lib/shared/views/resources/individual/connected-resource';
+import ConnectedResource from '../../../../../../lib/shared/views/resources/individual/connected-resource';
 import * as duck from '../../../../../../lib/shared/views/resources/individual/duck';
 
 import sinon from 'sinon';
@@ -10,7 +10,6 @@ import {shallow} from 'enzyme';
 import {simpleObject, integer, string, boolean} from '@travi/any';
 
 suite('connected resource component', () => {
-    const ConnectedResource = connectedResource(React);
     let sandbox;
 
     setup(() => {
