@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStore} from 'redux';
 import {fromJS} from 'immutable';
-import connectedWrap from '../../../../../../lib/shared/views/theme/wrap/component';
+import ConnectedWrap from '../../../../../../lib/shared/views/theme/wrap/component';
 import * as duck from '../../../../../../lib/shared/views/theme/wrap/duck';
 import sinon from 'sinon';
 import {shallow} from 'enzyme';
@@ -9,7 +9,6 @@ import {assert} from 'chai';
 import {listOf, simpleObject} from '@travi/any';
 
 suite('connected wrapper component', () => {
-    const ConnectedWrap = connectedWrap(React);
     let sandbox;
 
     setup(() => {

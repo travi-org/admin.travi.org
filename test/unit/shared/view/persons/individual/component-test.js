@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStore} from 'redux';
 import {fromJS} from 'immutable';
-import connectedPerson from '../../../../../../lib/shared/views/persons/individual/component';
+import ConnectedPerson from '../../../../../../lib/shared/views/persons/individual/component';
 import * as duck from '../../../../../../lib/shared/views/persons/individual/duck';
 
 import {assert} from 'chai';
@@ -10,7 +10,6 @@ import {string, url, simpleObject, integer, boolean} from '@travi/any';
 import sinon from 'sinon';
 
 suite('connected person component', () => {
-    const ConnectedPerson = connectedPerson(React);
     let sandbox;
 
     setup(() => {

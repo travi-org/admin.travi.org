@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStore} from 'redux';
 import {fromJS} from 'immutable';
-import connectedList from '../../../../../../lib/shared/views/resources/list/connected-list';
+import ConnectedList from '../../../../../../lib/shared/views/resources/list/connected-list';
 import * as duck from '../../../../../../lib/shared/views/resources/list/duck';
 
 import sinon from 'sinon';
@@ -11,7 +11,6 @@ import {simpleObject, string, listOf, boolean} from '@travi/any';
 
 suite('connected list component', () => {
     let sandbox;
-    const ConnectedList = connectedList(React);
 
     setup(() => {
         sandbox = sinon.sandbox.create();

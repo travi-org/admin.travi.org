@@ -7,20 +7,20 @@ import {assert} from 'chai';
 suite('routes', () => {
     const routes = proxyquire('../../../lib/shared/routes', {
         './views/theme/wrap/component': {
-            default: (React) => (props) => <div>wrapper { props.children }</div>    //eslint-disable-line no-shadow
+            default: (props) => <div>wrapper { props.children }</div>    //eslint-disable-line no-shadow
         },
         '@travi/admin.travi.org-components': {
-            createIndex: (React) => () => <div>index</div>,                         //eslint-disable-line no-shadow
-            createNotFound: (React) => () => <div>not-found</div>                   //eslint-disable-line no-shadow
+            Index: () => <div>index</div>,                         //eslint-disable-line no-shadow
+            NotFound: () => <div>not-found</div>                   //eslint-disable-line no-shadow
         },
         './views/resources/list/connected-list': {
-            default: (React) => () => <div>resources</div>                          //eslint-disable-line no-shadow
+            default: () => <div>resources</div>                          //eslint-disable-line no-shadow
         },
         './views/resources/individual/connected-resource': {
-            default: (React) => () => <div>resource</div>                           //eslint-disable-line no-shadow
+            default: () => <div>resource</div>                           //eslint-disable-line no-shadow
         },
         './views/persons/individual/component': {
-            default: (React) => () => <div>person</div>                             //eslint-disable-line no-shadow
+            default: () => <div>person</div>                             //eslint-disable-line no-shadow
         }
     }).getRoutes();
     let node;
