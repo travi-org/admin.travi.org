@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import path from 'path';
 import webpack from 'webpack';
-import {getIfUtils, removeEmpty} from 'webpack-config-utils';
+import {getIfUtils, removeEmpty, combineLoaders} from 'webpack-config-utils';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import CleanPlugin from 'clean-webpack-plugin';
 import AssetsPlugin from 'assets-webpack-plugin';
@@ -47,21 +47,47 @@ module.exports = function (environment = 'production') {
                 }),
                 ifProduction({
                     test: /bootstrap-custom\.scss$/,
-                    loader: ExtractTextPlugin.extract(
-                        'style',
-                        ['css?sourceMap', 'sass?sourceMap']
-                    )
+                    loader: ExtractTextPlugin.extract({
+                        fallbackLoader: 'style',
+                        loader: combineLoaders([
+                            {
+                                loader: 'css-loader',
+                                query: {
+                                    sourceMap: true
+                                }
+                            },
+                            {
+                                loader: 'sass-loader',
+                                query: {
+                                    sourceMap: true
+                                }
+                            }
+                        ])
+                    })
                 }),
                 ifProduction({
                     test: /\.scss$/,
                     exclude: /bootstrap-custom\.scss$/,
-                    loader: ExtractTextPlugin.extract(
-                        'style',
-                        [
-                            'css?modules&sourceMap',
-                            'sass?outputStyle=compressed&sourceMap=true&sourceMapContents=true'
-                        ]
-                    )
+                    loader: ExtractTextPlugin.extract({
+                        fallbackLoader: 'style',
+                        loader: combineLoaders([
+                            {
+                                loader: 'css-loader',
+                                query: {
+                                    modules: true,
+                                    sourceMap: true
+                                }
+                            },
+                            {
+                                loader: 'sass-loader',
+                                query: {
+                                    outputStyle: 'compressed',
+                                    sourceMap: true,
+                                    sourceMapContents: true
+                                }
+                            }
+                        ])
+                    })
                 })
             ])
         },

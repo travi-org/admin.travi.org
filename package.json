@@ -45,7 +45,7 @@
     "cucumber": "1.2.2",
     "enzyme": "2.4.1",
     "extend-grunt-plugin": "0.1.0",
-    "extract-text-webpack-plugin": "1.0.1",
+    "extract-text-webpack-plugin": "2.0.0-beta.3",
     "formatio": "1.2.0",
     "grunt": "1.0.1",
     "grunt-babel": "6.0.0",
@@ -84,7 +84,7 @@
     "style-loader": "0.13.1",
     "time-grunt": "1.4.0",
     "url-loader": "0.5.7",
-    "webpack": "2.1.0-beta.15",
+    "webpack": "2.1.0-beta.21",
     "webpack-config-utils": "2.0.0",
     "webpack-dev-server": "1.15.0",
     "webpack-validator": "2.2.7"
