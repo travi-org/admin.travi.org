@@ -85,7 +85,7 @@
     "time-grunt": "1.4.0",
     "url-loader": "0.5.7",
     "webpack": "2.1.0-beta.21",
-    "webpack-config-utils": "2.0.0",
+    "webpack-config-utils": "2.1.0",
     "webpack-dev-server": "1.15.0",
     "webpack-validator": "2.2.7"
   },
