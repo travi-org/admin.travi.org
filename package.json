@@ -86,7 +86,7 @@
     "url-loader": "0.5.7",
     "webpack": "2.1.0-beta.21",
     "webpack-config-utils": "2.1.0",
-    "webpack-dev-server": "1.15.0",
+    "webpack-dev-server": "1.15.1",
     "webpack-validator": "2.2.7"
   },
   "dependencies": {
