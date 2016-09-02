@@ -99,7 +99,7 @@
     "good-squeeze": "4.0.0",
     "hapi": "15.0.3",
     "hapi-mustache": "0.0.1",
-    "history": "3.0.0",
+    "history": "3.1.0",
     "immutable": "3.8.1",
     "inert": "4.0.1",
     "lodash": "4.15.0",
