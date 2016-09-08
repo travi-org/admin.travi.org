@@ -46,7 +46,7 @@ suite('route transformer', () => {
         assert.notCalled(request.setUrl);
     });
 
-    test('that an html request updates the route to match the magic one', () => {
+    test('that an html request updates the route to match the html route', () => {
         const
             server = {ext: sinon.stub()},
             reply = {continue: sinon.spy()},
@@ -58,6 +58,6 @@ suite('route transformer', () => {
 
         assert.calledOnce(next);
         assert.calledOnce(reply.continue);
-        assert.calledWith(request.setUrl, `/html/mime/type/hack${request.url.path}`);
+        assert.calledWith(request.setUrl, '/html');
     });
 });

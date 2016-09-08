@@ -25,7 +25,7 @@ suite('html route', () => {
             assert.calledOnce(next);
             assert.calledWith(server.route, {
                 method: 'GET',
-                path: '/html/mime/type/hack/{path*}',
+                path: '/html',
                 handler
             });
         });
@@ -54,21 +54,11 @@ suite('html route', () => {
         test('that html is rendered based on the original route', () => {
             const
                 reply = {view: sinon.spy()},
-                request = {params: {path: any.url()}},
+                url = any.url(),
+                request = {raw: {req: {url}}},
                 title = any.string();
-            routeRenderer.routeTo.withArgs(`/${request.params.path}`, store).yields(null, renderedContent);
+            routeRenderer.routeTo.withArgs(url, store).yields(null, renderedContent);
             toString.returns(title);
-
-            handler(request, reply);
-
-            assert.calledWith(htmlRenderer.respond, reply, {renderedContent, store});
-        });
-
-        test('that html is rendered based on the root route', () => {
-            const
-                reply = {view: sinon.spy()},
-                request = {params: {path: undefined}};
-            routeRenderer.routeTo.withArgs('/', store).yields(null, renderedContent);
 
             handler(request, reply);
 
@@ -83,7 +73,7 @@ suite('html route', () => {
             routeRenderer.routeTo.yields(error);
             Boom.wrap.withArgs(error).returns(wrappedError);
 
-            handler({params: any.simpleObject()}, reply);
+            handler({raw: {req: {url: any.url()}}}, reply);
 
             assert.calledWith(reply, wrappedError);
         });
