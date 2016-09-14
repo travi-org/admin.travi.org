@@ -104,7 +104,7 @@
     "inert": "4.0.2",
     "lodash": "4.15.0",
     "negotiator": "0.6.1",
-    "newrelic": "1.30.2",
+    "newrelic": "1.30.3",
     "react": "15.3.1",
     "react-dom": "15.3.1",
     "react-ga": "2.1.2",
