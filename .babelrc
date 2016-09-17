@@ -8,7 +8,7 @@
             "retainLines": true
         },
         "browser": {
-            "presets": ["es2015-native-modules"]
+            "presets": [["es2015", {modules: false}]]
         },
         "node": {
             "presets": ["es2015-node"],
