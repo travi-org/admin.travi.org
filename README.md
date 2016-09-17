@@ -40,6 +40,10 @@ implementation.
 - [x] [Redial](https://github.com/markdalgleish/redial)
 - [x] [Immutable.js](https://facebook.github.io/immutable-js/)
 - [x] [Webpack 2](https://webpack.github.io/)
+    - [x] Tree-shaking
+    - [ ] Vendor Chunk
+    - [ ] Code Splitting
+    - [ ] Commons Chunk
 - [ ] [React Hot Loader 3](https://github.com/gaearon/react-hot-loader)
 - [x] [Hapi](https://hapijs.com)
 - [x] [Traverson](https://github.com/basti1302/traverson) with the [HAL adapter](https://github.com/basti1302/traverson-hal)
