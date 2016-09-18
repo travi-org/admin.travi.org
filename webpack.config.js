@@ -101,6 +101,7 @@ module.exports = function (environment = 'production') {
             new webpack.optimize.OccurrenceOrderPlugin(),
             new AssetsPlugin(),
             ifDevelopment(new webpack.HotModuleReplacementPlugin()),
+            ifDevelopment(new webpack.NamedModulesPlugin()),
             ifProduction(new webpack.LoaderOptionsPlugin({
                 minimize: true,
                 debug: false
