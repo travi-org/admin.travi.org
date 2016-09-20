@@ -1,4 +1,5 @@
 /*global window */
+import ga from 'react-ga';
 import * as storeCreator from '../../../lib/shared/store/create';
 import * as dependencies from '../../../lib/client/dependencies';
 import * as historyListener from '../../../lib/client/history-listener';
@@ -23,6 +24,7 @@ suite('client-side app', () => {
         sandbox.stub(storeCreator, 'configureStore').withArgs(initialState).returns(store);
         sandbox.stub(historyListener, 'addHistoryListener');
         sandbox.stub(renderer, 'remountContent');
+        sandbox.stub(ga, 'initialize');
 
         window.__INITIAL_STATE__ = JSON.stringify(initialState);
     });
@@ -35,8 +37,9 @@ suite('client-side app', () => {
     test('that the app renders', () => {
         simulatePageLoad();
 
-        assert.calledWith(renderer.remountContent, store, 'UA-2890413-9');
+        assert.calledWith(renderer.remountContent, store);
         assert.calledOnce(dependencies.configure);
         assert.calledWith(historyListener.addHistoryListener, store);
+        assert.calledWith(ga.initialize, 'UA-2890413-9');
     });
 });

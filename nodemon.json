@@ -8,8 +8,7 @@
         "js": "babel-node"
     },
     "watch": [
-        "lib/server",
-        "lib/shared"
+        "lib/server"
     ],
     "ignore": [
         ".git",
