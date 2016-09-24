@@ -31,7 +31,13 @@ module.exports = function (environment = 'production') {
                 {
                     test: /\.jsx?$/,
                     include: /lib\/(client|shared)/,
-                    loaders: removeEmpty([ifDevelopment('react-hot-loader/webpack'), 'babel?cacheDirectory'])
+                    loaders: removeEmpty([
+                        ifDevelopment('react-hot-loader/webpack'),
+                        ifDevelopment(
+                            'babel?plugins[]=transform-react-jsx-source&cacheDirectory',
+                            'babel?cacheDirectory'
+                        )
+                    ])
                 },
                 {
                     test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=d+\.d+\.d+)?$/,
