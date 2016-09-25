@@ -6,6 +6,7 @@ tmp/
 logs/
 dist/
 coverage/
+pacts/
 
 .grunt
 .env

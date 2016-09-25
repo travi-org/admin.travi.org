@@ -7,4 +7,5 @@ target:
   - grunt/**/*.js
   - lib/**/*.js*
   - test/**/*.js*
+  - scripts/**/*.js
   - .storybook/**/*.js

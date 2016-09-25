@@ -6,13 +6,22 @@ import sinon from 'sinon';
 import {assert} from 'chai';
 
 suite('travi-api resource interactions', () => {
-    let stubForGet, sandbox;
+    let stubForGet, sandbox, apiTraversal;
 
     setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(traverson, 'from');
         sandbox.stub(Boom, 'notFound');
+
         stubForGet = sinon.stub();
+        apiTraversal = {
+            getResource: stubForGet,
+            follow: sinon.stub()
+        };
+
+        traverson.from.withArgs('https://api.travi.org/').returns({
+            withRequestOptions: sinon.stub().returns(apiTraversal)
+        });
     });
 
     teardown(() => {
@@ -26,10 +35,7 @@ suite('travi-api resource interactions', () => {
                 'self': url(),
                 'foo': url()
             };
-        traverson.from.withArgs('https://api.travi.org/').returns({
-            getResource: stubForGet
-        });
-        stubForGet.yields(null, { '_links': links });
+        stubForGet.yields(null, {'_links': links});
 
         traviApiResources.getLinksFor('catalog', callback);
 
@@ -48,10 +54,8 @@ suite('travi-api resource interactions', () => {
             /*eslint-disable no-underscore-dangle */
             responseFromApi._embedded[resourceType] = resources;
             /*eslint-enable no-underscore-dangle */
-            traverson.from.withArgs('https://api.travi.org/').returns({
-                follow: sinon.stub().withArgs(resourceType).returns({
-                    getResource: stubForGet.yields(null, responseFromApi)
-                })
+            apiTraversal.follow.withArgs(resourceType).returns({
+                getResource: stubForGet.yields(null, responseFromApi)
             });
 
             traviApiResources.getListOf(resourceType, callback);
@@ -64,11 +68,7 @@ suite('travi-api resource interactions', () => {
                 resourceType = string(),
                 error = new Error(string()),
                 callback = sinon.spy();
-            traverson.from.withArgs('https://api.travi.org/').returns({
-                follow: sinon.stub().withArgs(resourceType).returns({
-                    getResource: stubForGet.yields(error)
-                })
-            });
+            apiTraversal.follow.withArgs(resourceType).returns({getResource: stubForGet.yields(error)});
 
             traviApiResources.getListOf(resourceType, callback);
 
@@ -82,11 +82,7 @@ suite('travi-api resource interactions', () => {
                 wrappedError = simpleObject(),
                 callback = sinon.spy();
             Boom.notFound.withArgs(error).returns(wrappedError);
-            traverson.from.withArgs('https://api.travi.org/').returns({
-                follow: sinon.stub().withArgs(resourceType).returns({
-                    getResource: stubForGet.yields(error)
-                })
-            });
+            apiTraversal.follow.withArgs(resourceType).returns({getResource: stubForGet.yields(error)});
 
             traviApiResources.getListOf(resourceType, callback);
 
@@ -102,11 +98,7 @@ suite('travi-api resource interactions', () => {
             /*eslint-disable no-underscore-dangle */
             responseFromApi._embedded[resourceType] = resourceInstance;
             /*eslint-enable no-underscore-dangle */
-            traverson.from.withArgs('https://api.travi.org/').returns({
-                follow: sinon.stub().withArgs(resourceType).returns({
-                    getResource: stubForGet.yields(null, responseFromApi)
-                })
-            });
+            apiTraversal.follow.withArgs(resourceType).returns({getResource: stubForGet.yields(null, responseFromApi)});
 
             traviApiResources.getListOf(resourceType, callback);
 
@@ -123,10 +115,8 @@ suite('travi-api resource interactions', () => {
             originalError = new Error(`Could not find a matching link nor an embedded document for ${string}`);
 
         test('that promise is returned when requesting a single resource', () => {
-            traverson.from.withArgs('https://api.travi.org/').returns({
-                follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
-                    getResource: stubForGet.yields(null, resourceInstance)
-                })
+            apiTraversal.follow.withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
+                getResource: stubForGet.yields(null, resourceInstance)
             });
 
             const promise = traviApiResources.getResourceBy(resourceType, resourceId);
@@ -136,10 +126,8 @@ suite('travi-api resource interactions', () => {
         });
 
         test('that promise is rejected for an error when requesting a single resource', () => {
-            traverson.from.withArgs('https://api.travi.org/').returns({
-                follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
-                    getResource: stubForGet.yields(error)
-                })
+            apiTraversal.follow.withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
+                getResource: stubForGet.yields(error)
             });
 
             const promise = traviApiResources.getResourceBy(resourceType, resourceId);
@@ -149,10 +137,8 @@ suite('travi-api resource interactions', () => {
         });
 
         test('that promise is rejected as notFound when following chain to non-existent link', () => {
-            traverson.from.withArgs('https://api.travi.org/').returns({
-                follow: sinon.stub().withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
-                    getResource: stubForGet.yields(originalError)
-                })
+            apiTraversal.follow.withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
+                getResource: stubForGet.yields(originalError)
             });
             Boom.notFound.withArgs(originalError).returns(error);
 
