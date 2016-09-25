@@ -9,7 +9,7 @@
     "url": "git://github.com/travi/travi.org-admin"
   },
   "scripts": {
-    "test": "grunt",
+    "test": "grunt && npm run pact-generation",
     "start": "node dist/server/app.js",
     "postinstall": "grunt heroku:production",
     "serve:dev": "nodemon lib/server/app.js",
