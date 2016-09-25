@@ -49,15 +49,15 @@ implementation.
 - [x] [Traverson](https://github.com/basti1302/traverson) with the [HAL adapter](https://github.com/basti1302/traverson-hal)
 - [ ] [Pact Consumer](https://github.com/pact-foundation/grunt-pact)
 
-### Local Development
+## Local Development
 
-#### Install Dependencies
+### Install Dependencies
 ```
 $ nvm install
 $ npm install
 ```
 
-#### Run in development mode
+### Run in development mode
 Against the production API
 ```
 $ npm run dev
@@ -68,7 +68,7 @@ Against a local API
 $ npm run dev-local
 ```
 
-#### Verification
+### Verification
 ```
 $ npm test
 ```
