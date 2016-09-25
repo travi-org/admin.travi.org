@@ -17,14 +17,15 @@
     "serve:webpack": "BABEL_ENV=node babel-node ./webpack-dev-server.js",
     "dev": "NODE_ENV=development npm-run-all -p serve:webpack serve:dev",
     "dev-local": "NODE_ENV=development npm-run-all -p serve:webpack serve:dev-local",
-    "pact-generation": "BABEL_ENV=node babel-node scripts/pact.js "
+    "pact-generation": "BABEL_ENV=node babel-node scripts/pact.js",
+    "pact-publish": "BABEL_ENV=node babel-node scripts/publish-pacts-to-broker.js"
   },
   "engines": {
     "node": "6.6.x",
     "npm": "3.10.x"
   },
   "devDependencies": {
-    "@pact-foundation/grunt-pact": "4.3.0",
+    "@pact-foundation/pact-node": "4.5.3",
     "@travi/any": "0.6.1",
     "@travi/eslint-config-travi": "0.3.0",
     "assets-webpack-plugin": "3.4.0",
