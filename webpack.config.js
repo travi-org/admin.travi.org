@@ -6,7 +6,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import CleanPlugin from 'clean-webpack-plugin';
 import AssetsPlugin from 'assets-webpack-plugin';
 import validate from 'webpack-validator';
-
+import Visualizer from 'webpack-visualizer-plugin';
 
 module.exports = function (environment = 'production') {
     const
@@ -120,7 +120,8 @@ module.exports = function (environment = 'production') {
                 }
             })),
             ifProduction(new webpack.optimize.DedupePlugin()),
-            ifProduction(new ExtractTextPlugin('[name]-[hash].css'))
+            ifProduction(new ExtractTextPlugin('[name]-[hash].css')),
+            ifProduction(new Visualizer())
         ]),
         output: {
             path: assetsPath,

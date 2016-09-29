@@ -72,3 +72,6 @@ $ npm run dev-local
 ```
 $ npm test
 ```
+
+### Analyze the Webpack bundle
+After `grunt build` has been run, load `resources/js/stats.html` in a browser
