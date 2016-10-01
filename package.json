@@ -21,7 +21,7 @@
     "pact-publish": "BABEL_ENV=node babel-node scripts/publish-pacts-to-broker.js"
   },
   "engines": {
-    "node": "6.6.x",
+    "node": "6.7.x",
     "npm": "3.10.x"
   },
   "devDependencies": {
