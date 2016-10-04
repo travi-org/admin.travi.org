@@ -48,6 +48,7 @@ implementation.
 - [x] [Hapi](https://hapijs.com)
 - [x] [Traverson](https://github.com/basti1302/traverson) with the [HAL adapter](https://github.com/basti1302/traverson-hal)
 - [ ] [Pact Consumer](https://github.com/pact-foundation/grunt-pact)
+    - Pacts can be viewed on [my broker](https://pact-api.travi.org)
 
 ## Local Development
 
