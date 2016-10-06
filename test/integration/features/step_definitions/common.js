@@ -4,10 +4,10 @@ import loadApi from '../../../../lib/server/app.js';
 module.exports = function () {
     this.World = require('../support/world.js').World;
 
-    this.Before(() => {
+    this.Before((scenario, callback) => {
         nock.disableNetConnect();
         this.mime = 'application/json';
-   
+
         loadApi.then(() => callback());
     });
 
