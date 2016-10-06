@@ -105,7 +105,7 @@
     "history": "4.3.0",
     "immutable": "3.8.1",
     "inert": "4.0.2",
-    "lodash": "4.16.3",
+    "lodash": "4.16.4",
     "negotiator": "0.6.1",
     "newrelic": "1.30.5",
     "react": "15.3.2",
