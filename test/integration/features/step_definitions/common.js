@@ -1,4 +1,5 @@
 import nock from 'nock';
+import loadApi from '../../../../lib/server/app.js';
 
 module.exports = function () {
     this.World = require('../support/world.js').World;
@@ -6,6 +7,8 @@ module.exports = function () {
     this.Before(() => {
         nock.disableNetConnect();
         this.mime = 'application/json';
+   
+        loadApi.then(() => callback());
     });
 
     this.After(function () {
