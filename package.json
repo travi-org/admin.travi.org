@@ -63,7 +63,7 @@
     "grunt-gh-pages": "2.0.0",
     "grunt-mocha-istanbul": "5.0.2",
     "grunt-perfbudget": "0.1.9",
-    "grunt-webpack": "1.0.17",
+    "grunt-webpack": "1.0.18",
     "h2o2": "5.2.0",
     "istanbul": "1.1.0-alpha.1",
     "jsdom": "9.6.0",
