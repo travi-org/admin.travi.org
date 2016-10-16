@@ -94,7 +94,7 @@
   },
   "dependencies": {
     "@travi/admin.travi.org-components": "0.11.1",
-    "async": "2.1.1",
+    "async": "2.1.2",
     "boom": "4.2.0",
     "glue": "4.0.0",
     "good": "7.0.2",
