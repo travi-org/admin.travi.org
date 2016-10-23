@@ -69,7 +69,7 @@
     "jsdom": "9.7.1",
     "load-grunt-config": "0.19.2",
     "mocha-junit-reporter": "1.12.1",
-    "nock": "8.2.0",
+    "nock": "9.0.0",
     "node-sass": "3.10.1",
     "npm-run-all": "3.1.1",
     "pact": "1.0.0-rc.5",
