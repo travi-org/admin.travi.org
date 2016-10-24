@@ -39,7 +39,7 @@
     "babel-preset-es2015": "6.16.0",
     "babel-preset-es2015-node": "6.1.1",
     "babel-preset-react": "6.16.0",
-    "babel-preset-stage-2": "6.16.0",
+    "babel-preset-stage-2": "6.17.0",
     "balanced-match": "0.4.2",
     "chai": "3.5.0",
     "chai-as-promised": "6.0.0",
