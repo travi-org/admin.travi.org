@@ -18,7 +18,9 @@
     "dev": "NODE_ENV=development npm-run-all -p serve:webpack serve:dev",
     "dev-local": "NODE_ENV=development npm-run-all -p serve:webpack serve:dev-local",
     "pact-generation": "BABEL_ENV=node babel-node scripts/pact.js",
-    "pact-publish": "BABEL_ENV=node babel-node scripts/publish-pacts-to-broker.js"
+    "pact-publish": "BABEL_ENV=node babel-node scripts/publish-pacts-to-broker.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "engines": {
     "node": "6.7.x",
@@ -123,6 +125,8 @@
     "traverson-hal": "4.1.1",
     "vision": "4.1.0",
     "visionary": "6.0.2",
-    "xhr": "2.2.2"
-  }
+    "xhr": "2.2.2",
+    "snyk": "^1.19.1"
+  },
+  "snyk": true
 }
