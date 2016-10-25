@@ -68,7 +68,7 @@
     "grunt-webpack": "1.0.18",
     "h2o2": "5.4.0",
     "istanbul": "1.1.0-alpha.1",
-    "jsdom": "9.7.1",
+    "jsdom": "9.8.2",
     "load-grunt-config": "0.19.2",
     "mocha-junit-reporter": "1.12.1",
     "nock": "9.0.0",
