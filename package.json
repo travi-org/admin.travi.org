@@ -20,7 +20,9 @@
     "pact-generation": "BABEL_ENV=node babel-node scripts/pact.js",
     "pact-publish": "BABEL_ENV=node babel-node scripts/publish-pacts-to-broker.js",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "prepublish": "npm run snyk-protect",
+    "commitmsg": "validate-commit-msg",
+    "precommit": "npm test"
   },
   "engines": {
     "node": "6.7.x",
@@ -51,7 +53,7 @@
     "coveralls": "2.11.14",
     "css-loader": "0.25.0",
     "cucumber": "1.3.1",
-    "dotenv-safe": "2.3.3",
+    "cz-conventional-changelog": "1.2.0", "dotenv-safe": "2.3.3",
     "enzyme": "2.5.1",
     "extract-text-webpack-plugin": "2.0.0-beta.3",
     "formatio": "1.2.0",
@@ -67,6 +69,7 @@
     "grunt-perfbudget": "0.1.9",
     "grunt-webpack": "1.0.18",
     "h2o2": "5.4.0",
+    "husky": "0.11.9",
     "istanbul": "1.1.0-alpha.1",
     "jsdom": "9.8.1",
     "load-grunt-config": "0.19.2",
@@ -88,6 +91,7 @@
     "style-loader": "0.13.1",
     "time-grunt": "1.4.0",
     "url-loader": "0.5.7",
+    "validate-commit-msg": "2.8.2",
     "webpack": "2.1.0-beta.22",
     "webpack-config-utils": "2.1.0",
     "webpack-dev-server": "2.1.0-beta.4",
@@ -128,6 +132,11 @@
     "vision": "4.1.0",
     "visionary": "6.0.2",
     "xhr": "2.2.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "snyk": true
 }
