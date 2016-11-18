@@ -1,5 +1,5 @@
 import middleware from '../../../../lib/shared/store/fetch-middleware';
-import * as iocContainer from '../../../../lib/shared/ioc/container';
+import * as iocContainer from '@travi/ioc';
 import any from '@travi/any';
 import sinon from 'sinon';
 import {assert} from 'chai';

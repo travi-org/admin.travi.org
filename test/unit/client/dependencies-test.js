@@ -1,6 +1,6 @@
 import {configure} from '../../../lib/client/dependencies';
 import * as fetcher from '../../../lib/client/fetcher';
-import * as container from '../../../lib/shared/ioc/container';
+import * as container from '@travi/ioc';
 import {assert} from 'chai';
 import sinon from 'sinon';
 
