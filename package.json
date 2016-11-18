@@ -103,6 +103,7 @@
     "@travi/admin.travi.org-components": "0.11.1",
     "@travi/hapi-html-request-router": "0.1.0",
     "@travi/ioc": "0.1.1",
+    "@travi/redux-fetch-middleware": "0.1.0",
     "async": "2.1.2",
     "boom": "4.2.0",
     "glue": "4.0.0",
