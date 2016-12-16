@@ -1,8 +1,10 @@
-import {getResource, getResources, getNav} from '../../../../lib/server/resources/fetcher';
+import {createFetcher} from '../../../../lib/server/resources/fetcher';
 import * as controller from '../../../../lib/server/resources/controller';
 import sinon from 'sinon';
 import {assert} from 'chai';
 import any from '@travi/any';
+
+const {getResource, getResources, getNav} = createFetcher();
 
 suite('server-side data fetcher', () => {
     let sandbox;

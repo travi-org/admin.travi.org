@@ -9,7 +9,7 @@ suite('server dependencies', () => {
 
     setup(() => {
         sandbox = sinon.sandbox.create();
-        sandbox.stub(container, 'add');
+        sandbox.stub(container, 'register');
     });
 
     teardown(() => {
@@ -19,6 +19,6 @@ suite('server dependencies', () => {
     test('that the dependencies are loaded into the container', () => {
         define();
 
-        assert.calledWith(container.add, 'fetcher', fetcher);
+        assert.calledWith(container.register, 'fetcher-factory', fetcher);
     });
 });

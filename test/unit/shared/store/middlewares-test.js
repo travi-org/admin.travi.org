@@ -1,7 +1,7 @@
 /*global window */
 import * as redux from 'redux';
 import {getComposed} from '../../../../lib/shared/store/middlewares';
-import fetchMiddleware from '@travi/redux-fetch-middleware';
+import * as fetchMiddlewareFactory from '@travi/redux-fetch-middleware';
 import sinon from 'sinon';
 import {assert} from 'chai';
 import any from '@travi/any';
@@ -13,8 +13,12 @@ suite('redux middlewares', () => {
         composed = any.simpleObject();
 
     setup(() => {
+        const fetchMiddleware = any.simpleObject();
+
         sandbox = sinon.sandbox.create();
+
         sandbox.stub(redux, 'compose');
+        sandbox.stub(fetchMiddlewareFactory, 'default').returns(fetchMiddleware);
         sandbox.stub(redux, 'applyMiddleware').withArgs(fetchMiddleware).returns(appliedFetch);
     });
 

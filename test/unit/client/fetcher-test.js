@@ -1,8 +1,10 @@
-import {getResource, getResources, getNav} from '../../../lib/client/fetcher';
+import {createFetcher} from '../../../lib/client/fetcher';
 import sinon from 'sinon';
 import xhr from 'xhr';
 import {assert} from 'chai';
 import any from '@travi/any';
+
+const {getResource, getResources, getNav} = createFetcher();
 
 suite('client-side data fetcher', () => {
     let sandbox;
