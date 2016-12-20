@@ -99,7 +99,11 @@ suite('error renderer', () => {
 
             return errorRenderer.handler(erroringRequest, reply).then(() => {
                 assert.calledWith(requestLog, ['error', statusCode], erroringRequest.response);
-                assert.calledWith(htmlRenderer.respond, reply, {renderedContent, store, boomDetails: {statusCode}});
+                assert.calledWith(
+                    htmlRenderer.respond,
+                    reply,
+                    {renderedContent, store, status: statusCode, boomDetails: {statusCode}}
+                );
             });
         });
 
@@ -124,7 +128,7 @@ suite('error renderer', () => {
                     assert.calledWith(
                         htmlRenderer.respond,
                         reply,
-                        {renderedContent, store, boomDetails: {statusCode: 500}}
+                        {renderedContent, store, status: 500, boomDetails: {statusCode: 500}}
                     );
                 })
             ]);

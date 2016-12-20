@@ -21,7 +21,7 @@ suite('client-side app', () => {
     setup(() => {
         sandbox = sinon.sandbox.create();
         sandbox.stub(dependencies, 'configure');
-        sandbox.stub(storeCreator, 'configureStore').withArgs(initialState).returns(store);
+        sandbox.stub(storeCreator, 'configureStore').withArgs({initialState}).returns(store);
         sandbox.stub(historyListener, 'addHistoryListener');
         sandbox.stub(renderer, 'remountContent');
         sandbox.stub(ga, 'initialize');

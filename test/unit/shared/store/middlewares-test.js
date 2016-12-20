@@ -10,7 +10,8 @@ suite('redux middlewares', () => {
     let sandbox;
     const
         appliedFetch = any.simpleObject(),
-        composed = any.simpleObject();
+        composed = any.simpleObject(),
+        session = any.simpleObject();
 
     setup(() => {
         const fetchMiddleware = any.simpleObject();
@@ -18,7 +19,7 @@ suite('redux middlewares', () => {
         sandbox = sinon.sandbox.create();
 
         sandbox.stub(redux, 'compose');
-        sandbox.stub(fetchMiddlewareFactory, 'default').returns(fetchMiddleware);
+        sandbox.stub(fetchMiddlewareFactory, 'default').withArgs(session).returns(fetchMiddleware);
         sandbox.stub(redux, 'applyMiddleware').withArgs(fetchMiddleware).returns(appliedFetch);
     });
 
@@ -33,7 +34,7 @@ suite('redux middlewares', () => {
     test('that the middlewares are composed', () => {
         redux.compose.withArgs(appliedFetch).returns(composed);
 
-        assert.equal(getComposed(), composed);
+        assert.equal(getComposed(session), composed);
     });
 
     test('that devtools browser extension is initialized if present', () => {
@@ -41,6 +42,6 @@ suite('redux middlewares', () => {
         window.devToolsExtension = sinon.stub().returns(enhancer);
         redux.compose.withArgs(appliedFetch, enhancer).returns(composed);
 
-        assert.equal(getComposed(), composed);
+        assert.equal(getComposed(session), composed);
     });
 });

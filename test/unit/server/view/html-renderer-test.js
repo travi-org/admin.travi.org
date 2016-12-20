@@ -24,7 +24,8 @@ suite('html renderer', () => {
         resources = any.simpleObject(),
         renderedContent = any.string(),
         state = any.simpleObject(),
-        title = any.string();
+        title = any.string(),
+        status = any.integer();
 
     setup(() => {
         sandbox = sinon.sandbox.create();
@@ -43,18 +44,22 @@ suite('html renderer', () => {
     });
 
     test('that appropriate data is passed to the layout template', () => {
-        respond(reply, {renderedContent, store});
+        respond(reply, {renderedContent, store, status});
 
         assertRequiredDataPassedToLayoutTemplate(reply, {renderedContent, resources, state, title});
+        assert.calledWith(response.code, status);
     });
 
     test('that an error response sets the status code and passes boom data to the layout template', () => {
-        const boomDetails = {...any.simpleObject(), statusCode: any.integer()};
+        const
+            boomDetails = {...any.simpleObject(), statusCode: any.integer()},
+            code = sinon.stub();
+        reply.view.withArgs('layout', sinon.match({boom: JSON.stringify(boomDetails)})).returns({code});
+        code.withArgs(status).returns(response);
 
-        respond(reply, {renderedContent, store, boomDetails});
+        respond(reply, {renderedContent, store, status, boomDetails});
 
         assertRequiredDataPassedToLayoutTemplate(reply, {renderedContent, resources, state, title});
-        assert.calledWith(reply.view, 'layout', sinon.match({boom: JSON.stringify(boomDetails)}));
         assert.calledWith(response.code, boomDetails.statusCode);
     });
 

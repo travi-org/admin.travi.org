@@ -27,7 +27,7 @@ suite('store creation for production', () => {
     });
 
     test('that redux store is created from provided initial state', () => {
-        assert.equal(configureStore(initialState), store);
+        assert.equal(configureStore({initialState}), store);
     });
 
     test('that devtools browser extension is initialized if present', () => {
@@ -35,6 +35,6 @@ suite('store creation for production', () => {
 
         configureStore(initialState);
 
-        assert.equal(configureStore(initialState), store);
+        assert.equal(configureStore({initialState}), store);
     });
 });
