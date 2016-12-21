@@ -118,7 +118,7 @@
     "inert": "4.0.3",
     "lodash": "4.17.2",
     "negotiator": "0.6.1",
-    "newrelic": "1.35.1",
+    "newrelic": "1.36.0",
     "react": "15.4.1",
     "react-addons-test-utils": "15.4.1",
     "react-dom": "15.4.1",
