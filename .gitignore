@@ -7,6 +7,7 @@ logs/
 dist/
 coverage/
 pacts/
+.nyc_output/
 
 .grunt
 .env
