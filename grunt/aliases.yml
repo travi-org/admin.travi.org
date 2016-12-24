@@ -10,25 +10,4 @@ build:
   - compileClient
   - compileServer
 
-lint: eslint
-
-unit:
-  - env:node
-  - mocha_istanbul:unit
-
-wip: cucumberjs:wip
-integration:
-  - env:node
-  - cucumberjs:integration
-
-test:
-  - unit
-  - integration
-
-verify:
-  - lint
-  - test
-
 heroku:production: build
-
-default: verify

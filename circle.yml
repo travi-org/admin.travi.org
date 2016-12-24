@@ -10,6 +10,7 @@ test:
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
     - BABEL_ENV=node cucumber.js --format=json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --tags=~@wip test/integration/features/ --compiler=js*:babel-register
+    - npm run report-coverage
 
 deployment:
   production:
