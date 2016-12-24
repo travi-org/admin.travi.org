@@ -6,6 +6,8 @@ travi.org-admin
 [![Code Climate](http://img.shields.io/codeclimate/github/travi/travi.org-admin.svg?style=flat)](https://codeclimate.com/github/travi/travi.org-admin)
 [![Dependency Status](http://img.shields.io/gemnasium/travi/travi.org-admin.svg?style=flat)](https://gemnasium.com/travi/travi.org-admin)
 
+![greenkeeper badge](https://badges.greenkeeper.io/travi/travi.org-admin.svg)
+
 ## Project Goals
 
 As I continue to learn about the node and react ecosystems, my intent with this project is for it to be both a playground
