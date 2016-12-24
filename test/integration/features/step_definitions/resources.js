@@ -1,12 +1,14 @@
 import nock from 'nock';
 import {assert} from 'referee';
 import _ from 'lodash';
+import {OK} from 'http-status-codes';
+import {defineSupportCode} from 'cucumber';
+import {World} from '../support/world';
 import {url, listOf, resource, resources, integer} from '../../../helpers/any-for-admin';
 
 const
     DOMAIN = 'api.travi.org',
-    HOST = `https://${DOMAIN}`,
-    HTTP_SUCCESS = 200;
+    HOST = `https://${DOMAIN}`;
 
 let existingResourceId,
     existingResource;
@@ -92,7 +94,7 @@ function setupExpectedApiResponsesFor(resourceType) {
         .log(console.log)   //eslint-disable-line no-console
         .get(requestPath)
         .reply(
-            HTTP_SUCCESS,
+            OK,
             document,
             headers
         );
@@ -111,7 +113,7 @@ function setupExpectedApiResponsesFor(resourceType) {
                     .log(console.log)   //eslint-disable-line no-console
                     .get(resourcePath)
                     .reply(
-                        HTTP_SUCCESS,
+                        OK,
                         extendedExistingResource,
                         headers
                     );
@@ -148,26 +150,26 @@ function assertFormatMappedToViewFor(resourceType, list) {
     });
 }
 
-module.exports = function () {
-    this.World = require('../support/world.js').World;
+defineSupportCode(({After, Given, When, Then, setWorldConstructor}) => {
+    setWorldConstructor(World);
 
-    this.After(() => {
+    After(function () {
         existingResourceId = null;
         this.serverResponse = null;
         this.apiResponseLinks = {};
     });
 
-    this.Given(/^list of "([^"]*)" resources exists in the api$/, function (resourceType, callback) {
+    Given(/^list of "([^"]*)" resources exists in the api$/, function (resourceType, callback) {
         setupExpectedApiResponsesFor.call(this, resourceType);
 
         callback();
     });
 
-    this.Given(/^list of "([^"]*)" resources does not exist in the api$/, (resourceType, callback) => {
+    Given(/^list of "([^"]*)" resources does not exist in the api$/, (resourceType, callback) => {
         callback();
     });
 
-    this.Given(/^list of "([^"]*)" contains one entry$/, (resourceType, callback) => {
+    Given(/^list of "([^"]*)" contains one entry$/, (resourceType, callback) => {
         const
             embedded = {},
             host = 'https://api.travi.org',
@@ -179,7 +181,7 @@ module.exports = function () {
             .get('/')
             .times(2)
             .reply(
-                HTTP_SUCCESS,
+                OK,
                 {_links: buildLinksIncluding(resourceType, resourceLink)},
                 headers
             );
@@ -194,7 +196,7 @@ module.exports = function () {
         nock(host)
             .get(requestPath)
             .reply(
-                HTTP_SUCCESS,
+                OK,
                 { _embedded: embedded },
                 headers
             );
@@ -202,26 +204,26 @@ module.exports = function () {
         callback();
     });
 
-    this.Given(/^a "([^"]*)" exists in the api$/, function (resourceType, callback) {
+    Given(/^a "([^"]*)" exists in the api$/, function (resourceType, callback) {
         existingResourceId = integer({min: 1});
         setupExpectedApiResponsesFor.call(this, resourceType);
 
         callback();
     });
 
-    this.Given(/^a "([^"]*)" does not exist in the api$/, (resourceType, callback) => {
+    Given(/^a "([^"]*)" does not exist in the api$/, (resourceType, callback) => {
         callback();
     });
 
-    this.When(/^list of "([^"]*)" resources is requested$/, function (resourceType, callback) {
+    When(/^list of "([^"]*)" resources is requested$/, function (resourceType, callback) {
         this.makeRequestTo(`/${resourceType}`, callback);
     });
 
-    this.When(/^the "([^"]*)" is requested by id$/, function (resourceType, callback) {
+    When(/^the "([^"]*)" is requested by id$/, function (resourceType, callback) {
         this.makeRequestTo(`/${resourceType}/${existingResourceId}`, callback);
     });
 
-    this.Then(/^list of "([^"]*)" resources is returned$/, function (resourceType, done) {
+    Then(/^list of "([^"]*)" resources is returned$/, function (resourceType, done) {
         const list = JSON.parse(this.getResponseBody())[resourceType];
 
         if (resources.hasOwnProperty(getSingularForm(resourceType))) {
@@ -233,7 +235,7 @@ module.exports = function () {
         done();
     });
 
-    this.Then(/^the "([^"]*)" is returned$/, function (resourceType, done) {
+    Then(/^the "([^"]*)" is returned$/, function (resourceType, done) {
         const
             payload = JSON.parse(this.getResponseBody()),
             resourceInstance = payload.resource;
@@ -243,4 +245,4 @@ module.exports = function () {
 
         done();
     });
-};
+});

@@ -1,19 +1,21 @@
 import {assert} from 'referee';
+import {defineSupportCode} from 'cucumber';
+import {World} from '../support/world';
 
-module.exports = function () {
-    this.World = require('../support/world.js').World;
+defineSupportCode(({When, Then, setWorldConstructor}) => {
+    setWorldConstructor(World);
 
-    this.When(/^the homepage is loaded$/, function (callback) {
+    When(/^the homepage is loaded$/, function (callback) {
         this.makeRequestTo('/', callback);
     });
 
-    this.Then(/^no resources are listed$/, function (done) {
+    Then(/^no resources are listed$/, function (done) {
         assert.equals(this.getResponseBody(), JSON.stringify({primaryNav: []}));
 
         done();
     });
 
-    this.Then(/^top level resources are listed$/, function (done) {
+    Then(/^top level resources are listed$/, function (done) {
         assert.equals(this.getResponseBody(), JSON.stringify({
             primaryNav: this.availableResourceTypes.map((type) => {
                 return {
@@ -25,5 +27,4 @@ module.exports = function () {
 
         done();
     });
-
-};
+});

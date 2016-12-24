@@ -1,10 +1,9 @@
 import nock from 'nock';
 import {url} from '@travi/any';
+import {OK} from 'http-status-codes';
 import loadApi from '../../../../lib/server/app.js';
 
-const
-    DOMAIN = 'api.travi.org',
-    HTTP_SUCCESS = 200;
+const DOMAIN = 'api.travi.org';
 
 export function World() {
     this.apiResponseLinks = {};
@@ -61,7 +60,7 @@ export function World() {
             .get('/')
             .times(3)
             .reply(
-                HTTP_SUCCESS,
+                OK,
                 {_links: buildApiResponseLinks.call(this)},
                 {'Content-Type': 'application/hal+json'}
             );

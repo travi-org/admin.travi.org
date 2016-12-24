@@ -1,16 +1,18 @@
 import cheerio from 'cheerio';
 import {assert} from 'referee';
+import {defineSupportCode} from 'cucumber';
+import {World} from '../support/world';
 
-module.exports = function () {
-    this.World = require('../support/world.js').World;
+defineSupportCode(({Given, Then, setWorldConstructor}) => {
+    setWorldConstructor(World);
 
-    this.Given(/^html is requested$/, function (callback) {
+    Given(/^html is requested$/, function (callback) {
         this.mime = 'text/html';
 
         callback();
     });
 
-    this.Then(/^the primary nav is rendered$/, function (done) {
+    Then(/^the primary nav is rendered$/, function (done) {
         const
             $ = cheerio.load(this.getResponseBody()),
             $primaryNav = $('#wrap').find('ul.navbar-nav'),
@@ -23,7 +25,7 @@ module.exports = function () {
         done();
     });
 
-    this.Then(/^the index route is rendered$/, function (done) {
+    Then(/^the index route is rendered$/, function (done) {
         const $ = cheerio.load(this.getResponseBody());
 
         assert.equals($('div.jumbotron').length, 1);
@@ -31,7 +33,7 @@ module.exports = function () {
         done();
     });
 
-    this.Then(/^the resource\-list route is rendered$/, function (done) {
+    Then(/^the resource\-list route is rendered$/, function (done) {
         const
             $ = cheerio.load(this.getResponseBody()),
             $resources = $('ul.list-group');
@@ -42,7 +44,7 @@ module.exports = function () {
         done();
     });
 
-    this.Then(/^the resource route is rendered$/, function (done) {
+    Then(/^the resource route is rendered$/, function (done) {
         const
             $ = cheerio.load(this.getResponseBody()),
             $heading = $('h3');
@@ -56,4 +58,4 @@ module.exports = function () {
 
         done();
     });
-};
+});
