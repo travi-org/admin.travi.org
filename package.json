@@ -32,7 +32,7 @@
     "precommit": "npm test"
   },
   "engines": {
-    "node": "6.7.x",
+    "node": "7.3.x",
     "npm": "3.10.x"
   },
   "devDependencies": {
