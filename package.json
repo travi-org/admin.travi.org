@@ -11,7 +11,9 @@
   "scripts": {
     "lint:js": "eslint .",
     "lint:md": "globstar --node -- markdownlint **/*.md",
-    "test": "grunt && npm run pact-generation",
+    "tests:unit": "BABEL_ENV=node mocha --recursive test/unit",
+    "tests:pact": "BABEL_ENV=node babel-node scripts/pact.js",
+    "test": "grunt && npm run tests:pact",
     "start": "node dist/server/app.js",
     "postinstall": "grunt heroku:production",
     "serve:dev": "nodemon lib/server/app.js",
@@ -19,7 +21,6 @@
     "serve:webpack": "BABEL_ENV=node babel-node ./webpack-dev-server.js",
     "dev": "NODE_ENV=development run-p serve:webpack serve:dev",
     "dev-local": "NODE_ENV=development run-p serve:webpack serve:dev-local",
-    "pact-generation": "BABEL_ENV=node babel-node scripts/pact.js",
     "pact-publish": "BABEL_ENV=node babel-node scripts/publish-pacts-to-broker.js",
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect",

@@ -1,4 +1,4 @@
 --ui tdd
 -r ./test/helpers/mocha-setup.js
---compilers jsx:babel-register
+--compilers js:babel-register
 --reporter-options mochaFile=./logs/unit/test-results.xml
