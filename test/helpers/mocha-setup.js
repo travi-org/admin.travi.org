@@ -8,20 +8,19 @@ import referee from 'referee';
 import 'sinon-as-promised';
 
 function setupDom() {
-    const
-        baseMarkup = '<!DOCTYPE html>',
-        window = jsdom.jsdom(baseMarkup).defaultView;
+  const baseMarkup = '<!DOCTYPE html>';
+  const window = jsdom.jsdom(baseMarkup).defaultView;
 
-    global.window = window;
-    global.document = window.document;
-    global.navigator = window.navigator;
+  global.window = window;
+  global.document = window.document;
+  global.navigator = window.navigator;
 }
 
 setupDom();
 
 require.extensions['.scss'] = () => undefined;
 
-sinon.assert.expose(chai.assert, { prefix: '' });
+sinon.assert.expose(chai.assert, {prefix: ''});
 chai.use(chaiImmutable);
 chai.use(chaiAsPromised);
 chai.use(chaiSubset);

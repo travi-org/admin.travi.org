@@ -1,68 +1,63 @@
 import nock from 'nock';
 import {url} from '@travi/any';
 import {OK} from 'http-status-codes';
-import loadApi from '../../../../lib/server/app.js';
+import loadApi from '../../../../lib/server/app';
 
 const DOMAIN = 'api.travi.org';
 
 export function World() {
-    this.apiResponseLinks = {};
+  this.apiResponseLinks = {};
 
-    this.makeRequestTo = (address, callback) => {
-        loadApi.then((server) => {
-            server.inject({
-                method: 'GET',
-                url: address,
-                headers: {
-                    'Accept': this.mime
-                }
-            }).then((response) => {
-                this.serverResponse = response;
-
-                callback();
-            });
-        }).catch(callback);
-    };
-
-    this.getResponseBody = () => this.serverResponse.payload;
-
-    this.apiResponseShouldIncludeLinkFor = (link) => {
-        this.apiResponseLinks[link.rel] = link.path;
-    };
-
-    function buildHalLink(href) {
-        return {href};
-    }
-
-    function buildApiResponseLinks() {
-        const links = {
-            'self': buildHalLink(url({domain: DOMAIN}))
-        };
-
-        let rel;
-
-        for (rel in this.apiResponseLinks) {
-            if (this.apiResponseLinks.hasOwnProperty(rel)) {
-                links[rel] = buildHalLink(this.apiResponseLinks[rel]);
-            }
+  this.makeRequestTo = (address, callback) => {
+    loadApi.then(server => {
+      server.inject({
+        method: 'GET',
+        url: address,
+        headers: {
+          Accept: this.mime
         }
+      }).then(response => {
+        this.serverResponse = response;
 
-        this.availableResourceTypes.forEach((type) => {
-            links[type] = buildHalLink(url());
-        });
+        callback();
+      });
+    }).catch(callback);
+  };
 
-        return links;
-    }
+  this.getResponseBody = () => this.serverResponse.payload;
 
-    this.stubApiCatalogCall = () => {
-        nock('https://api.travi.org')
-            .log(console.log)   //eslint-disable-line no-console
-            .get('/')
-            .times(3)
-            .reply(
-                OK,
-                {_links: buildApiResponseLinks.call(this)},
-                {'Content-Type': 'application/hal+json'}
-            );
+  this.apiResponseShouldIncludeLinkFor = link => {
+    this.apiResponseLinks[link.rel] = link.path;
+  };
+
+  function buildHalLink(href) {
+    return {href};
+  }
+
+  function buildApiResponseLinks() {
+    const links = {
+      self: buildHalLink(url({domain: DOMAIN})),
+      ...Object.entries(this.apiResponseLinks)
+        .map(([key, value]) => [key, buildHalLink(value)])
+        .reduce((obj, [k, v]) => ({...obj, [k]: v}), {})
     };
+
+    this.availableResourceTypes.forEach(type => {
+      links[type] = buildHalLink(url());
+    });
+
+    return links;
+  }
+
+  this.stubApiCatalogCall = () => {
+    nock('https://api.travi.org')
+      .log(console.log)   // eslint-disable-line no-console
+      .get('/')
+      .times(3)
+      .reply(
+        OK,
+        {_links: buildApiResponseLinks.call(this)},
+        {'Content-Type': 'application/hal+json'}
+      );
+  };
 }

@@ -1,45 +1,45 @@
-/*global window */
+/* global window */
+/* eslint no-underscore-dangle: ["error", { "allow": ["__INITIAL_STATE__"] }]*/
 import ga from 'react-ga';
+import * as any from '@travi/any';
+import {assert} from 'chai';
+import sinon from 'sinon';
 import * as storeCreator from '../../../lib/shared/store/create';
 import * as dependencies from '../../../lib/client/dependencies';
 import * as historyListener from '../../../lib/client/history-listener';
 import * as renderer from '../../../lib/client/renderer';
-import * as any from '@travi/any';
-import {assert} from 'chai';
-import sinon from 'sinon';
 
 suite('client-side app', () => {
-    let sandbox;
-    const
-        initialState = any.simpleObject(),
-        store = {...any.simpleObject(), dispatch: () => undefined};
+  let sandbox;
+  const initialState = any.simpleObject();
+  const store = {...any.simpleObject(), dispatch: () => undefined};
 
-    function simulatePageLoad() {
-        require('../../../lib/client/app');
-    }
+  function simulatePageLoad() {
+    require('../../../lib/client/app');
+  }
 
-    setup(() => {
-        sandbox = sinon.sandbox.create();
-        sandbox.stub(dependencies, 'configure');
-        sandbox.stub(storeCreator, 'configureStore').withArgs({initialState}).returns(store);
-        sandbox.stub(historyListener, 'addHistoryListener');
-        sandbox.stub(renderer, 'remountContent');
-        sandbox.stub(ga, 'initialize');
+  setup(() => {
+    sandbox = sinon.sandbox.create();
+    sandbox.stub(dependencies, 'default');
+    sandbox.stub(storeCreator, 'configureStore').withArgs({initialState}).returns(store);
+    sandbox.stub(historyListener, 'default');
+    sandbox.stub(renderer, 'default');
+    sandbox.stub(ga, 'initialize');
 
-        window.__INITIAL_STATE__ = JSON.stringify(initialState);
-    });
+    window.__INITIAL_STATE__ = JSON.stringify(initialState);
+  });
 
-    teardown(() => {
-        sandbox.restore();
-        window.__INITIAL_STATE__ = null;
-    });
+  teardown(() => {
+    sandbox.restore();
+    window.__INITIAL_STATE__ = null;
+  });
 
-    test('that the app renders', () => {
-        simulatePageLoad();
+  test('that the app renders', () => {
+    simulatePageLoad();
 
-        assert.calledWith(renderer.remountContent, store);
-        assert.calledOnce(dependencies.configure);
-        assert.calledWith(historyListener.addHistoryListener, store);
-        assert.calledWith(ga.initialize, 'UA-2890413-9');
-    });
+    assert.calledWith(renderer.default, store);
+    assert.calledOnce(dependencies.default);
+    assert.calledWith(historyListener.default, store);
+    assert.calledWith(ga.initialize, 'UA-2890413-9');
+  });
 });

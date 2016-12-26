@@ -4,3 +4,5 @@ rules:
   no-extra-parens:
     - error
     - functions
+
+parser: babel-eslint

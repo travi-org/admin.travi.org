@@ -4,58 +4,55 @@ import {defineSupportCode} from 'cucumber';
 import {World} from '../support/world';
 
 defineSupportCode(({Given, Then, setWorldConstructor}) => {
-    setWorldConstructor(World);
+  setWorldConstructor(World);
 
-    Given(/^html is requested$/, function (callback) {
-        this.mime = 'text/html';
+  Given(/^html is requested$/, function (callback) {
+    this.mime = 'text/html';
 
-        callback();
-    });
+    callback();
+  });
 
-    Then(/^the primary nav is rendered$/, function (done) {
-        const
-            $ = cheerio.load(this.getResponseBody()),
-            $primaryNav = $('#wrap').find('ul.navbar-nav'),
-            expectedLinkCount = this.availableResourceTypes.length + Object.keys(this.apiResponseLinks).length;
+  Then(/^the primary nav is rendered$/, function (done) {
+    const $ = cheerio.load(this.getResponseBody());
+    const $primaryNav = $('#wrap').find('ul.navbar-nav');
+    const expectedLinkCount = this.availableResourceTypes.length + Object.keys(this.apiResponseLinks).length;
 
-        assert.equals($primaryNav.length, 1);
-        assert.greater(expectedLinkCount, 0);
-        assert.equals(expectedLinkCount, $primaryNav.find('> li').length);
+    assert.equals($primaryNav.length, 1);
+    assert.greater(expectedLinkCount, 0);
+    assert.equals(expectedLinkCount, $primaryNav.find('> li').length);
 
-        done();
-    });
+    done();
+  });
 
-    Then(/^the index route is rendered$/, function (done) {
-        const $ = cheerio.load(this.getResponseBody());
+  Then(/^the index route is rendered$/, function (done) {
+    const $ = cheerio.load(this.getResponseBody());
 
-        assert.equals($('div.jumbotron').length, 1);
+    assert.equals($('div.jumbotron').length, 1);
 
-        done();
-    });
+    done();
+  });
 
-    Then(/^the resource\-list route is rendered$/, function (done) {
-        const
-            $ = cheerio.load(this.getResponseBody()),
-            $resources = $('ul.list-group');
+  Then(/^the resource-list route is rendered$/, function (done) {
+    const $ = cheerio.load(this.getResponseBody());
+    const $resources = $('ul.list-group');
 
-        assert.equals($resources.length, 1);
-        assert.equals($resources.find('li').length, this.resourceCount);
+    assert.equals($resources.length, 1);
+    assert.equals($resources.find('li').length, this.resourceCount);
 
-        done();
-    });
+    done();
+  });
 
-    Then(/^the resource route is rendered$/, function (done) {
-        const
-            $ = cheerio.load(this.getResponseBody()),
-            $heading = $('h3');
+  Then(/^the resource route is rendered$/, function (done) {
+    const $ = cheerio.load(this.getResponseBody());
+    const $heading = $('h3');
 
-        assert.equals($heading.length, 1);
-        //TODO: this check needs to be more generic so that multiple resource types are handled properly
-        //assert.equals(
-        //    $heading.text(),
-        //    `${this.existingResource['first-name']} ${this.existingResource['last-name']}`
-        //);
+    assert.equals($heading.length, 1);
+    // TODO: this check needs to be more generic so that multiple resource types are handled properly
+    // assert.equals(
+    //    $heading.text(),
+    //    `${this.existingResource['first-name']} ${this.existingResource['last-name']}`
+    // );
 
-        done();
-    });
+    done();
+  });
 });

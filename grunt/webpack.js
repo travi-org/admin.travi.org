@@ -1,4 +1,4 @@
 module.exports = {
-    options: require('../webpack.config.js')(),
-    build: {}
+  options: require('../webpack.config.js')(),
+  build: {}
 };
