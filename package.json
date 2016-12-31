@@ -130,7 +130,7 @@
     "http-status-codes": "1.0.6",
     "immutable": "3.8.1",
     "inert": "4.1.0",
-    "lodash": "4.17.3",
+    "lodash": "4.17.4",
     "material-ui": "0.16.5",
     "negotiator": "0.6.1",
     "newrelic": "1.36.0",
