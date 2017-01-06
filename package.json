@@ -57,7 +57,7 @@
     "chai-immutable": "1.6.0",
     "chai-subset": "1.4.0",
     "cheerio": "0.22.0",
-    "clean-webpack-plugin": "0.1.14",
+    "clean-webpack-plugin": "0.1.15",
     "concat-map": "0.0.1",
     "coveralls": "2.11.15",
     "css-loader": "0.26.1",
