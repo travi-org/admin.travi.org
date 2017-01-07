@@ -63,7 +63,7 @@
     "css-loader": "0.26.1",
     "cucumber": "2.0.0-rc.6",
     "cz-conventional-changelog": "1.2.0",
-    "dotenv": "3.0.0",
+    "dotenv": "4.0.0",
     "dotenv-safe": "4.0.2",
     "enzyme": "2.7.0",
     "extract-text-webpack-plugin": "2.0.0-beta.3",
