@@ -131,7 +131,7 @@
     "immutable": "3.8.1",
     "inert": "4.1.0",
     "lodash": "4.17.4",
-    "material-ui": "0.16.5",
+    "material-ui": "0.16.7",
     "negotiator": "0.6.1",
     "newrelic": "1.36.1",
     "react": "15.4.1",
