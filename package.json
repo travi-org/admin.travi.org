@@ -90,7 +90,7 @@
     "nock": "9.0.2",
     "node-sass": "4.3.0",
     "npm-run-all": "4.0.1",
-    "nyc": "10.1.0",
+    "nyc": "10.1.2",
     "pact": "1.0.0-rc.5",
     "proxyquire": "1.7.10",
     "react-addons-test-utils": "15.4.1",
