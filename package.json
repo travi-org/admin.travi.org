@@ -92,7 +92,7 @@
     "npm-run-all": "4.0.1",
     "nyc": "10.1.2",
     "pact": "1.0.0-rc.5",
-    "proxyquire": "1.7.10",
+    "proxyquire": "1.7.11",
     "react-addons-test-utils": "15.4.1",
     "redux-devtools": "3.3.2",
     "redux-devtools-log-monitor": "1.2.0",
