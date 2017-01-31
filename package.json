@@ -61,7 +61,7 @@
     "concat-map": "0.0.1",
     "coveralls": "2.11.15",
     "css-loader": "0.26.1",
-    "cucumber": "2.0.0-rc.6",
+    "cucumber": "2.0.0-rc.7",
     "cz-conventional-changelog": "1.2.0",
     "dotenv": "4.0.0",
     "dotenv-safe": "4.0.3",
