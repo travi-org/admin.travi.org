@@ -87,7 +87,7 @@
     "load-grunt-config": "0.19.2",
     "markdownlint-cli": "0.2.0",
     "mocha-junit-reporter": "1.13.0",
-    "nock": "9.0.4",
+    "nock": "9.0.5",
     "node-sass": "4.5.0",
     "npm-run-all": "4.0.1",
     "nyc": "10.1.2",
