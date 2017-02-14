@@ -33,23 +33,23 @@ module.exports = (environment = 'production') => {
           loaders: removeEmpty([
             ifDevelopment('react-hot-loader/webpack'),
             ifDevelopment(
-              'babel?plugins[]=transform-react-jsx-source&cacheDirectory',
-              'babel?cacheDirectory'
+              'babel-loader?plugins[]=transform-react-jsx-source&cacheDirectory',
+              'babel-loader?cacheDirectory'
             )
           ])
         },
         {
           test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=d+\.d+\.d+)?$/,
-          loader: 'url'
+          loader: 'url-loader'
         },
         ifDevelopment({
           test: /bootstrap-custom\.scss$/,
-          loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
+          loaders: ['style-loader', 'css-loader?sourceMap', 'sass-loader?sourceMap']
         }),
         ifDevelopment({
           test: /\.scss$/,
           exclude: /bootstrap-custom\.scss$/,
-          loaders: ['style', 'css?modules&sourceMap', 'sass?sourceMap']
+          loaders: ['style-loader', 'css-loader?modules&sourceMap', 'sass-loader?sourceMap']
         }),
         ifProduction({
           test: /bootstrap-custom\.scss$/,
