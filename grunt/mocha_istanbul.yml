@@ -1,8 +1,0 @@
-unit:
-  src: test/unit/**/*-test.js
-  options:
-    reporter: spec
-    coverage: true
-    reportFormats:
-      - lcovonly
-
