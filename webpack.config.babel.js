@@ -16,7 +16,7 @@ export default function (env) {
   process.env.BABEL_ENV = 'browser';
 
   return {
-    devtool: 'source-map',
+    devtool: ifDevelopment('eval-source-map', 'source-map'),
     entry: removeEmpty([
       ifDevelopment('react-hot-loader/patch'),
       ifDevelopment(`webpack-dev-server/client?${devServerHost}:${devServerPort}`),
@@ -111,6 +111,7 @@ export default function (env) {
         debug: false
       })),
       ifProduction(new webpack.optimize.UglifyJsPlugin({
+        sourceMap: true,
         compress: {
           screw_ie8: true,
           warnings: false
