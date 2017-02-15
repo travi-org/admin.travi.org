@@ -1,7 +1,7 @@
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import getConfigFor from './webpack.config';
+import getConfigFor from './webpack.config.babel';
 
 if ('development' !== process.env.NODE_ENV) {
   throw new Error('ERROR: Webpack dev server only works in dev environment');

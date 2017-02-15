@@ -7,11 +7,11 @@ import CleanPlugin from 'clean-webpack-plugin';
 import AssetsPlugin from 'assets-webpack-plugin';
 import Visualizer from 'webpack-visualizer-plugin';
 
-module.exports = (environment = 'production') => {
+export default function (env) {
   const assetsPath = path.join(__dirname, 'resources/js');
   const devServerPort = '3000';
   const devServerHost = 'http://0.0.0.0';
-  const {ifProduction, ifDevelopment} = getIfUtils(environment);
+  const {ifProduction, ifDevelopment} = getIfUtils(env);
 
   process.env.BABEL_ENV = 'browser';
 
@@ -23,7 +23,6 @@ module.exports = (environment = 'production') => {
       ifDevelopment('webpack/hot/only-dev-server'),
       './lib/client/app.js'
     ]),
-    progress: false,
     module: {
       loaders: removeEmpty([
         {
@@ -100,7 +99,7 @@ module.exports = (environment = 'production') => {
       new CleanPlugin([assetsPath], {root: __dirname}),
       new webpack.DefinePlugin({
         'process.env': {
-          NODE_ENV: JSON.stringify(environment)
+          NODE_ENV: JSON.stringify(env)
         }
       }),
       new webpack.optimize.OccurrenceOrderPlugin(),
@@ -127,4 +126,4 @@ module.exports = (environment = 'production') => {
       publicPath: '/resources/js/'
     }
   };
-};
+}

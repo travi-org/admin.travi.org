@@ -1,8 +1,0 @@
-default:
-  options:
-    url: http://admin.travi.org
-    key: '<%= webPageTestApiToken %>'
-    budget:
-      render: 1000
-      SpeedIndex: 1000
-      TTFB: 84
