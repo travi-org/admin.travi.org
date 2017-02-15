@@ -9,5 +9,3 @@ build:
   - clean
   - compileClient
   - compileServer
-
-heroku:production: build
