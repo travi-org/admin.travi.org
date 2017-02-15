@@ -5,7 +5,6 @@ import {getIfUtils, removeEmpty, combineLoaders} from 'webpack-config-utils';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import CleanPlugin from 'clean-webpack-plugin';
 import AssetsPlugin from 'assets-webpack-plugin';
-import validate from 'webpack-validator';
 import Visualizer from 'webpack-visualizer-plugin';
 
 module.exports = (environment = 'production') => {
@@ -16,7 +15,7 @@ module.exports = (environment = 'production') => {
 
   process.env.BABEL_ENV = 'browser';
 
-  return validate({
+  return {
     devtool: 'source-map',
     entry: removeEmpty([
       ifDevelopment('react-hot-loader/patch'),
@@ -53,9 +52,9 @@ module.exports = (environment = 'production') => {
         }),
         ifProduction({
           test: /bootstrap-custom\.scss$/,
-          loader: ExtractTextPlugin.extract({
-            fallbackLoader: 'style',
-            loader: combineLoaders([
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: combineLoaders([
               {
                 loader: 'css-loader',
                 query: {
@@ -74,9 +73,9 @@ module.exports = (environment = 'production') => {
         ifProduction({
           test: /\.scss$/,
           exclude: /bootstrap-custom\.scss$/,
-          loader: ExtractTextPlugin.extract({
-            fallbackLoader: 'style',
-            loader: combineLoaders([
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: combineLoaders([
               {
                 loader: 'css-loader',
                 query: {
@@ -118,7 +117,6 @@ module.exports = (environment = 'production') => {
           warnings: false
         }
       })),
-      ifProduction(new webpack.optimize.DedupePlugin()),
       ifProduction(new ExtractTextPlugin('[name]-[hash].css')),
       ifProduction(new Visualizer())
     ]),
@@ -128,5 +126,5 @@ module.exports = (environment = 'production') => {
       chunkFilename: '[name]-[hash].js',
       publicPath: '/resources/js/'
     }
-  });
+  };
 };
