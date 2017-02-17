@@ -125,7 +125,7 @@
     "lodash": "4.17.4",
     "material-ui": "0.17.0",
     "negotiator": "0.6.1",
-    "newrelic": "1.37.1",
+    "newrelic": "1.37.2",
     "react": "15.4.2",
     "react-addons-test-utils": "15.4.1",
     "react-dom": "15.4.2",
