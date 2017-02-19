@@ -1,5 +1,5 @@
-/* global window */
 import * as redux from 'redux';
+import * as devTools from 'redux-devtools-extension';
 import * as fetchMiddlewareFactory from '@travi/redux-fetch-middleware';
 import sinon from 'sinon';
 import {assert} from 'chai';
@@ -17,29 +17,15 @@ suite('redux middlewares', () => {
 
     sandbox = sinon.sandbox.create();
 
-    sandbox.stub(redux, 'compose');
+    sandbox.stub(devTools, 'composeWithDevTools');
     sandbox.stub(fetchMiddlewareFactory, 'default').withArgs(session).returns(fetchMiddleware);
     sandbox.stub(redux, 'applyMiddleware').withArgs(fetchMiddleware).returns(appliedFetch);
   });
 
-  teardown(() => {
-    sandbox.restore();
-
-    if (window.devToolsExtension) {
-      delete window.devToolsExtension;
-    }
-  });
+  teardown(() => sandbox.restore());
 
   test('that the middlewares are composed', () => {
-    redux.compose.withArgs(appliedFetch).returns(composed);
-
-    assert.equal(getComposed(session), composed);
-  });
-
-  test('that devtools browser extension is initialized if present', () => {
-    const enhancer = any.simpleObject();
-    window.devToolsExtension = sinon.stub().returns(enhancer);
-    redux.compose.withArgs(appliedFetch, enhancer).returns(composed);
+    devTools.composeWithDevTools.withArgs(appliedFetch).returns(composed);
 
     assert.equal(getComposed(session), composed);
   });
