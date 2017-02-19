@@ -18,7 +18,7 @@ suite('asset manager', () => {
 
   test('that the asset list is returned based on the webpack assets file', () => {
     const assets = simpleObject();
-    fs.readFile.withArgs(path.resolve(__dirname, '../../../../webpack-assets.json')).yields(null, assets);
+    fs.readFile.withArgs(path.resolve(__dirname, '../../../../webpack-assets.json'), 'utf-8').yields(null, assets);
 
     return assert.becomes(getAssets(), assets);
   });
