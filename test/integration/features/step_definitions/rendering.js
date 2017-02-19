@@ -55,4 +55,15 @@ defineSupportCode(({Given, Then, setWorldConstructor}) => {
 
     done();
   });
+
+  Then('the static assets are included', function (done) {
+    const $ = cheerio.load(this.getResponseBody());
+    const scripts = $('script').map((index, script) => $(script).attr('src')).get();
+    const stylesheets = $('link[rel=stylesheet]').map((index, sheet) => $(sheet).attr('href')).get();
+
+    assert.match(scripts[1], 'main');
+    assert.match(stylesheets[1], 'main');
+
+    done();
+  });
 });

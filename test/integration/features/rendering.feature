@@ -7,6 +7,7 @@ Feature: HTML Rendering
         Then a "200" status code should be returned
         And the primary nav is rendered
         And the index route is rendered
+        And the static assets are included
 
     Scenario: html requested for list page
         Given html is requested
