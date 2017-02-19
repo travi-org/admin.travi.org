@@ -4,12 +4,14 @@ import cheerio from 'cheerio';
 import {defineSupportCode} from 'cucumber';
 import {World} from '../support/world';
 
+const debug = require('debug')('test');
+
 defineSupportCode(({Given, Then, setWorldConstructor}) => {
   setWorldConstructor(World);
 
   Given(/^the api is down$/, callback => {
     nock('https://api.travi.org')
-      .log(console.log)   // eslint-disable-line no-console
+      .log(debug)
       .get('/')
       .times(2)
       .replyWithError('something awful happened');

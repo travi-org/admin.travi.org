@@ -6,6 +6,8 @@ import {defineSupportCode} from 'cucumber';
 import {World} from '../support/world';
 import {url, listOf, resource, resources, integer} from '../../../helpers/any-for-admin';
 
+const debug = require('debug')('test');
+
 const DOMAIN = 'api.travi.org';
 const HOST = `https://${DOMAIN}`;
 
@@ -88,7 +90,7 @@ function setupExpectedApiResponsesFor(resourceType) {
   });
 
   nock(HOST)
-    .log(console.log)   // eslint-disable-line no-console
+    .log(debug)
     .get(requestPath)
     .reply(
       OK,
@@ -106,7 +108,7 @@ function setupExpectedApiResponsesFor(resourceType) {
         extendedExistingResource.extended = true;
 
         nock(linkHost)
-          .log(console.log)   // eslint-disable-line no-console
+          .log(debug)
           .get(resourcePath)
           .reply(
             OK,
@@ -172,6 +174,7 @@ defineSupportCode(({After, Given, When, Then, setWorldConstructor}) => {
     const headers = {'Content-Type': 'application/hal+json'};
 
     nock(host)
+      .log(debug)
       .get('/')
       .times(2)
       .reply(
@@ -188,6 +191,7 @@ defineSupportCode(({After, Given, When, Then, setWorldConstructor}) => {
     resources[resourceType] = [embedded[resourceType]];
 
     nock(host)
+      .log(debug)
       .get(requestPath)
       .reply(
         OK,
