@@ -29,7 +29,7 @@ suite('html renderer', () => {
   setup(() => {
     sandbox = sinon.sandbox.create();
     sandbox.stub(helmet, 'rewind').returns({title: {toString: () => title}});
-    sandbox.stub(assetManager, 'default').yields(null, resources);
+    sandbox.stub(assetManager, 'default').resolves(resources);
     sandbox.stub(Boom, 'wrap');
 
     response.code = sinon.spy();
@@ -42,12 +42,12 @@ suite('html renderer', () => {
     reply.reset();
   });
 
-  test('that appropriate data is passed to the layout template', () => {
-    respond(reply, {renderedContent, store, status});
-
-    assertRequiredDataPassedToLayoutTemplate(reply, {renderedContent, resources, state, title});
-    assert.calledWith(response.code, status);
-  });
+  test('that appropriate data is passed to the layout template', () => respond(reply, {renderedContent, store, status})
+    .then(() => {
+      assertRequiredDataPassedToLayoutTemplate(reply, {renderedContent, resources, state, title});
+      assert.calledWith(response.code, status);
+    })
+  );
 
   test('that an error response sets the status code and passes boom data to the layout template', () => {
     const boomDetails = {...any.simpleObject(), statusCode: any.integer()};
@@ -55,20 +55,18 @@ suite('html renderer', () => {
     reply.view.withArgs('layout', sinon.match({boom: JSON.stringify(boomDetails)})).returns({code});
     code.withArgs(status).returns(response);
 
-    respond(reply, {renderedContent, store, status, boomDetails});
-
-    assertRequiredDataPassedToLayoutTemplate(reply, {renderedContent, resources, state, title});
-    assert.calledWith(response.code, boomDetails.statusCode);
+    return respond(reply, {renderedContent, store, status, boomDetails}).then(() => {
+      assertRequiredDataPassedToLayoutTemplate(reply, {renderedContent, resources, state, title});
+      assert.calledWith(response.code, boomDetails.statusCode);
+    });
   });
 
   test('that an error getting asset details results in an immediate error response', () => {
     const error = any.simpleObject();
     const wrappedError = any.simpleObject();
-    assetManager.default.yields(error);
+    assetManager.default.rejects(error);
     Boom.wrap.withArgs(error).returns(wrappedError);
 
-    respond(reply, {renderedContent, store});
-
-    assert.calledWith(reply, wrappedError);
+    return respond(reply, {renderedContent, store}).then(() => assert.calledWith(reply, wrappedError));
   });
 });

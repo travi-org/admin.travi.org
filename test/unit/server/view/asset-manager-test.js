@@ -1,19 +1,33 @@
-import proxyquire from 'proxyquire';
 import {assert} from 'chai';
-import {simpleObject} from '@travi/any';
 import sinon from 'sinon';
-
-const assets = simpleObject();
-const assetManager = proxyquire('../../../../lib/server/view/asset-manager', {
-  '../../../webpack-assets.json': assets
-});
+import {simpleObject} from '@travi/any';
+import fs from 'fs';
+import path from 'path';
+import getAssets from '../../../../lib/server/view/asset-manager';
 
 suite('asset manager', () => {
+  let sandbox;
+
+  setup(() => {
+    sandbox = sinon.sandbox.create();
+
+    sandbox.stub(fs, 'readFile');
+  });
+
+  teardown(() => sandbox.restore());
+
   test('that the asset list is returned based on the webpack assets file', () => {
-    const callback = sinon.spy();
+    const assets = simpleObject();
+    fs.readFile.withArgs(path.resolve(__dirname, '../../../../webpack-assets.json')).yields(null, assets);
 
-    assetManager.default(callback);
+    return assert.becomes(getAssets(), assets);
+  });
 
-    assert.calledWith(callback, null, assets);
+  test('that an error loading the assets file results in rejection', () => {
+    const msg = 'from test';
+    const error = new Error(msg);
+    fs.readFile.yields(error);
+
+    return assert.isRejected(getAssets(), error, msg);
   });
 });
