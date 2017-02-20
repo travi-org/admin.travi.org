@@ -1,6 +1,6 @@
 import {assert} from 'chai';
 import sinon from 'sinon';
-import {simpleObject} from '@travi/any';
+import any from '@travi/any';
 import fs from 'fs';
 import path from 'path';
 import getAssets from '../../../../lib/server/view/asset-manager';
@@ -17,12 +17,25 @@ suite('asset manager', () => {
   teardown(() => sandbox.restore());
 
   test('that the asset list is returned based on the webpack assets file', () => {
-    const assets = simpleObject();
+    const jsFiles = [];
+    const cssFiles = [];
+    const assetsFile = any.listOf(any.word)
+      .map(key => {
+        const jsFile = any.string();
+        const cssFile = any.string();
+        jsFiles.push(jsFile);
+        cssFiles.push(cssFile);
+        return {[key]: {js: jsFile, css: cssFile}};
+      })
+      .reduce((acc, entry) => ({...acc, ...entry}), {});
     fs.readFile
       .withArgs(path.resolve(__dirname, '../../../../webpack-assets.json'), 'utf-8')
-      .yields(null, JSON.stringify(assets));
+      .yields(null, JSON.stringify(assetsFile));
 
-    return assert.becomes(getAssets(), assets);
+    return getAssets().then(assets => {
+      jsFiles.forEach(file => assert.include(assets.js, file));
+      cssFiles.forEach(file => assert.include(assets.css, file));
+    });
   });
 
   test('that an error loading the assets file results in rejection', () => {
