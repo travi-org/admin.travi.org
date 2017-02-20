@@ -17,12 +17,15 @@ export default function (env) {
 
   return {
     devtool: ifDevelopment('eval-source-map', 'source-map'),
-    entry: removeEmpty([
-      ifDevelopment('react-hot-loader/patch'),
-      ifDevelopment(`webpack-dev-server/client?${devServerHost}:${devServerPort}`),
-      ifDevelopment('webpack/hot/only-dev-server'),
-      './lib/client/app.js'
-    ]),
+    entry: {
+      vendor: ['react', 'react-dom'],
+      main: removeEmpty([
+        ifDevelopment('react-hot-loader/patch'),
+        ifDevelopment(`webpack-dev-server/client?${devServerHost}:${devServerPort}`),
+        ifDevelopment('webpack/hot/only-dev-server'),
+        './lib/client/app.js'
+      ])
+    },
     module: {
       loaders: removeEmpty([
         {
@@ -102,6 +105,9 @@ export default function (env) {
           NODE_ENV: JSON.stringify(env)
         }
       }),
+      new webpack.optimize.CommonsChunkPlugin({
+        names: ['vendor', 'manifest']
+      }),
       new webpack.optimize.OccurrenceOrderPlugin(),
       new AssetsPlugin(),
       ifDevelopment(new webpack.HotModuleReplacementPlugin()),
@@ -117,13 +123,13 @@ export default function (env) {
           warnings: false
         }
       })),
-      ifProduction(new ExtractTextPlugin('[name]-[hash].css')),
+      ifProduction(new ExtractTextPlugin('[name]-[chunkhash].css')),
       ifProduction(new Visualizer())
     ]),
     output: {
       path: assetsPath,
-      filename: '[name]-[hash].js',
-      chunkFilename: '[name]-[hash].js',
+      filename: ifProduction('[name]-[chunkhash].js', '[name].js'),
+      chunkFilename: ifProduction('[name]-[chunkhash].js', '[name].js'),
       publicPath: '/resources/js/'
     }
   };

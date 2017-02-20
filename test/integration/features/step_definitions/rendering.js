@@ -61,7 +61,9 @@ defineSupportCode(({Given, Then, setWorldConstructor}) => {
     const scripts = $('script').map((index, script) => $(script).attr('src')).get();
     const stylesheets = $('link[rel=stylesheet]').map((index, sheet) => $(sheet).attr('href')).get();
 
-    assert.match(scripts[1], 'main');
+    assert.match(scripts[1], 'manifest');
+    assert.match(scripts[2], 'vendor');
+    assert.match(scripts[3], 'main');
     assert.match(stylesheets[1], 'main');
 
     done();
