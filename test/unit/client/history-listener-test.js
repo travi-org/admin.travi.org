@@ -1,5 +1,3 @@
-/* global window */
-/* eslint no-underscore-dangle: ["error", { "allow": ["__INITIAL_STATE__"] }]*/
 import * as reactRouter from 'react-router';
 import sinon from 'sinon';
 import redial from 'redial';
@@ -25,10 +23,7 @@ suite('history listener', () => {
     sandbox.stub(routes, 'getRoutes').returns(routesConfig);
   });
 
-  teardown(() => {
-    sandbox.restore();
-    delete window.__INITIAL_STATE__;
-  });
+  teardown(() => sandbox.restore());
 
   test('that fetch is triggered for redial when the route changes', () => {
     const dispatch = any.simpleObject();
@@ -37,14 +32,5 @@ suite('history listener', () => {
     addHistoryListener({dispatch, getState: () => state});
 
     assert.calledWith(redial.trigger, 'fetch', components, {dispatch, params, state});
-  });
-
-  test('that fetch is not triggered on the initial page load', () => {
-    window.__INITIAL_STATE__ = any.simpleObject();
-
-    addHistoryListener({});
-
-    assert.notCalled(redial.trigger);
-    assert.isNull(window.__INITIAL_STATE__);
   });
 });
