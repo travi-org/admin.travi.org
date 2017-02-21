@@ -21,8 +21,8 @@ suite('asset manager', () => {
     const cssFiles = [];
     const assetsFile = any.listOf(any.word)
       .map(key => {
-        const jsFile = any.string();
-        const cssFile = any.string();
+        const jsFile = any.word();
+        const cssFile = any.word();
         jsFiles.push(jsFile);
         cssFiles.push(cssFile);
         return {[key]: {js: jsFile, css: cssFile}};
