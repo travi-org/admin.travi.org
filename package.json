@@ -85,7 +85,7 @@
     "node-sass": "4.5.0",
     "npm-run-all": "4.0.2",
     "nyc": "10.1.2",
-    "pact": "1.0.0",
+    "pact": "2.0.0",
     "proxyquire": "1.7.11",
     "react-addons-test-utils": "15.4.2",
     "redux-devtools": "3.3.2",
