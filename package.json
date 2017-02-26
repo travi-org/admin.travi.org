@@ -64,7 +64,6 @@
     "chai-subset": "1.4.0",
     "cheerio": "0.22.0",
     "clean-webpack-plugin": "0.1.15",
-    "cli-color": "1.2.0",
     "concat-map": "0.0.1",
     "coveralls": "2.11.16",
     "css-loader": "0.26.2",
