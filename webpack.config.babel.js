@@ -29,7 +29,13 @@ export default function (env) {
     module: {
       loaders: removeEmpty([
         {
-          test: /\.jsx?$/,
+          test: /\.js$/,
+          include: /@travi/,
+          enforce: 'pre',
+          loader: 'source-map-loader'
+        },
+        {
+          test: /\.js$/,
           include: /lib\/(client|shared)/,
           loaders: removeEmpty([
             ifDevelopment('react-hot-loader/webpack'),
