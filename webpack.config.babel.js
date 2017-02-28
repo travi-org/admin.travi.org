@@ -27,7 +27,7 @@ export default function (env) {
       ])
     },
     module: {
-      loaders: removeEmpty([
+      rules: removeEmpty([
         {
           test: /\.js$/,
           include: /@travi/,
