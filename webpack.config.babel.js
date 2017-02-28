@@ -37,13 +37,20 @@ export default function (env) {
         {
           test: /\.js$/,
           include: /lib\/(client|shared)/,
-          loaders: removeEmpty([
-            ifDevelopment('react-hot-loader/webpack'),
-            ifDevelopment(
-              'babel-loader?plugins[]=transform-react-jsx-source&cacheDirectory',
-              'babel-loader?cacheDirectory'
-            )
-          ])
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+            comments: false,
+            babelrc: false,
+            presets: [['es2015', {modules: false}], 'react', 'stage-3'],
+            plugins: removeEmpty([
+              ifProduction('transform-react-remove-prop-types'),
+              ifDevelopment('react-hot-loader/babel'),
+              ifDevelopment('transform-react-jsx-source'),
+              'transform-runtime',
+              'lodash'
+            ])
+          }
         },
         {
           test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=d+\.d+\.d+)?$/,
