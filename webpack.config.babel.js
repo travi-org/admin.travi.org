@@ -111,6 +111,10 @@ export default function (env) {
         })
       ])
     },
+    resolve: {
+      symlinks: false,
+      modules: [path.resolve(__dirname, 'node_modules')]
+    },
     plugins: removeEmpty([
       new CleanPlugin([assetsPath], {root: __dirname}),
       new webpack.DefinePlugin({
