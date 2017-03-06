@@ -117,7 +117,7 @@
     "@travi/ioc": "1.0.0",
     "@travi/redux-fetch-middleware": "1.0.3",
     "async": "2.1.5",
-    "blankie": "2.0.0",
+    "blankie": "travi/blankie#individual-nonce",
     "boom": "4.2.0",
     "glue": "4.1.0",
     "good": "7.1.0",
