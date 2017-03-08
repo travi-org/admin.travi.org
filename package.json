@@ -97,7 +97,7 @@
     "referee": "1.2.0",
     "referee-sinon": "1.0.3",
     "rimraf": "2.6.1",
-    "sass-loader": "6.0.2",
+    "sass-loader": "6.0.3",
     "sinon": "1.17.7",
     "sinon-as-promised": "4.0.2",
     "skin-deep": "1.0.0-alpha2",
