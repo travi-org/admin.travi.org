@@ -140,7 +140,7 @@ export default function (env) {
           warnings: false
         }
       })),
-      ifProduction(new ExtractTextPlugin('[name]-[chunkhash].css')),
+      ifProduction(new ExtractTextPlugin('[name]-[contenthash].css')),
       ifProduction(new Visualizer())
     ]),
     output: {
