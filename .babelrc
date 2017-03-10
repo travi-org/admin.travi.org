@@ -7,19 +7,8 @@
         "development": {
             "retainLines": true
         },
-        "browser": {
-            "presets": [["es2015", {modules: false}]]
-        },
         "node": {
-            "presets": ["es2015-node"],
-            "plugins": [
-                [
-                    "babel-plugin-transform-require-ignore",
-                    {
-                        "extensions": [".scss", ".sass"]
-                    }
-                ]
-            ]
+            "presets": ["es2015-node"]
         }
     }
 }

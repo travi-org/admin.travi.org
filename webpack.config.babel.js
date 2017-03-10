@@ -13,10 +13,9 @@ export default function (env) {
   const devServerHost = 'http://0.0.0.0';
   const {ifProduction, ifDevelopment} = getIfUtils(env);
 
-  process.env.BABEL_ENV = 'browser';
-
   return {
     devtool: ifDevelopment('eval-source-map', 'source-map'),
+    context: path.resolve(__dirname),
     entry: {
       vendor: ['react', 'react-dom'],
       main: removeEmpty([
@@ -95,7 +94,8 @@ export default function (env) {
                 loader: 'css-loader',
                 query: {
                   modules: true,
-                  sourceMap: true
+                  sourceMap: true,
+                  localIdentName: '[name]__[local]___[hash:base64:5]'
                 }
               },
               {
