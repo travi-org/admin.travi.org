@@ -1,7 +1,7 @@
 import nock from 'nock';
 import {url} from '@travi/any';
 import {OK} from 'http-status-codes';
-import loadApi from '../../../../lib/server/app';
+import loadApi from '../../../../src/server/app';
 
 const debug = require('debug')('test');
 

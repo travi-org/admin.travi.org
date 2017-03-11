@@ -4,10 +4,10 @@ import ga from 'react-ga';
 import * as any from '@travi/any';
 import {assert} from 'chai';
 import sinon from 'sinon';
-import * as storeCreator from '../../../lib/shared/store/create';
-import * as dependencies from '../../../lib/client/dependencies';
-import * as historyListener from '../../../lib/client/history-listener';
-import * as renderer from '../../../lib/client/renderer';
+import * as storeCreator from '../../../src/shared/store/create';
+import * as dependencies from '../../../src/client/dependencies';
+import * as historyListener from '../../../src/client/history-listener';
+import * as renderer from '../../../src/client/renderer';
 
 suite('client-side app', () => {
   let sandbox;
@@ -15,7 +15,7 @@ suite('client-side app', () => {
   const store = {...any.simpleObject(), dispatch: () => undefined};
 
   function simulatePageLoad() {
-    require('../../../lib/client/app');
+    require('../../../src/client/app');
   }
 
   setup(() => {

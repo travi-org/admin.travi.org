@@ -3,7 +3,7 @@ import {createStore} from 'redux';
 import {assert} from 'chai';
 import {shallow} from 'enzyme';
 import any from '@travi/any';
-import Root from '../../../../../lib/shared/views/root/root';
+import Root from '../../../../../src/shared/views/root/root';
 
 suite('production root module', () => {
   const children = <div id="foo">bar</div>;

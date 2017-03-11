@@ -1,4 +1,4 @@
-import mapper from '../../../../../lib/server/resources/mappers/ride-mapper';
+import mapper from '../../../../../src/server/resources/mappers/ride-mapper';
 import {resources, url} from '../../../../helpers/any-for-admin';
 import assert from 'assert';
 

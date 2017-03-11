@@ -7,7 +7,7 @@ import reducer, {
   LOAD_PERSON,
   PERSON_LOAD_FAILED,
   PERSON_LOADED
-} from '../../../../../../lib/shared/views/persons/individual/duck';
+} from '../../../../../../src/shared/views/persons/individual/duck';
 
 suite('person duck', () => {
   suite('reducer', () => {

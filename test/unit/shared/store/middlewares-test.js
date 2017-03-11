@@ -4,7 +4,7 @@ import * as fetchMiddlewareFactory from '@travi/redux-fetch-middleware';
 import sinon from 'sinon';
 import {assert} from 'chai';
 import any from '@travi/any';
-import {getComposed} from '../../../../lib/shared/store/middlewares';
+import {getComposed} from '../../../../src/shared/store/middlewares';
 
 suite('redux middlewares', () => {
   let sandbox;

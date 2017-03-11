@@ -7,7 +7,7 @@ import reducer, {
   LOAD_RESOURCE,
   RESOURCE_LOAD_FAILED,
   RESOURCE_LOADED
-} from '../../../../../../lib/shared/views/resources/individual/duck';
+} from '../../../../../../src/shared/views/resources/individual/duck';
 
 suite('resource duck', () => {
   suite('reducer', () => {

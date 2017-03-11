@@ -1,8 +1,8 @@
 import {listOf, simpleObject} from '@travi/any';
 import sinon from 'sinon';
 import {assert} from 'chai';
-import * as landing from '../../../../lib/server/core/landing';
-import * as resourcesController from '../../../../lib/server/resources/controller';
+import * as landing from '../../../../src/server/core/landing';
+import * as resourcesController from '../../../../src/server/resources/controller';
 
 suite('landing config', () => {
   let sandbox;

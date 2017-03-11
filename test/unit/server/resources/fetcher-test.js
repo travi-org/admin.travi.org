@@ -1,5 +1,5 @@
-import {createFetcher} from '../../../../lib/server/resources/fetcher';
-import * as controller from '../../../../lib/server/resources/controller';
+import {createFetcher} from '../../../../src/server/resources/fetcher';
+import * as controller from '../../../../src/server/resources/controller';
 import sinon from 'sinon';
 import {assert} from 'chai';
 import any from '@travi/any';

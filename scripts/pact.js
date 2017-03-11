@@ -1,7 +1,7 @@
 import pact from 'pact';
 import {assert} from 'chai';
 import JsonHalAdapter from 'traverson-hal';
-import apiResources from '../lib/server/resources/travi-api-resources';
+import apiResources from '../src/server/resources/travi-api-resources';
 
 const consumer = 'travi.org-admin';
 const provider = 'travi-api';

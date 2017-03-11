@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import any from '@travi/any';
 import fs from 'fs';
 import path from 'path';
-import getAssets from '../../../../lib/server/view/asset-manager';
+import getAssets from '../../../../src/server/view/asset-manager';
 
 suite('asset manager', () => {
   let sandbox;

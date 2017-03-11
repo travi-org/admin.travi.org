@@ -3,9 +3,9 @@ import {fromJS} from 'immutable';
 import any, {simpleObject} from '@travi/any';
 import sinon from 'sinon';
 import {assert} from 'chai';
-import {configureStore} from '../../../../lib/shared/store/create';
-import * as reducers from '../../../../lib/shared/store/reducers';
-import * as middlewares from '../../../../lib/shared/store/middlewares';
+import {configureStore} from '../../../../src/shared/store/create';
+import * as reducers from '../../../../src/shared/store/reducers';
+import * as middlewares from '../../../../src/shared/store/middlewares';
 
 suite('store creation for production', () => {
   let sandbox;

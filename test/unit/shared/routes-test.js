@@ -5,7 +5,7 @@ import proxyquire from 'proxyquire';
 import {assert} from 'chai';
 
 suite('routes', () => {
-  const routes = proxyquire('../../../lib/shared/routes', {
+  const routes = proxyquire('../../../src/shared/routes', {
     './views/theme/wrap/component': {
       default: props => <div>wrapper { props.children }</div>     // eslint-disable-line no-shadow
     },

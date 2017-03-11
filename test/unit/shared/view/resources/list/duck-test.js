@@ -4,7 +4,7 @@ import reducer, {
     LOAD_RESOURCES,
     RESOURCES_LOAD_FAILED,
     RESOURCES_LOADED
-} from '../../../../../../lib/shared/views/resources/list/duck';
+} from '../../../../../../src/shared/views/resources/list/duck';
 import {assert} from 'chai';
 import any from '@travi/any';
 import sinon from 'sinon';

@@ -1,8 +1,8 @@
 import sinon from 'sinon';
 import {assert} from 'chai';
-import routes from '../../../../lib/server/resources/routes';
-import * as resourcesController from '../../../../lib/server/resources/controller';
-import {getResourceHandler, getResourcesHandler} from '../../../../lib/server/resources/route-handlers';
+import routes from '../../../../src/server/resources/routes';
+import * as resourcesController from '../../../../src/server/resources/controller';
+import {getResourceHandler, getResourcesHandler} from '../../../../src/server/resources/route-handlers';
 
 suite('server routes config', () => {
     let sandbox;

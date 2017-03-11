@@ -5,8 +5,8 @@ import {assert} from 'chai';
 import {shallow} from 'enzyme';
 import {string, url, simpleObject, integer, boolean} from '@travi/any';
 import sinon from 'sinon';
-import ConnectedPerson from '../../../../../../lib/shared/views/persons/individual/component';
-import * as duck from '../../../../../../lib/shared/views/persons/individual/duck';
+import ConnectedPerson from '../../../../../../src/shared/views/persons/individual/component';
+import * as duck from '../../../../../../src/shared/views/persons/individual/duck';
 
 suite('connected person component', () => {
   let sandbox;

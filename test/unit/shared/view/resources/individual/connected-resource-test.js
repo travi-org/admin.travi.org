@@ -1,8 +1,8 @@
 import React from 'react';
 import {createStore} from 'redux';
 import {fromJS} from 'immutable';
-import ConnectedResource from '../../../../../../lib/shared/views/resources/individual/connected-resource';
-import * as duck from '../../../../../../lib/shared/views/resources/individual/duck';
+import ConnectedResource from '../../../../../../src/shared/views/resources/individual/connected-resource';
+import * as duck from '../../../../../../src/shared/views/resources/individual/duck';
 
 import sinon from 'sinon';
 import {assert} from 'chai';

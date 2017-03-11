@@ -1,4 +1,4 @@
-import mapper from '../../../../../lib/server/resources/mappers/person-mapper';
+import mapper from '../../../../../src/server/resources/mappers/person-mapper';
 import {resources, url} from '../../../../helpers/any-for-admin';
 import {assert} from 'chai';
 

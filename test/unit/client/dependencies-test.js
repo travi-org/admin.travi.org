@@ -1,8 +1,8 @@
 import * as container from '@travi/ioc';
 import {assert} from 'chai';
 import sinon from 'sinon';
-import configure from '../../../lib/client/dependencies';
-import * as fetcher from '../../../lib/client/fetcher';
+import configure from '../../../src/client/dependencies';
+import * as fetcher from '../../../src/client/fetcher';
 
 suite('client dependencies', () => {
   let sandbox;

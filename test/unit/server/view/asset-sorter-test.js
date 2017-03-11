@@ -1,6 +1,6 @@
 import any from '@travi/any';
 import {assert} from 'chai';
-import sort from '../../../../lib/server/view/asset-sorter';
+import sort from '../../../../src/server/view/asset-sorter';
 
 suite('sort webpack assets', () => {
   const manifest = `/assets/manifest-${any.string()}.js`;

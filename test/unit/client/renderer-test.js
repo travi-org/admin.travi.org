@@ -4,8 +4,8 @@ import dom from 'react-dom';
 import {assert} from 'chai';
 import sinon from 'sinon';
 import any from '@travi/any';
-import remountContent from '../../../lib/client/renderer';
-import Wrapper from '../../../lib/client/wrapper';
+import remountContent from '../../../src/client/renderer';
+import Wrapper from '../../../src/client/wrapper';
 
 suite('client-side renderer', () => {
   let sandbox;

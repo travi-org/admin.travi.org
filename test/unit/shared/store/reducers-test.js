@@ -2,11 +2,11 @@ import * as redux from 'redux-immutable';
 import sinon from 'sinon';
 import {assert} from 'chai';
 import any from '@travi/any';
-import {getCombined} from '../../../../lib/shared/store/reducers';
-import person from '../../../../lib/shared/views/persons/individual/duck';
-import resource from '../../../../lib/shared/views/resources/individual/duck';
-import resources from '../../../../lib/shared/views/resources/list/duck';
-import wrap from '../../../../lib/shared/views/theme/wrap/duck';
+import {getCombined} from '../../../../src/shared/store/reducers';
+import person from '../../../../src/shared/views/persons/individual/duck';
+import resource from '../../../../src/shared/views/resources/individual/duck';
+import resources from '../../../../src/shared/views/resources/list/duck';
+import wrap from '../../../../src/shared/views/theme/wrap/duck';
 
 suite('reducers', () => {
   let sandbox;

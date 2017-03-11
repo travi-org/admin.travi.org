@@ -1,7 +1,7 @@
 import nock from 'nock';
 import {defineSupportCode} from 'cucumber';
 import {World} from '../support/world';
-import loadApi from '../../../../lib/server/app';
+import loadApi from '../../../../src/server/app';
 
 defineSupportCode(({Before, After, setWorldConstructor}) => {
   setWorldConstructor(World);

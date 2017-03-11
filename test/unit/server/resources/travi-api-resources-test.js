@@ -1,4 +1,4 @@
-import traviApiResources from '../../../../lib/server/resources/travi-api-resources.js';
+import traviApiResources from '../../../../src/server/resources/travi-api-resources.js';
 import traverson from 'traverson';
 import Boom from 'boom';
 import {url, string, word, integer, resource, listOf, simpleObject} from '../../../helpers/any-for-admin';

@@ -3,8 +3,8 @@ import sinon from 'sinon';
 import redial from 'redial';
 import {assert} from 'chai';
 import any from '@travi/any';
-import addHistoryListener from '../../../lib/client/history-listener';
-import * as routes from '../../../lib/shared/routes';
+import addHistoryListener from '../../../src/client/history-listener';
+import * as routes from '../../../src/shared/routes';
 
 suite('history listener', () => {
   let sandbox;

@@ -2,7 +2,7 @@ import React from 'react';
 import {assert} from 'chai';
 import {shallow} from 'enzyme';
 import {ServerError, NotFound} from '@travi/admin.travi.org-components';
-import ErrorPage from '../../../../../lib/shared/views/errors/page';
+import ErrorPage from '../../../../../src/shared/views/errors/page';
 
 suite('error page', () => {
   test('that the error component is wrapped into a page', () => {

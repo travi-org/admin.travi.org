@@ -7,7 +7,7 @@ import reducer, {
   NAV_LOADED,
   NAV_LOAD_FAILED,
   loadNav
-} from '../../../../../../lib/shared/views/theme/wrap/duck';
+} from '../../../../../../src/shared/views/theme/wrap/duck';
 
 suite('site-level duck', () => {
   suite('reducer', () => {

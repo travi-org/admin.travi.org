@@ -3,8 +3,8 @@ import Boom from 'boom';
 import {assert} from 'chai';
 import sinon from 'sinon';
 import any from '@travi/any';
-import respond from '../../../../lib/server/view/html-renderer';
-import * as assetManager from '../../../../lib/server/view/asset-manager';
+import respond from '../../../../src/server/view/html-renderer';
+import * as assetManager from '../../../../src/server/view/asset-manager';
 
 function assertRequiredDataPassedToLayoutTemplate(reply, {renderedContent, resources, state, title}) {
   assert.calledWith(reply.view, 'layout', sinon.match({

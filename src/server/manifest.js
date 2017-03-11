@@ -57,7 +57,7 @@ export default {
         register: 'visionary',
         options: {
           engines: {mustache: 'hapi-mustache'},
-          path: './lib/server/view'
+          path: './src/server/view'
         }
       }
     },

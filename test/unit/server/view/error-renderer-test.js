@@ -5,15 +5,15 @@ import {assert} from 'chai';
 import proxyquire from 'proxyquire';
 import any from '@travi/any';
 import {INTERNAL_SERVER_ERROR} from 'http-status-codes';
-import * as storeCreator from '../../../../lib/shared/store/create';
-import ErrorPage from '../../../../lib/shared/views/errors/page';
-import Root from '../../../../lib/shared/views/root/root';
-import * as htmlRenderer from '../../../../lib/server/view/html-renderer';
-import * as primaryNavActions from '../../../../lib/shared/views/theme/wrap/duck';
+import * as storeCreator from '../../../../src/shared/store/create';
+import ErrorPage from '../../../../src/shared/views/errors/page';
+import Root from '../../../../src/shared/views/root/root';
+import * as htmlRenderer from '../../../../src/server/view/html-renderer';
+import * as primaryNavActions from '../../../../src/shared/views/theme/wrap/duck';
 
 suite('error renderer', () => {
   const Negotiator = sinon.stub();
-  const errorRenderer = proxyquire('../../../../lib/server/view/error-renderer', {
+  const errorRenderer = proxyquire('../../../../src/server/view/error-renderer', {
     negotiator: Negotiator
   });
 

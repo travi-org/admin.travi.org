@@ -1,5 +1,5 @@
-import * as resourcesController from '../../../../lib/server/resources/controller';
-import * as handlers from '../../../../lib/server/resources/route-handlers';
+import * as resourcesController from '../../../../src/server/resources/controller';
+import * as handlers from '../../../../src/server/resources/route-handlers';
 import {assert} from 'chai';
 import sinon from 'sinon';
 import any from '@travi/any';

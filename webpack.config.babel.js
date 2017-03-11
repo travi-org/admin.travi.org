@@ -22,7 +22,7 @@ export default function (env) {
         ifDevelopment('react-hot-loader/patch'),
         ifDevelopment(`webpack-dev-server/client?${devServerHost}:${devServerPort}`),
         ifDevelopment('webpack/hot/only-dev-server'),
-        './lib/client/app.js'
+        './src/client/app.js'
       ])
     },
     module: {
@@ -35,7 +35,7 @@ export default function (env) {
         },
         {
           test: /\.js$/,
-          include: /lib\/(client|shared)/,
+          include: /src\/(client|shared)/,
           loader: 'babel-loader',
           options: {
             cacheDirectory: true,

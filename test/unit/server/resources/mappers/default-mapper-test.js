@@ -1,4 +1,4 @@
-import {mapToView, mapToViewList} from '../../../../../lib/server/resources/mappers/default-mapper';
+import {mapToView, mapToViewList} from '../../../../../src/server/resources/mappers/default-mapper';
 import {assert} from 'chai';
 
 suite('default mapper', () => {

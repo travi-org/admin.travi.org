@@ -9,8 +9,8 @@ import {assert} from 'chai';
 import sinon from 'sinon';
 import jsdom from 'jsdom';
 import any from '@travi/any';
-import * as routes from '../../../lib/shared/routes';
-import Wrapper from '../../../lib/client/wrapper';
+import * as routes from '../../../src/shared/routes';
+import Wrapper from '../../../src/client/wrapper';
 
 suite('wrapper for hot reloading', () => {
   let sandbox;

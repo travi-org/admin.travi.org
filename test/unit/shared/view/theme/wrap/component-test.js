@@ -5,8 +5,8 @@ import sinon from 'sinon';
 import {shallow} from 'enzyme';
 import {assert} from 'chai';
 import {listOf, simpleObject} from '@travi/any';
-import ConnectedWrap from '../../../../../../lib/shared/views/theme/wrap/component';
-import * as duck from '../../../../../../lib/shared/views/theme/wrap/duck';
+import ConnectedWrap from '../../../../../../src/shared/views/theme/wrap/component';
+import * as duck from '../../../../../../src/shared/views/theme/wrap/duck';
 
 suite('connected wrapper component', () => {
   let sandbox;

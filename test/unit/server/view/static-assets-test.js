@@ -1,6 +1,6 @@
 import {assert} from 'chai';
 import sinon from 'sinon';
-import {register} from '../../../../lib/server/view/static-assets';
+import {register} from '../../../../src/server/view/static-assets';
 
 suite('static assets', () => {
   teardown(() => {
