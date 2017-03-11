@@ -28,3 +28,5 @@ chai.use(chaiSubset);
 referee.format = require('formatio').configure({quoteStrings: false}).ascii;
 require('referee-sinon')(referee, sinon);
 global.formatio = require('formatio');
+
+console.error = warning => { throw new Error(warning); };   // eslint-disable-line no-console

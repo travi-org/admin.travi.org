@@ -7,7 +7,7 @@ import * as duck from '../../../../../../src/shared/views/resources/list/duck';
 import sinon from 'sinon';
 import {assert} from 'chai';
 import {shallow} from 'enzyme';
-import {simpleObject, string, listOf, boolean} from '@travi/any';
+import {simpleObject, string, listOf, boolean, integer} from '@travi/any';
 
 suite('connected list component', () => {
     let sandbox;
@@ -17,13 +17,11 @@ suite('connected list component', () => {
         sandbox.stub(duck, 'loadResources');
     });
 
-    teardown(() => {
-        sandbox.restore();
-    });
+    teardown(() => sandbox.restore());
 
     test('that redux state is mapped to props', () => {
         const
-            list = listOf(simpleObject),
+            list = listOf(() => ({...simpleObject(), id: integer(), displayName: string()})),
             type = string(),
             loading = boolean(),
 
