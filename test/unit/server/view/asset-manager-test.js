@@ -17,17 +17,9 @@ suite('asset manager', () => {
   teardown(() => sandbox.restore());
 
   test('that the asset list is returned based on the webpack assets file', () => {
-    const jsFiles = [];
-    const cssFiles = [];
-    const assetsFile = any.listOf(any.word)
-      .map(key => {
-        const jsFile = any.word();
-        const cssFile = any.word();
-        jsFiles.push(jsFile);
-        cssFiles.push(cssFile);
-        return {[key]: {js: jsFile, css: cssFile}};
-      })
-      .reduce((acc, entry) => ({...acc, ...entry}), {});
+    const assetsFile = any.listOf(() => ({[any.word]: {js: any.word(), css: any.word()}}));
+    const jsFiles = Object.values(assetsFile).map(files => files.js);
+    const cssFiles = Object.values(assetsFile).map(files => files.css);
     fs.readFile
       .withArgs(path.resolve(__dirname, '../../../../webpack-assets.json'), 'utf-8')
       .yields(null, JSON.stringify(assetsFile));
