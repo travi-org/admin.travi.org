@@ -26,7 +26,7 @@ suite('client-side app', () => {
     sandbox.stub(renderer, 'default');
     sandbox.stub(ga, 'initialize');
 
-    window.__INITIAL_STATE__ = JSON.stringify(initialState);
+    window.__INITIAL_STATE__ = initialState;
   });
 
   teardown(() => {

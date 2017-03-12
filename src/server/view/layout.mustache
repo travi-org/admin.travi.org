@@ -9,7 +9,7 @@
     </head>
     <body>
         <div id="wrap"><div>{{{ renderedContent }}}</div></div>
-        <script nonce="{{ script-nonce }}">__INITIAL_STATE__ = '{{{ initialState }}}'; {{#boom}}__BOOM__ = {{/boom}}{{{boom}}}</script>
+        <script nonce="{{ script-nonce }}">__INITIAL_STATE__ = {{{ initialState }}}; {{#boom}}__BOOM__ = {{/boom}}{{{boom}}}</script>
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js"> </script>
         {{ #resources.js }}<script src="{{ . }}"> </script>{{ /resources.js }}
     </body>

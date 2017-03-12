@@ -9,7 +9,7 @@ export default function (reply, {renderedContent, store, status, boomDetails}) {
       renderedContent,
       resources,
       title: helmet.rewind().title.toString(),
-      initialState: serialize(store.getState(), {isJSON: true}).replace(/\\/g, '\\\\').replace(/'/g, "\\'"),
+      initialState: serialize(store.getState(), {isJSON: true}),
       boom: boomDetails ? serialize(boomDetails, {isJSON: true}) : undefined
     }).code(status);
 

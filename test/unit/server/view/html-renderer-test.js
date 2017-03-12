@@ -50,39 +50,6 @@ suite('html renderer', () => {
     });
   });
 
-  test('that single-quotes get escaped in the dumped store state', () => {
-    const view = sinon.stub();
-    const code = sinon.spy();
-    const state = {...any.simpleObject(), textWithSingleQuote: "doesn't this cause problems if it isn't escaped?"};
-    const getState = () => state;
-    view.withArgs('layout', sinon.match({
-      renderedContent,
-      resources,
-      title,
-      initialState: JSON.stringify(state).replace(/'/g, "\\'")
-    })).returns({code});
-
-    return respond({view}, {renderedContent, store: {getState}, status}).then(() => assert.calledWith(code, status));
-  });
-
-  test('that double-quotes get double escaped so the JSON', () => {
-    const view = sinon.stub();
-    const code = sinon.spy();
-    const state = {
-      ...any.simpleObject(),
-      textWithEscapedDoubleQuote: "doesn't this cause problems if it isn't \"escaped\"?"
-    };
-    const getState = () => state;
-    view.withArgs('layout', sinon.match({
-      renderedContent,
-      resources,
-      title,
-      initialState: JSON.stringify(state).replace(/\\/g, '\\\\').replace(/'/g, "\\'")
-    })).returns({code});
-
-    return respond({view}, {renderedContent, store: {getState}, status}).then(() => assert.calledWith(code, status));
-  });
-
   // https://medium.com/node-security/the-most-common-xss-vulnerability-in-react-js-applications-2bdffbcc1fa0
   test('that html entities get escaped to prevent XSS attacks', () => {
     const view = sinon.stub();
@@ -97,10 +64,9 @@ suite('html renderer', () => {
       resources,
       title,
       initialState: JSON.stringify(state)
-        .replace(/\\/g, '\\\\')
-        .replace(/</g, '\\\\u003C')
-        .replace(/\//g, '\\\\u002F')
-        .replace(/>/g, '\\\\u003E')
+        .replace(/</g, '\\u003C')
+        .replace(/\//g, '\\u002F')
+        .replace(/>/g, '\\u003E')
     })).returns({code});
 
     return respond({view}, {renderedContent, store: {getState}, status}).then(() => assert.calledWith(code, status));

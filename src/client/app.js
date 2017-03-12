@@ -6,7 +6,7 @@ import {configureStore} from '../shared/store/create';
 import defineDependencies from './dependencies';
 import addHistoryListener from './history-listener';
 
-const store = configureStore({initialState: JSON.parse(window.__INITIAL_STATE__)});
+const store = configureStore({initialState: window.__INITIAL_STATE__});
 
 ga.initialize('UA-2890413-9');
 defineDependencies();
