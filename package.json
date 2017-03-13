@@ -126,7 +126,7 @@
     "immutable": "4.0.0-rc.1",
     "inert": "4.1.0",
     "lodash": "4.17.4",
-    "material-ui": "0.17.0",
+    "material-ui": "1.0.0-alpha.7",
     "negotiator": "0.6.1",
     "newrelic": "1.37.2",
     "postcss-scss": "0.4.1",
