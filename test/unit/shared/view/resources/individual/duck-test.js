@@ -45,12 +45,11 @@ suite('resource duck', () => {
 
   suite('action creators', () => {
     test('that loadPerson defines handlers for fetching data for a resource', () => {
-      const
-        id = any.integer(),
-        resource = any.simpleObject(),
-        getResource = sinon.stub(),
-        fetcher = {getResource},
-        type = any.string();
+      const id = any.integer();
+      const resource = any.simpleObject();
+      const getResource = sinon.stub();
+      const fetcher = {getResource};
+      const type = any.string();
       getResource.withArgs(type, id).returns(resource);
 
       assert.containSubset(loadResource(type, id), {

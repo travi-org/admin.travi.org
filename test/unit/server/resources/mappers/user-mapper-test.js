@@ -1,55 +1,55 @@
+import {assert} from 'chai';
 import mapper from '../../../../../src/server/resources/mappers/person-mapper';
 import {resources, url} from '../../../../helpers/any-for-admin';
-import {assert} from 'chai';
 
 suite('person mapper', () => {
-    test('that person resources mapped to view list', () => {
-        const person = resources.person();
+  test('that person resources mapped to view list', () => {
+    const person = resources.person();
 
-        assert.deepEqual(
-            [{
-                id: person.id,
-                displayName: `${person['first-name']} ${person['last-name']}`,
-                name: {
-                    first: person['first-name'],
-                    last: person['last-name']
-                },
-                thumbnail: person.avatar,
-                links: {}
-            }],
-            mapper.mapToViewList([person])
-        );
-    });
+    assert.deepEqual(
+      [{
+        id: person.id,
+        displayName: `${person['first-name']} ${person['last-name']}`,
+        name: {
+          first: person['first-name'],
+          last: person['last-name']
+        },
+        thumbnail: person.avatar,
+        links: {}
+      }],
+      mapper.mapToViewList([person])
+    );
+  });
 
-    test('that person mapped to view', () => {
-        const person = resources.person();
+  test('that person mapped to view', () => {
+    const person = resources.person();
 
-        assert.deepEqual(
-            {
-                id: person.id,
-                displayName: `${person['first-name']} ${person['last-name']}`,
-                name: {
-                    first: person['first-name'],
-                    last: person['last-name']
-                },
-                thumbnail: person.avatar,
-                links: {}
-            },
-            mapper.mapToView(person)
-        );
-    });
+    assert.deepEqual(
+      {
+        id: person.id,
+        displayName: `${person['first-name']} ${person['last-name']}`,
+        name: {
+          first: person['first-name'],
+          last: person['last-name']
+        },
+        thumbnail: person.avatar,
+        links: {}
+      },
+      mapper.mapToView(person)
+    );
+  });
 
-    test('that self link defined when defined in api', () => {
-        const person = resources.person();
-        person._links.self = url();
+  test('that self link defined when defined in api', () => {
+    const person = resources.person();
+    person._links.self = url();
 
-        assert.deepEqual(
-            {
-                'self': {
-                    href: `/persons/${person.id}`
-                }
-            },
-            mapper.mapToView(person).links
-        );
-    });
+    assert.deepEqual(
+      {
+        self: {
+          href: `/persons/${person.id}`
+        }
+      },
+      mapper.mapToView(person).links
+    );
+  });
 });

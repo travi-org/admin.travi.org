@@ -1,77 +1,73 @@
-import * as resourcesController from '../../../../src/server/resources/controller';
-import * as handlers from '../../../../src/server/resources/route-handlers';
 import {assert} from 'chai';
 import sinon from 'sinon';
 import any from '@travi/any';
+import * as resourcesController from '../../../../src/server/resources/controller';
+import * as handlers from '../../../../src/server/resources/route-handlers';
 
 suite('route handlers', () => {
-    let sandbox;
+  let sandbox;
+
+  setup(() => {
+    sandbox = sinon.sandbox.create();
+  });
+
+  teardown(() => {
+    sandbox.restore();
+  });
+
+  suite('single resource', () => {
+    const params = {resourceType: any.string(), id: any.integer()};
 
     setup(() => {
-        sandbox = sinon.sandbox.create();
+      sandbox.stub(resourcesController, 'getResource');
     });
 
-    teardown(() => {
-        sandbox.restore();
+    test('that the resource is eventually returned', () => {
+      const resource = any.simpleObject();
+      const reply = sinon.spy();
+      resourcesController.getResource.withArgs(params.resourceType, params.id).resolves(resource);
+
+      return handlers.getResourceHandler({params}, reply).then(() => {
+        assert.calledWith(reply, {resource});
+      });
     });
 
-    suite('single resource', () => {
-        const params = {resourceType: any.string(), id: any.integer()};
+    test('that errors are eventually handled', () => {
+      const error = any.simpleObject();
+      const reply = sinon.spy();
+      resourcesController.getResource.rejects(error);
 
-        setup(() => {
-            sandbox.stub(resourcesController, 'getResource');
-        });
+      return handlers.getResourceHandler({params}, reply).then(assert.fail).catch(() => {
+        assert.calledWith(reply, error);
+      });
+    });
+  });
 
-        test('that the resource is eventually returned', () => {
-            const
-                resource = any.simpleObject(),
-                reply = sinon.spy();
-            resourcesController.getResource.withArgs(params.resourceType, params.id).resolves(resource);
+  suite('list', () => {
+    const params = {resourceType: any.string()};
 
-            return handlers.getResourceHandler({params}, reply).then(() => {
-                assert.calledWith(reply, {resource});
-            });
-        });
-
-        test('that errors are eventually handled', () => {
-            const
-                error = any.simpleObject(),
-                reply = sinon.spy();
-            resourcesController.getResource.rejects(error);
-
-            return handlers.getResourceHandler({params}, reply).then(assert.fail).catch(() => {
-                assert.calledWith(reply, error);
-            });
-        });
+    setup(() => {
+      sandbox.stub(resourcesController, 'getListOf');
     });
 
-    suite('list', () => {
-        const params = {resourceType: any.string()};
+    test('that the resource is eventually returned', () => {
+      const resources = any.listOf(any.simpleObject);
+      const reply = sinon.spy();
+      resourcesController.getListOf.withArgs(params.resourceType).resolves(resources);
 
-        setup(() => {
-            sandbox.stub(resourcesController, 'getListOf');
-        });
-
-        test('that the resource is eventually returned', () => {
-            const
-                resources = any.listOf(any.simpleObject),
-                reply = sinon.spy();
-            resourcesController.getListOf.withArgs(params.resourceType).resolves(resources);
-
-            return handlers.getResourcesHandler({params}, reply).then(() => {
-                assert.calledWith(reply, {[params.resourceType]: resources, resourceType: params.resourceType});
-            });
-        });
-
-        test('that errors are eventually handled', () => {
-            const
-                error = any.simpleObject(),
-                reply = sinon.spy();
-            resourcesController.getListOf.rejects(error);
-
-            return handlers.getResourcesHandler({params}, reply).then(assert.fail).catch(() => {
-                assert.calledWith(reply, error);
-            });
-        });
+      return handlers.getResourcesHandler({params}, reply).then(() => {
+        assert.calledWith(reply, {[params.resourceType]: resources, resourceType: params.resourceType});
+      });
     });
+
+    test('that errors are eventually handled', () => {
+      const error = any.simpleObject();
+      const reply = sinon.spy();
+      resourcesController.getListOf.rejects(error);
+
+      return handlers.getResourcesHandler({params}, reply).then(assert.fail).catch(() => {
+        assert.calledWith(reply, error);
+      });
+    });
+  });
 });

@@ -1,14 +1,7 @@
-function mapToView(resource) {
-    resource.links = {};
-
-    return resource;
+export function mapToView(resource) {
+  return {...resource, links: {}};
 }
 
-function mapToViewList(list) {
-    return list.map(mapToView);
+export function mapToViewList(list) {
+  return list.map(mapToView);
 }
-
-module.exports = {
-    mapToView,
-    mapToViewList
-};

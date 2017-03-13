@@ -1,0 +1,6 @@
+# removable after https://github.com/benmosher/eslint-plugin-import/issues/759
+
+rules:
+  import/extensions:
+    - error
+    - mjs: never

@@ -1,4 +1,4 @@
 dist/
-resources/
+/resources/
 
 newrelic.js

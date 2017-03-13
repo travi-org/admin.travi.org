@@ -1,10 +1,10 @@
 export function getMapperFor(resourceType) {
-    switch (resourceType) {
+  switch (resourceType) {
     case 'persons':
-        return require('./person-mapper');
+      return require('./person-mapper').default;
     case 'rides':
-        return require('./ride-mapper');
+      return require('./ride-mapper').default;
     default:
-        return require('./default-mapper');
-    }
+      return require('./default-mapper');
+  }
 }

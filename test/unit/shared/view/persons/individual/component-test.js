@@ -16,9 +16,7 @@ suite('connected person component', () => {
     sandbox.stub(duck, 'loadPerson');
   });
 
-  teardown(() => {
-    sandbox.restore();
-  });
+  teardown(() => sandbox.restore());
 
   test('that redux state is mapped to props', () => {
     const person = {
