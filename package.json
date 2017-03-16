@@ -68,7 +68,7 @@
     "clean-webpack-plugin": "0.1.16",
     "coveralls": "2.12.0",
     "css-loader": "0.27.3",
-    "cucumber": "2.0.0-rc.8",
+    "cucumber": "2.0.0-rc.9",
     "cz-conventional-changelog": "2.0.0",
     "debug": "2.6.3",
     "dotenv": "4.0.0",
