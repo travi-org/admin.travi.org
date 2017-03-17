@@ -1,7 +1,7 @@
 import {assert} from 'chai';
 import sinon from 'sinon';
 import any from '@travi/any';
-import fs from 'fs';
+import fs from 'mz/fs';
 import path from 'path';
 import getAssets from '../../../../src/server/view/asset-manager';
 
@@ -22,7 +22,7 @@ suite('asset manager', () => {
     const cssFiles = Object.values(assetsFile).map(files => files.css);
     fs.readFile
       .withArgs(path.resolve(__dirname, '../../../../webpack-assets.json'), 'utf-8')
-      .yields(null, JSON.stringify(assetsFile));
+      .resolves(JSON.stringify(assetsFile));
 
     return getAssets().then(assets => {
       jsFiles.forEach(file => assert.include(assets.js, file));
@@ -33,7 +33,7 @@ suite('asset manager', () => {
   test('that an error loading the assets file results in rejection', () => {
     const msg = 'from test';
     const error = new Error(msg);
-    fs.readFile.yields(error);
+    fs.readFile.rejects(error);
 
     return assert.isRejected(getAssets(), error, msg);
   });

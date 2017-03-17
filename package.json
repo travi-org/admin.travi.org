@@ -127,6 +127,7 @@
     "inert": "4.1.0",
     "lodash": "4.17.4",
     "material-ui": "0.17.1",
+    "mz": "2.6.0",
     "negotiator": "0.6.1",
     "newrelic": "1.38.0",
     "postcss-scss": "0.4.1",

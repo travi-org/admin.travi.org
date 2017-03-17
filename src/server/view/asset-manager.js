@@ -1,14 +1,9 @@
-import {readFile} from 'fs';
+import {readFile} from 'mz/fs';
 import path from 'path';
 import sort from './asset-sorter';
 
-export default function () {
-  return new Promise((resolve, reject) => {
-    readFile(path.resolve(__dirname, '../../../webpack-assets.json'), 'utf-8', (err, data) => {
-      if (err) reject(err);
-      else resolve(JSON.parse(data));
-    });
-  }).then(assets => Object.entries(assets)
+function mapToAssetLists(assets) {
+  return Object.entries(assets)
     .map(([, files]) => files)
     .reduce(
       (acc, files) => ({
@@ -16,10 +11,18 @@ export default function () {
         css: [...acc.css, files.css]
       }),
       {js: [], css: []}
-    )
-  ).then(assets => {
-    assets.js.sort(sort);
+    );
+}
 
-    return assets;
-  });
+function sortScriptsForProperWebpackLoadOrder(assets) {
+  assets.js.sort(sort);
+
+  return assets;
+}
+
+export default function () {
+  return readFile(path.resolve(__dirname, '../../../webpack-assets.json'), 'utf-8')
+    .then(fileContents => JSON.parse(fileContents))
+    .then(assets => mapToAssetLists(assets))
+    .then(assets => sortScriptsForProperWebpackLoadOrder(assets));
 }
