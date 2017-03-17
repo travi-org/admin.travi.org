@@ -17,15 +17,20 @@ suite('asset manager', () => {
   teardown(() => sandbox.restore());
 
   test('that the asset list is returned based on the webpack assets file', () => {
-    const assetsFile = any.listOf(() => ({[any.word]: {js: any.word(), css: any.word()}}));
-    const jsFiles = Object.values(assetsFile).map(files => files.js);
-    const cssFiles = Object.values(assetsFile).map(files => files.css);
+    const assetsFile = any.listOf(() => ({[any.word()]: {
+      js: any.word(),
+      css: any.fromList([any.word(), undefined, undefined])
+    }})).reduce((acc, entry) => ({...acc, ...entry}), {});
+    const assetsByEntry = Object.values(assetsFile);
+    const jsFiles = assetsByEntry.map(files => files.js);
+    const cssFiles = assetsByEntry.map(files => files.css);
     fs.readFile
       .withArgs(path.resolve(__dirname, '../../../../webpack-assets.json'), 'utf-8')
       .resolves(JSON.stringify(assetsFile));
 
     return getAssets().then(assets => {
       jsFiles.forEach(file => assert.include(assets.js, file));
+      assert.equal(assets.css.length, cssFiles.length);
       cssFiles.forEach(file => assert.include(assets.css, file));
     });
   });
