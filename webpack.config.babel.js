@@ -1,7 +1,7 @@
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 import path from 'path';
 import webpack from 'webpack';
-import {getIfUtils, removeEmpty, combineLoaders} from 'webpack-config-utils';
+import {getIfUtils, removeEmpty} from 'webpack-config-utils';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import CleanPlugin from 'clean-webpack-plugin';
 import AssetsPlugin from 'assets-webpack-plugin';
@@ -57,31 +57,29 @@ export default function (env) {
         },
         ifDevelopment({
           test: /bootstrap-custom\.scss$/,
-          loaders: ['style-loader', 'css-loader?sourceMap', 'sass-loader?sourceMap']
+          loaders: [
+            'style-loader',
+            {loader: 'css-loader', options: {sourceMap: true}},
+            {loader: 'sass-loader', options: {sourceMap: true}}
+          ]
         }),
         ifDevelopment({
           test: /\.scss$/,
           exclude: /bootstrap-custom\.scss$/,
-          loaders: ['style-loader', 'css-loader?modules&sourceMap', 'sass-loader?sourceMap']
+          loaders: [
+            'style-loader',
+            {loader: 'css-loader', options: {modules: true, sourceMap: true}},
+            {loader: 'sass-loader', options: {sourceMap: true}}
+          ]
         }),
         ifProduction({
           test: /bootstrap-custom\.scss$/,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            use: combineLoaders([
-              {
-                loader: 'css-loader',
-                query: {
-                  sourceMap: true
-                }
-              },
-              {
-                loader: 'sass-loader',
-                query: {
-                  sourceMap: true
-                }
-              }
-            ])
+            use: [
+              {loader: 'css-loader', options: {sourceMap: true}},
+              {loader: 'sass-loader', options: {sourceMap: true}}
+            ]
           })
         }),
         ifProduction({
@@ -89,10 +87,10 @@ export default function (env) {
           exclude: /bootstrap-custom\.scss$/,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            use: combineLoaders([
+            use: [
               {
                 loader: 'css-loader',
-                query: {
+                options: {
                   modules: true,
                   sourceMap: true,
                   localIdentName: '[name]__[local]___[hash:base64:5]'
@@ -100,13 +98,13 @@ export default function (env) {
               },
               {
                 loader: 'sass-loader',
-                query: {
+                options: {
                   outputStyle: 'compressed',
                   sourceMap: true,
                   sourceMapContents: true
                 }
               }
-            ])
+            ]
           })
         })
       ])
