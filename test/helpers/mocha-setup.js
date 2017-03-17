@@ -5,7 +5,16 @@ import chaiAsPromised from 'chai-as-promised';
 import chaiSubset from 'chai-subset';
 import sinon from 'sinon';
 import referee from 'referee';
-import 'sinon-as-promised';
+
+sinon.behavior = require('sinon/lib/sinon/behavior');
+
+sinon.defaultConfig = {
+  injectInto: null,
+  properties: ['spy', 'stub', 'mock', 'clock', 'server', 'requests'],
+  useFakeTimers: true,
+  useFakeServer: true
+};
+require('sinon-as-promised');
 
 function setupDom() {
   const baseMarkup = '<!DOCTYPE html>';
