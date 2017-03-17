@@ -23,7 +23,7 @@ suite('asset manager', () => {
     }})).reduce((acc, entry) => ({...acc, ...entry}), {});
     const assetsByEntry = Object.values(assetsFile);
     const jsFiles = assetsByEntry.map(files => files.js);
-    const cssFiles = assetsByEntry.map(files => files.css);
+    const cssFiles = assetsByEntry.map(files => files.css).filter(file => !!file);
     fs.readFile
       .withArgs(path.resolve(__dirname, '../../../../webpack-assets.json'), 'utf-8')
       .resolves(JSON.stringify(assetsFile));

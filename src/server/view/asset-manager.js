@@ -8,7 +8,7 @@ function mapToAssetLists(assets) {
     .reduce(
       (acc, files) => ({
         js: [...acc.js, files.js],
-        css: [...acc.css, files.css]
+        css: [...acc.css, files.css].filter(file => !!file)
       }),
       {js: [], css: []}
     );
