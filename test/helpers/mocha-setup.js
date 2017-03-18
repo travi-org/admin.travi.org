@@ -6,16 +6,6 @@ import chaiSubset from 'chai-subset';
 import sinon from 'sinon';
 import referee from 'referee';
 
-sinon.behavior = require('sinon/lib/sinon/behavior');
-
-sinon.defaultConfig = {
-  injectInto: null,
-  properties: ['spy', 'stub', 'mock', 'clock', 'server', 'requests'],
-  useFakeTimers: true,
-  useFakeServer: true
-};
-require('sinon-as-promised');
-
 function setupDom() {
   const baseMarkup = '<!DOCTYPE html>';
   const window = jsdom.jsdom(baseMarkup).defaultView;

@@ -87,7 +87,8 @@ suite('resources controller', () => {
   });
 
   test('that error bubbles for api request for resource', () => {
-    const error = word();
+    const errorMessage = word();
+    const error = new Error(errorMessage);
     const resourceType = string();
     const resourceId = string();
     const resourceInstance = resource();
@@ -97,6 +98,6 @@ suite('resources controller', () => {
       mapToView: sinon.stub().withArgs(resourceInstance).returns(mappedResource)
     });
 
-    return assert.isRejected(resourcesController.getResource(resourceType, resourceId), new RegExp(error));
+    return assert.isRejected(resourcesController.getResource(resourceType, resourceId), error, errorMessage);
   });
 });
