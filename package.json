@@ -1,8 +1,8 @@
 {
   "name": "travi.org-admin",
   "main": "index.js",
-  "author": "Matt Travi",
   "license": "MIT",
+  "author": "Matt Travi <npm@travi.org> (https://matt.travi.org/)",
   "private": true,
   "repository": {
     "type": "git",
