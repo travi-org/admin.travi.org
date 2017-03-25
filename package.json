@@ -110,7 +110,7 @@
     "@travi/hapi-react-router": "1.1.3",
     "@travi/ioc": "1.0.0",
     "@travi/redux-fetch-middleware": "1.0.3",
-    "async": "2.1.5",
+    "async": "2.2.0",
     "blankie": "travi/blankie#individual-nonce",
     "boom": "4.3.0",
     "css-modules-require-hook": "4.0.6",
