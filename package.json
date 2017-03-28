@@ -112,7 +112,7 @@
     "@travi/redux-fetch-middleware": "1.0.3",
     "async": "2.2.0",
     "blankie": "travi/blankie#individual-nonce",
-    "boom": "4.3.0",
+    "boom": "4.3.1",
     "css-modules-require-hook": "4.0.6",
     "glue": "4.1.0",
     "good": "7.1.0",
