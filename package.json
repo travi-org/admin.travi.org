@@ -123,7 +123,7 @@
     "hapi-mustache": "0.0.1",
     "http-status-codes": "1.1.6",
     "immutable": "4.0.0-rc.1",
-    "inert": "4.1.0",
+    "inert": "4.2.0",
     "lodash": "4.17.4",
     "material-ui": "0.17.1",
     "mz": "2.6.0",
