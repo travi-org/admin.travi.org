@@ -82,7 +82,7 @@
     "markdownlint-cli": "0.2.0",
     "mocha": "3.2.0",
     "mocha-junit-reporter": "1.13.0",
-    "nock": "9.0.11",
+    "nock": "9.0.12",
     "node-sass": "4.5.2",
     "npm-run-all": "4.0.2",
     "nyc": "10.2.0",
