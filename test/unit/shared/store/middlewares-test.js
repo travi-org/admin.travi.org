@@ -1,3 +1,4 @@
+import immutable from 'immutable';
 import * as redux from 'redux';
 import * as devTools from 'redux-devtools-extension';
 import * as fetchMiddlewareFactory from '@travi/redux-fetch-middleware';
@@ -25,7 +26,9 @@ suite('redux middlewares', () => {
   teardown(() => sandbox.restore());
 
   test('that the middlewares are composed', () => {
-    devTools.composeWithDevTools.withArgs(appliedFetch).returns(composed);
+    const enhancedCompose = sinon.stub();
+    devTools.composeWithDevTools.withArgs({serialize: {immutable}}).returns(enhancedCompose);
+    enhancedCompose.withArgs(appliedFetch).returns(composed);
 
     assert.equal(getComposed(session), composed);
   });
