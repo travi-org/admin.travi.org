@@ -1,6 +1,7 @@
 /* global window */
 /* eslint no-underscore-dangle: ["error", { "allow": ["__BOOM__"] }]*/
 import React from 'react';
+import {shape, func} from 'prop-types';
 import {Router, browserHistory} from 'react-router';
 import ga from 'react-ga';
 import {getRoutes} from '../shared/routes';
@@ -26,9 +27,9 @@ export default function Wrapper({store}) {
 Wrapper.displayName = 'Wrapper';
 
 Wrapper.propTypes = {
-  store: React.PropTypes.shape({
-    subscribe: React.PropTypes.func,
-    dispatch: React.PropTypes.func,
-    getState: React.PropTypes.func
+  store: shape({
+    subscribe: func,
+    dispatch: func,
+    getState: func
   }).isRequired
 };

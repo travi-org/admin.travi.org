@@ -1,4 +1,5 @@
 import React from 'react';
+import {number} from 'prop-types';
 import {ServerError, NotFound} from '@travi/admin.travi.org-components';
 import {NOT_FOUND} from 'http-status-codes';
 import Wrap from '../theme/wrap/component';
@@ -19,5 +20,5 @@ export default function ErrorPage({statusCode}) {
 ErrorPage.displayName = 'ErrorPage';
 
 ErrorPage.propTypes = {
-  statusCode: React.PropTypes.number
+  statusCode: number
 };
