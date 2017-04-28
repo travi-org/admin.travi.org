@@ -72,7 +72,7 @@
     "cz-conventional-changelog": "2.0.0",
     "debug": "2.6.5",
     "dotenv": "4.0.0",
-    "dotenv-safe": "4.0.3",
+    "dotenv-safe": "4.0.4",
     "enzyme": "2.8.2",
     "extract-text-webpack-plugin": "2.1.0",
     "formatio": "1.2.0",
