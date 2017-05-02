@@ -128,7 +128,7 @@
     "material-ui": "0.18.0",
     "mz": "2.6.0",
     "negotiator": "0.6.1",
-    "newrelic": "1.38.2",
+    "newrelic": "1.39.0",
     "postcss-scss": "0.4.1",
     "prop-types": "15.5.8",
     "react": "15.5.4",
