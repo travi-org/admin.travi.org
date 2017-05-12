@@ -130,7 +130,7 @@
     "negotiator": "0.6.1",
     "newrelic": "1.39.1",
     "postcss-scss": "1.0.0",
-    "prop-types": "15.5.9",
+    "prop-types": "15.5.10",
     "react": "15.5.4",
     "react-dom": "15.5.4",
     "react-ga": "2.2.0",
