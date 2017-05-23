@@ -1,21 +1,10 @@
-import jsdom from 'jsdom';
 import chai from 'chai';
 import chaiImmutable from 'chai-immutable';
 import chaiAsPromised from 'chai-as-promised';
 import chaiSubset from 'chai-subset';
 import sinon from 'sinon';
 import referee from 'referee';
-
-function setupDom() {
-  const baseMarkup = '<!DOCTYPE html>';
-  const window = jsdom.jsdom(baseMarkup).defaultView;
-
-  global.window = window;
-  global.document = window.document;
-  global.navigator = window.navigator;
-}
-
-setupDom();
+import './dom';
 
 require.extensions['.scss'] = () => undefined;
 
