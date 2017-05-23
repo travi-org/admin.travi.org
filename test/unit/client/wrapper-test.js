@@ -7,8 +7,8 @@ import ga from 'react-ga';
 import {shallow} from 'enzyme';
 import {assert} from 'chai';
 import sinon from 'sinon';
-import jsdom from 'jsdom';
 import any from '@travi/any';
+import dom from '../../helpers/dom';
 import * as routes from '../../../src/shared/routes';
 import Wrapper from '../../../src/client/wrapper';
 
@@ -24,7 +24,7 @@ suite('wrapper for hot reloading', () => {
     sandbox.stub(routes, 'getRoutes');
     sandbox.stub(ga, 'pageview');
 
-    jsdom.changeURL(window, url);
+    dom.reconfigure({url});
   });
 
   teardown(() => {
@@ -45,6 +45,7 @@ suite('wrapper for hot reloading', () => {
     assert.notCalled(ga.pageview);
     router.prop('onUpdate')();
 
+    assert.calledOnce(ga.pageview);
     assert.calledWith(ga.pageview, parse(url).pathname);
   });
 
