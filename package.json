@@ -85,7 +85,7 @@
     "nock": "9.0.13",
     "node-sass": "4.5.3",
     "npm-run-all": "4.0.2",
-    "nyc": "10.3.2",
+    "nyc": "11.0.2",
     "pact": "2.5.0",
     "proxyquire": "1.8.0",
     "react-test-renderer": "15.5.4",
