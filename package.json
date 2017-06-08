@@ -98,7 +98,7 @@
     "source-map-loader": "0.2.1",
     "style-loader": "0.18.2",
     "url-loader": "0.5.8",
-    "validate-commit-msg": "2.12.1",
+    "validate-commit-msg": "2.12.2",
     "webpack": "3.0.0-rc.1",
     "webpack-config-utils": "2.3.0",
     "webpack-dev-server": "2.4.5",
