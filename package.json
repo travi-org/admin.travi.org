@@ -101,7 +101,7 @@
     "validate-commit-msg": "2.12.2",
     "webpack": "3.0.0-rc.1",
     "webpack-config-utils": "2.3.0",
-    "webpack-dev-server": "2.4.5",
+    "webpack-dev-server": "2.5.0",
     "webpack-visualizer-plugin": "0.1.11"
   },
   "dependencies": {
