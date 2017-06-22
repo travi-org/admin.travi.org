@@ -73,7 +73,7 @@
     "debug": "2.6.8",
     "dotenv": "4.0.0",
     "dotenv-safe": "4.0.4",
-    "enzyme": "2.8.2",
+    "enzyme": "2.9.0",
     "extract-text-webpack-plugin": "2.1.2",
     "formatio": "1.2.0",
     "globstar": "1.0.0",
