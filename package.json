@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@pact-foundation/pact-node": "4.10.0",
-    "@travi/any": "1.1.0",
+    "@travi/any": "1.2.0",
     "@travi/eslint-config-travi": "1.2.13",
     "assets-webpack-plugin": "3.5.1",
     "babel-cli": "6.24.1",
