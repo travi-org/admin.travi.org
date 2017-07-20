@@ -99,7 +99,7 @@
     "style-loader": "0.18.2",
     "uglify-js": "3.0.25",
     "url-loader": "0.5.8",
-    "validate-commit-msg": "2.12.3",
+    "validate-commit-msg": "2.13.0",
     "webpack": "3.3.0",
     "webpack-config-utils": "2.3.0",
     "webpack-dev-server": "2.5.1",
