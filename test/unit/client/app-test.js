@@ -1,5 +1,5 @@
 /* global window */
-/* eslint no-underscore-dangle: ["error", { "allow": ["__INITIAL_STATE__"] }]*/
+/* eslint no-underscore-dangle: ["error", { "allow": ["__INITIAL_STATE__"] }] */
 import ga from 'react-ga';
 import * as any from '@travi/any';
 import {assert} from 'chai';

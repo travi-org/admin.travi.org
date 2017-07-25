@@ -1,5 +1,5 @@
 /* global window */
-/* eslint no-underscore-dangle: ["error", { "allow": ["__INITIAL_STATE__"] }]*/
+/* eslint no-underscore-dangle: ["error", { "allow": ["__INITIAL_STATE__"] }] */
 import ga from 'react-ga';
 import remountContent from './renderer';
 import {configureStore} from '../shared/store/create';

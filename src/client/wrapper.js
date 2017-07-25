@@ -1,5 +1,5 @@
 /* global window */
-/* eslint no-underscore-dangle: ["error", { "allow": ["__BOOM__"] }]*/
+/* eslint no-underscore-dangle: ["error", { "allow": ["__BOOM__"] }] */
 import React from 'react';
 import {shape, func} from 'prop-types';
 import {Router, browserHistory} from 'react-router';
