@@ -100,7 +100,7 @@
     "uglify-js": "3.0.26",
     "url-loader": "0.5.8",
     "validate-commit-msg": "2.13.1",
-    "webpack": "3.3.0",
+    "webpack": "3.4.0",
     "webpack-config-utils": "2.3.0",
     "webpack-dev-server": "2.6.1",
     "webpack-visualizer-plugin": "0.1.11"
