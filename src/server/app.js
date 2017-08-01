@@ -1,6 +1,7 @@
 import 'newrelic';
 import Glue from 'glue';
 import 'css-modules-require-hook/preset';
+import 'regenerator-runtime/runtime';
 import manifest from './manifest';
 import {define as defineDependencies} from './dependencies';
 
