@@ -108,7 +108,7 @@
   "dependencies": {
     "@travi/admin.travi.org-components": "1.0.18",
     "@travi/hapi-html-request-router": "1.1.0",
-    "@travi/hapi-react-router": "1.1.3",
+    "@travi/hapi-react-router": "1.2.1",
     "@travi/ioc": "1.0.0",
     "@travi/redux-fetch-middleware": "1.0.3",
     "async": "2.5.0",
@@ -143,6 +143,7 @@
     "redux": "3.7.2",
     "redux-devtools-extension": "2.13.2",
     "redux-immutable": "4.0.0",
+    "regenerator-runtime": "0.10.5",
     "scooter": "4.0.0",
     "serialize-javascript": "1.4.0",
     "snyk": "1.37.0",
