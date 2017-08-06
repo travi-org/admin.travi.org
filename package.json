@@ -86,7 +86,7 @@
     "node-sass": "4.5.3",
     "npm-run-all": "4.0.2",
     "nyc": "11.1.0",
-    "pact": "2.6.0",
+    "pact": "2.7.0",
     "proxyquire": "1.8.0",
     "react-test-renderer": "15.6.1",
     "referee": "1.2.0",
