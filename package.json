@@ -114,7 +114,7 @@
     "async": "2.5.0",
     "blankie": "2.1.0",
     "boom": "5.2.0",
-    "css-modules-require-hook": "4.0.6",
+    "css-modules-require-hook": "4.1.0",
     "glue": "4.2.0",
     "good": "7.2.0",
     "good-console": "6.4.0",
