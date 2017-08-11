@@ -2,14 +2,10 @@ machine:
   node:
     version: v7.3
 
-dependencies:
-  pre:
-    - npm install -g cucumber
-
 test:
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
-    - BABEL_ENV=node cucumber.js --format=json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --tags 'not @wip' test/integration/features/ --compiler=js*:babel-register
+    - npm run cucumber-report
     - npm run report-coverage
 
 deployment:
