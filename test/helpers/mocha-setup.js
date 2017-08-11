@@ -17,4 +17,5 @@ referee.format = require('formatio').configure({quoteStrings: false}).ascii;
 require('referee-sinon')(referee, sinon);
 global.formatio = require('formatio');
 
-console.error = warning => { throw new Error(warning); };   // eslint-disable-line no-console
+console.error = err => { throw new Error(err); };           // eslint-disable-line no-console
+console.warn = warning => { throw new Error(warning); };    // eslint-disable-line no-console
