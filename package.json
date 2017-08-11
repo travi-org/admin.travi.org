@@ -16,6 +16,7 @@
     "tests:integration": "BABEL_ENV=node cucumber.js test/integration --compiler js:babel-register --tags 'not @wip'",
     "tests:integration:debug": "DEBUG=test run-s tests:integration",
     "tests:integration:wip": "BABEL_ENV=node cucumber.js test/integration --compiler js:babel-register --tags @wip",
+    "cucumber-report": "BABEL_ENV=node cucumber.js --format=json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --tags 'not @wip' test/integration --compiler js:babel-register",
     "tests:pact": "BABEL_ENV=node babel-node scripts/pact.js",
     "test": "run-s lint:* coverage tests:integration tests:pact",
     "coverage": "nyc run-s tests:unit",
