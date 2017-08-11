@@ -5,7 +5,7 @@ machine:
 test:
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
-    - npm run cucumber-report
+#    - npm run cucumber-report
     - npm run report-coverage
 
 deployment:
