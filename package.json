@@ -144,7 +144,7 @@
     "redux": "3.7.2",
     "redux-devtools-extension": "2.13.2",
     "redux-immutable": "4.0.0",
-    "regenerator-runtime": "0.10.5",
+    "regenerator-runtime": "0.11.0",
     "scooter": "4.0.0",
     "serialize-javascript": "1.4.0",
     "snyk": "1.38.2",
