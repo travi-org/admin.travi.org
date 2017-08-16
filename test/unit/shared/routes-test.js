@@ -7,20 +7,20 @@ import {assert} from 'chai';
 suite('routes', () => {
   const routes = proxyquire('../../../src/shared/routes', {
     './views/theme/wrap/component': {
-      default: props => <div>wrapper { props.children }</div>     // eslint-disable-line no-shadow
+      default: props => <div>wrapper { props.children }</div>
     },
     '@travi/admin.travi.org-components': {
-      Index: () => <div>index</div>,                              // eslint-disable-line no-shadow
-      NotFound: () => <div>not-found</div>                        // eslint-disable-line no-shadow
+      Index: () => <div>index</div>,
+      NotFound: () => <div>not-found</div>
     },
     './views/resources/list/connected-list': {
-      default: () => <div>resources</div>                         // eslint-disable-line no-shadow
+      default: () => <div>resources</div>
     },
     './views/resources/individual/connected-resource': {
-      default: () => <div>resource</div>                          // eslint-disable-line no-shadow
+      default: () => <div>resource</div>
     },
     './views/persons/individual/component': {
-      default: () => <div>person</div>                            // eslint-disable-line no-shadow
+      default: () => <div>person</div>
     }
   }).getRoutes();
   let node;
