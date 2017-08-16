@@ -2,12 +2,12 @@
 
 [![license](https://img.shields.io/github/license/travi/travi.org-admin.svg)](LICENSE)
 
-[![Build Status](https://img.shields.io/circleci/project/travi/travi.org-admin/master.svg?style=flat)](https://circleci.com/gh/travi/travi.org-admin)
-[![Coverage Status](http://img.shields.io/coveralls/travi/travi.org-admin.svg?style=flat)](https://coveralls.io/r/travi/travi.org-admin?branch=master)
-[![Code Climate](http://img.shields.io/codeclimate/github/travi/travi.org-admin.svg?style=flat)](https://codeclimate.com/github/travi/travi.org-admin)
+[![Build Status](https://img.shields.io/travis/travi-org/admin.travi.org/master.svg?style=flat)](https://travis-ci.org/travi-org/admin.travi.org)
+[![Coverage Status](http://img.shields.io/coveralls/travi-org/admin.travi.org.svg?style=flat)](https://coveralls.io/r/travi-org/admin.travi.org?branch=master)
+[![Code Climate](http://img.shields.io/codeclimate/github/travi-org/admin.travi.org.svg?style=flat)](https://codeclimate.com/github/travi-org/admin.travi.org)
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-![greenkeeper badge](https://badges.greenkeeper.io/travi/travi.org-admin.svg)
+[![Greenkeeper badge](https://badges.greenkeeper.io/travi-org/admin.travi.org.svg)](https://greenkeeper.io/)
 
 ## Project Goals
 
@@ -48,7 +48,7 @@ project, but please keep in mind that this is intended to be a reference impleme
     - [x] Tree-shaking
     - [x] Vendor Chunk
     - [ ] Code Splitting
-    - [ ] Commons Chunk
+    - [x] Commons Chunk
     - [x] Cache busting when assets change
 - [x] [React Hot Loader 3](https://github.com/gaearon/react-hot-loader)
 - [x] [Hapi](https://hapijs.com)
@@ -87,4 +87,4 @@ $ npm test
 
 ### Analyze the Webpack bundle
 
-After `grunt build` has been run, load `resources/js/stats.html` in a browser
+After `npm run build` has been run, load `resources/js/stats.html` in a browser
