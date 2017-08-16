@@ -3,7 +3,7 @@
 [![license](https://img.shields.io/github/license/travi/travi.org-admin.svg)](LICENSE)
 
 [![Build Status](https://img.shields.io/travis/travi-org/admin.travi.org/master.svg?style=flat)](https://travis-ci.org/travi-org/admin.travi.org)
-[![Coverage Status](http://img.shields.io/coveralls/travi-org/admin.travi.org.svg?style=flat)](https://coveralls.io/r/travi-org/admin.travi.org?branch=master)
+[![Codecov](https://img.shields.io/codecov/c/github/travi-org/admin.travi.org.svg)](https://codecov.io/github/travi-org/admin.travi.org)
 [![Code Climate](http://img.shields.io/codeclimate/github/travi-org/admin.travi.org.svg?style=flat)](https://codeclimate.com/github/travi-org/admin.travi.org)
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
