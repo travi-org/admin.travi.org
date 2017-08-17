@@ -68,7 +68,7 @@
     "cheerio": "1.0.0-rc.2",
     "clean-webpack-plugin": "0.1.16",
     "codecov": "2.3.0",
-    "css-loader": "0.28.4",
+    "css-loader": "0.28.5",
     "cucumber": "3.0.0",
     "cz-conventional-changelog": "2.0.0",
     "debug": "3.0.0",
