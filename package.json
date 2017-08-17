@@ -60,7 +60,7 @@
     "babel-preset-es2015-node": "6.1.1",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
-    "babel-register": "6.24.1",
+    "babel-register": "6.26.0",
     "chai": "4.1.1",
     "chai-as-promised": "7.1.1",
     "chai-immutable": "1.6.0",
