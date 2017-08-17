@@ -47,7 +47,7 @@
     "@travi/any": "1.4.0",
     "@travi/eslint-config-travi": "1.5.0",
     "assets-webpack-plugin": "3.5.1",
-    "babel-cli": "6.24.1",
+    "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
     "babel-loader": "7.1.1",
