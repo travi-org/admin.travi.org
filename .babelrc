@@ -1,14 +1,6 @@
 {
-    "presets": [
-        "react",
-        "stage-2"
-    ],
-    "env": {
-        "development": {
-            "retainLines": true
-        },
-        "node": {
-            "presets": ["es2015-node"]
-        }
-    }
+  "presets": [["env", {"targets": {"node": "current"}}], "react"],
+  "plugins": [
+    ["transform-object-rest-spread", { "useBuiltIns": true }]
+  ]
 }
