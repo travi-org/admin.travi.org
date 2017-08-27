@@ -107,7 +107,7 @@
     "webpack-visualizer-plugin": "0.1.11"
   },
   "dependencies": {
-    "@travi/admin.travi.org-components": "1.0.21",
+    "@travi/admin.travi.org-components": "1.0.22",
     "@travi/hapi-html-request-router": "1.1.0",
     "@travi/hapi-react-router": "1.2.1",
     "@travi/ioc": "1.0.0",
