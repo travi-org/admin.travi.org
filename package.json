@@ -10,7 +10,7 @@
   },
   "scripts": {
     "clean": "rimraf dist/ resources/js/ resources/css/ webpack-assets.json tmp/",
-    "lint:js": "eslint .",
+    "lint:js": "eslint . --cache",
     "lint:md": "globstar --node -- markdownlint **/*.md",
     "tests:unit": "BABEL_ENV=node mocha --recursive test/unit",
     "tests:integration": "BABEL_ENV=node cucumber.js test/integration --compiler js:babel-register --tags 'not @wip'",

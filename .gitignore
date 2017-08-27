@@ -13,3 +13,4 @@ pacts/
 .env
 newrelic_agent.log
 webpack-assets.json
+.eslintcache
