@@ -111,7 +111,7 @@
     "@travi/hapi-html-request-router": "1.1.0",
     "@travi/hapi-react-router": "1.2.1",
     "@travi/ioc": "1.0.0",
-    "@travi/redux-fetch-middleware": "1.0.3",
+    "@travi/redux-fetch-middleware": "1.1.0",
     "async": "2.5.0",
     "blankie": "2.1.0",
     "boom": "5.2.0",
