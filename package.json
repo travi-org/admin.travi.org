@@ -114,7 +114,7 @@
     "@travi/redux-fetch-middleware": "1.1.0",
     "async": "2.5.0",
     "blankie": "2.1.0",
-    "boom": "5.2.0",
+    "boom": "6.0.0",
     "css-modules-require-hook": "4.2.2",
     "glue": "4.2.0",
     "good": "7.3.0",
