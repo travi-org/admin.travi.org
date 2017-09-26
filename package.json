@@ -133,7 +133,7 @@
     "newrelic": "2.2.0",
     "postcss-scss": "1.0.2",
     "prop-types": "15.6.0",
-    "react": "15.6.2",
+    "react": "16.0.0",
     "react-dom": "15.6.2",
     "react-ga": "2.3.5",
     "react-helmet": "5.2.0",
