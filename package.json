@@ -67,7 +67,7 @@
     "chai-immutable": "1.6.0",
     "chai-subset": "1.6.0",
     "cheerio": "1.0.0-rc.2",
-    "clean-webpack-plugin": "0.1.16",
+    "clean-webpack-plugin": "0.1.17",
     "codecov": "2.3.0",
     "css-loader": "0.28.7",
     "cucumber": "3.0.3",
