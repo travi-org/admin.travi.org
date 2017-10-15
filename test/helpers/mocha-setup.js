@@ -4,9 +4,13 @@ import chaiAsPromised from 'chai-as-promised';
 import chaiSubset from 'chai-subset';
 import sinon from 'sinon';
 import referee from 'referee';
+import {configure} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import './dom';
 
 require.extensions['.scss'] = () => undefined;
+
+configure({adapter: new Adapter()});
 
 sinon.assert.expose(chai.assert, {prefix: ''});
 chai.use(chaiImmutable);
