@@ -20,6 +20,8 @@ function setupDom() {
     userAgent: 'node.js'
   };
 
+  global.requestAnimationFrame = callback => setTimeout(callback, 0);
+
   return jsdom;
 }
 
