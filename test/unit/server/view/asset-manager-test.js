@@ -17,10 +17,12 @@ suite('asset manager', () => {
   teardown(() => sandbox.restore());
 
   test('that the asset list is returned based on the webpack assets file', () => {
-    const assetsFile = any.listOf(() => ({[any.word()]: {
-      js: any.word(),
-      css: any.fromList([any.word(), undefined, undefined])
-    }})).reduce((acc, entry) => ({...acc, ...entry}), {});
+    const assetsFile = any.listOf(() => ({
+      [any.word()]: {
+        js: any.word(),
+        css: any.fromList([any.word(), undefined, undefined])
+      }
+    })).reduce((acc, entry) => ({...acc, ...entry}), {});
     const assetsByEntry = Object.values(assetsFile);
     const jsFiles = assetsByEntry.map(files => files.js);
     const cssFiles = assetsByEntry.map(files => files.css).filter(file => !!file);

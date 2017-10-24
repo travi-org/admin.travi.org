@@ -9,13 +9,11 @@ import {loadNav} from '../../shared/views/theme/wrap/duck';
 import respond from './html-renderer';
 
 function renderContent(store, statusCode) {
-  return renderToString(
-    <Root store={store}><ErrorPage statusCode={statusCode} /></Root>
-  );
+  return renderToString(<Root store={store}><ErrorPage statusCode={statusCode} /></Root>);
 }
 
 export function handler(request, reply) {
-  const response = request.response;
+  const {response} = request;
   const negotiator = new Negotiator(request);
 
   if (response.isBoom && 'text/html' === negotiator.mediaType()) {

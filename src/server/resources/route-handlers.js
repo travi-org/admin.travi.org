@@ -6,8 +6,8 @@ export function getResourceHandler(request, reply) {
     .catch(err => reply(err));
 }
 
-export function getResourcesHandler(request, reply) {
-  const resourceType = request.params.resourceType;
+export function getResourcesHandler({params}, reply) {
+  const {resourceType} = params;
 
   return getListOf(resourceType)
     .then(list => reply({[resourceType]: list, resourceType}))

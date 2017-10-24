@@ -1,4 +1,5 @@
 import React from 'react';
+import {shape} from 'prop-types';
 import {createMemoryHistory} from 'react-router';
 
 export default class HistoryWrapper extends React.Component {
@@ -19,5 +20,5 @@ export default class HistoryWrapper extends React.Component {
 }
 
 HistoryWrapper.childContextTypes = {
-  router: React.PropTypes.object
+  router: shape
 };
