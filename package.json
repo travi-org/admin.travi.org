@@ -70,7 +70,7 @@
     "clean-webpack-plugin": "0.1.17",
     "codecov": "3.0.0",
     "css-loader": "0.28.7",
-    "cucumber": "3.0.5",
+    "cucumber": "3.1.0",
     "cz-conventional-changelog": "2.0.0",
     "debug": "3.1.0",
     "dotenv": "4.0.0",
