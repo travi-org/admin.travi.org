@@ -135,7 +135,7 @@
     "postcss-scss": "1.0.2",
     "prop-types": "15.6.0",
     "react": "16.1.0",
-    "react-dom": "16.0.0",
+    "react-dom": "16.1.0",
     "react-ga": "2.3.5",
     "react-helmet": "5.2.0",
     "react-hot-loader": "3.0.0",
