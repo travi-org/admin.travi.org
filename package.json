@@ -136,7 +136,7 @@
     "prop-types": "15.6.0",
     "react": "16.1.1",
     "react-dom": "16.1.1",
-    "react-ga": "2.3.5",
+    "react-ga": "2.3.6",
     "react-helmet": "5.2.0",
     "react-hot-loader": "3.0.0",
     "react-redux": "5.0.6",
