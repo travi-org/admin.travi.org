@@ -119,7 +119,7 @@
     "css-modules-require-hook": "4.2.3",
     "glue": "4.2.1",
     "good": "7.3.0",
-    "good-console": "6.4.1",
+    "good-console": "7.0.0",
     "good-squeeze": "5.0.2",
     "h2o2": "6.0.2",
     "hapi": "16.6.2",
