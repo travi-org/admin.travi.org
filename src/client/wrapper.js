@@ -12,7 +12,7 @@ function trackPageView() {
   ga.pageview(window.location.pathname);
 }
 
-function determineContent() {       // eslint-disable-line react/display-name
+function determineContent() {
   if (window.__BOOM__) {
     return <ErrorPage statusCode={window.__BOOM__.statusCode} />;
   }

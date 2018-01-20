@@ -4,7 +4,7 @@ import {ServerError, NotFound} from '@travi/admin.travi.org-components';
 import {NOT_FOUND} from 'http-status-codes';
 import Wrap from '../theme/wrap/component';
 
-function error(code) {      // eslint-disable-line react/display-name
+function error(code) {
   switch (code) {
     case NOT_FOUND:
       return <NotFound />;
