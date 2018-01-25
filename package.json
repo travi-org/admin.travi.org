@@ -36,7 +36,9 @@
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect",
     "commitmsg": "validate-commit-msg",
-    "precommit": "npm test"
+    "precommit": "npm test",
+    "greenkeeper:update-lockfile": "greenkeeper-lockfile-update",
+    "greenkeeper:upload-lockfile": "greenkeeper-lockfile-upload"
   },
   "engines": {
     "node": "8.9.x",
@@ -80,6 +82,7 @@
     "extract-text-webpack-plugin": "3.0.2",
     "formatio": "1.2.0",
     "globstar": "1.0.0",
+    "greenkeeper-lockfile": "1.13.1",
     "husky": "0.14.3",
     "jsdom": "11.4.0",
     "markdownlint-cli": "0.3.1",
