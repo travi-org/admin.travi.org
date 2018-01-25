@@ -39,8 +39,8 @@
     "precommit": "npm test"
   },
   "engines": {
-    "node": "7.3.x",
-    "npm": "3.10.x"
+    "node": "8.9.x",
+    "npm": "5.6.x"
   },
   "devDependencies": {
     "@pact-foundation/pact-node": "6.7.3",
