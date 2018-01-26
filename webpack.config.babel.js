@@ -111,7 +111,7 @@ export default function (env) {
     },
     resolve: {
       symlinks: false,
-      modules: [path.resolve(__dirname, 'node_modules')]
+      modules: [path.resolve(__dirname, 'node_modules'), 'node_modules']
     },
     plugins: removeEmpty([
       new CleanPlugin([assetsPath], {root: __dirname}),
