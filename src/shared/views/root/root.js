@@ -17,7 +17,6 @@ export default function Root({store, children, request}) {
 Root.displayName = 'Root';
 
 Root.propTypes = {
-  // eslint-disable-next-line react/no-typos
   children: node.isRequired,
   store: shape({
     subscribe: func,
