@@ -60,7 +60,7 @@ suite('error renderer', () => {
 
     teardown(() => {
       sandbox.restore();
-      Negotiator.reset();
+      Negotiator.resetHistory();
     });
 
     test('that a normal response is not modified', () => {

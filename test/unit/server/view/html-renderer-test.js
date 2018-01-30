@@ -37,7 +37,7 @@ suite('html renderer', () => {
 
   teardown(() => {
     sandbox.restore();
-    reply.reset();
+    reply.resetHistory();
   });
 
   test('that appropriate data is passed to the layout template', () => {
