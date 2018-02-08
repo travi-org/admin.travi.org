@@ -86,7 +86,7 @@
     "greenkeeper-lockfile": "1.13.2",
     "husky": "0.14.3",
     "jsdom": "11.6.2",
-    "markdownlint-cli": "0.7.0",
+    "markdownlint-cli": "0.7.1",
     "mocha": "5.0.0",
     "mocha-junit-reporter": "1.17.0",
     "nock": "9.1.6",
