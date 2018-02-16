@@ -103,7 +103,7 @@
     "sinon": "4.3.0",
     "source-map-loader": "0.2.3",
     "style-loader": "0.20.0",
-    "uglify-js": "3.3.10",
+    "uglify-js": "3.3.11",
     "url-loader": "0.6.2",
     "validate-commit-msg": "2.14.0",
     "webpack": "3.11.0",
