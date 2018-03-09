@@ -33,7 +33,7 @@
     "serve:webpack": "babel-node ./webpack-dev-server.js",
     "dev": "NODE_ENV=development run-p serve:webpack serve:dev",
     "dev-local": "NODE_ENV=development run-p serve:webpack serve:dev-local",
-    "pact-publish": "babel-node scripts/publish-pacts-to-broker.js",
+    "pact:publish": "babel-node scripts/publish-pacts-to-broker.js",
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect",
     "commitmsg": "validate-commit-msg",

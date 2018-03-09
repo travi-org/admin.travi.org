@@ -9,7 +9,13 @@ after_script:
 - npm run report-coverage
 - npm run greenkeeper:upload-lockfile
 deploy:
-  provider: heroku
+- provider: script
+  skip_cleanup: true
+  script: npm run pact:publish
+- provider: heroku
   app: travi-org-admin
   api_key:
     secure: Upf86PmPxhI0wZ3+iBomvGY/QPHGAB0bPWsGyQouhZQTwkGr0C5PmndH/2rX2acvGi2N1Z4M+XIdbZy43wIrObfR2ST4U87AMbDsFmkwQPRT4ZaUYXIYTxvZjVV5N+Xwd6RszDmoVJDYan7jpFO2zMtPKrCDX8dCFHV22I+qXsA=
+env:
+  global:
+    secure: W8H3NasuPT0K4fvTRed21841k12N+t17VthpoA09stdN6Anaint1zaT8ZQ0oYnPr6Bux+BUiXrU9KclZTqCTN0vpC8hDIHjpHWeIH8KuOTrw61m5HyUnnAde/nLRY/lo2iC8ST/hw/DMRfH1nngS6SaVphxYCcBVzNPz3LA/vz8=
