@@ -7,11 +7,6 @@ const consumer = 'travi.org-admin';
 const provider = 'travi-api';
 const port = 5670;
 
-const expectedLinks = {
-  self: {href: 'https://api.travi.org/'},
-  rides: {href: 'https://api.travi.org/rides'},
-  persons: {href: 'https://api.travi.org/persons'}
-};
 const providerInstance = pact({consumer, provider, port});
 
 function verifyAndWrite() {
@@ -20,7 +15,11 @@ function verifyAndWrite() {
     if (err) {
       console.error(err);     // eslint-disable-line no-console
     } else {
-      assert.deepEqual(links, expectedLinks);
+      assert.deepEqual(links, {
+        self: {href: 'https://api.travi.org/'},
+        rides: {href: 'https://api.travi.org/rides'},
+        persons: {href: 'https://api.travi.org/persons'}
+      });
       providerInstance.verify();
     }
 
@@ -29,6 +28,8 @@ function verifyAndWrite() {
 }
 
 providerInstance.setup().then(() => {
+  const urlPattern = '(?i)\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:\'".,<>?«»“”‘’]))';   // eslint-disable-line max-len
+
   providerInstance.addInteraction({
     // state: 'no token',
     uponReceiving: 'a request for the catalog',
@@ -40,7 +41,28 @@ providerInstance.setup().then(() => {
     willRespondWith: {
       status: 200,
       headers: {'Content-Type': JsonHalAdapter.mediaType},
-      body: {_links: expectedLinks}
+      body: {
+        _links: {
+          self: {
+            href: pact.Matchers.term({
+              matcher: urlPattern,
+              generate: 'https://api.travi.org/'
+            })
+          },
+          rides: {
+            href: pact.Matchers.term({
+              matcher: urlPattern,
+              generate: 'https://api.travi.org/rides'
+            })
+          },
+          persons: {
+            href: pact.Matchers.term({
+              matcher: urlPattern,
+              generate: 'https://api.travi.org/persons'
+            })
+          }
+        }
+      }
     }
   }).then(verifyAndWrite);
 }).catch(console.error);                  // eslint-disable-line no-console
