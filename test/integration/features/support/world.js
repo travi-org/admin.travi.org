@@ -1,7 +1,6 @@
 import nock from 'nock';
 import {url} from '@travi/any';
 import {OK} from 'http-status-codes';
-import loadApi from '../../../../src/server/app';
 
 const debug = require('debug')('test');
 
@@ -11,18 +10,16 @@ export function World() {
   this.apiResponseLinks = {};
 
   this.makeRequestTo = (address, callback) => {
-    loadApi.then(server => {
-      server.inject({
-        method: 'GET',
-        url: address,
-        headers: {
-          Accept: this.mime
-        }
-      }).then(response => {
-        this.serverResponse = response;
+    this.server.inject({
+      method: 'GET',
+      url: address,
+      headers: {
+        Accept: this.mime
+      }
+    }).then(response => {
+      this.serverResponse = response;
 
-        callback();
-      });
+      callback();
     }).catch(callback);
   };
 
