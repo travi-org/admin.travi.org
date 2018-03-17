@@ -4,6 +4,7 @@ notifications:
 install:
 - npm install
 - gem install travis
+- gem install pact_broker-client
 before_script: npm run greenkeeper:update-lockfile
 after_script:
 - npm run report-coverage
