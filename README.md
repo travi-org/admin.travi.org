@@ -56,7 +56,7 @@ project, but please keep in mind that this is intended to be a reference impleme
 - [x] [Traverson](https://github.com/basti1302/traverson) with the [HAL adapter](https://github.com/basti1302/traverson-hal)
 - [ ] [Pact Consumer](https://github.com/pact-foundation/grunt-pact)
     - [x] publish pacts to [my broker](https://pact-api.travi.org)
-    - [ ] ensure pacts have passed provider verification before deploying
+    - [x] ensure pacts have passed provider verification before deploying
     - [ ] enable promotion of pacts from wip to production
 
 ## Local Development
