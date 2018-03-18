@@ -21,4 +21,5 @@ deploy:
     condition: $(pact-broker can-i-deploy --pacticipant travi.org-admin --version "$TRAVIS_COMMIT" --broker-base-url pact-api.travi.org)
 env:
   global:
-    secure: ssRC8iYx+sj2rxBfZMMWIVB15+AV8aU7Y1aW8aPFjuNNaypPecMuMIbGROcgTeywvHWaONJqXQz/coMwGgNtQDnyUajDNWmSzc5ezWqWir0ooNiR0pr0R+5otTA9gL/4s2UN+NI3k2LAp9CIX7gLkGJTqIXgcWX7F4yEGMOWdn4=
+  - FORCE_COLOR=1
+  - secure: ssRC8iYx+sj2rxBfZMMWIVB15+AV8aU7Y1aW8aPFjuNNaypPecMuMIbGROcgTeywvHWaONJqXQz/coMwGgNtQDnyUajDNWmSzc5ezWqWir0ooNiR0pr0R+5otTA9gL/4s2UN+NI3k2LAp9CIX7gLkGJTqIXgcWX7F4yEGMOWdn4=
