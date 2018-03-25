@@ -46,7 +46,7 @@
     "npm": "5.6.x"
   },
   "devDependencies": {
-    "@pact-foundation/pact-node": "6.11.0",
+    "@pact-foundation/pact-node": "6.12.0",
     "@travi/any": "1.7.2",
     "@travi/eslint-config-travi": "1.6.10",
     "assets-webpack-plugin": "3.5.1",
