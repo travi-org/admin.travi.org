@@ -65,4 +65,7 @@ providerInstance.setup().then(() => {
       }
     }
   }).then(verifyAndWrite);
-}).catch(console.error);                  // eslint-disable-line no-console
+}).catch((...args) => {
+  process.exitCode = 1;
+  console.error(...args);       // eslint-disable-line no-console
+});
