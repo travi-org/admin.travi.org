@@ -103,7 +103,7 @@
     "sass-loader": "6.0.7",
     "sinon": "4.4.2",
     "source-map-loader": "0.2.3",
-    "style-loader": "0.20.3",
+    "style-loader": "0.21.0",
     "uglify-js": "3.3.14",
     "url-loader": "0.6.2",
     "webpack": "3.11.0",
