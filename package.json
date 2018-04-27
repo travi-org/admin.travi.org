@@ -71,7 +71,7 @@
     "chai-subset": "1.6.0",
     "cheerio": "1.0.0-rc.2",
     "clean-webpack-plugin": "0.1.19",
-    "codecov": "3.0.0",
+    "codecov": "3.0.1",
     "commitlint-config-travi": "1.2.29",
     "css-loader": "0.28.10",
     "cucumber": "4.0.0",
