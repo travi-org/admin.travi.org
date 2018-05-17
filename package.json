@@ -157,7 +157,7 @@
     "traverson-hal": "6.0.0",
     "vision": "4.1.1",
     "visionary": "6.0.2",
-    "xhr": "2.4.1"
+    "xhr": "2.5.0"
   },
   "config": {
     "commitizen": {
