@@ -49,7 +49,7 @@
     "@pact-foundation/pact-node": "6.12.1",
     "@travi/any": "1.7.2",
     "@travi/eslint-config-travi": "1.6.10",
-    "assets-webpack-plugin": "3.5.1",
+    "assets-webpack-plugin": "4.0.0",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-eslint": "8.2.2",
