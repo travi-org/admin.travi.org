@@ -113,7 +113,7 @@
   },
   "dependencies": {
     "@travi/admin.travi.org-components": "1.0.24",
-    "@travi/hapi-html-request-router": "1.2.0",
+    "@travi/hapi-html-request-router": "1.2.1",
     "@travi/hapi-react-router": "1.2.2",
     "@travi/ioc": "1.0.0",
     "@travi/redux-fetch-middleware": "1.1.0",
