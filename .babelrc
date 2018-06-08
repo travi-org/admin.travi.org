@@ -1,6 +1,3 @@
 {
-  "presets": [["env", {"targets": {"node": "current"}}], "react"],
-  "plugins": [
-    ["transform-object-rest-spread", { "useBuiltIns": true }]
-  ]
+  "presets": [["travi", {react: true}]]
 }

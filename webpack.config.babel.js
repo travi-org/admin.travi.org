@@ -41,7 +41,7 @@ export default function (env) {
             cacheDirectory: true,
             comments: false,
             babelrc: false,
-            presets: [['es2015', {modules: false}], 'react', 'stage-3'],
+            presets: [['travi', {react: true, targets: {browser: true}, modules: false}]],
             plugins: removeEmpty([
               ifProduction('transform-react-remove-prop-types'),
               ifDevelopment('react-hot-loader/babel'),
