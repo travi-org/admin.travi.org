@@ -8,7 +8,7 @@ suite('client dependencies', () => {
   let sandbox;
 
   setup(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     sandbox.stub(container, 'register');
   });
 

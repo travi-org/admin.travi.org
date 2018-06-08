@@ -10,7 +10,7 @@ suite('server-side data fetcher', () => {
   let sandbox;
 
   setup(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     sandbox.stub(controller, 'getResource');
     sandbox.stub(controller, 'getListOf');
     sandbox.stub(controller, 'listResourceTypes');

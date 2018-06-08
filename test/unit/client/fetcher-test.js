@@ -10,7 +10,7 @@ suite('client-side data fetcher', () => {
   let sandbox;
 
   setup(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     sandbox.stub(xhr, 'get');
   });
 

@@ -7,7 +7,7 @@
         "js": "babel-node"
     },
     "watch": [
-        "lib/server"
+        "src/server"
     ],
     "ignore": [
         ".git",

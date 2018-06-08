@@ -20,7 +20,7 @@ suite('wrapper for hot reloading', () => {
   const statusCode = any.integer();
 
   setup(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     sandbox.stub(routes, 'getRoutes');
     sandbox.stub(ga, 'pageview');
 

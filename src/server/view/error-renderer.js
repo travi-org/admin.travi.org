@@ -12,7 +12,7 @@ function renderContent(store, statusCode) {
   return renderToString(<Root store={store}><ErrorPage statusCode={statusCode} /></Root>);
 }
 
-export function handler(request, reply) {
+export async function handler(request, h) {
   const {response} = request;
   const negotiator = new Negotiator(request);
 
@@ -21,36 +21,33 @@ export function handler(request, reply) {
 
     request.log(['error', response.output.statusCode], response);
 
-    return store.dispatch(loadNav(store.getState()))
-      .then(() => {
-        respond(reply, {
-          renderedContent: renderContent(store, response.output.statusCode),
-          store,
-          status: response.output.statusCode,
-          boomDetails: {statusCode: response.output.statusCode}
-        });
-      })
-      .catch(e => {
-        request.log(['error', INTERNAL_SERVER_ERROR], e);
-        respond(reply, {
-          renderedContent: renderContent(store, INTERNAL_SERVER_ERROR),
-          store,
-          status: INTERNAL_SERVER_ERROR,
-          boomDetails: {statusCode: INTERNAL_SERVER_ERROR}
-        });
-        return Promise.reject(e);
+    try {
+      await store.dispatch(loadNav(store.getState()));
+
+      return respond(h, {
+        renderedContent: renderContent(store, response.output.statusCode),
+        store,
+        status: response.output.statusCode,
+        boomDetails: {statusCode: response.output.statusCode}
       });
+    } catch (err) {
+      request.log(['error', INTERNAL_SERVER_ERROR], err);
+
+      return respond(h, {
+        renderedContent: renderContent(store, INTERNAL_SERVER_ERROR),
+        store,
+        status: INTERNAL_SERVER_ERROR,
+        boomDetails: {statusCode: INTERNAL_SERVER_ERROR}
+      });
+    }
   }
 
-  return reply.continue();
+  return h.continue;
 }
 
-export function register(server, options, next) {
-  server.ext('onPreResponse', handler);
-
-  next();
-}
-
-register.attributes = {
-  name: 'error-renderer'
+export const plugin = {
+  name: 'error-renderer',
+  async register(server) {
+    server.ext('onPreResponse', handler);
+  }
 };

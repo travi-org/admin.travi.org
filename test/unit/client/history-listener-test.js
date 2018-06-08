@@ -14,7 +14,7 @@ suite('history listener', () => {
   const params = any.simpleObject();
 
   setup(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     sandbox.stub(redial, 'trigger');
     sandbox.stub(reactRouter.browserHistory, 'listen').yields(location);
     sandbox.stub(reactRouter, 'match')

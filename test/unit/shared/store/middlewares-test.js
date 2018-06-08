@@ -16,7 +16,7 @@ suite('redux middlewares', () => {
   setup(() => {
     const fetchMiddleware = any.simpleObject();
 
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
 
     sandbox.stub(devTools, 'composeWithDevTools');
     sandbox.stub(fetchMiddlewareFactory, 'default').withArgs(session).returns(fetchMiddleware);

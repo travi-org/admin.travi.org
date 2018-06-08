@@ -1,3 +1,4 @@
+import mustache from 'mustache';
 import {getRoutes} from '../shared/routes';
 import respond from './view/html-renderer';
 import Root from '../shared/views/root/root';
@@ -8,13 +9,12 @@ const port = process.env.PORT || defaultPort;
 const isDevelopment = 'development' === process.env.NODE_ENV;
 
 export default {
-  server: {connections: {routes: {security: true}}},
-  connections: [{port}],
-  registrations: [
-    {plugin: 'scooter'},
-    {
-      plugin: {
-        register: 'blankie',
+  server: {routes: {security: true}, port},
+  register: {
+    plugins: [
+      {plugin: 'scooter'},
+      {
+        plugin: 'blankie',
         options: {
           reportUri: 'https://travi.report-uri.io/r/default/csp/enforce',
           defaultSrc: 'https:',
@@ -47,23 +47,26 @@ export default {
             'http://0.0.0.0:3333'
           ] : undefined
         }
-      }
-    },
-    {plugin: 'inert'},
-    {plugin: 'vision'},
-    {plugin: 'h2o2'},
-    {
-      plugin: {
-        register: 'visionary',
+      },
+      {plugin: 'inert'},
+      {
+        plugin: 'vision',
         options: {
-          engines: {mustache: 'hapi-mustache'},
+          engines: {
+            mustache: {
+              compile: template => {
+                mustache.parse(template);
+
+                return context => mustache.render(template, context);
+              }
+            }
+          },
           path: './src/server/view'
         }
-      }
-    },
-    {
-      plugin: {
-        register: 'good',
+      },
+      {plugin: 'h2o2'},
+      {
+        plugin: 'good',
         options: {
           ops: false,
           reporters: {
@@ -78,18 +81,16 @@ export default {
             ]
           }
         }
-      }
-    },
-    {plugin: '@travi/hapi-html-request-router'},
-    {
-      plugin: {
-        register: '@travi/hapi-react-router',
+      },
+      {plugin: '@travi/hapi-html-request-router'},
+      {
+        plugin: '@travi/hapi-react-router',
         options: {routes: getRoutes(), respond, Root, configureStore}
-      }
-    },
-    {plugin: './core/landing'},
-    {plugin: './view/static-assets'},
-    {plugin: './resources/routes'},
-    {plugin: './view/error-renderer'}
-  ]
+      },
+      {plugin: './core/landing'},
+      {plugin: './view/static-assets'},
+      {plugin: './resources/routes'},
+      {plugin: './view/error-renderer'}
+    ]
+  }
 };

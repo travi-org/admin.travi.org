@@ -12,7 +12,7 @@ suite('connected resource component', () => {
   let sandbox;
 
   setup(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     sandbox.stub(duck, 'loadResource');
   });
 

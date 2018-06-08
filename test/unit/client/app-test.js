@@ -19,7 +19,7 @@ suite('client-side app', () => {
   }
 
   setup(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     sandbox.stub(dependencies, 'default');
     sandbox.stub(storeCreator, 'configureStore').withArgs({initialState}).returns(store);
     sandbox.stub(historyListener, 'default');

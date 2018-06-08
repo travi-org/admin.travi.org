@@ -15,7 +15,7 @@ suite('store creation for production', () => {
   const combinedReducer = any.simpleObject();
 
   setup(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     sandbox.stub(reducers, 'getCombined').returns(combinedReducer);
     sandbox.stub(middlewares, 'getComposed').returns(composed);
     sandbox.stub(redux, 'createStore').withArgs(combinedReducer, fromJS(initialState), composed).returns(store);

@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 import {assert} from 'chai';
-import {register} from '../../../../src/server/resources/routes';
+import {plugin} from '../../../../src/server/resources/routes';
 import * as resourcesController from '../../../../src/server/resources/controller';
 import {getResourceHandler, getResourcesHandler} from '../../../../src/server/resources/route-handlers';
 
@@ -8,26 +8,20 @@ suite('server routes config', () => {
   let sandbox;
 
   setup(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     sandbox.stub(resourcesController, 'getListOf');
     sandbox.stub(resourcesController, 'getResource');
   });
 
   teardown(() => sandbox.restore());
 
-  test('that the plugin is defined', () => {
-    assert.deepEqual(register.attributes, {
-      name: 'resources-routes'
-    });
-  });
+  test('that the plugin is defined', () => assert.equal(plugin.name, 'resources-routes'));
 
-  test('that the list route is configured', () => {
-    const next = sinon.spy();
+  test('that the list route is configured', async () => {
     const server = {route: sinon.stub()};
 
-    register(server, null, next);
+    await plugin.register(server);
 
-    assert.calledOnce(next);
     assert.calledWith(server.route, {
       method: 'GET',
       path: '/{resourceType}',
@@ -36,13 +30,11 @@ suite('server routes config', () => {
   });
 
 
-  test('that the single resource route is configured', () => {
-    const next = sinon.spy();
+  test('that the single resource route is configured', async () => {
     const server = {route: sinon.stub()};
 
-    register(server, null, next);
+    await plugin.register(server);
 
-    assert.calledOnce(next);
     assert.calledWith(server.route, {
       method: 'GET',
       path: '/{resourceType}/{id}',

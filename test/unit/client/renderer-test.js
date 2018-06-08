@@ -13,7 +13,7 @@ suite('client-side renderer', () => {
   const store = any.simpleObject();
 
   setup(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     sandbox.stub(dom, 'render');
     sandbox.stub(React, 'createElement');
   });

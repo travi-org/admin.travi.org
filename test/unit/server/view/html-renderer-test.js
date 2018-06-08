@@ -1,53 +1,44 @@
 import helmet from 'react-helmet';
-import Boom from 'boom';
 import {assert} from 'chai';
 import sinon from 'sinon';
 import any from '@travi/any';
 import respond from '../../../../src/server/view/html-renderer';
 import * as assetManager from '../../../../src/server/view/asset-manager';
 
-function assertRequiredDataPassedToLayoutTemplate(reply, {renderedContent, resources, state, title}) {
-  assert.calledWith(reply.view, 'layout', sinon.match({
-    renderedContent,
-    resources,
-    title,
-    initialState: JSON.stringify(state)
-  }));
-}
-
 suite('html renderer', () => {
   let sandbox;
-  const reply = sinon.spy();
+  const h = sinon.spy();
   const store = {};
   const response = {};
   const resources = any.simpleObject();
   const renderedContent = any.string();
+  const responseContent = any.simpleObject();
   const title = any.string();
   const status = any.integer();
 
   setup(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     sandbox.stub(helmet, 'rewind').returns({title: {toString: () => title}});
     sandbox.stub(assetManager, 'default').resolves(resources);
-    sandbox.stub(Boom, 'wrap');
 
-    response.code = sinon.spy();
-    reply.view = sinon.stub().returns(response);
+    response.code = sinon.stub();
+    h.view = sinon.stub().returns(response);
   });
 
   teardown(() => {
     sandbox.restore();
-    reply.resetHistory();
+    h.resetHistory();
   });
 
   test('that appropriate data is passed to the layout template', () => {
     const state = any.simpleObject();
     store.getState = sinon.stub().returns(state);
+    h.view
+      .withArgs('layout', {renderedContent, resources, title, initialState: JSON.stringify(state)})
+      .returns(response);
+    response.code.withArgs(status).returns(responseContent);
 
-    respond(reply, {renderedContent, store, status}).then(() => {
-      assertRequiredDataPassedToLayoutTemplate(reply, {renderedContent, resources, state, title});
-      assert.calledWith(response.code, status);
-    });
+    return assert.becomes(respond(h, {renderedContent, store, status}), responseContent);
   });
 
   // https://medium.com/node-security/the-most-common-xss-vulnerability-in-react-js-applications-2bdffbcc1fa0
@@ -74,24 +65,21 @@ suite('html renderer', () => {
 
   test('that an error response sets the status code and passes boom data to the layout template', () => {
     const boomDetails = {...any.simpleObject(), statusCode: any.integer()};
-    const code = sinon.stub();
     const state = any.simpleObject();
-    store.getState = sinon.stub().returns(state);
-    reply.view.withArgs('layout', sinon.match({boom: JSON.stringify(boomDetails)})).returns({code});
-    code.withArgs(status).returns(response);
+    store.getState = () => state;
+    h.view.withArgs(
+      'layout',
+      {renderedContent, resources, title, initialState: JSON.stringify(state), boom: JSON.stringify(boomDetails)}
+    ).returns(response);
+    response.code.withArgs(boomDetails.statusCode).returns(responseContent);
 
-    return respond(reply, {renderedContent, store, status, boomDetails}).then(() => {
-      assertRequiredDataPassedToLayoutTemplate(reply, {renderedContent, resources, state, title});
-      assert.calledWith(response.code, boomDetails.statusCode);
-    });
+    return assert.becomes(respond(h, {renderedContent, store, status, boomDetails}), responseContent);
   });
 
   test('that an error getting asset details results in an immediate error response', () => {
-    const error = any.simpleObject();
-    const wrappedError = any.simpleObject();
+    const error = new Error('cause');
     assetManager.default.rejects(error);
-    Boom.wrap.withArgs(error).returns(wrappedError);
 
-    return respond(reply, {renderedContent, store}).then(() => assert.calledWith(reply, wrappedError));
+    return assert.isRejected(respond(h, {renderedContent, store}), error);
   });
 });

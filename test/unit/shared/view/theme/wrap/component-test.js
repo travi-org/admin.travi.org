@@ -12,7 +12,7 @@ suite('connected wrapper component', () => {
   let sandbox;
 
   setup(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     sandbox.stub(duck, 'loadNav');
   });
 

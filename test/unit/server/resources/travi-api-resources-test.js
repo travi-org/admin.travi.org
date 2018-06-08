@@ -9,7 +9,7 @@ suite('travi-api resource interactions', () => {
   let stubForGet, sandbox, apiTraversal;
 
   setup(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     sandbox.stub(traverson, 'from');
     sandbox.stub(Boom, 'notFound');
 

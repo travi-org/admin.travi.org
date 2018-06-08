@@ -18,20 +18,14 @@ suite('error renderer', () => {
   });
 
   suite('plugin', () => {
-    test('that the plugin is defined', () => {
-      assert.deepEqual(errorRenderer.register.attributes, {
-        name: 'error-renderer'
-      });
-    });
+    test('that the plugin is defined', () => assert.equal(errorRenderer.plugin.name, 'error-renderer'));
 
-    test('that the handler is bound to to onPreResponse', () => {
-      const next = sinon.spy();
+    test('that the handler is bound to to onPreResponse', async () => {
       const ext = sinon.spy();
 
-      errorRenderer.register({ext}, null, next);
+      await errorRenderer.plugin.register({ext});
 
       assert.calledWith(ext, 'onPreResponse', errorRenderer.handler);
-      assert.calledOnce(next);
     });
   });
 
@@ -40,9 +34,11 @@ suite('error renderer', () => {
     const store = any.simpleObject();
     const state = any.simpleObject();
     const statusCode = any.integer();
+    const continueSymbol = any.simpleObject();
+    const responseContent = any.simpleObject();
 
     setup(() => {
-      sandbox = sinon.sandbox.create();
+      sandbox = sinon.createSandbox();
       sandbox.stub(storeCreator, 'configureStore').returns(store);
       sandbox.stub(ReactDOMServer, 'renderToString');
       sandbox.stub(React, 'createElement');
@@ -63,29 +59,27 @@ suite('error renderer', () => {
       Negotiator.resetHistory();
     });
 
-    test('that a normal response is not modified', () => {
-      const replyContinue = sinon.spy();
+    test('that a normal response is not modified', async () => {
       mediaType.returns('text/html');
 
-      errorRenderer.handler(request, {continue: replyContinue});
+      const symbol = await errorRenderer.handler(request, {continue: continueSymbol});
 
-      assert.calledOnce(replyContinue);
+      assert.equal(symbol, continueSymbol);
     });
 
-    test('that a boom response for a non-html request is not modified', () => {
-      const replyContinue = sinon.spy();
+    test('that a boom response for a non-html request is not modified', async () => {
       mediaType.returns('text/foo');
 
-      errorRenderer.handler(erroringRequest, {continue: replyContinue});
+      const symbol = await errorRenderer.handler(erroringRequest, {continue: continueSymbol});
 
-      assert.calledOnce(replyContinue);
+      assert.equal(symbol, continueSymbol);
     });
 
-    test('that a boom response for an html request is rendered to html', () => {
+    test('that a boom response for an html request is rendered to html', async () => {
       const errorPageComponent = any.simpleObject();
       const rootComponent = any.simpleObject();
       const renderedContent = any.string();
-      const reply = any.simpleObject();
+      const h = any.simpleObject();
       const loadNavPromise = any.simpleObject();
       mediaType.returns('text/html');
       React.createElement.withArgs(ErrorPage).returns(errorPageComponent);
@@ -93,41 +87,41 @@ suite('error renderer', () => {
       ReactDOMServer.renderToString.withArgs(rootComponent).returns(renderedContent);
       primaryNavActions.loadNav.withArgs(state).returns(loadNavPromise);
       store.dispatch.withArgs(loadNavPromise).resolves();
+      htmlRenderer.default
+        .withArgs(h, {renderedContent, store, status: statusCode, boomDetails: {statusCode}})
+        .resolves(responseContent);
 
-      return errorRenderer.handler(erroringRequest, reply).then(() => {
-        assert.calledWith(requestLog, ['error', statusCode], erroringRequest.response);
-        assert.calledWith(
-          htmlRenderer.default,
-          reply,
-          {renderedContent, store, status: statusCode, boomDetails: {statusCode}}
-        );
-      });
+      const res = await errorRenderer.handler(erroringRequest, h);
+
+      assert.equal(res, responseContent);
+      assert.calledWith(requestLog, ['error', statusCode], erroringRequest.response);
     });
 
-    test('that a failure to fetch the primary nav still renders the error as html', () => {
+    test('that a failure to fetch the primary nav still renders the error as html', async () => {
       const errorPageComponent = any.simpleObject();
       const rootComponent = any.simpleObject();
       const renderedContent = any.string();
-      const reply = any.simpleObject();
+      const h = any.simpleObject();
       const error = new Error(any.word());
       mediaType.returns('text/html');
       React.createElement.withArgs(ErrorPage).returns(errorPageComponent);
       React.createElement.withArgs(Root, {store}, errorPageComponent).returns(rootComponent);
       ReactDOMServer.renderToString.withArgs(rootComponent).returns(renderedContent);
       store.dispatch = sinon.stub().rejects(error);
-
-      return Promise.all([
-        assert.isRejected(errorRenderer.handler(erroringRequest, reply), error),
-        errorRenderer.handler(erroringRequest, reply).catch(() => {
-          assert.calledWith(requestLog, ['error', statusCode], erroringRequest.response);
-          assert.calledWith(requestLog, ['error', INTERNAL_SERVER_ERROR], error);
-          assert.calledWith(
-            htmlRenderer.default,
-            reply,
-            {renderedContent, store, status: INTERNAL_SERVER_ERROR, boomDetails: {statusCode: INTERNAL_SERVER_ERROR}}
-          );
+      htmlRenderer.default
+        .withArgs(h, {
+          renderedContent,
+          store,
+          status: INTERNAL_SERVER_ERROR,
+          boomDetails: {statusCode: INTERNAL_SERVER_ERROR}
         })
-      ]);
+        .resolves(responseContent);
+
+      const res = await errorRenderer.handler(erroringRequest, h);
+
+      assert.equal(res, responseContent);
+      assert.calledWith(requestLog, ['error', statusCode], erroringRequest.response);
+      assert.calledWith(requestLog, ['error', INTERNAL_SERVER_ERROR], error);
     });
   });
 });

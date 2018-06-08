@@ -1,15 +1,11 @@
 import {getResource, getListOf} from './controller';
 
-export function getResourceHandler(request, reply) {
-  return getResource(request.params.resourceType, request.params.id)
-    .then(resource => reply({resource}))
-    .catch(err => reply(err));
+export async function getResourceHandler(request) {
+  return {resource: await getResource(request.params.resourceType, request.params.id)};
 }
 
-export function getResourcesHandler({params}, reply) {
+export async function getResourcesHandler({params}) {
   const {resourceType} = params;
 
-  return getListOf(resourceType)
-    .then(list => reply({[resourceType]: list, resourceType}))
-    .catch(err => reply(err));
+  return {[resourceType]: await getListOf(resourceType), resourceType};
 }
