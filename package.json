@@ -137,7 +137,7 @@
     "newrelic": "4.1.4",
     "postcss-scss": "1.0.5",
     "prop-types": "15.6.1",
-    "react": "16.4.0",
+    "react": "16.4.1",
     "react-dom": "16.4.0",
     "react-ga": "2.5.3",
     "react-helmet": "5.2.0",
