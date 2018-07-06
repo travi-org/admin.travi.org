@@ -71,7 +71,7 @@
     "clean-webpack-plugin": "0.1.19",
     "codecov": "3.0.2",
     "commitlint-config-travi": "1.2.30",
-    "css-loader": "0.28.11",
+    "css-loader": "1.0.0",
     "cucumber": "4.2.1",
     "cz-conventional-changelog": "2.1.0",
     "debug": "3.1.0",
