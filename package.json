@@ -25,7 +25,7 @@
     "build:client": "webpack --env production",
     "build:server": "NODE_ENV=production babel src/server --source-maps --out-dir dist/server",
     "build:shared": "NODE_ENV=production babel src/shared --source-maps --out-dir dist/shared",
-    "build": "run-s clean && run-p build:*",
+    "build": "run-s clean && run-p --print-label build:*",
     "start": "node dist/server/app.js",
     "postinstall": "run-s build",
     "serve:dev": "nodemon src/server/app.js",
@@ -105,7 +105,7 @@
     "travis-lint": "1.0.0",
     "uglify-js": "3.4.5",
     "url-loader": "1.0.1",
-    "webpack": "4.16.1",
+    "webpack": "3.12.0",
     "webpack-config-utils": "2.3.0",
     "webpack-dev-server": "3.1.4",
     "webpack-visualizer-plugin": "0.1.11"
