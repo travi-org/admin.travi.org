@@ -46,18 +46,18 @@ project, but please keep in mind that this is intended to be a reference impleme
 - [x] [Redial](https://github.com/markdalgleish/redial)
 - [x] [Immutable.js](https://facebook.github.io/immutable-js/)
 - [x] [Webpack 2](https://webpack.github.io/)
-    - [x] Tree-shaking
-    - [x] Vendor Chunk
-    - [ ] Code Splitting
-    - [x] Commons Chunk
-    - [x] Cache busting when assets change
+  - [x] Tree-shaking
+  - [x] Vendor Chunk
+  - [ ] Code Splitting
+  - [x] Commons Chunk
+  - [x] Cache busting when assets change
 - [x] [React Hot Loader 3](https://github.com/gaearon/react-hot-loader)
 - [x] [Hapi](https://hapijs.com)
 - [x] [Traverson](https://github.com/basti1302/traverson) with the [HAL adapter](https://github.com/basti1302/traverson-hal)
 - [ ] [Pact Consumer](https://github.com/pact-foundation/grunt-pact)
-    - [x] publish pacts to [my broker](https://pact-api.travi.org)
-    - [x] ensure pacts have passed provider verification before deploying
-    - [ ] enable promotion of pacts from wip to production
+  - [x] publish pacts to [my broker](https://pact-api.travi.org)
+  - [x] ensure pacts have passed provider verification before deploying
+  - [ ] enable promotion of pacts from wip to production
 
 ## Local Development
 
