@@ -67,7 +67,7 @@
     "chai-as-promised": "7.1.1",
     "chai-immutable": "2.0.0",
     "chai-subset": "1.6.0",
-    "cheerio": "1.0.0-rc.2",
+    "cheerio": "1.0.0-rc.3",
     "clean-webpack-plugin": "1.0.1",
     "codecov": "3.3.0",
     "commitlint-config-travi": "1.2.40",
