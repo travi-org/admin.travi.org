@@ -70,7 +70,7 @@
     "cheerio": "1.0.0-rc.3",
     "clean-webpack-plugin": "1.0.1",
     "codecov": "3.3.0",
-    "commitlint-config-travi": "1.2.40",
+    "commitlint-config-travi": "1.2.41",
     "css-loader": "1.0.0",
     "cucumber": "5.1.0",
     "cz-conventional-changelog": "2.1.0",
