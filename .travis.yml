@@ -4,10 +4,7 @@ notifications:
 install:
 - npm install
 - gem install pact_broker-client
-before_script: npm run greenkeeper:update-lockfile
-after_script:
-- npm run report-coverage
-- npm run greenkeeper:upload-lockfile
+after_script: npm run report-coverage
 deploy:
 - provider: script
   skip_cleanup: true
@@ -22,5 +19,4 @@ env:
   global:
   - FORCE_COLOR=1
   - NPM_CONFIG_COLOR=always
-  - GK_LOCK_COMMIT_AMEND=true
   - secure: ssRC8iYx+sj2rxBfZMMWIVB15+AV8aU7Y1aW8aPFjuNNaypPecMuMIbGROcgTeywvHWaONJqXQz/coMwGgNtQDnyUajDNWmSzc5ezWqWir0ooNiR0pr0R+5otTA9gL/4s2UN+NI3k2LAp9CIX7gLkGJTqIXgcWX7F4yEGMOWdn4=
