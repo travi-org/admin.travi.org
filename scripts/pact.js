@@ -1,7 +1,7 @@
 import pact from 'pact';
 import {assert} from 'chai';
 import JsonHalAdapter from 'traverson-hal';
-import apiResources from '../src/server/resources/travi-api-resources';
+import {getLinksFor, setHost} from '../src/server/resources/travi-api-resources';
 
 const consumer = 'travi.org-admin';
 const provider = 'travi-api';
@@ -10,8 +10,8 @@ const port = 5670;
 const providerInstance = pact({consumer, provider, port});
 
 function verifyAndWrite() {
-  apiResources.setHost(`http://localhost:${port}`);
-  apiResources.getLinksFor('', (err, links) => {
+  setHost(`http://localhost:${port}`);
+  getLinksFor('', (err, links) => {
     if (err) {
       console.error(err);     // eslint-disable-line no-console
     } else {

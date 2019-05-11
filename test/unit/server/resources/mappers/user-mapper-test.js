@@ -1,6 +1,7 @@
 import {assert} from 'chai';
+import any from '@travi/any';
 import mapper from '../../../../../src/server/resources/mappers/person-mapper';
-import {resources, url} from '../../../../helpers/any-for-admin';
+import {resources} from '../../../../helpers/any-for-admin';
 
 suite('person mapper', () => {
   test('that person resources mapped to view list', () => {
@@ -41,7 +42,7 @@ suite('person mapper', () => {
 
   test('that self link defined when defined in api', () => {
     const person = resources.person();
-    person._links.self = url();
+    person._links.self = any.url();
 
     assert.deepEqual(
       {

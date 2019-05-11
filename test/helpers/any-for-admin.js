@@ -1,7 +1,5 @@
 import any from '@travi/any';
 
-export * from '@travi/any';
-
 function resource() {
   return {
     id: any.integer()

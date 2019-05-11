@@ -4,83 +4,72 @@ import Boom from 'boom';
 
 traverson.registerMediaType(JsonHalAdapter.mediaType, JsonHalAdapter);
 
-module.exports = (() => {
-  let apiRoot = 'https://api.travi.org/';
-  const ENVIRONMENT_ARG = 2;
+let apiRoot = 'https://api.travi.org/';
+const ENVIRONMENT_ARG = 2;
 
-  function api() {
-    return traverson.from(apiRoot).withRequestOptions({headers: {Accept: 'application/hal+json'}});
+function api() {
+  return traverson.from('local' === process.argv[ENVIRONMENT_ARG] ? 'http://localhost:4444' : apiRoot)
+    .withRequestOptions({headers: {Accept: 'application/hal+json'}});
+}
+
+function getResourceList(document, resourceType) {
+  let list = [];
+  const embedded = document._embedded[resourceType];
+
+  if (Array.isArray(embedded)) {
+    list = embedded;
+  } else {
+    list.push(embedded);
   }
 
-  function getResourceList(document, resourceType) {
-    let list = [];
-    const embedded = document._embedded[resourceType];
+  return list;
+}
 
-    if (Array.isArray(embedded)) {
-      list = embedded;
-    } else {
-      list.push(embedded);
-    }
-
-    return list;
-  }
-
-  function getLinksFor(resource, callback) {
-    api().getResource((err, document) => {
+export function getLinksFor(resource, callback) {
+  api()
+    .getResource((err, document) => {
       if (err) {
         callback(err);
       } else {
         callback(null, document._links);
       }
     });
-  }
+}
 
-  function getListOf(resourceType, callback) {
+export function getListOf(resourceType, callback) {
+  api()
+    .follow(resourceType)
+    .getResource((err, document) => {
+      if (err) {
+        if (err.message.startsWith('Could not find a matching link nor an embedded document for')) {
+          callback(Boom.notFound(err));
+        } else {
+          callback(err);
+        }
+      } else {
+        callback(null, getResourceList(document, resourceType));
+      }
+    });
+}
+
+export function getResourceBy(resourceType, resourceId) {
+  return new Promise((resolve, reject) => {
     api()
-      .follow(resourceType)
-      .getResource((err, document) => {
+      .follow(resourceType, `${resourceType}[id:${resourceId}]`, 'self')
+      .getResource((err, resource) => {
         if (err) {
           if (err.message.startsWith('Could not find a matching link nor an embedded document for')) {
-            callback(Boom.notFound(err));
+            reject(Boom.notFound(err));
           } else {
-            callback(err);
+            reject(err);
           }
         } else {
-          callback(null, getResourceList(document, resourceType));
+          resolve(resource);
         }
       });
-  }
+  });
+}
 
-  function getResourceBy(resourceType, resourceId) {
-    return new Promise((resolve, reject) => {
-      api()
-        .follow(resourceType, `${resourceType}[id:${resourceId}]`, 'self')
-        .getResource((err, resource) => {
-          if (err) {
-            if (err.message.startsWith('Could not find a matching link nor an embedded document for')) {
-              reject(Boom.notFound(err));
-            } else {
-              reject(err);
-            }
-          } else {
-            resolve(resource);
-          }
-        });
-    });
-  }
-
-  function setHost(host) {
-    apiRoot = host;
-  }
-
-  if ('local' === process.argv[ENVIRONMENT_ARG]) {
-    setHost('http://localhost:4444');
-  }
-
-  return {
-    getLinksFor,
-    getListOf,
-    getResourceBy,
-    setHost
-  };
-})();
+export function setHost(host) {
+  apiRoot = host;
+}

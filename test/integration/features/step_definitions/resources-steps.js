@@ -1,10 +1,11 @@
 import nock from 'nock';
 import {assert} from 'referee';
+import any from '@travi/any';
 import _ from 'lodash';
 import {OK} from 'http-status-codes';
 import {defineSupportCode} from 'cucumber';
 import {World} from '../support/world';
-import {url, listOf, resource, resources, integer} from '../../../helpers/any-for-admin';
+import {resource, resources} from '../../../helpers/any-for-admin';
 
 const debug = require('debug')('test');
 
@@ -23,7 +24,7 @@ function buildHalLink(href) {
 
 function buildLinksIncluding(resourceType, resourceLink) {
   const links = {
-    self: buildHalLink(url({domain: DOMAIN}))
+    self: buildHalLink(any.url({domain: DOMAIN}))
   };
 
   if (resourceLink) {
@@ -34,7 +35,7 @@ function buildLinksIncluding(resourceType, resourceLink) {
 }
 
 function buildListOf(factory) {
-  const resourceList = listOf(factory, {min: 1, uniqueOn: 'id'});
+  const resourceList = any.listOf(factory, {min: 1, uniqueOn: 'id'});
 
   if (existingResourceId) {
     existingResource = factory();
@@ -203,7 +204,7 @@ defineSupportCode(({After, Given, When, Then, setWorldConstructor}) => {
   });
 
   Given(/^a "([^"]*)" exists in the api$/, function (resourceType, callback) {
-    existingResourceId = integer({min: 1});
+    existingResourceId = any.integer({min: 1});
     setupExpectedApiResponsesFor.call(this, resourceType);
 
     callback();

@@ -1,6 +1,7 @@
 import assert from 'assert';
+import any from '@travi/any';
 import mapper from '../../../../../src/server/resources/mappers/ride-mapper';
-import {resources, url} from '../../../../helpers/any-for-admin';
+import {resources} from '../../../../helpers/any-for-admin';
 
 suite('ride mapper', () => {
   test('that ride resources mapped to view list', () => {
@@ -31,7 +32,7 @@ suite('ride mapper', () => {
 
   test('that self link defined when defined in api', () => {
     const ride = resources.ride();
-    ride._links.self = url();
+    ride._links.self = any.url();
 
     assert.deepEqual(
       {

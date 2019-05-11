@@ -2,8 +2,9 @@ import traverson from 'traverson';
 import Boom from 'boom';
 import sinon from 'sinon';
 import {assert} from 'chai';
-import traviApiResources from '../../../../src/server/resources/travi-api-resources';
-import {url, string, word, integer, resource, listOf, simpleObject} from '../../../helpers/any-for-admin';
+import any from '@travi/any';
+import * as traviApiResources from '../../../../src/server/resources/travi-api-resources';
+import {resource} from '../../../helpers/any-for-admin';
 
 suite('travi-api resource interactions', () => {
   let stubForGet, sandbox, apiTraversal;
@@ -29,8 +30,8 @@ suite('travi-api resource interactions', () => {
   test('that links are requested from the api catalog', () => {
     const callback = sinon.spy();
     const links = {
-      self: url(),
-      foo: url()
+      self: any.url(),
+      foo: any.url()
     };
     stubForGet.yields(null, {_links: links});
 
@@ -41,8 +42,8 @@ suite('travi-api resource interactions', () => {
 
   suite('list', () => {
     test('that list of resources requested by following link from api catalog', () => {
-      const resourceType = string();
-      const resources = listOf(resource);
+      const resourceType = any.string();
+      const resources = any.listOf(resource);
       const responseFromApi = {
         _embedded: {}
       };
@@ -58,8 +59,8 @@ suite('travi-api resource interactions', () => {
     });
 
     test('that error bubbles from resources request', () => {
-      const resourceType = string();
-      const error = new Error(string());
+      const resourceType = any.string();
+      const error = new Error(any.string());
       const callback = sinon.spy();
       apiTraversal.follow.withArgs(resourceType).returns({getResource: stubForGet.yields(error)});
 
@@ -69,9 +70,9 @@ suite('travi-api resource interactions', () => {
     });
 
     test('that error bubbles as notFound when following chain to non-existent link', () => {
-      const resourceType = string();
-      const error = new Error(`Could not find a matching link nor an embedded document for ${string}`);
-      const wrappedError = simpleObject();
+      const resourceType = any.string();
+      const error = new Error(`Could not find a matching link nor an embedded document for ${resourceType}`);
+      const wrappedError = any.simpleObject();
       const callback = sinon.spy();
       Boom.notFound.withArgs(error).returns(wrappedError);
       apiTraversal.follow.withArgs(resourceType).returns({getResource: stubForGet.yields(error)});
@@ -82,7 +83,7 @@ suite('travi-api resource interactions', () => {
     });
 
     test('that a single resource is mapped to a list', () => {
-      const resourceType = string();
+      const resourceType = any.string();
       const responseFromApi = {_embedded: {}};
       const resourceInstance = resource();
       const callback = sinon.spy();
@@ -96,11 +97,11 @@ suite('travi-api resource interactions', () => {
   });
 
   suite('single resource', () => {
-    const resourceType = string();
-    const resourceId = integer();
+    const resourceType = any.string();
+    const resourceId = any.integer();
     const resourceInstance = resource();
-    const error = new Error(word());
-    const originalError = new Error(`Could not find a matching link nor an embedded document for ${string}`);
+    const error = new Error(any.word());
+    const originalError = new Error(`Could not find a matching link nor an embedded document for ${resourceType}`);
 
     test('that promise is returned when requesting a single resource', () => {
       apiTraversal.follow.withArgs(resourceType, `${resourceType}[id:${resourceId}]`).returns({
