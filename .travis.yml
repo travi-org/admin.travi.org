@@ -12,7 +12,7 @@ deploy:
 - provider: heroku
   app: travi-org-admin
   api_key:
-    secure: Upf86PmPxhI0wZ3+iBomvGY/QPHGAB0bPWsGyQouhZQTwkGr0C5PmndH/2rX2acvGi2N1Z4M+XIdbZy43wIrObfR2ST4U87AMbDsFmkwQPRT4ZaUYXIYTxvZjVV5N+Xwd6RszDmoVJDYan7jpFO2zMtPKrCDX8dCFHV22I+qXsA=
+    secure: im28yIt5GSyGEXFySUHm7ID1fQaaBxB8YtJpjP9DE2+XjV+DHUrLeOSuqhlTsKTrnp7aHv3SCfnFlT93O9RCl4mCZ6L1F16E3kmkX2/K8CkADUaIZK2m2TqNZEKGfBuxzcEtxvOu7zhhOITj2OSEQe5yHfPWvYzHJPuW5bHnxHE=
   on:
     condition: $(pact-broker can-i-deploy --pacticipant travi.org-admin --version "$TRAVIS_COMMIT" --broker-base-url pact-api.travi.org)
 env:
