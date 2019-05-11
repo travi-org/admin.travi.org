@@ -27,7 +27,6 @@
     "build:shared": "NODE_ENV=production babel src/shared --source-maps --out-dir dist/shared",
     "build": "run-s clean && run-p --print-label build:*",
     "start": "node dist/server/app.js",
-    "postinstall": "run-s build",
     "serve:dev": "nodemon src/server/app.js",
     "serve:dev-local": "nodemon src/server/app.js local",
     "serve:webpack": "babel-node ./webpack-dev-server.js",
