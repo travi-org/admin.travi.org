@@ -6,6 +6,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import CleanPlugin from 'clean-webpack-plugin';
 import AssetsPlugin from 'assets-webpack-plugin';
 import Visualizer from 'webpack-visualizer-plugin';
+import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 
 export default function (env) {
   const assetsPath = path.join(__dirname, 'resources/js');
@@ -139,7 +140,8 @@ export default function (env) {
         }
       })),
       ifProduction(new ExtractTextPlugin('[name]-[contenthash].css')),
-      ifProduction(new Visualizer())
+      ifProduction(new Visualizer()),
+      ifProduction(new BundleAnalyzerPlugin({generateStatsFile: true, analyzerMode: 'static', openAnalyzer: false}))
     ]),
     output: {
       path: assetsPath,

@@ -34,6 +34,7 @@
     "dev": "NODE_ENV=development run-p serve:webpack serve:dev",
     "dev-local": "NODE_ENV=development run-p serve:webpack serve:dev-local",
     "pact:publish": "pact publish --pact-files-or-dirs $TRAVIS_BUILD_DIR/pacts/ --consumer-version $TRAVIS_COMMIT --pact-broker https://pact-api.travi.org/ --pact-broker-username $PACT_BROKER_USER --pact-broker-password $PACT_BROKER_PASSWORD",
+    "packtracker:publish": "packtracker-upload --stats=resources/js/stats.json",
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect",
     "commitmsg": "commitlint -e",
@@ -103,6 +104,7 @@
     "uglify-js": "3.5.11",
     "url-loader": "1.1.2",
     "webpack": "3.12.0",
+    "webpack-bundle-analyzer": "3.3.2",
     "webpack-config-utils": "2.3.1",
     "webpack-dev-server": "3.3.1",
     "webpack-visualizer-plugin": "0.1.11"

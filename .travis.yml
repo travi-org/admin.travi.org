@@ -4,7 +4,9 @@ notifications:
 install:
 - npm install
 - gem install pact_broker-client
-after_script: npm run report-coverage
+after_script:
+  - npm run report-coverage
+  - npm run packtracker:publish
 deploy:
 - provider: script
   skip_cleanup: true
@@ -14,9 +16,12 @@ deploy:
   api_key:
     secure: im28yIt5GSyGEXFySUHm7ID1fQaaBxB8YtJpjP9DE2+XjV+DHUrLeOSuqhlTsKTrnp7aHv3SCfnFlT93O9RCl4mCZ6L1F16E3kmkX2/K8CkADUaIZK2m2TqNZEKGfBuxzcEtxvOu7zhhOITj2OSEQe5yHfPWvYzHJPuW5bHnxHE=
   on:
-    condition: $(pact-broker can-i-deploy --pacticipant travi.org-admin --version "$TRAVIS_COMMIT" --broker-base-url pact-api.travi.org)
+    condition: $(pact-broker can-i-deploy --pacticipant travi.org-admin --version
+      "$TRAVIS_COMMIT" --broker-base-url pact-api.travi.org)
 env:
   global:
   - FORCE_COLOR=1
   - NPM_CONFIG_COLOR=always
+  - PT_UPLOAD=true
   - secure: ssRC8iYx+sj2rxBfZMMWIVB15+AV8aU7Y1aW8aPFjuNNaypPecMuMIbGROcgTeywvHWaONJqXQz/coMwGgNtQDnyUajDNWmSzc5ezWqWir0ooNiR0pr0R+5otTA9gL/4s2UN+NI3k2LAp9CIX7gLkGJTqIXgcWX7F4yEGMOWdn4=
+  - secure: GPus0I5qXyYSRR8kctNCa5ywVBE9IdQpyBgS+hz0+pPNLGXYM0igc6MvnnJtG4+zB3YTrtU3UBVY34LT0BpcyHIiifWAPNYJy+8iAA/6jG1MxR9dQwnXaxBe1A05d5GYNxVwXtNuH9FAZjxUNjdzyWg+5bN3O4GfPo2maRVWDgo=
