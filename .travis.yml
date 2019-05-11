@@ -4,7 +4,7 @@ notifications:
 install:
 - npm install
 - gem install pact_broker-client
-after_script:
+after_success:
   - npm run report-coverage
   - npm run packtracker:publish
 deploy:
