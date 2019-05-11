@@ -19,7 +19,7 @@
     "tests:integration:debug": "DEBUG=test run-s tests:integration",
     "tests:integration:wip": "run-s 'tests:integration:base -- --tags @wip'",
     "tests:pact": "babel-node scripts/pact.js",
-    "test": "run-s lint:* coverage tests:integration tests:pact",
+    "test": "run-s lint:* coverage tests:integration tests:pact build",
     "coverage": "nyc run-s tests:unit",
     "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "build:client": "webpack --env production",
