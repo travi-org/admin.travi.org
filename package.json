@@ -82,7 +82,7 @@
     "formatio": "1.2.0",
     "globstar": "1.0.0",
     "husky": "2.2.0",
-    "jsdom": "15.0.0",
+    "jsdom": "15.1.0",
     "markdownlint-cli": "0.16.0",
     "mocha": "5.2.0",
     "mocha-junit-reporter": "1.22.0",
