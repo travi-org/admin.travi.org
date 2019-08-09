@@ -92,7 +92,7 @@
     "nyc": "14.1.1",
     "pact": "4.3.2",
     "proxyquire": "2.1.2",
-    "react-test-renderer": "16.8.6",
+    "react-test-renderer": "16.9.0",
     "referee": "1.2.0",
     "referee-sinon": "1.0.3",
     "rimraf": "2.6.3",
