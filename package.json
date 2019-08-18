@@ -74,7 +74,7 @@
     "cucumber": "5.1.0",
     "cz-conventional-changelog": "3.0.0",
     "debug": "4.1.1",
-    "dotenv": "8.0.0",
+    "dotenv": "8.1.0",
     "dotenv-safe": "6.1.0",
     "enzyme": "3.9.0",
     "enzyme-adapter-react-16": "1.12.1",
