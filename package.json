@@ -150,7 +150,7 @@
     "redux-immutable": "4.0.0",
     "regenerator-runtime": "0.12.1",
     "scooter": "5.0.2",
-    "serialize-javascript": "2.0.0",
+    "serialize-javascript": "2.1.0",
     "snyk": "1.193.1",
     "stampit": "4.2.0",
     "traverson": "6.1.1",
