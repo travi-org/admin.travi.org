@@ -42,12 +42,12 @@ export default function (env) {
             cacheDirectory: true,
             comments: false,
             babelrc: false,
-            presets: [['travi', {react: true, targets: {browser: true}, modules: false}]],
+            presets: [['@travi', {react: true, targets: {browser: true}, modules: false}]],
             plugins: removeEmpty([
               ifProduction('transform-react-remove-prop-types'),
               ifDevelopment('react-hot-loader/babel'),
               ifDevelopment('transform-react-jsx-source'),
-              'transform-runtime',
+              '@babel/transform-runtime',
               'lodash'
             ])
           }

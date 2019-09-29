@@ -1,4 +1,4 @@
 --ui tdd
---require babel-register
+--require @babel/register
 --require ./test/helpers/mocha-setup.js
 --reporter-options mochaFile=./logs/unit/test-results.xml
