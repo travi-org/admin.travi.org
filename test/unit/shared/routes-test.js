@@ -32,13 +32,11 @@ suite('routes', () => {
     .getRoutes();
   let node;
 
-  beforeEach(() => {
+  setup(() => {
     node = document.createElement('div');
   });
 
-  afterEach(() => {
-    dom.unmountComponentAtNode(node);
-  });
+  teardown(() => dom.unmountComponentAtNode(node));
 
   test('that the root route is defined', () => {
     dom.render(
