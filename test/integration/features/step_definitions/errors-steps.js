@@ -9,7 +9,7 @@ const debug = require('debug')('test');
 defineSupportCode(({Given, Then, setWorldConstructor}) => {
   setWorldConstructor(World);
 
-  Given(/^the api is down$/, callback => {
+  Given(/^the api is down$/, function (callback) {
     nock('https://api.travi.org')
       .log(debug)
       .get('/')

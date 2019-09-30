@@ -27,6 +27,6 @@ suite('client-side renderer', () => {
 
     remountContent(store);
 
-    assert.calledWith(dom.render, containerComponent, document.getElementById('wrap'));
+    assert.calledWith(dom.render, containerComponent, global.document.getElementById('wrap'));
   });
 });

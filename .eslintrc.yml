@@ -1,1 +1,20 @@
-extends: '@travi/travi/rules/es6'
+extends:
+  - '@travi'
+  - '@travi/mocha'
+  - '@travi/cucumber'
+
+overrides:
+  - extends: '@travi/react'
+    files:
+    - src/client/**/*.js
+    - src/server/view/**/*.js
+    - src/shared/views/**/*.js
+    - test/unit/client/**/*-test.js
+    - test/unit/server/view/**/*-test.js
+    - test/unit/shared/routes-test.js
+    - test/unit/shared/view/**/*-test.js
+  - extends: '@travi/hal'
+    files:
+    - src/server/**/*.js
+    - test/unit/server/**/*-test.js
+    - test/integration/features/step_definitions/**/*-steps.js
