@@ -163,11 +163,11 @@ defineSupportCode(({After, Given, When, Then, setWorldConstructor}) => {
     callback();
   });
 
-  Given(/^list of "([^"]*)" resources does not exist in the api$/, (resourceType, callback) => {
+  Given(/^list of "([^"]*)" resources does not exist in the api$/, function (resourceType, callback) {
     callback();
   });
 
-  Given(/^list of "([^"]*)" contains one entry$/, (resourceType, callback) => {
+  Given(/^list of "([^"]*)" contains one entry$/, function (resourceType, callback) {
     const embedded = {};
     const host = 'https://api.travi.org';
     const requestPath = `/${resourceType}`;
@@ -210,7 +210,7 @@ defineSupportCode(({After, Given, When, Then, setWorldConstructor}) => {
     callback();
   });
 
-  Given(/^a "([^"]*)" does not exist in the api$/, (resourceType, callback) => {
+  Given(/^a "([^"]*)" does not exist in the api$/, function (resourceType, callback) {
     callback();
   });
 

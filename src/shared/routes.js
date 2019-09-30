@@ -10,11 +10,11 @@ import Resource from './views/resources/individual/connected-resource';
 export function getRoutes() {
   return (
     <Route path="/" component={Wrap}>
-      <IndexRoute component={Index}/>
-      <Route path="/:type" component={ResourceList}/>
-      <Route path="/persons/:id" component={Person}/>
-      <Route path="/:type/:id" component={Resource}/>
-      <Route path="*" component={NotFound}/>
+      <IndexRoute component={Index} />
+      <Route path="/:type" component={ResourceList} />
+      <Route path="/persons/:id" component={Person} />
+      <Route path="/:type/:id" component={Resource} />
+      <Route path="*" component={NotFound} />
     </Route>
   );
 }

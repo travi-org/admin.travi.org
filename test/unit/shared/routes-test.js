@@ -33,7 +33,7 @@ suite('routes', () => {
   let node;
 
   setup(() => {
-    node = document.createElement('div');
+    node = global.document.createElement('div');
   });
 
   teardown(() => dom.unmountComponentAtNode(node));

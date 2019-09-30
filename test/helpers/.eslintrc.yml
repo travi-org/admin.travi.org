@@ -1,1 +1,3 @@
-extends: '@travi/travi/rules/tests/react'
+rules:
+  react/prop-types: off
+  class-methods-use-this: off
