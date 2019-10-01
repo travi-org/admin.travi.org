@@ -13,6 +13,7 @@
     "lint:js": "eslint . --cache",
     "lint:md": "globstar --node -- markdownlint **/*.md",
     "lint:travis": "travis-lint .travis.yml",
+    "lint:engine": "check-engine",
     "tests:unit": "mocha --recursive test/unit",
     "pretests:integration": "run-s build",
     "tests:integration": "run-s 'tests:integration:base -- --tags \"not @wip\"'",
@@ -41,8 +42,8 @@
     "precommit": "npm test"
   },
   "engines": {
-    "node": "10.7.x",
-    "npm": "6.1.x"
+    "node": "10.16.x",
+    "npm": "6.9.x"
   },
   "devDependencies": {
     "@babel/cli": "7.6.2",
@@ -69,6 +70,7 @@
     "chai-as-promised": "7.1.1",
     "chai-immutable": "2.1.0",
     "chai-subset": "1.6.0",
+    "check-engine": "1.8.1",
     "cheerio": "1.0.0-rc.3",
     "clean-webpack-plugin": "1.0.1",
     "codecov": "3.6.1",
