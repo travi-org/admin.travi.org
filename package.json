@@ -116,6 +116,7 @@
     "webpack-visualizer-plugin": "0.1.11"
   },
   "dependencies": {
+    "@hapi/glue": "6.2.0",
     "@packtracker/webpack-plugin": "2.2.0",
     "@travi/admin.travi.org-components": "1.0.24",
     "@travi/hapi-html-request-router": "3.0.0",
@@ -126,7 +127,6 @@
     "blankie": "4.1.0",
     "boom": "6.0.0",
     "css-modules-require-hook": "4.2.3",
-    "glue": "6.0.0",
     "good": "8.1.2",
     "good-console": "8.0.0",
     "good-squeeze": "5.1.0",
