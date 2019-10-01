@@ -53,7 +53,7 @@
     "@pact-foundation/pact-node": "9.0.4",
     "@travi/any": "2.0.4",
     "@travi/babel-preset": "3.0.0",
-    "@travi/eslint-config": "1.0.23",
+    "@travi/eslint-config": "1.0.24",
     "@travi/eslint-config-cucumber": "1.0.3",
     "@travi/eslint-config-hal": "1.0.0",
     "@travi/eslint-config-mocha": "1.0.4",
