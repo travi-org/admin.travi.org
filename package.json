@@ -112,7 +112,7 @@
     "webpack-bundle-analyzer": "3.5.2",
     "webpack-cli": "3.3.9",
     "webpack-config-utils": "2.3.1",
-    "webpack-dev-server": "3.8.1",
+    "webpack-dev-server": "3.8.2",
     "webpack-visualizer-plugin": "0.1.11"
   },
   "dependencies": {
