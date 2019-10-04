@@ -10,6 +10,7 @@ sentry.init({dsn: process.env.SENTRY_DSN});
 const defaultPort = 3333;
 const port = process.env.PORT || defaultPort;
 const isDevelopment = 'development' === process.env.NODE_ENV;
+const isProduction = 'production' === process.env.NODE_ENV;
 
 export default {
   server: {routes: {security: true}, port},
@@ -79,8 +80,18 @@ export default {
                 name: 'Squeeze',
                 args: [{log: '*', request: '*', response: '*', error: '*'}]
               },
-              {module: 'good-console'},
-              'stdout'
+              ...isProduction
+                ? [
+                  {
+                    module: 'good-sentry',
+                    dsn: process.env.SENTRY_DSN,
+                    captureUncaught: true
+                  }
+                ]
+                : [
+                  {module: 'good-console'},
+                  'stdout'
+                ]
             ]
           }
         }

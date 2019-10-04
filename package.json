@@ -131,6 +131,7 @@
     "css-modules-require-hook": "4.2.3",
     "good": "8.1.2",
     "good-console": "8.0.0",
+    "good-sentry": "2.4.1",
     "good-squeeze": "5.1.0",
     "h2o2": "8.2.0",
     "hapi-mustache": "0.0.1",
