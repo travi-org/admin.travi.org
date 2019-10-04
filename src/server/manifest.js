@@ -1,8 +1,11 @@
 import mustache from 'mustache';
+import * as sentry from '@sentry/node';
 import {getRoutes} from '../shared/routes';
 import respond from './view/html-renderer';
 import Root from '../shared/views/root/root';
 import {configureStore} from '../shared/store/create';
+
+sentry.init({dsn: process.env.SENTRY_DSN});
 
 const defaultPort = 3333;
 const port = process.env.PORT || defaultPort;
