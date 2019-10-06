@@ -1,4 +1,3 @@
-/* global window */
 /* eslint no-underscore-dangle: ["error", { "allow": ["__BOOM__"] }] */
 import {parse} from 'url';
 import React from 'react';
