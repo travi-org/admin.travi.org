@@ -46,7 +46,7 @@
     "npm": "6.9.x"
   },
   "devDependencies": {
-    "@babel/cli": "7.6.3",
+    "@babel/cli": "7.6.4",
     "@babel/node": "7.6.3",
     "@babel/plugin-transform-runtime": "7.6.2",
     "@babel/register": "7.6.2",
