@@ -84,8 +84,10 @@ export default {
                 ? [
                   {
                     module: 'good-sentry',
-                    dsn: process.env.SENTRY_DSN,
-                    captureUncaught: true
+                    args: [{
+                      dsn: process.env.SENTRY_DSN,
+                      captureUncaught: true
+                    }]
                   }
                 ]
                 : [
