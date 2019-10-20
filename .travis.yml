@@ -9,7 +9,7 @@ after_success:
   - npm run packtracker:publish
 deploy:
 - provider: script
-  skip_cleanup: true
+  edge: true
   script: npm run pact:publish
 - provider: heroku
   app: travi-org-admin
