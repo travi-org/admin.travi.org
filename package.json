@@ -150,7 +150,7 @@
     "react-dom": "16.8.6",
     "react-ga": "2.7.0",
     "react-helmet": "5.2.1",
-    "react-hot-loader": "4.12.15",
+    "react-hot-loader": "4.12.16",
     "react-redux": "5.0.7",
     "react-router": "3.2.0",
     "redial": "0.5.0",
