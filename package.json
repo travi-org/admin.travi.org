@@ -42,8 +42,7 @@
     "precommit": "npm test"
   },
   "engines": {
-    "node": "10.16.x",
-    "npm": "6.9.x"
+    "node": "10.x.x"
   },
   "devDependencies": {
     "@babel/cli": "7.6.4",
