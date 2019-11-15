@@ -1,4 +1,3 @@
-/* global window */
 /* eslint no-underscore-dangle: ["error", { "allow": ["__INITIAL_STATE__"] }] */
 import ga from 'react-ga';
 import remountContent from './renderer';
