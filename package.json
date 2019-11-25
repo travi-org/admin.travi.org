@@ -142,7 +142,7 @@
     "mustache": "3.1.0",
     "mz": "2.7.0",
     "negotiator": "0.6.2",
-    "newrelic": "5.13.1",
+    "newrelic": "6.2.0",
     "postcss-scss": "2.0.0",
     "prop-types": "15.7.2",
     "react": "16.10.1",
