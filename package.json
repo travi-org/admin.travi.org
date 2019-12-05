@@ -50,7 +50,7 @@
     "@babel/plugin-transform-runtime": "7.7.4",
     "@babel/register": "7.7.4",
     "@pact-foundation/pact-node": "9.0.6",
-    "@travi/any": "2.0.6",
+    "@travi/any": "2.0.7",
     "@travi/babel-preset": "3.0.7",
     "@travi/eslint-config": "1.0.28",
     "@travi/eslint-config-cucumber": "1.0.3",
