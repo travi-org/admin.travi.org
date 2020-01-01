@@ -1,4 +1,3 @@
-/* global document */
 import React from 'react';
 import dom from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
