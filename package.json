@@ -116,7 +116,7 @@
     "webpack-visualizer-plugin": "0.1.11"
   },
   "dependencies": {
-    "@hapi/glue": "6.2.0",
+    "@hapi/glue": "7.0.0",
     "@packtracker/webpack-plugin": "2.2.0",
     "@sentry/node": "5.10.2",
     "@travi/admin.travi.org-components": "1.0.25",
