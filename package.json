@@ -42,7 +42,7 @@
     "precommit": "npm test"
   },
   "engines": {
-    "node": "10.x.x"
+    "node": "12.x.x"
   },
   "devDependencies": {
     "@babel/cli": "7.7.7",
