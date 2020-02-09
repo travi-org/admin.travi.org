@@ -100,7 +100,7 @@
     "react-test-renderer": "16.10.1",
     "referee": "1.2.0",
     "referee-sinon": "1.0.3",
-    "rimraf": "3.0.1",
+    "rimraf": "3.0.2",
     "sass-loader": "7.3.1",
     "sinon": "8.1.0",
     "source-map-loader": "0.2.4",
