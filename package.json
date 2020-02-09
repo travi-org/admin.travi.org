@@ -87,7 +87,7 @@
     "globstar": "1.0.0",
     "husky": "4.2.1",
     "jsdom": "16.1.0",
-    "markdownlint-cli": "0.20.0",
+    "markdownlint-cli": "0.22.0",
     "mocha": "6.2.2",
     "mocha-junit-reporter": "1.23.3",
     "nock": "11.7.0",
