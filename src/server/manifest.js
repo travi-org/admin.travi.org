@@ -52,7 +52,7 @@ export default {
           ] : undefined
         }
       },
-      {plugin: 'inert'},
+      {plugin: '@hapi/inert'},
       {
         plugin: 'vision',
         options: {
