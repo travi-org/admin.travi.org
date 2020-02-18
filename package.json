@@ -117,6 +117,7 @@
   },
   "dependencies": {
     "@hapi/glue": "7.0.0",
+    "@hapi/scooter": "6.0.0",
     "@packtracker/webpack-plugin": "2.2.0",
     "@sentry/node": "5.12.3",
     "@travi/admin.travi.org-components": "1.0.25",
@@ -157,7 +158,6 @@
     "redux-devtools-extension": "2.13.8",
     "redux-immutable": "4.0.0",
     "regenerator-runtime": "0.13.3",
-    "scooter": "5.0.2",
     "serialize-javascript": "3.0.0",
     "snyk": "1.292.0",
     "stampit": "4.3.1",
