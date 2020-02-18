@@ -25,9 +25,10 @@ suite('connected resource component', () => {
     const loading = boolean();
 
     const wrapper = shallow(<ConnectedResource store={createStore(() => fromJS({resource: {resource, loading}}))} />);
+    const resourceComponent = wrapper.find('Resource');
 
-    assert.deepEqual(wrapper.prop('resource'), resource);
-    assert.equal(wrapper.prop('loading'), loading);
+    assert.deepEqual(resourceComponent.prop('resource'), resource);
+    assert.equal(resourceComponent.prop('loading'), loading);
   });
 
   test('that the `fetch` hook returns a promise', () => {

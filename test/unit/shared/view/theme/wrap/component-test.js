@@ -24,7 +24,8 @@ suite('connected wrapper component', () => {
     const nav = listOf(simpleObject);
 
     const wrapper = shallow(<ConnectedWrap store={createStore(() => fromJS({wrap: {nav}}))} />);
-    const navProp = wrapper.prop('primaryNav');
+    const wrap = wrapper.find('Wrap');
+    const navProp = wrap.prop('primaryNav');
 
     assert.deepEqual(navProp, nav);
   });
