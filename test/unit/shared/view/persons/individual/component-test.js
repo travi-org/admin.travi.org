@@ -32,14 +32,15 @@ suite('connected person component', () => {
     const loading = boolean();
 
     const wrapper = shallow(<ConnectedPerson store={createStore(() => fromJS({person: {person, loading}}))} />);
-    const personProp = wrapper.prop('person');
+    const personComponent = wrapper.find('Person');
+    const personProp = personComponent.prop('person');
 
     assert.equal(personProp.id, person.id);
     assert.equal(personProp.displayName, person.displayName);
     assert.deepEqual(personProp.name, person.name);
     assert.deepEqual(personProp.links, person.links);
     assert.equal(personProp.avatar, person.thumbnail);
-    assert.equal(wrapper.prop('loading'), loading);
+    assert.equal(personComponent.prop('loading'), loading);
   });
 
   test('that the `fetch` hook returns a promise', () => {

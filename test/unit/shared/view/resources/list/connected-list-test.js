@@ -24,10 +24,11 @@ suite('connected list component', () => {
     const loading = boolean();
 
     const wrapper = shallow(<ConnectedList store={createStore(() => fromJS({resources: {list, type, loading}}))} />);
+    const listComponent = wrapper.find('MaybeList');
 
-    assert.deepEqual(wrapper.prop('resources'), list);
-    assert.equal(wrapper.prop('resourceType'), type);
-    assert.equal(wrapper.prop('loading'), loading);
+    assert.deepEqual(listComponent.prop('resources'), list);
+    assert.equal(listComponent.prop('resourceType'), type);
+    assert.equal(listComponent.prop('loading'), loading);
   });
 
   test('that the `fetch` hook returns a promise', () => {
