@@ -126,7 +126,7 @@
     "@travi/ioc": "1.1.1",
     "@travi/redux-fetch-middleware": "1.1.0",
     "async": "3.1.1",
-    "blankie": "4.1.0",
+    "blankie": "4.1.1",
     "boom": "6.0.0",
     "css-modules-require-hook": "4.2.3",
     "good": "8.1.2",

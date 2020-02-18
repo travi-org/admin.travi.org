@@ -16,7 +16,7 @@ export default {
   server: {routes: {security: true}, port},
   register: {
     plugins: [
-      {plugin: 'scooter'},
+      {plugin: '@hapi/scooter'},
       {
         plugin: 'blankie',
         options: {
