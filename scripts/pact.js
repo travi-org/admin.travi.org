@@ -1,4 +1,4 @@
-import pact from 'pact';
+import {Pact} from '@pact-foundation/pact';
 import {assert} from 'chai';
 import JsonHalAdapter from 'traverson-hal';
 import {getLinksFor, setHost} from '../src/server/resources/travi-api-resources';
@@ -7,7 +7,7 @@ const consumer = 'travi.org-admin';
 const provider = 'travi-api';
 const port = 5670;
 
-const providerInstance = pact({consumer, provider, port});
+const providerInstance = new Pact({consumer, provider, port});
 
 function verifyAndWrite() {
   setHost(`http://localhost:${port}`);

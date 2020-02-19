@@ -1,9 +1,6 @@
 language: node_js
 notifications:
   email: false
-install:
-- npm install
-- gem install pact_broker-client
 after_success:
   - npm run report-coverage
   - npm run packtracker:publish
