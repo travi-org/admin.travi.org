@@ -3,7 +3,7 @@ import {assert} from 'referee';
 import any from '@travi/any';
 import _ from 'lodash';
 import {OK} from 'http-status-codes';
-import {defineSupportCode} from 'cucumber';
+import {setWorldConstructor, After, Given, When, Then} from 'cucumber';
 import {World} from '../support/world';
 import {resource, resources} from '../../../helpers/any-for-admin';
 
@@ -12,7 +12,8 @@ const debug = require('debug')('test');
 const DOMAIN = 'api.travi.org';
 const HOST = `https://${DOMAIN}`;
 
-let existingResourceId, existingResource;
+let existingResourceId,
+  existingResource;
 
 function getSingularForm(resourceType) {
   return resourceType.substring(0, resourceType.length - 1);
@@ -35,7 +36,10 @@ function buildLinksIncluding(resourceType, resourceLink) {
 }
 
 function buildListOf(factory) {
-  const resourceList = any.listOf(factory, {min: 1, uniqueOn: 'id'});
+  const resourceList = any.listOf(factory, {
+    min: 1,
+    uniqueOn: 'id'
+  });
 
   if (existingResourceId) {
     existingResource = factory();
@@ -61,7 +65,10 @@ function prepareListForResponse(resourceType) {
 
   resourceList = resourceList.map(instance => {
     if (_.isObject(instance)) {
-      return {...instance, _links: buildLinksIncluding()};
+      return {
+        ...instance,
+        _links: buildLinksIncluding()
+      };
     }
 
     return instance;
@@ -148,99 +155,97 @@ function assertFormatMappedToViewFor(resourceType, list) {
   });
 }
 
-defineSupportCode(({After, Given, When, Then, setWorldConstructor}) => {
-  setWorldConstructor(World);
+setWorldConstructor(World);
 
-  After(function () {
-    existingResourceId = null;
-    this.serverResponse = null;
-    this.apiResponseLinks = {};
-  });
+After(function () {
+  existingResourceId = null;
+  this.serverResponse = null;
+  this.apiResponseLinks = {};
+});
 
-  Given(/^list of "([^"]*)" resources exists in the api$/, function (resourceType, callback) {
-    setupExpectedApiResponsesFor.call(this, resourceType);
+Given(/^list of "([^"]*)" resources exists in the api$/, function (resourceType, callback) {
+  setupExpectedApiResponsesFor.call(this, resourceType);
 
-    callback();
-  });
+  callback();
+});
 
-  Given(/^list of "([^"]*)" resources does not exist in the api$/, function (resourceType, callback) {
-    callback();
-  });
+Given(/^list of "([^"]*)" resources does not exist in the api$/, function (resourceType, callback) {
+  callback();
+});
 
-  Given(/^list of "([^"]*)" contains one entry$/, function (resourceType, callback) {
-    const embedded = {};
-    const host = 'https://api.travi.org';
-    const requestPath = `/${resourceType}`;
-    const resourceLink = host + requestPath;
-    const headers = {'Content-Type': 'application/hal+json'};
+Given(/^list of "([^"]*)" contains one entry$/, function (resourceType, callback) {
+  const embedded = {};
+  const host = 'https://api.travi.org';
+  const requestPath = `/${resourceType}`;
+  const resourceLink = host + requestPath;
+  const headers = {'Content-Type': 'application/hal+json'};
 
-    nock(host)
-      .log(debug)
-      .get('/')
-      .times(2)
-      .reply(
-        OK,
-        {_links: buildLinksIncluding(resourceType, resourceLink)},
-        headers
-      );
+  nock(host)
+    .log(debug)
+    .get('/')
+    .times(2)
+    .reply(
+      OK,
+      {_links: buildLinksIncluding(resourceType, resourceLink)},
+      headers
+    );
 
-    if (Object.prototype.hasOwnProperty.call(resources, getSingularForm(resourceType))) {
-      embedded[resourceType] = resources[getSingularForm(resourceType)]();
-    } else {
-      embedded[resourceType] = resource();
-    }
-    resources[resourceType] = [embedded[resourceType]];
+  if (Object.prototype.hasOwnProperty.call(resources, getSingularForm(resourceType))) {
+    embedded[resourceType] = resources[getSingularForm(resourceType)]();
+  } else {
+    embedded[resourceType] = resource();
+  }
+  resources[resourceType] = [embedded[resourceType]];
 
-    nock(host)
-      .log(debug)
-      .get(requestPath)
-      .reply(
-        OK,
-        {_embedded: embedded},
-        headers
-      );
+  nock(host)
+    .log(debug)
+    .get(requestPath)
+    .reply(
+      OK,
+      {_embedded: embedded},
+      headers
+    );
 
-    callback();
-  });
+  callback();
+});
 
-  Given(/^a "([^"]*)" exists in the api$/, function (resourceType, callback) {
-    existingResourceId = any.integer({min: 1});
-    setupExpectedApiResponsesFor.call(this, resourceType);
+Given(/^a "([^"]*)" exists in the api$/, function (resourceType, callback) {
+  existingResourceId = any.integer({min: 1});
+  setupExpectedApiResponsesFor.call(this, resourceType);
 
-    callback();
-  });
+  callback();
+});
 
-  Given(/^a "([^"]*)" does not exist in the api$/, function (resourceType, callback) {
-    callback();
-  });
+Given(/^a "([^"]*)" does not exist in the api$/, function (resourceType, callback) {
+  callback();
+});
 
-  When(/^list of "([^"]*)" resources is requested$/, function (resourceType, callback) {
-    this.makeRequestTo(`/${resourceType}`, callback);
-  });
+When(/^list of "([^"]*)" resources is requested$/, function (resourceType, callback) {
+  this.makeRequestTo(`/${resourceType}`, callback);
+});
 
-  When(/^the "([^"]*)" is requested by id$/, function (resourceType, callback) {
-    this.makeRequestTo(`/${resourceType}/${existingResourceId}`, callback);
-  });
+When(/^the "([^"]*)" is requested by id$/, function (resourceType, callback) {
+  this.makeRequestTo(`/${resourceType}/${existingResourceId}`, callback);
+});
 
-  Then(/^list of "([^"]*)" resources is returned$/, function (resourceType, done) {
-    const list = JSON.parse(this.getResponseBody())[resourceType];
+Then(/^list of "([^"]*)" resources is returned$/, function (resourceType, done) {
+  const list = JSON.parse(this.getResponseBody())[resourceType];
 
-    if (Object.prototype.hasOwnProperty.call(resources, getSingularForm(resourceType))) {
-      assertFormatMappedToViewFor(resourceType, list);
-    } else {
-      assertFormatIsUntouchedFor(resourceType, list);
-    }
+  if (Object.prototype.hasOwnProperty.call(resources, getSingularForm(resourceType))) {
+    assertFormatMappedToViewFor(resourceType, list);
+  } else {
+    assertFormatIsUntouchedFor(resourceType, list);
+  }
 
-    done();
-  });
+  done();
+});
 
-  Then(/^the "([^"]*)" is returned$/, function (resourceType, done) {
-    const payload = JSON.parse(this.getResponseBody());
-    const resourceInstance = payload.resource;
+Then(/^the "([^"]*)" is returned$/, function (resourceType, done) {
+  const payload = JSON.parse(this.getResponseBody());
+  const resourceInstance = payload.resource;
 
-    assert.equals(resourceInstance.id, existingResourceId);
-    assert.isTrue(resourceInstance.extended);
+  assert.equals(resourceInstance.id, existingResourceId);
+  assert.isTrue(resourceInstance.extended);
 
-    done();
-  });
+  done();
 });

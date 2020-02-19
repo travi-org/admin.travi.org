@@ -1,35 +1,34 @@
 import nock from 'nock';
 import {assert} from 'referee';
 import cheerio from 'cheerio';
-import {defineSupportCode} from 'cucumber';
+import {setWorldConstructor, Given, Then} from 'cucumber';
 import {World} from '../support/world';
 
 const debug = require('debug')('test');
 
-defineSupportCode(({Given, Then, setWorldConstructor}) => {
-  setWorldConstructor(World);
+setWorldConstructor(World);
 
-  Given(/^the api is down$/, function (callback) {
-    nock('https://api.travi.org')
-      .log(debug)
-      .get('/')
-      .times(2)
-      .replyWithError('something awful happened');
+Given(/^the api is down$/, function (callback) {
+  nock('https://api.travi.org')
+    .log(debug)
+    .get('/')
+    .times(2)
+    .replyWithError('something awful happened');
 
-    callback();
-  });
+  callback();
+});
 
-  Then(/^a "([^"]*)" status code should be returned$/, function (statusCode, done) {
-    assert.equals(this.serverResponse.statusCode, parseInt(statusCode, 10));
+Then(/^a "([^"]*)" status code should be returned$/, function (statusCode, done) {
+  assert.equals(this.serverResponse.statusCode, parseInt(statusCode, 10));
 
-    done();
-  });
+  done();
+});
 
-  Then(/^the "([^"]*)" page should be displayed$/, function (statusCode, done) {
-    const $ = cheerio.load(this.getResponseBody());
+Then(/^the "([^"]*)" page should be displayed$/, function (statusCode, done) {
+  const $ = cheerio.load(this.getResponseBody());
 
-    assert.equals($('h2').text(), statusCode);
+  assert.equals($('h2')
+    .text(), statusCode);
 
-    done();
-  });
+  done();
 });
