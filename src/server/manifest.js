@@ -54,7 +54,7 @@ export default {
       },
       {plugin: '@hapi/inert'},
       {
-        plugin: 'vision',
+        plugin: '@hapi/vision',
         options: {
           engines: {
             mustache: {
@@ -68,15 +68,15 @@ export default {
           path: './src/server/view'
         }
       },
-      {plugin: 'h2o2'},
+      {plugin: '@hapi/h2o2'},
       {
-        plugin: 'good',
+        plugin: '@hapi/good',
         options: {
           ops: false,
           reporters: {
             console: [
               {
-                module: 'good-squeeze',
+                module: '@hapi/good-squeeze',
                 name: 'Squeeze',
                 args: [{log: '*', request: '*', response: '*', error: '*'}]
               },
@@ -91,7 +91,7 @@ export default {
                   }
                 ]
                 : [
-                  {module: 'good-console'},
+                  {module: '@hapi/good-console'},
                   'stdout'
                 ]
             ]
