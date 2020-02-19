@@ -38,9 +38,7 @@
     "pact:publish": "pact-broker publish --pact-files-or-dirs pacts/ --consumer-app-version $TRAVIS_COMMIT --broker-base-url https://pact-api.travi.org/ --pact-broker-username $PACT_BROKER_USER --pact-broker-password $PACT_BROKER_PASSWORD",
     "packtracker:publish": "packtracker-upload --stats=resources/js/stats.json",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect",
-    "commitmsg": "commitlint -e",
-    "precommit": "npm test"
+    "prepublish": "npm run snyk-protect"
   },
   "engines": {
     "node": "12.x.x"
