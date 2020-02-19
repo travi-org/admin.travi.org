@@ -9,7 +9,7 @@
     "url": "git://github.com/travi/travi.org-admin"
   },
   "scripts": {
-    "clean": "rimraf dist/ resources/js/ resources/css/ webpack-assets.json tmp/",
+    "clean": "rimraf dist/ resources/js/ resources/css/ webpack-assets.json tmp/ pacts/",
     "lint:js": "eslint . --cache",
     "lint:md": "globstar --node -- markdownlint **/*.md",
     "lint:travis": "travis-lint .travis.yml",
@@ -35,7 +35,7 @@
     "serve:webpack": "babel-node ./webpack-dev-server.js",
     "dev": "NODE_ENV=development run-p serve:webpack serve:dev",
     "dev-local": "NODE_ENV=development run-p serve:webpack serve:dev-local",
-    "pact:publish": "pact-broker publish --pact-files-or-dirs $TRAVIS_BUILD_DIR/pacts/ --consumer-app-version $TRAVIS_COMMIT --broker-base-url https://pact-api.travi.org/ --pact-broker-username $PACT_BROKER_USER --pact-broker-password $PACT_BROKER_PASSWORD",
+    "pact:publish": "pact-broker publish --pact-files-or-dirs pacts/ --consumer-app-version $TRAVIS_COMMIT --broker-base-url https://pact-api.travi.org/ --pact-broker-username $PACT_BROKER_USER --pact-broker-password $PACT_BROKER_PASSWORD",
     "packtracker:publish": "packtracker-upload --stats=resources/js/stats.json",
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect",
