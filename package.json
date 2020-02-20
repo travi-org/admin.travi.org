@@ -12,7 +12,7 @@
     "clean": "rimraf dist/ resources/js/ resources/css/ webpack-assets.json tmp/ pacts/",
     "lint:js": "eslint . --cache",
     "lint:md": "globstar --node -- markdownlint **/*.md",
-    "lint:travis": "travis-lint .travis.yml",
+    "disabled-lint:travis": "travis-lint .travis.yml",
     "lint:engine": "check-engine",
     "test:unit": "nyc run-s test:unit:base",
     "test:unit:base": "mocha --recursive test/unit",
