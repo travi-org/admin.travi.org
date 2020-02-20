@@ -13,6 +13,7 @@ deploy:
   script: npm run pact:publish
 - provider: heroku
   app: travi-org-admin
+  edge: true
   on:
     condition: $(pact-broker can-i-deploy --pacticipant travi.org-admin --version
       "$TRAVIS_COMMIT" --broker-base-url pact-api.travi.org)
