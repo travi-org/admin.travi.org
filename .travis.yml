@@ -1,4 +1,7 @@
-language: node_js
+version: ~> 1.0
+import:
+  - form8ion/.travis-ci:node.yml
+  - travi-org/.travis-ci:heroku-api-key-env.yml
 notifications:
   email: false
 after_success:
@@ -10,15 +13,11 @@ deploy:
   script: npm run pact:publish
 - provider: heroku
   app: travi-org-admin
-  api_key:
-    secure: im28yIt5GSyGEXFySUHm7ID1fQaaBxB8YtJpjP9DE2+XjV+DHUrLeOSuqhlTsKTrnp7aHv3SCfnFlT93O9RCl4mCZ6L1F16E3kmkX2/K8CkADUaIZK2m2TqNZEKGfBuxzcEtxvOu7zhhOITj2OSEQe5yHfPWvYzHJPuW5bHnxHE=
   on:
     condition: $(pact-broker can-i-deploy --pacticipant travi.org-admin --version
       "$TRAVIS_COMMIT" --broker-base-url pact-api.travi.org)
 env:
   global:
-  - FORCE_COLOR=1
-  - NPM_CONFIG_COLOR=always
   - PT_UPLOAD=true
   - PT_BRANCH=$TRAVIS_BRANCH
   - secure: ssRC8iYx+sj2rxBfZMMWIVB15+AV8aU7Y1aW8aPFjuNNaypPecMuMIbGROcgTeywvHWaONJqXQz/coMwGgNtQDnyUajDNWmSzc5ezWqWir0ooNiR0pr0R+5otTA9gL/4s2UN+NI3k2LAp9CIX7gLkGJTqIXgcWX7F4yEGMOWdn4=
