@@ -161,8 +161,8 @@
     "serialize-javascript": "3.0.0",
     "snyk": "1.294.1",
     "stampit": "4.3.1",
-    "traverson": "6.1.1",
-    "traverson-hal": "6.1.0",
+    "traverson": "7.0.0-alpha.6",
+    "traverson-hal": "7.0.0-alpha.2",
     "xhr": "2.5.0"
   },
   "config": {
