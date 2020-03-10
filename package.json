@@ -101,7 +101,7 @@
     "referee-sinon": "1.0.3",
     "rimraf": "3.0.2",
     "sass-loader": "7.3.1",
-    "sinon": "9.0.0",
+    "sinon": "9.0.1",
     "source-map-loader": "0.2.4",
     "style-loader": "1.1.2",
     "travis-lint": "1.0.0",
