@@ -156,7 +156,7 @@
     "redux": "4.0.4",
     "redux-devtools-extension": "2.13.8",
     "redux-immutable": "4.0.0",
-    "regenerator-runtime": "0.13.3",
+    "regenerator-runtime": "0.13.5",
     "serialize-javascript": "3.0.0",
     "snyk": "1.298.1",
     "stampit": "4.3.1",
