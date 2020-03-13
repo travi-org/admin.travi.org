@@ -1,7 +1,6 @@
 import 'newrelic';
 import Glue from '@hapi/glue';
 import 'css-modules-require-hook/preset';
-import 'regenerator-runtime/runtime';
 import manifest from './manifest';
 import {define as defineDependencies} from './dependencies';
 
