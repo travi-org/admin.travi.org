@@ -85,7 +85,7 @@
     "extract-text-webpack-plugin": "3.0.2",
     "formatio": "1.2.0",
     "globstar": "1.0.0",
-    "husky": "4.2.4",
+    "husky": "4.2.5",
     "jsdom": "16.2.2",
     "markdownlint-cli": "0.22.0",
     "mocha": "7.1.1",
