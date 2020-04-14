@@ -1,4 +1,4 @@
-import helmet from 'react-helmet';
+import {Helmet} from 'react-helmet';
 import serialize from 'serialize-javascript';
 import getAssets from './asset-manager';
 
@@ -8,7 +8,7 @@ export default async function (h, {renderedContent, store, status, boomDetails})
   return h.view('layout', {
     renderedContent,
     resources,
-    title: helmet.rewind().title.toString(),
+    title: Helmet.rewind().title.toString(),
     initialState: serialize(store.getState(), {isJSON: true}),
     boom: boomDetails ? serialize(boomDetails, {isJSON: true}) : undefined
   }).code(boomDetails ? boomDetails.statusCode : status);
