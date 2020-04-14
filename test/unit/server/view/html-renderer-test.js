@@ -1,4 +1,4 @@
-import helmet from 'react-helmet';
+import {Helmet} from 'react-helmet';
 import {assert} from 'chai';
 import sinon from 'sinon';
 import any from '@travi/any';
@@ -18,7 +18,7 @@ suite('html renderer', () => {
 
   setup(() => {
     sandbox = sinon.createSandbox();
-    sandbox.stub(helmet, 'rewind').returns({title: {toString: () => title}});
+    sandbox.stub(Helmet, 'rewind').returns({title: {toString: () => title}});
     sandbox.stub(assetManager, 'default').resolves(resources);
 
     response.code = sinon.stub();
