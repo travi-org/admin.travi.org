@@ -1,1 +1,4 @@
-{"extends":["github>form8ion/renovate-config:js-app"]}
+{
+  "extends":["github>form8ion/renovate-config:js-app"],
+  "ignoreDeps": ["react-router"]
+}
