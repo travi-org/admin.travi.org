@@ -100,7 +100,7 @@
     "referee": "1.2.0",
     "referee-sinon": "1.0.3",
     "rimraf": "3.0.2",
-    "sass-loader": "7.3.1",
+    "sass-loader": "8.0.2",
     "sinon": "9.0.2",
     "source-map-loader": "0.2.4",
     "style-loader": "1.2.1",
