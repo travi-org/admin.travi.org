@@ -123,7 +123,7 @@
     "@hapi/inert": "6.0.1",
     "@hapi/scooter": "6.0.0",
     "@hapi/vision": "6.0.0",
-    "@packtracker/webpack-plugin": "2.2.0",
+    "@packtracker/webpack-plugin": "2.3.0",
     "@sentry/node": "5.15.5",
     "@travi/admin.travi.org-components": "1.0.26",
     "@travi/hapi-html-request-router": "3.0.1",
