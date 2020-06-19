@@ -29,7 +29,6 @@ suite('server routes config', () => {
     });
   });
 
-
   test('that the single resource route is configured', async () => {
     const server = {route: sinon.stub()};
 
