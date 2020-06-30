@@ -7,8 +7,6 @@ import {setWorldConstructor, After, Given, When, Then} from 'cucumber';
 import {World} from '../support/world';
 import {resource, resources} from '../../../helpers/any-for-admin';
 
-const debug = require('debug')('test');
-
 const DOMAIN = 'api.travi.org';
 const HOST = `https://${DOMAIN}`;
 
@@ -98,7 +96,6 @@ function setupExpectedApiResponsesFor(resourceType) {
   });
 
   nock(HOST)
-    .log(debug)
     .get(requestPath)
     .reply(
       OK,
@@ -116,7 +113,6 @@ function setupExpectedApiResponsesFor(resourceType) {
         extendedExistingResource.extended = true;
 
         nock(linkHost)
-          .log(debug)
           .get(resourcePath)
           .reply(
             OK,
@@ -181,7 +177,6 @@ Given(/^list of "([^"]*)" contains one entry$/, function (resourceType, callback
   const headers = {'Content-Type': 'application/hal+json'};
 
   nock(host)
-    .log(debug)
     .get('/')
     .times(2)
     .reply(
@@ -198,7 +193,6 @@ Given(/^list of "([^"]*)" contains one entry$/, function (resourceType, callback
   resources[resourceType] = [embedded[resourceType]];
 
   nock(host)
-    .log(debug)
     .get(requestPath)
     .reply(
       OK,

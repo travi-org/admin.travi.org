@@ -2,8 +2,6 @@ import nock from 'nock';
 import {url} from '@travi/any';
 import {OK} from 'http-status-codes';
 
-const debug = require('debug')('test');
-
 const DOMAIN = 'api.travi.org';
 
 export function World() {
@@ -50,7 +48,6 @@ export function World() {
 
   this.stubApiCatalogCall = () => {
     nock('https://api.travi.org')
-      .log(debug)
       .get('/')
       .times(3)
       .reply(
