@@ -51,7 +51,7 @@
     "@pact-foundation/pact": "9.11.0",
     "@pact-foundation/pact-node": "10.9.6",
     "@travi/any": "2.0.9",
-    "@travi/babel-preset": "3.0.23",
+    "@travi/babel-preset": "3.0.24",
     "@travi/eslint-config": "1.0.41",
     "@travi/eslint-config-cucumber": "1.0.5",
     "@travi/eslint-config-hal": "1.0.0",
