@@ -137,7 +137,7 @@
     "hapi-mustache": "0.0.1",
     "http-status-codes": "1.4.0",
     "immutable": "4.0.0-rc.1",
-    "lodash": "4.17.17",
+    "lodash": "4.17.19",
     "material-ui": "0.20.2",
     "mustache": "4.0.1",
     "mz": "2.7.0",
