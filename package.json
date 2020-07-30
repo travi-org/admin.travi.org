@@ -48,7 +48,7 @@
     "@babel/node": "7.10.5",
     "@babel/plugin-transform-runtime": "7.10.5",
     "@babel/register": "7.10.5",
-    "@pact-foundation/pact": "9.11.0",
+    "@pact-foundation/pact": "9.11.1",
     "@pact-foundation/pact-node": "10.9.7",
     "@travi/any": "2.0.10",
     "@travi/babel-preset": "3.0.25",
