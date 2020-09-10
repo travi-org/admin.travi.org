@@ -156,7 +156,7 @@
     "redux": "4.0.5",
     "redux-devtools-extension": "2.13.8",
     "redux-immutable": "4.0.0",
-    "serialize-javascript": "5.0.0",
+    "serialize-javascript": "5.0.1",
     "snyk": "1.393.0",
     "stampit": "4.3.1",
     "traverson": "7.0.1",
