@@ -143,7 +143,7 @@
     "mz": "2.7.0",
     "negotiator": "0.6.2",
     "newrelic": "6.13.1",
-    "postcss-scss": "3.0.1",
+    "postcss-scss": "3.0.2",
     "prop-types": "15.7.2",
     "react": "16.10.1",
     "react-dom": "16.8.6",
