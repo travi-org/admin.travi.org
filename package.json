@@ -24,7 +24,7 @@
     "test:integration:focus": "run-s 'test:integration:base -- --tags @focus'",
     "test:pact": "babel-node scripts/pact.js",
     "test": "npm-run-all --print-label clean --parallel lint:* --parallel test:*",
-    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "coverage:report": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "build:client": "webpack --env production",
     "build:server": "NODE_ENV=production babel src/server --source-maps --out-dir dist/server",
     "build:shared": "NODE_ENV=production babel src/shared --source-maps --out-dir dist/shared",
