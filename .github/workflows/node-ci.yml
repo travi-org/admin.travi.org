@@ -1,0 +1,38 @@
+name: Node.js CI
+'on':
+  push:
+    branches:
+      - master
+      - 'renovate/**'
+  pull_request:
+    types:
+      - opened
+      - synchronize
+env:
+  FORCE_COLOR: 1
+  NPM_CONFIG_COLOR: always
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Read .nvmrc
+        run: 'echo ::set-output name=NVMRC::$(cat .nvmrc)'
+        id: nvm
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
+      - uses: bahmutov/npm-install@v1
+      - run: npm test
+      - name: Upload coverage data to Codecov
+        run: 'npm run coverage:report'
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      - name: report webpack stats
+        run: npm run packtracker:publish
+        env:
+          PT_PROJECT_TOKEN: ${{ secrets.PT_PROJECT_TOKEN }}
+          PT_BRANCH: ${{ steps.extract_branch.outputs.branch }}
