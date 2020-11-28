@@ -39,6 +39,6 @@ jobs:
           PT_PROJECT_TOKEN: ${{ secrets.PT_PROJECT_TOKEN }}
           PT_BRANCH: ${{ steps.extract_branch.outputs.branch }}
       - name: Publish Pact to Broker
-        run: npm run publish:pact
+        run: npm run pact:publish
       - name: Can I Deploy?
         run: npm run pact:can-i-deploy
