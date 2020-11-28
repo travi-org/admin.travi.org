@@ -35,6 +35,7 @@
     "serve:webpack": "babel-node ./webpack-dev-server.js",
     "dev": "NODE_ENV=development run-p serve:webpack serve:dev",
     "dev-local": "NODE_ENV=development run-p serve:webpack serve:dev-local",
+    "pact:can-i-deploy": "pact-broker can-i-deploy --pacticipant travi.org-admin --version $GITHUB_SHA --broker-base-url pact-api.travi.org",
     "pact:publish": "pact-broker publish ./pacts/ --consumer-app-version $TRAVIS_COMMIT --broker-base-url https://pact-api.travi.org/ --broker-username $PACT_BROKER_USER --broker-password $PACT_BROKER_PASSWORD",
     "packtracker:publish": "packtracker-upload --stats=resources/js/stats.json",
     "snyk-protect": "snyk protect",

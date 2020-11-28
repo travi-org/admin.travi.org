@@ -39,4 +39,4 @@ jobs:
           PT_PROJECT_TOKEN: ${{ secrets.PT_PROJECT_TOKEN }}
           PT_BRANCH: ${{ steps.extract_branch.outputs.branch }}
       - name: Can I Deploy?
-        run: pact-broker can-i-deploy --pacticipant travi.org-admin --version $GITHUB_SHA --broker-base-url pact-api.travi.org
+        run: npm run pact:can-i-deploy
