@@ -2,6 +2,7 @@
 
 <!--status-badges start -->
 
+[![Node CI Workflow Status][github-actions-ci-badge]][github-actions-ci-link]
 [![Codecov](https://img.shields.io/codecov/c/github/travi-org/admin.travi.org.svg)](https://codecov.io/github/travi-org/admin.travi.org)
 [![Code Climate](http://img.shields.io/codeclimate/github/travi-org/admin.travi.org.svg?style=flat)](https://codeclimate.com/github/travi-org/admin.travi.org)
 [![travi.org-admin/travi-api Pact Status](https://pact-api.travi.org/pacts/provider/travi-api/consumer/travi.org-admin/latest/badge.svg?style=flat)](https://pact-api.travi.org)
