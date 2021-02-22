@@ -42,7 +42,7 @@
     "prepublish": "npm run snyk-protect"
   },
   "engines": {
-    "node": "12.x.x"
+    "node": "14.x"
   },
   "devDependencies": {
     "@babel/cli": "7.12.17",
