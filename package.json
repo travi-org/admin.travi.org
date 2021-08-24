@@ -158,7 +158,7 @@
     "redux-immutable": "4.0.0",
     "serialize-javascript": "5.0.1",
     "snyk": "1.462.0",
-    "stampit": "4.3.1",
+    "stampit": "4.3.2",
     "traverson": "7.0.1",
     "traverson-hal": "7.0.2",
     "xhr": "2.6.0"
