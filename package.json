@@ -154,7 +154,7 @@
     "react-router": "3.2.5",
     "redial": "0.5.0",
     "redux": "4.0.5",
-    "redux-devtools-extension": "2.13.8",
+    "redux-devtools-extension": "2.13.9",
     "redux-immutable": "4.0.0",
     "serialize-javascript": "5.0.1",
     "snyk": "1.462.0",
