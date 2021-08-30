@@ -57,7 +57,7 @@
     "@travi/eslint-config-cucumber": "1.0.5",
     "@travi/eslint-config-hal": "1.0.0",
     "@travi/eslint-config-mocha": "1.0.12",
-    "@travi/eslint-config-react": "1.0.58",
+    "@travi/eslint-config-react": "1.0.59",
     "assets-webpack-plugin": "7.1.1",
     "babel-loader": "8.2.2",
     "babel-plugin-lodash": "3.3.4",
