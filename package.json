@@ -41,7 +41,7 @@
     "snyk-protect": "snyk protect"
   },
   "engines": {
-    "node": "14.x"
+    "node": "18.x"
   },
   "devDependencies": {
     "@babel/cli": "7.14.8",
