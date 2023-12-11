@@ -44,10 +44,10 @@
     "node": "14.x"
   },
   "devDependencies": {
-    "@babel/cli": "7.14.8",
-    "@babel/node": "7.14.9",
-    "@babel/plugin-transform-runtime": "7.15.0",
-    "@babel/register": "7.15.3",
+    "@babel/cli": "7.23.4",
+    "@babel/node": "7.22.19",
+    "@babel/plugin-transform-runtime": "7.23.6",
+    "@babel/register": "7.22.15",
     "@pact-foundation/pact": "9.16.0",
     "@pact-foundation/pact-node": "10.13.3",
     "@travi/any": "2.0.17",
