@@ -135,7 +135,7 @@
     "good-sentry": "2.4.1",
     "hapi-mustache": "0.0.1",
     "http-status-codes": "2.1.4",
-    "immutable": "4.0.0-rc.1",
+    "immutable": "4.3.7",
     "lodash": "4.17.21",
     "material-ui": "0.20.2",
     "mustache": "4.2.0",
